@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Http\Services\Repositories\BaseRepository;
+use App\Http\Services\Repositories\Contracts\BaseContract;
+use App\Http\Services\Repositories\Contracts\MenuContract;
+use App\Http\Services\Repositories\Contracts\RoleContract;
+use App\Http\Services\Repositories\Contracts\UserMenuContract;
+use App\Http\Services\Repositories\Contracts\UsersContract;
+use App\Http\Services\Repositories\MenuRepository;
+use App\Http\Services\Repositories\RoleRepository;
+use App\Http\Services\Repositories\UserMenuRepository;
+use App\Http\Services\Repositories\UsersRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind(BaseContract::class, BaseRepository::class);
+
+        $this->app->bind(MenuContract::class, MenuRepository::class);
+        $this->app->bind(RoleContract::class, RoleRepository::class);
+        $this->app->bind(UserMenuContract::class, UserMenuRepository::class);
+        $this->app->bind(UsersContract::class, UsersRepository::class);
     }
 }
