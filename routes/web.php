@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController as Auths;
 use App\Models\RencanaHasilKerja;
+use App\Livewire\PostCrud;
+
+Route::get('posts', PostCrud::class);
 
 // Route::get('/', function () {
 //     return view('app.welcome');
