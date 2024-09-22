@@ -1,18 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\ApprovalRhkController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\IndikatorKinerjaController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\RencanaHasilKerjaController;
-use App\Http\Controllers\Admin\RencanaKerjaController;
+use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SuratKeluarController;
 use App\Http\Controllers\Admin\UserMenuController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
+use App\Http\Services\Repositories\Contracts\SuratMasukContract;
 use App\Models\RencanaHasilKerja;
 
 // Route::get('/', function () {
@@ -47,46 +46,26 @@ Route::domain('')->group(function () { // development
 
 
         # APPS 
-        Route::group(['prefix' => '/rencana-hasil-kerja'], function () {
-            Route::get('/', [RencanaHasilKerjaController::class, 'index'])->name('rencana-hasil-kerja.index');
-            Route::get('/data', [RencanaHasilKerjaController::class, 'data'])->name('rencana-hasil-kerja.data');
-            Route::get('/create', [RencanaHasilKerjaController::class, 'create'])->name('rencana-hasil-kerja.create');
-            Route::post('/store', [RencanaHasilKerjaController::class, 'store'])->name('rencana-hasil-kerja.store');
-            Route::get('/{id}/edit', [RencanaHasilKerjaController::class, 'edit'])->name('rencana-hasil-kerja.edit');
-            Route::put('/{id}', [RencanaHasilKerjaController::class, 'update'])->name('rencana-hasil-kerja.update');
-            Route::patch('/{id}', [RencanaHasilKerjaController::class, 'destroy'])->name('rencana-hasil-kerja.delete');
-            Route::get('/export', [RencanaHasilKerjaController::class, 'export'])->name('rencana-hasil-kerja.export');
+        Route::group(['prefix' => '/surat-masuk'], function () {
+            Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+            Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
+            Route::get('/create', [SuratMasukController::class, 'create'])->name('surat-masuk.create');
+            Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
+            Route::get('/{id}/edit', [SuratMasukController::class, 'edit'])->name('surat-masuk.edit');
+            Route::put('/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
+            Route::patch('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
+            Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
         });
 
-        Route::group(['prefix' => '/approval-rencana-hasil-kerja'], function () {
-            Route::get('/', [ApprovalRhkController::class, 'index'])->name('approval-rencana-hasil-kerja.index');
-            Route::get('/data', [ApprovalRhkController::class, 'data'])->name('approval-rencana-hasil-kerja.data');
-            Route::get('/create', [ApprovalRhkController::class, 'create'])->name('approval-rencana-hasil-kerja.create');
-            Route::post('/store', [ApprovalRhkController::class, 'store'])->name('approval-rencana-hasil-kerja.store');
-            Route::get('/{id}/edit', [ApprovalRhkController::class, 'edit'])->name('approval-rencana-hasil-kerja.edit');
-            Route::put('/{id}', [ApprovalRhkController::class, 'update'])->name('approval-rencana-hasil-kerja.update');
-            Route::patch('/{id}', [ApprovalRhkController::class, 'destroy'])->name('approval-rencana-hasil-kerja.delete');
-        });
-
-        # MASTER DATA 
-        Route::group(['prefix' => '/rencana-kerja'], function () {
-            Route::get('/', [RencanaKerjaController::class, 'index'])->name('rencana-kerja.index');
-            Route::get('/data', [RencanaKerjaController::class, 'data'])->name('rencana-kerja.data');
-            Route::get('/create', [RencanaKerjaController::class, 'create'])->name('rencana-kerja.create');
-            Route::post('/store', [RencanaKerjaController::class, 'store'])->name('rencana-kerja.store');
-            Route::get('/{id}/edit', [RencanaKerjaController::class, 'edit'])->name('rencana-kerja.edit');
-            Route::put('/{id}', [RencanaKerjaController::class, 'update'])->name('rencana-kerja.update');
-            Route::delete('/{id}', [RencanaKerjaController::class, 'destroy'])->name('rencana-kerja.delete');
-        });
-
-        Route::group(['prefix' => '/indikator-kinerja'], function () {
-            Route::get('/', [IndikatorKinerjaController::class, 'index'])->name('indikator-kinerja.index');
-            Route::get('/data', [IndikatorKinerjaController::class, 'data'])->name('indikator-kinerja.data');
-            Route::get('/create', [IndikatorKinerjaController::class, 'create'])->name('indikator-kinerja.create');
-            Route::post('/store', [IndikatorKinerjaController::class, 'store'])->name('indikator-kinerja.store');
-            Route::get('/{id}/edit', [IndikatorKinerjaController::class, 'edit'])->name('indikator-kinerja.edit');
-            Route::put('/{id}', [IndikatorKinerjaController::class, 'update'])->name('indikator-kinerja.update');
-            Route::delete('/{id}', [IndikatorKinerjaController::class, 'destroy'])->name('indikator-kinerja.delete');
+        Route::group(['prefix' => '/surat-keluar'], function () {
+            Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+            Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
+            Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
+            Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
+            Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
+            Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
+            Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+            Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
         });
 
         # USER SETTING

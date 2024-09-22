@@ -85,7 +85,7 @@ class LoginController extends Controller
         // if ($roles == 3) {
         //     return $this->loggedOut($request) ?: redirect('/login');
         // } else {
-        return $this->loggedOut($request) ?: redirect('/');
+        return $this->loggedOut($request) ?: redirect('/auth/login');
         // }
     }
 }

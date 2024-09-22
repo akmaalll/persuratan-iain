@@ -51,7 +51,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column text-white pt-15">
                                 <span class="fw-bold fs-2x">
-                                    Selamat Datang - Dashboard BPFK Makassar
+                                    Selamat Datang - Persuratan IAIN Pare-Pare
                                 </span>
                             </h3>
                             <!--end::Title-->
@@ -64,13 +64,13 @@
                                 <!--begin::Row-->
                                 <div class="row g-3 g-lg-6">
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-30px me-5 mb-8">
                                                 <span class="symbol-label">
-                                                    <i class="ki-duotone ki-award fs-1 text-primary">
+                                                    <i class="ki-duotone ki-file-down fs-1 text-primary">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
@@ -84,7 +84,7 @@
                                                     class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">37</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Hasil Rencana Kerja</span>
+                                                <span class="text-gray-500 fw-semibold fs-6">Surat Masuk</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
@@ -93,16 +93,15 @@
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-30px me-5 mb-8">
                                                 <span class="symbol-label">
-                                                    <i class="ki-duotone ki-bank fs-1 text-primary">
+                                                    <i class="ki-duotone ki-file-up fs-1 text-primary">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
-                                                        <span class="path3"></span>
                                                     </i>
                                                 </span>
                                             </div>
@@ -114,7 +113,36 @@
                                                     class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">6</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Indikator Kinerja</span>
+                                                <span class="text-gray-500 fw-semibold fs-6">Surat Keluar</span>
+                                                <!--end::Desc-->
+                                            </div>
+                                            <!--end::Stats-->
+                                        </div>
+                                        <!--end::Items-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-4">
+                                        <!--begin::Items-->
+                                        <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
+                                            <!--begin::Symbol-->
+                                            <div class="symbol symbol-30px me-5 mb-8">
+                                                <span class="symbol-label">
+                                                    <i class="ki-duotone ki-abstract-14 fs-1 text-primary">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </span>
+                                            </div>
+                                            <!--end::Symbol-->
+                                            <!--begin::Stats-->
+                                            <div class="m-0">
+                                                <!--begin::Number-->
+                                                <span
+                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">6</span>
+                                                <!--end::Number-->
+                                                <!--begin::Desc-->
+                                                <span class="text-gray-500 fw-semibold fs-6">Data Arsip</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
