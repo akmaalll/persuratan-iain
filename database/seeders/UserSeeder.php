@@ -19,8 +19,15 @@ class UserSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123'),
-                'role' => 1,
+                'role' => 2,
             ],
+            [
+                'name' => 'Super Admin',
+                'username' => 'superadmin',
+                'email' => 'superadmin@gmail.com',
+                'password' => bcrypt('123'),
+                'role' => 1,
+            ]
         ];
 
         foreach ($usr as $v) {
