@@ -3,16 +3,23 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Post;
+use App\Http\Services\Repositories\PostRepository;
 
 class PostCrud extends Component
 {
     public $posts, $judul, $isi, $post_id;
     public $isOpen = 0;
 
+    protected $postRepository;
+
+    public function boot(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function render()
     {
-        $this->posts = Post::all();
+        $this->posts = $this->postRepository->all();
         return view('livewire.post-crud');
     }
 
@@ -46,15 +53,20 @@ class PostCrud extends Component
             'isi' => 'required',
         ]);
 
-        Post::updateOrCreate(['id' => $this->post_id], [
+        $attributes = [
             'judul' => $this->judul,
             'isi' => $this->isi
-        ]);
+        ];
 
-        session()->flash(
-            'message',
-            $this->post_id ? 'Data Berhasil Di Update.' : 'Data Berhasil Dibuat.'
-        );
+        if ($this->post_id) {
+            $this->postRepository->update($attributes, $this->post_id);
+            $message = 'Data Berhasil Di Update.';
+        } else {
+            $this->postRepository->store($attributes);
+            $message = 'Data Berhasil Dibuat.';
+        }
+
+        session()->flash('message', $message);
 
         $this->closeModal();
         $this->resetInputFields();
@@ -62,7 +74,7 @@ class PostCrud extends Component
 
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $post = $this->postRepository->find($id);
         $this->post_id = $id;
         $this->judul = $post->judul;
         $this->isi = $post->isi;
@@ -72,7 +84,7 @@ class PostCrud extends Component
 
     public function delete($id)
     {
-        Post::find($id)->delete();
+        $this->postRepository->delete($id);
         session()->flash('message', 'Data berhasil di hapus.');
     }
 }
