@@ -17,7 +17,7 @@ class SuratMasuk extends Component
     }
     public function render()
     {
-        $this->title = 'surat-masuk';
+        $title = $this->title;
         $this->suratmasuk = $this->repo->all();
         return view('livewire.admin.surat-masuk', compact('title'));
     }
