@@ -15,6 +15,12 @@ use App\Http\Services\Repositories\Contracts\SuratMasukContract;
 use App\Models\RencanaHasilKerja;
 use App\Livewire\PostCrud;
 use App\Livewire\Admin\SuratMasuk;
+use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\SuratKeluar;
+use App\Livewire\Admin\Menu;
+use App\Livewire\Admin\Role;
+use App\Livewire\Admin\Users;
+use App\Livewire\Admin\UserMenu;
 
 Route::get('posts', PostCrud::class);
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -56,56 +62,61 @@ Route::domain('')->group(function () { // development
         });
 
         Route::group(['prefix' => '/surat-keluar'], function () {
-            Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
-            Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
-            Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
-            Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
-            Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
-            Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
-            Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
-            Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
+            Route::get('/', SuratKeluar::class);
+            // Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+            // Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
+            // Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
+            // Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
+            // Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
+            // Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
+            // Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+            // Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
         });
 
         # USER SETTING
         Route::group(['prefix' => '/roles'], function () {
-            Route::get('/', [RoleController::class, 'index'])->name('roles.index');
-            Route::get('/data', [RoleController::class, 'data'])->name('roles.data');
-            Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
-            Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
-            Route::get('/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
-            Route::put('/{id}', [RoleController::class, 'update'])->name('roles.update');
-            Route::delete('/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
+            Route::get('/', Role::class);
+            // Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+            // Route::get('/data', [RoleController::class, 'data'])->name('roles.data');
+            // Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+            // Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+            // Route::get('/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+            // Route::put('/{id}', [RoleController::class, 'update'])->name('roles.update');
+            // Route::delete('/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
         });
 
         Route::group(['prefix' => '/menus'], function () {
-            Route::get('/', [MenuController::class, 'index'])->name('menus.index');
-            Route::get('/data', [MenuController::class, 'data'])->name('menus.data');
-            Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
-            Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
-            Route::get('/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
-            Route::put('/{id}', [MenuController::class, 'update'])->name('menus.update');
-            Route::delete('/{id}', [MenuController::class, 'destroy'])->name('menus.delete');
+            Route::get('/', Menu::class);
+            // Route::get('/', [MenuController::class, 'index'])->name('menus.index');
+            // Route::get('/data', [MenuController::class, 'data'])->name('menus.data');
+            // Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
+            // Route::post('/store', [MenuController::class, 'store'])->name('menus.store');
+            // Route::get('/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+            // Route::put('/{id}', [MenuController::class, 'update'])->name('menus.update');
+            // Route::delete('/{id}', [MenuController::class, 'destroy'])->name('menus.delete');
         });
 
         Route::group(['prefix' => '/user-menus'], function () {
-            Route::get('/', [UserMenuController::class, 'index'])->name('user-menus.index');
-            Route::get('/data', [UserMenuController::class, 'data'])->name('user-menus.data');
-            Route::post('/store', [UserMenuController::class, 'store'])->name('user-menus.store');
-            Route::get('/{id}/edit', [UserMenuController::class, 'edit'])->name('user-menus.edit');
-            Route::get('/{id}/show', [UserMenuController::class, 'show'])->name('user-menus.show');
-            Route::delete('/{id}', [UserMenuController::class, 'destroy'])->name('user-menus.delete');
+            Route::get('/', UserMenu::class);
+            // Route::get('/', [UserMenuController::class, 'index'])->name('user-menus.index');
+            // Route::get('/data', [UserMenuController::class, 'data'])->name('user-menus.data');
+            // Route::post('/store', [UserMenuController::class, 'store'])->name('user-menus.store');
+            // Route::get('/{id}/edit', [UserMenuController::class, 'edit'])->name('user-menus.edit');
+            // Route::get('/{id}/show', [UserMenuController::class, 'show'])->name('user-menus.show');
+            // Route::delete('/{id}', [UserMenuController::class, 'destroy'])->name('user-menus.delete');
         });
         Route::get('user-menus/create/{id}', [UserMenuController::class, 'create'])->name('user-menus.create');
 
 
         Route::group(['prefix' => '/users'], function () {
-            Route::get('/', [UsersController::class, 'index'])->name('users.index');
-            Route::get('/data', [UsersController::class, 'data'])->name('users.data');
-            Route::get('/create', [UsersController::class, 'create'])->name('users.create');
-            Route::post('/store', [UsersController::class, 'store'])->name('users.store');
-            Route::get('/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
-            Route::put('/{id}', [UsersController::class, 'update'])->name('users.update');
-            Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.delete');
+            Route::get('/', Users::class);
+            // Route::get('/', [UsersController::class, 'index'])->name('users.index');
+            // Route::get('/data', [UsersController::class, 'data'])->name('users.data');
+            // Route::get('/create', [UsersController::class, 'create'])->name('users.create');
+            // Route::post('/store', [UsersController::class, 'store'])->name('users.store');
+            // Route::get('/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
+            // Route::put('/{id}', [UsersController::class, 'update'])->name('users.update');
+            // Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.delete');
         });
     });
 });
