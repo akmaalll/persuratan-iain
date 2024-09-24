@@ -3,17 +3,17 @@
 namespace App\Http\Services\Repositories;
 
 use App\Http\Services\Repositories\BaseRepository;
-use App\Http\Services\Repositories\Contracts\SuratMasukContract;
-use App\Models\surat_masuk as SuratMasuk;
+use App\Http\Services\Repositories\Contracts\ArsipSuratContract;
+use App\Models\ArsipSurat;
 
-class SuratMasukRepository extends BaseRepository implements SuratMasukContract
+class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 {
 	/**
 	 * @var
 	 */
 	protected $model;
 
-	public function __construct(SuratMasuk $model)
+	public function __construct(ArsipSurat $model)
 	{
 		$this->model = $model;
 	}

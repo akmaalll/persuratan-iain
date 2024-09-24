@@ -4,7 +4,7 @@ namespace App\Http\Services\Repositories;
 
 use App\Http\Services\Repositories\BaseRepository;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
-use App\Models\SuratKeluar;
+use App\Models\surat_keluar as SuratKeluar;
 
 class SuratKeluarRepository extends BaseRepository implements SuratKeluarContract
 {
