@@ -21,6 +21,7 @@ use App\Livewire\Admin\Menu;
 use App\Livewire\Admin\Role;
 use App\Livewire\Admin\Users;
 use App\Livewire\Admin\UserMenu;
+use App\Livewire\Admin\ArsipSurat;
 
 Route::get('posts', PostCrud::class);
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -59,6 +60,9 @@ Route::domain('')->group(function () { // development
         # APPS 
         Route::group(['prefix' => '/surat-masuk'], function () {
             Route::get('/', SuratMasuk::class);
+        });
+        Route::group(['prefix' => '/arsip'], function () {
+            Route::get('/', ArsipSurat::class);
         });
 
         Route::group(['prefix' => '/surat-keluar'], function () {
