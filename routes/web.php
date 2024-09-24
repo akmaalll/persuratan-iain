@@ -14,8 +14,10 @@ use App\Http\Controllers\Auth\LoginController as Auths;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
 use App\Models\RencanaHasilKerja;
 use App\Livewire\PostCrud;
+use App\Livewire\Admin\SuratMasuk;
 
 Route::get('posts', PostCrud::class);
+// Route::get('suratmasuk', SuratMasuk::class);
 
 // Route::get('/', function () {
 //     return view('app.welcome');
@@ -38,7 +40,7 @@ Route::domain('')->group(function () { // development
     Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
     Route::post('/auth/login', [Auths::class, 'login'])->name('login');
 
-    Route::get('/logout', [Auths::class, 'logout'])->middleware('auth');
+    Route::get('/logout', [Auths::class, 'logout'])->middleware('auth')->name('logout');
 
 
     // ADMIN_ROUTES
@@ -50,14 +52,7 @@ Route::domain('')->group(function () { // development
 
         # APPS 
         Route::group(['prefix' => '/surat-masuk'], function () {
-            Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
-            Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
-            Route::get('/create', [SuratMasukController::class, 'create'])->name('surat-masuk.create');
-            Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
-            Route::get('/{id}/edit', [SuratMasukController::class, 'edit'])->name('surat-masuk.edit');
-            Route::put('/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
-            Route::patch('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
-            Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
+            Route::get('/', SuratMasuk::class);
         });
 
         Route::group(['prefix' => '/surat-keluar'], function () {
