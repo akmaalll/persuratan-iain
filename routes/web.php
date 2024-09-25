@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController as Auths;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
+use App\Livewire\Admin\Dashboard;
 use App\Models\RencanaHasilKerja;
 use App\Livewire\PostCrud;
 
@@ -44,7 +45,7 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+        Route::get('/', Dashboard::class)->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
