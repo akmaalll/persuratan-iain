@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
+use App\Livewire\Auth\Index as Auth;
+use App\Livewire\Auth\Login as Login;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
+use App\Livewire\Admin\Dashboard;
 use App\Models\RencanaHasilKerja;
 use App\Livewire\PostCrud;
 use App\Livewire\Admin\SuratMasuk;
@@ -44,6 +47,7 @@ Route::domain('')->group(function () { // development
     // Route::domain('permohonan.bpfkmakassar.go.id')->group(function () { // production
 
     // Auth::routes();
+
     Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
     Route::post('/auth/login', [Auths::class, 'login'])->name('login');
 
@@ -53,7 +57,7 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+        Route::get('/', Dashboard::class)->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
