@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
+use App\Livewire\Auth\Index as Auth;
+use App\Livewire\Auth\Login as Login;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
 use App\Livewire\Admin\Dashboard;
 use App\Models\RencanaHasilKerja;
@@ -36,9 +38,10 @@ Route::domain('')->group(function () { // development
     // Route::domain('permohonan.bpfkmakassar.go.id')->group(function () { // production
 
     // Auth::routes();
-    Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
-    Route::post('/auth/login', [Auths::class, 'login'])->name('login');
-
+    // Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
+    Route::get('/auth/login', Auth::class)->name('admin.login');
+    // Route::post('/auth/login', [Auths::class, 'login'])->name('login');
+    Route::post('/auth/login', Login::class)->name('login');
     Route::get('/logout', [Auths::class, 'logout'])->middleware('auth');
 
 

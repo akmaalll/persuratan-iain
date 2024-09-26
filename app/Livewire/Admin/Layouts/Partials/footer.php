@@ -4,7 +4,7 @@ namespace App\Livewire\Admin\Layouts\Partials;
 
 use Livewire\Component;
 
-class footer extends Component
+class Footer extends Component
 {
     public function render()
     {
