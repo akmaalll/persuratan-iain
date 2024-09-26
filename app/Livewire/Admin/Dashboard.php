@@ -6,8 +6,16 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public function render()
+//     public function render()
+//     {
+//         return view('livewire.admin.dashboard');
+//     }
+    public function home()
     {
-        return view('livewire.admin.dashboard');
+        try {
+            return view('app.welcome');
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
     }
 }

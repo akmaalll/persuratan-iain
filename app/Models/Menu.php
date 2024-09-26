@@ -17,7 +17,6 @@ class Menu extends Model
         'index',
         'sort',
         'active',
-
         'main_menu',
         'sub_parent'
     ];

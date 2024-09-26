@@ -12,7 +12,7 @@
                             <input type="text" wire:model="judul" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Judul">
                             @error('judul') <span class="text-red-500">{{ $message }}</span>@enderror <br><br>
                             <textarea wire:model="isi" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="Isi"></textarea>
-                            @error('idi') <span class="text-red-500">{{ $message }}</span>@enderror <br>
+                            @error('isi') <span class="text-red-500">{{ $message }}</span>@enderror <br>
                         </div>
                     </div>
                 </div>
