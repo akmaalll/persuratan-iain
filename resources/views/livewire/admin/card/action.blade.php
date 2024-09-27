@@ -32,7 +32,7 @@
 
     <!--begin::Card toolbar-->
     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-        <a href="{{ route($title . '.create') }}" class="btn btn-success">
+        <a wire:click="create()" class="btn btn-success">
             <span class="btn-label">
                 <i class="fa fa-plus"></i>
             </span>
