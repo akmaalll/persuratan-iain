@@ -19,7 +19,7 @@ class SuratMasuk extends Component
     {
         $title = $this->title;
         $this->suratmasuk = $this->repo->all();
-        return view('livewire.admin.surat-masuk', compact('title'));
+        return view('livewire.admin.surat-masuk.index', compact('title'));
     }
     public function create()
     {
@@ -55,6 +55,7 @@ class SuratMasuk extends Component
     public function store()
     {
         $this->validate([
+            'kd_klasifikasi_id' => 'required',
             'tgl_surat' => 'required',
             'nomor' => 'required',
             'perihal' => 'required',
@@ -71,6 +72,7 @@ class SuratMasuk extends Component
         ]);
 
         $attributes = [
+            'kd_klasifikasi_id' => $this->kd_klasifikasi_id,
             'tgl_surat' => $this->tgl_surat,
             'nomor' => $this->nomor,
             'perihal' => $this->perihal,
@@ -98,6 +100,23 @@ class SuratMasuk extends Component
 
         $this->closeModal();
         $this->resetInputFields();
+
+        // dd(
+        //     $this->kd_klasifikasi_id,
+        //     $this->tgl_surat,
+        //     $this->nomor,
+        //     $this->perihal,
+        //     $this->status,
+        //     $this->asal,
+        //     $this->tgl_terima,
+        //     $this->tgl_input,
+        //     $this->ttd,
+        //     $this->tujuan,
+        //     $this->kepada,
+        //     $this->jenis,
+        //     $this->retensi,
+        //     $this->riwayat_mutasi
+        // );
     }
 
     public function edit($id)

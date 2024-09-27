@@ -18,6 +18,7 @@ use App\Livewire\Admin\Dashboard;
 use App\Models\RencanaHasilKerja;
 use App\Livewire\PostCrud;
 use App\Livewire\Admin\SuratMasuk;
+use App\Livewire\Admin\SuratMasuk\Index;
 use App\Livewire\Admin\SuratKeluar;
 use App\Livewire\Admin\Menu;
 use App\Livewire\Admin\Role;
