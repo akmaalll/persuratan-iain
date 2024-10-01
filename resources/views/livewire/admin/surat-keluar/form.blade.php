@@ -1,4 +1,4 @@
-@extends('livewire.admin._layouts.index')
+@extends('livewire.admin.layouts.index')
 
 {{-- @push('Data Master')
     here show
@@ -10,7 +10,7 @@
 
 @section('content')
     <!--begin::Toolbar-->
-    @component('livewire.admin._card.breadcrumb')
+    @component('livewire.admin.card.breadcrumb')
         @slot('header')
             {{ $title }}
         @endslot
@@ -31,7 +31,7 @@
                 <!--begin::Header-->
                 <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Form {{ isset($data->id) ? 'Edit' : 'Input' }}</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Form {{ $sk_id ? 'Edit Post' : 'Buat Post' }}</span>
                     </h3>
                 </div>
                 <!--end::Header-->
@@ -41,100 +41,148 @@
 
                     <div class="row mt-5">
                         <!--begin:Form-->
-                        <form id="kt_modal_new_target_form" class="form" action="#">
-                            <input name="_method" type="hidden" id="methodId"
-                                value="{{ isset($data->id) ? 'PUT' : 'POST' }}">
-                            <input type="hidden" name="id" id="formId" value="{{ $data->id ?? null }}">
+                        <form id="kt_modal_new_target_form" class="form" wire:submit.prevent="store">
                             @csrf
 
-                            <!--begin::Input group-->
+                            <!-- Kode Klasifikasi -->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Main Menu</label>
-                                    <input type="text" class="form-control" name="main_menu" id="main_menu"
-                                        value="{{ isset($data->main_menu) ? $data->main_menu : '' }}" />
+                                    <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
+                                    <input type="text" class="form-control" wire:model="kd_klasifikasi_id" />
+                                    @error('kd_klasifikasi_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
+                                <!-- Tanggal Surat -->
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Parent</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="true"
-                                        data-placeholder="Select a Roles" name="parent" id="parent">
-                                        <option value="">Select user...</option>
-                                        @foreach (Helper::getData('menus')->where('parent', '0') as $v)
-                                            <option {{ isset($data->parent) && $data->parent == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">{{ $v->name }}
-                                                {{ $v->role->nama ?? null }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="fs-6 fw-semibold mb-2">Tanggal Surat</label>
+                                    <input type="date" class="form-control" wire:model="tgl_surat" />
+                                    @error('tgl_surat')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
+                            <!-- Nomor Surat dan Perihal -->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Menu Name</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        value="{{ isset($data->name) ? $data->name : '' }}" />
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" wire:model="nomor" />
+                                    @error('nomor')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Icon </label>
-                                    <select class="form-select" data-control="select2" data-hide-search="true"
-                                        data-placeholder="Select a Roles" name="icon" id="icon">
-                                        <option value="">Select Icon...</option>
-                                        <option {{ isset($data->icon) && $data->icon == 'bi-stack' ? 'selected' : '' }}>
-                                            bi-stack</option>
-                                        <option
-                                            {{ isset($data->icon) && $data->icon == 'bi-people-fill' ? 'selected' : '' }}>
-                                            bi-people-fill</option>
-                                    </select>
+                                    <label class="fs-6 fw-semibold mb-2">Perihal</label>
+                                    <input type="text" class="form-control" wire:model="perihal" />
+                                    @error('perihal')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
+                            <!-- Status dan Asal -->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Url</label>
-                                    <input type="text" class="form-control" name="url" id="url"
-                                        value="{{ isset($data->url) ? $data->url : '' }}" />
+                                    <label class="fs-6 fw-semibold mb-2">Status</label>
+                                    <input type="text" class="form-control" wire:model="status" />
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
-                                <div class="col-md-3 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Index</label>
-                                    <input type="text" class="form-control" name="index" id="index"
-                                        value="{{ isset($data->index) ? $data->index : '' }}" />
-                                </div>
-                                <div class="col-md-3 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Sub Parent</label>
-                                    <label class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="sub_parent" id="sub_parent" type="checkbox"
-                                            value="1" checked="checked" />
-                                        <span class="form-check-label fw-semibold text-muted">Yes</span>
-                                    </label>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Asal</label>
+                                    <input type="text" class="form-control" wire:model="asal" />
+                                    @error('asal')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            <!--end::Input group-->
 
-                            <!--begin::Actions-->
+                            <!-- Tanggal Terima dan Tanggal Input -->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Tanggal Kirim</label>
+                                    <input type="date" class="form-control" wire:model="tgl_kirim" />
+                                    @error('tgl_kirim')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Tanggal Input</label>
+                                    <input type="date" class="form-control" wire:model="tgl_input" />
+                                    @error('tgl_input')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- TTD dan Tujuan -->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
+                                    <input type="text" class="form-control" wire:model="ttd" />
+                                    @error('ttd')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Tujuan</label>
+                                    <input type="text" class="form-control" wire:model="tujuan" />
+                                    @error('tujuan')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Kepala dan Jenis -->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Kepada</label>
+                                    <input type="text" class="form-control" wire:model="kepada" />
+                                    @error('kepada')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Jenis</label>
+                                    <input type="text" class="form-control" wire:model="jenis" />
+                                    @error('jenis')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Retensi dan Riwayat Mutasi -->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Retensi</label>
+                                    <input type="text" class="form-control" wire:model="retensi" />
+                                    @error('retensi')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                
+                            </div>
+
+                            <!-- Submit Button -->
                             <div class="d-flex justify-content-end">
-                                <a href="{{ route($title . '.index') }}">
-                                    <button type="button" id="kt_modal_new_target_cancel" class="btn btn-secondary me-3"
-                                        data-bs-dismiss="modal">Batal</button>
-                                </a>
-                                @if (isset($data->id))
-                                    <button type="submit" id="kt_modal_new_target_update" class="btn btn-primary">
-                                        <span class="indicator-label">Update</span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                @else
-                                    <button type="submit" id="kt_modal_new_target_save" class="btn btn-primary">
-                                        <span class="indicator-label">Simpan</span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                @endif
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="indicator-label">{{ $sk_id ? 'Update' : 'Simpan' }}</span>
+                                    <span class="indicator-progress">Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <button type="button" class="btn btn-secondary ms-3"
+                                    wire:click="closeModal()">Batal</button>
                             </div>
-                            <!--end::Actions-->
-
                         </form>
                         <!--end:Form-->
                     </div>
@@ -187,11 +235,11 @@
             }
         );
     </script>
-
+{{-- 
     @if (isset($data->id))
         @include('livewire.admin._card._updateAjax')
     @else
         @include('livewire.admin._card._createAjax')
-    @endif
+    @endif --}}
 
 @endpush

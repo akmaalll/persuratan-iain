@@ -60,6 +60,7 @@
                             <thead>
                                 <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-20px pe-2">No</th>
+                                    <th class="min-w-140px">Kode Klasifikasi</th>
                                     <th class="min-w-140px">Tanggal Surat</th>
                                     <th class="min-w-120px">Nomor Surat</th>
                                     <th class="min-w-120px">Perihal Surat</th>
