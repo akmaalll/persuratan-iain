@@ -8,6 +8,11 @@
         </td>
         <td>
             <span class="fw-semibold">
+                {{ $v->kd_klasifikasi_id }} {{-- Tanggal Surat --}}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
                 {{ $v->tgl_surat }} {{-- Tanggal Surat --}}
             </span>
         </td>

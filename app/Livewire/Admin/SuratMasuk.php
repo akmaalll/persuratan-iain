@@ -123,6 +123,7 @@ class SuratMasuk extends Component
     {
         $post = $this->repo->find($id);
         $this->sm_id = $id;
+        $this->kd_klasifikasi_id = $post->kd_klasifikasi_id;
         $this->tgl_surat = $post->tgl_surat;
         $this->nomor = $post->nomor;
         $this->perihal = $post->perihal;
@@ -139,6 +140,7 @@ class SuratMasuk extends Component
 
         $this->openModal();
     }
+    
     public function delete($id)
     {
         $this->repo->delete($id);
