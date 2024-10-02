@@ -46,13 +46,27 @@
 
                             <!-- Kode Klasifikasi -->
                             <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
-                                    <input type="text" class="form-control" wire:model="kd_klasifikasi_id" />
-                                    @error('kd_klasifikasi_id')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                    <div class="col-md-6 fv-row" x-init="$nextTick(() => {
+                                        $('#kd_klasifikasi_id').select2({
+                                            placeholder: 'Pilih Kode Klasifikasi',
+                                            allowClear: true
+                                        }).on('change', function() {
+                                            $wire.set('kd_klasifikasi_id', $(this).val());
+                                        });
+                                    })">
+                                        <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
+                                        <select class="form-select" id="kd_klasifikasi_id" data-control="select2"
+                                            data-hide-search="false" data-placeholder="Pilih Kode Klasifikasi">
+                                            <option value="">--- Pilih Kode Klasifikasi ---</option>
+                                            @foreach (Helper::getData('kd_klasifikasis') as $v)
+                                                <option value="{{ $v->id }}">{{ $v->nama }} - {{ $v->nomor }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('kd_klasifikasi_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
                                 <!-- Tanggal Surat -->
                                 <div class="col-md-6 fv-row">
@@ -190,7 +204,6 @@
                                     wire:click="closeModal()">Batal</button>
                             </div>
                         </form>
-
                         <!--end:Form-->
                     </div>
 
@@ -242,10 +255,4 @@
             }
         );
     </script>
-
-    {{-- @if (isset($suratmasuk->id))
-        @include('livewire.admin._card._updateAjax')
-    @else
-        @include('livewire.admin._card._createAjax')
-    @endif --}}
 @endpush

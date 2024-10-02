@@ -112,21 +112,22 @@
 
                         </table>
                         <!--end::Table-->
-                    </div>
+                        {{-- {{ $suratmasuk->links() }} --}}
 
-                    <!--begin::Pagination-->
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="d-flex flex-wrap py-2 mr-3">
-                            <div class="text-center pagination">
-                                <div id="contentPage"></div>
+                        <!--begin::Pagination-->
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex flex-wrap py-2 mr-3">
+                                <div class="text-center pagination">
+                                    <div id="contentPage"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center py-3">
+                                <ul class="pagination twbs-pagination">
+                                </ul>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center py-3">
-                            <ul class="pagination twbs-pagination">
-                            </ul>
-                        </div>
+                        <!--end::Pagination-->
                     </div>
-                    <!--end::Pagination-->
 
                 </div>
 
@@ -143,30 +144,37 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        document.addEventListener('livewire:load', function() {
+            toastr.success('tes');
+            Livewire.on('showToastr', event => {
+                toastr.success(event.message);
+            });
+        });
+
         $(document).ready(function() {
-            loadpage(5, '');
-            var $pagination = $('.twbs-pagination');
-            var defaultOpts = {
-                totalPages: 1,
-                prev: '&#8672;',
-                next: '&#8674;',
-                first: '&#8676;',
-                last: '&#8677;',
-            };
-            $pagination.twbsPagination(defaultOpts);
+            // loadpage(5, '');
+            // var $pagination = $('.twbs-pagination');
+            // var defaultOpts = {
+            //     totalPages: 1,
+            //     prev: '&#8672;',
+            //     next: '&#8674;',
+            //     first: '&#8676;',
+            //     last: '&#8677;',
+            // };
+            // $pagination.twbsPagination(defaultOpts);
 
 
 
-            $("#button_search, #perPage").on('click change', function(event) {
-                let search = $('#input_search').val();
-                let per_page = $('#perPage').val() ?? 5;
-                loadpage(per_page, search);
-            });
+            // $("#button_search, #perPage").on('click change', function(event) {
+            //     let search = $('#input_search').val();
+            //     let per_page = $('#perPage').val() ?? 5;
+            //     loadpage(per_page, search);
+            // });
 
-            $("#button_refresh").on('click', function(event) {
-                $('#input_search').val('');
-                loadpage(5, '');
-            });
+            // $("#button_refresh").on('click', function(event) {
+            //     $('#input_search').val('');
+            //     loadpage(5, '');
+            // });
 
 
             // proses delete data

@@ -96,7 +96,7 @@ class SuratMasuk extends Component
             $message = 'Data Berhasil Di Buat.';
         }
 
-        session()->flash('message', $message);
+        $this->dispatch('showToastr', ['message' => $message]);
 
         $this->closeModal();
         $this->resetInputFields();
