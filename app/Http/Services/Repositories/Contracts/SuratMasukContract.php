@@ -12,4 +12,5 @@ interface SuratMasukContract
 	*/
 
 	public function paginated(array $request);
+	public function search($search, $perPage);
 }

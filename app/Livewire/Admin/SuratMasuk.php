@@ -8,7 +8,8 @@ use App\Http\Services\Repositories\SuratMasukRepository;
 class SuratMasuk extends Component
 {
     public $suratmasuk, $title, $sm_id, $kd_klasifikasi_id, $tgl_surat, $nomor, $perihal, $status, $asal, $tgl_terima, $tgl_input, $ttd, $tujuan, $kepada, $jenis, $retensi, $riwayat_mutasi;
-    public $isopen = 0;
+    public $isopen = 0; 
+
     protected $repo;
     public function boot(SuratMasukRepository $repo)
     {
@@ -19,6 +20,7 @@ class SuratMasuk extends Component
     {
         $title = $this->title;
         $this->suratmasuk = $this->repo->all();
+        // dd($this->suratmasuk);
         return view('livewire.admin.surat-masuk.index', compact('title'));
     }
     public function create()

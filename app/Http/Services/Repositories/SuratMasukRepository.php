@@ -25,5 +25,12 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
 	}
-
+	public function search($search, $perPage = 10)
+	{
+		return SuratMasuk::where('nomor', 'like', "%{$search}%")
+			->orWhere('perihal', 'like', "%{$search}%")
+			->orWhere('asal', 'like', "%{$search}%")
+			->orWhere('kepada', 'like', "%{$search}%")
+			->paginate($perPage);
+	}
 }
