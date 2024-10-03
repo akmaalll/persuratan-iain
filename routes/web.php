@@ -11,20 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
-use App\Livewire\Auth\Index as Auth;
-use App\Livewire\Auth\Login as Login;
-use App\Http\Services\Repositories\Contracts\SuratMasukContract;
-use App\Livewire\Admin\Dashboard;
-use App\Models\RencanaHasilKerja;
-use App\Livewire\PostCrud;
-use App\Livewire\Admin\SuratMasuk;
-use App\Livewire\Admin\SuratMasuk\Index;
-use App\Livewire\Admin\SuratKeluar;
-use App\Livewire\Admin\Menu;
-use App\Livewire\Admin\Role;
-use App\Livewire\Admin\Users;
-use App\Livewire\Admin\UserMenu;
-use App\Livewire\Admin\ArsipSurat;
+
 
 Route::get('posts', PostCrud::class);
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -57,7 +44,7 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-        Route::get('/', Dashboard::class)->name('admin');
+        Route::get('/', DashboardController::class)->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
