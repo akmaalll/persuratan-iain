@@ -92,8 +92,8 @@
             </span>
         </td> --}}
         <td>
-            <span class="fw-semibold">
-                {{ $v->retensi }}
+            <span class="fw-semibold text-nowrap">
+                {{ Helper::getDateIndos($v->retensi) }}
             </span>
         </td>
         <td class="text-nowrap">
