@@ -64,12 +64,12 @@
                                 </div> --}}
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Nomor Surat</label>
                                     <input type="text" class="form-control" name="nomor" id="nomor"
                                         value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
                                 </div>
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Kepada</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Kepada</label>
                                     <input type="text" class="form-control" name="kepada" id="kepada"
                                         value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
                                 </div>
@@ -106,8 +106,17 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
-                                    <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asal : '' }}" />
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Asal" name="asal" id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}">
+                                                {{ $v->nama }} </option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input type="text" class="form-control" name="asal" id="asal"
+                                        value="{{ isset($data->asal) ? $data->asal : '' }}" /> --}}
                                 </div>
                             </div>
 
@@ -121,7 +130,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
                                     <input type="date" class="form-control" name="tgl_input" id="tgl_input"
-                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" />
+                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                        readonly />
                                 </div>
                             </div>
 
@@ -142,15 +152,53 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
-                                    <input type="text" class="form-control" name="jenis" id="jenis"
-                                        value="{{ isset($data->jenis) ? $data->jenis : '' }}" />
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Status" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'dinamis' ? 'selected' : '' }}
+                                            value="dinamis">Dinamis</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'statis' ? 'selected' : '' }}
+                                            value="statis">Statis</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'vital' ? 'selected' : '' }}
+                                            value="vital">Vital</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'umum' ? 'selected' : '' }}
+                                            value="umum">Umum</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
+                                            value="terjaga">Terjaga</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'aktif' ? 'selected' : '' }}
+                                            value="aktif">Aktif</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'inaktif' ? 'selected' : '' }}
+                                            value="inaktif">Inaktif</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="text" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" />
+                                    <select class="form-control" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Retensi" name="retensi" id="retensi" required>
+                                        <option value="">Pilih Retensi</option>
+                                        <option value="1"
+                                            {{ isset($data->retensi) && $data->retensi == 1 ? 'selected' : '' }}>1 Tahun
+                                        </option>
+                                        <option value="3"
+                                            {{ isset($data->retensi) && $data->retensi == 3 ? 'selected' : '' }}>3 Tahun
+                                        </option>
+                                        <option value="5"
+                                            {{ isset($data->retensi) && $data->retensi == 5 ? 'selected' : '' }}>5 Tahun
+                                        </option>
+                                        <option value="8"
+                                            {{ isset($data->retensi) && $data->retensi == 8 ? 'selected' : '' }}>8 Tahun
+                                        </option>
+                                        <option value="10"
+                                            {{ isset($data->retensi) && $data->retensi == 10 ? 'selected' : '' }}>10 Tahun
+                                        </option>
+                                        <option value="15"
+                                            {{ isset($data->retensi) && $data->retensi == 15 ? 'selected' : '' }}>15 Tahun
+                                        </option>
+                                    </select>
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    {{-- <input type="date" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" /> --}}
                                 </div>
                             </div>
                             <!--end::Input group-->
