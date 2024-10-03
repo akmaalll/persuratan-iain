@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('surat_masuks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kd_klasifikasi_id');
             $table->date('tgl_surat');
             $table->string('nomor', 50);
             $table->string('perihal');

@@ -18,7 +18,6 @@ use App\Http\Services\Repositories\SuratKeluarRepository;
 use App\Http\Services\Repositories\SuratMasukRepository;
 use App\Http\Services\Repositories\UserMenuRepository;
 use App\Http\Services\Repositories\UsersRepository;
-use App\Models\Post;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
