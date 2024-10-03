@@ -73,7 +73,7 @@ trait Uploadable
     {
         $tgl = date('Ymd');
         $file = array('file' => $image);
-        $rules = array('file' => 'mimes:png,jpg,jpeg,pdf|max:5148');
+        $rules = array('file' => 'mimes:png,jpg,jpeg,pdf,docx|max:5148');
         $validator = Validator::make($file, $rules);
 
         if ($validator->fails() or $image == null) {

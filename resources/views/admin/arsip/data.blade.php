@@ -43,7 +43,7 @@
         </td> --}}
         <td>
             <span class="fw-semibold">
-                {{ $v->uraian }} {{-- Jenis --}}
+                {!! $v->uraian !!} 
             </span>
         </td>
         <td>
