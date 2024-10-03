@@ -27,6 +27,6 @@ class ArsipSurat extends Model
     ];
 
     public function klasifikasi() {
-        return $this->hasOne(kd_klasifikasi::class);
+        return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
     }
 }

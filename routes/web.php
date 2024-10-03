@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SuratMasukController;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
+
 
 
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -43,7 +45,9 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-        Route::get('/', DashboardController::class)->name('admin');
+
+        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
@@ -51,8 +55,17 @@ Route::domain('')->group(function () { // development
         Route::group(['prefix' => '/surat-masuk'], function () {
             // Route::get('/', SuratMasuk::class);
         });
+
+        // Arsip surat
         Route::group(['prefix' => '/arsip'], function () {
-            // Route::get('/', ArsipSurat::class);
+            Route::get('/', [ArsipSuratController::class, 'index'])->name('arsip.index');
+            Route::get('/data', [ArsipSuratController::class, 'data'])->name('arsip.data');
+            Route::get('/create', [ArsipSuratController::class, 'create'])->name('arsip.create');
+            Route::post('/store', [ArsipSuratController::class, 'store'])->name('arsip.store');
+            Route::get('/{id}/edit', [ArsipSuratController::class, 'edit'])->name('arsip.edit');
+            Route::put('/{id}', [ArsipSuratController::class, 'update'])->name('arsip.update');
+            Route::delete('/{id}', [ArsipSuratController::class, 'destroy'])->name('arsip.delete');
+
         });
 
         Route::group(['prefix' => '/surat-keluar'], function () {
@@ -89,6 +102,7 @@ Route::domain('')->group(function () { // development
             Route::put('/{id}', [MenuController::class, 'update'])->name('menus.update');
             Route::delete('/{id}', [MenuController::class, 'destroy'])->name('menus.delete');
         });
+
 
         Route::group(['prefix' => '/user-menus'], function () {
             // Route::get('/', UserMenu::class);

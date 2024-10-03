@@ -20,11 +20,11 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    // public function getIndikatorKinerja($id)
-    // {
-    //     $data = $this->indikator->getByIdRencana($id);
-    //     return response()->json($data);
-    // }
+    public function getIndikatorKinerja($id)
+    {
+        $data = $this->indikator->getByIdRencana($id);
+        return response()->json($data);
+    }
 
     public function home()
     {
@@ -34,22 +34,22 @@ class DashboardController extends Controller
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
-    // public function data(Request $request)
-    // {
-    //     try {
-    //         $data = $this->rk->paginated($request->all());
-    //         // dd($data);
-    //         $perPage = $request->per_page == '' ? 5 : $request->per_page;
-    //         $view = view('app.data', compact('data'))->with('i', ($request->input('page', 1) -
-    //             1) * $perPage)->render();
-    //         return response()->json([
-    //             "total_page" => $data->lastpage(),
-    //             "total_data" => $data->total(),
-    //             "html"       => $view,
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         dd($e);
-    //         return view('errors.message', ['message' => $e->getMessage()]);
-    //     }
-    // }
+    public function data(Request $request)
+    {
+        try {
+            $data = $this->rk->paginated($request->all());
+            // dd($data);
+            $perPage = $request->per_page == '' ? 5 : $request->per_page;
+            $view = view('app.data', compact('data'))->with('i', ($request->input('page', 1) -
+                1) * $perPage)->render();
+            return response()->json([
+                "total_page" => $data->lastpage(),
+                "total_data" => $data->total(),
+                "html"       => $view,
+            ]);
+        } catch (\Exception $e) {
+            dd($e);
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
 }
