@@ -11,7 +11,20 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
-
+use App\Livewire\Auth\Index as Auth;
+use App\Livewire\Auth\Login as Login;
+use App\Http\Services\Repositories\Contracts\SuratMasukContract;
+use App\Livewire\Admin\Dashboard;
+use App\Models\RencanaHasilKerja;
+use App\Livewire\PostCrud;
+use App\Livewire\Admin\SuratMasuk;
+use App\Livewire\Admin\SuratMasuk\Index;
+use App\Livewire\Admin\SuratKeluar;
+use App\Livewire\Admin\Menu;
+use App\Livewire\Admin\Role;
+use App\Livewire\Admin\Users;
+use App\Livewire\Admin\UserMenu;
+use App\Livewire\Admin\ArsipSurat;
 
 Route::get('posts', PostCrud::class);
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -44,7 +57,7 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-        Route::get('/', DashboardController::class)->name('admin');
+        Route::get('/', Dashboard::class)->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
@@ -55,8 +68,17 @@ Route::domain('')->group(function () { // development
         Route::group(['prefix' => '/arsip'], function () {
             Route::get('/', ArsipSurat::class);
         });
+
         Route::group(['prefix' => '/surat-keluar'], function () {
-            Route::get('/', SuratKeluar::class)->name('surat-keluar.index');
+            Route::get('/', SuratKeluar::class);
+            // Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+            // Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
+            // Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
+            // Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
+            // Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
+            // Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
+            // Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+            // Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
         });
 
         # USER SETTING
