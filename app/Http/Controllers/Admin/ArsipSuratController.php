@@ -71,6 +71,7 @@ class ArsipSuratController extends Controller
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
@@ -92,7 +93,7 @@ class ArsipSuratController extends Controller
             $req = $request->all();
             // dd($req);
             $data = $this->repo->find($req['id']);
-            
+
             if ($request->hasFile('file')) {
                 $files = $request->file('file')->getClientOriginalName();
                 $files_name = pathinfo($files, PATHINFO_FILENAME);

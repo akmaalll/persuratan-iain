@@ -50,6 +50,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleContract::class, RoleRepository::class);
         $this->app->bind(UserMenuContract::class, UserMenuRepository::class);
         $this->app->bind(UsersContract::class, UsersRepository::class);
-        Paginator::useBootstrapFive();
     }
 }

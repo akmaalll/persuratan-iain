@@ -263,10 +263,11 @@
         ClassicEditor
             .create(document.querySelector('#uraian'))
             .then(editor => {
-                console.log(editor);
+                window.uraianEditor = editor; // Simpan ke window object
+                console.log('CKEditor initialized successfully');
             })
             .catch(error => {
-                console.error(error);
+                console.error('CKEditor initialization failed:', error);
             });
         // Define form element
         const form = document.getElementById('kt_modal_new_target_form');
