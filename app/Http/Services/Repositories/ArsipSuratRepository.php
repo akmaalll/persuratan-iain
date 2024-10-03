@@ -26,4 +26,12 @@ class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
 	}
 
+	public function paginate($criteria)
+	{
+		$perPage = $criteria['per_page'] ?? 5;
+		$field = $criteria['sort_field'] ?? 'id';
+		$sortOrder = $criteria['sort_order'] ?? 'desc';
+		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
+	}
+
 }

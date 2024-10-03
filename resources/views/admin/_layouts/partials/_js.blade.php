@@ -6,7 +6,7 @@
 <!--end::Global Javascript Bundle-->
 
 <script src="{{ asset('/') }}twbs-pagination/jquery.twbsPagination.min.js"></script>
-
+<script src="{{ asset('/') }}demo/assets/plugins/custom/ckeditor/ckeditor-classic.bundle.js"></script>
 <!--begin::Vendors Javascript(used for this page only)-->
 {{-- <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <script src="assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
