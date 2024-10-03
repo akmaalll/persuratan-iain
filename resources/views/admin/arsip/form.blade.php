@@ -205,8 +205,9 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
-                                        name="file" id="file"  />
-                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}" name="files_old" id="files_old" />
+                                        name="file" id="file" />
+                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
+                                        name="files_old" id="files_old" />
                                 </div>
 
 
@@ -265,9 +266,10 @@
             .then(editor => {
                 window.editor = editor
                 console.log(editor);
+
             })
             .catch(error => {
-                console.error(error);
+                console.error('CKEditor initialization failed:', error);
             });
         // Define form element
         const form = document.getElementById('kt_modal_new_target_form');

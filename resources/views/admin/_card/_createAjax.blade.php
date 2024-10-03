@@ -20,11 +20,13 @@
                         console.log(formData);
                         if (window.editor) {
                             const editorContent = window.editor.getData();
+
                             formData.set('uraian', editorContent);
                             console.log('Added editor content to form data');
                         } else {
                             console.warn('CKEditor not found');
                         }
+
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
