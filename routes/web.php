@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController as Auths;
 
 
-
 // Route::get('suratmasuk', SuratMasuk::class);
 
 // Route::get('/', function () {
@@ -45,16 +44,23 @@ Route::domain('')->group(function () { // development
     // ADMIN_ROUTES
     Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
 
-
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
-
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
         # APPS 
         Route::group(['prefix' => '/surat-masuk'], function () {
-            // Route::get('/', SuratMasuk::class);
+            Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+            Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
+            Route::get('/create', [SuratMasukController::class, 'create'])->name('surat-masuk.create');
+            Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
+            Route::get('/{id}/edit', [SuratMasukController::class, 'edit'])->name('surat-masuk.edit');
+            Route::put('/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
+            Route::delete('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
+            Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
         });
+
+        
 
         // Arsip surat
         Route::group(['prefix' => '/arsip'], function () {
@@ -76,13 +82,13 @@ Route::domain('')->group(function () { // development
             Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
             Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
             Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
-            Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+            Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+//             Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
         });
 
         # USER SETTING
         Route::group(['prefix' => '/roles'], function () {
-            // Route::get('/', Role::class);
             Route::get('/', [RoleController::class, 'index'])->name('roles.index');
             Route::get('/data', [RoleController::class, 'data'])->name('roles.data');
             Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
@@ -93,7 +99,6 @@ Route::domain('')->group(function () { // development
         });
 
         Route::group(['prefix' => '/menus'], function () {
-            // Route::get('/', Menu::class);
             Route::get('/', [MenuController::class, 'index'])->name('menus.index');
             Route::get('/data', [MenuController::class, 'data'])->name('menus.data');
             Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
@@ -105,7 +110,6 @@ Route::domain('')->group(function () { // development
 
 
         Route::group(['prefix' => '/user-menus'], function () {
-            // Route::get('/', UserMenu::class);
             Route::get('/', [UserMenuController::class, 'index'])->name('user-menus.index');
             Route::get('/data', [UserMenuController::class, 'data'])->name('user-menus.data');
             Route::post('/store', [UserMenuController::class, 'store'])->name('user-menus.store');
@@ -117,7 +121,6 @@ Route::domain('')->group(function () { // development
 
 
         Route::group(['prefix' => '/users'], function () {
-            // Route::get('/', Users::class);
             Route::get('/', [UsersController::class, 'index'])->name('users.index');
             Route::get('/data', [UsersController::class, 'data'])->name('users.data');
             Route::get('/create', [UsersController::class, 'create'])->name('users.create');

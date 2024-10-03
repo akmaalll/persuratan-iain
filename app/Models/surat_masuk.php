@@ -9,7 +9,6 @@ class surat_masuk extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kd_klasifikasi_id',
         'tgl_surat',
         'nomor',
         'perihal',
@@ -24,9 +23,5 @@ class surat_masuk extends Model
         'retensi', 
         'riwayat_mutasi', 
     ];
-
-    public function klasifikasi() {
-        return $this->hasOne(kd_klasifikasi::class);
-    }
     
 }
