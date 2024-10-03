@@ -205,8 +205,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
-                                        name="file" id="file" />
-                                    <input type="hidden" name="files_old" id="files_old" />
+                                        name="file" id="file"  />
+                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}" name="files_old" id="files_old" />
                                 </div>
 
 
@@ -263,6 +263,7 @@
         ClassicEditor
             .create(document.querySelector('#uraian'))
             .then(editor => {
+                window.editor = editor
                 console.log(editor);
             })
             .catch(error => {

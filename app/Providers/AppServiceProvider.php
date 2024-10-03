@@ -20,8 +20,6 @@ use App\Http\Services\Repositories\SuratKeluarRepository;
 use App\Http\Services\Repositories\SuratMasukRepository;
 use App\Http\Services\Repositories\UserMenuRepository;
 use App\Http\Services\Repositories\UsersRepository;
-// use App\Models\Post;
-// use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,6 +48,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleContract::class, RoleRepository::class);
         $this->app->bind(UserMenuContract::class, UserMenuRepository::class);
         $this->app->bind(UsersContract::class, UsersRepository::class);
-        Paginator::useBootstrapFive();
     }
 }

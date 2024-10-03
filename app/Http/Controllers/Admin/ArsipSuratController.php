@@ -59,6 +59,7 @@ class ArsipSuratController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         try {
             $req = $request->all();
             $files_old = "";
