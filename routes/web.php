@@ -55,17 +55,8 @@ Route::domain('')->group(function () { // development
         Route::group(['prefix' => '/arsip'], function () {
             Route::get('/', ArsipSurat::class);
         });
-
         Route::group(['prefix' => '/surat-keluar'], function () {
-            Route::get('/', SuratKeluar::class);
-            // Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
-            // Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
-            // Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
-            // Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
-            // Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
-            // Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
-            // Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
-            // Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
+            Route::get('/', SuratKeluar::class)->name('surat-keluar.index');
         });
 
         # USER SETTING
