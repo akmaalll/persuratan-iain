@@ -7,31 +7,63 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->parent }}
+                {{ $v->tgl_surat }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->name }}
+                {{ $v->nomor }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->icon }}
+                {{ $v->perihal }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->url }}
+                {{ $v->status }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->index }}
+                {{ $v->asal }}
             </span>
         </td>
-        <td class="text-muted fw-semibold">
-            {{ $v->sub_parent }}
+        <td>
+            <span class="fw-semibold">
+                {{ $v->tgl_kirim }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->tgl_input }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->ttd }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->tujuan }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->kepada }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->jenis }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->retensi }}
+            </span>
         </td>
         <td class="text-end">
             {!! Helper::btnAction($v->id, $title) !!}
