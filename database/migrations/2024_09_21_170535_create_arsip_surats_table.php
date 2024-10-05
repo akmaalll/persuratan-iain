@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('no_box');
             $table->string('retensi');
             $table->string('file');
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

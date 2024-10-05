@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('log_surats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('surat_masuks_id')->nullable();
-            $table->unsignedInteger('surat_keluars_id')->nullable();
-            $table->unsignedInteger('user_id');
-            $table->string('created_by', 5);
-            $table->string('updated_by', 5);
-            $table->string('deleted_by', 5);
+            $table->string('activity')->nullable();
+            $table->string('jenis_log');
+            $table->string('desc');
+            $table->string('user_id', 5)->nullable();
             $table->timestamps();
         });
     }

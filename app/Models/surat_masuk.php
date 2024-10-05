@@ -22,6 +22,8 @@ class surat_masuk extends Model
         'jenis', 
         'retensi', 
         'riwayat_mutasi', 
+        'created_by', 
+        'updated_by', 
     ];
     
 }

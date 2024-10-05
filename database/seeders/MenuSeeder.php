@@ -28,6 +28,7 @@ class MenuSeeder extends Seeder
             ['name' => 'Surat Masuk', 'icon' => 'bi-stack', 'url' => 'surat-masuk', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Surat Keluar', 'icon' => 'bi-stack', 'url' => 'surat-keluar', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Data Arsip', 'icon' => 'bi-stack', 'url' => 'arsip', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
+            ['name' => 'Log Aktivitas', 'icon' => 'bi-people-fill', 'url' => 'log-aktivitas', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
 
             ['name' => 'User', 'icon' => 'bi-people-fill', 'url' => 'users', 'index' => 0, 'main_menu' => 'USERS', 'active' => '1', 'parent' => '2'],
 

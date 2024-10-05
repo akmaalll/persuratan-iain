@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('kepada');
             $table->string('jenis');
             $table->string('retensi');
+            $table->unsignedInteger('created_by'); 
+            $table->unsignedInteger('updated_by')->nullable(); 
             $table->timestamps();
         });
     }
