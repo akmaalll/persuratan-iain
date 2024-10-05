@@ -20,11 +20,13 @@
                     @php
                         $split_datetime = explode(' ', $v->created_at);
                     @endphp
+                    {{-- {{ dd(Helper::getDateIndo(Carbon\Carbon::parse($v->created_at))) }} --}}
                     <div class="text-muted me-2 fs-7">
                         Pada
                         {{ Helper::getHari(Carbon\Carbon::parse($v->created_at)->format('D')) .
                             ', ' .
-                            Helper::getDateIndo(Carbon\Carbon::parse($split_datetime[1])) }}. <br>
+                            Helper::getDateIndo(Carbon\Carbon::parse($v->created_at)) }}.
+                        <br>
                         Pukul {{ Carbon\Carbon::parse($v->created_at)->format('H:i') . ' WITA' }}
                     </div>
                     <!--end::Info-->
