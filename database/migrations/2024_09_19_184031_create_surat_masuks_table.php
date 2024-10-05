@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('jenis'); 
             $table->string('retensi'); 
             $table->string('riwayat_mutasi'); 
+            $table->unsignedInteger('created_by'); 
+            $table->unsignedInteger('updated_by')->nullable(); 
             $table->timestamps();
             
         });

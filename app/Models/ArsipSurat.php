@@ -24,6 +24,8 @@ class ArsipSurat extends Model
         'no_box',
         'retensi',
         'file',
+        'created_by', 
+        'updated_by', 
     ];
 
     public function klasifikasi() {

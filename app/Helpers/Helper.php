@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\log_surat;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -125,7 +126,7 @@ class Helper
                             </button>
                 </a>';
         }
-        
+
         return $edit . $delete;
     }
 
@@ -325,5 +326,61 @@ class Helper
     {
         $data = DB::table('menus')->select('name')->find($id);
         return isset($data) ? $data->name : '';
+    }
+
+    public static function logAuth($activity, $jenis_log, $desc, $id_user)
+    {
+        return log_surat::create([
+            'activity' => $activity,
+            'jenis_log' => $jenis_log,
+            'desc' => $desc,
+            'user_id' => $id_user,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    public static function logIcon($activity)
+    {
+        $iconName = '<i class="ki-duotone ki-flag fs-2  text-gray-500">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>';
+
+        if ($activity == 'Create') {
+            $iconName = '<i class="ki-duotone fs-2 text-success ki-plus-square">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>';
+        } else if ($activity == 'Update') {
+            $iconName = '<i class="ki-duotone ki-pencil text-warning fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>';
+        } else if ($activity == 'Delete') {
+            $iconName = '<i class="ki-duotone ki-trash text-danger fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                        </i>';
+        } else if ($activity == 'Logout') {
+            $iconName = '<i class="ki-duotone ki-black-left-line text-dark fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>';
+        } else if ($activity == 'Login') {
+            $iconName = '<i class="ki-duotone ki-entrance-left text-dark fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>';
+        }
+
+        return '
+            <div class="timeline-icon me-4">
+                ' . $iconName . '
+            </div>
+        ';
     }
 }

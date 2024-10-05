@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratKeluarController extends Controller
 {
@@ -58,6 +59,7 @@ class SuratKeluarController extends Controller
     {
         try {
             $req = $request->all();
+            $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
@@ -80,6 +82,7 @@ class SuratKeluarController extends Controller
     {
         try {
             $req = $request->all();
+            $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $request->id);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {

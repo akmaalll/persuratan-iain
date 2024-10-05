@@ -66,6 +66,7 @@ class LoginController extends Controller
             $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
             if (Auth::attempt([$field => $login, 'password' => $request->password])) {
+                Helper::logAuth('Login','User login','Telah login',Auth::user()->id);
                 Helper::menu();
                 return redirect()->route('admin');
             } else {
@@ -79,6 +80,8 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        Helper::logAuth('Logout','User logout','Telah logout',Auth::user()->id);
+
         // $roles = auth()->user()->id_role;
         $this->guard()->logout();
         $request->session()->invalidate();

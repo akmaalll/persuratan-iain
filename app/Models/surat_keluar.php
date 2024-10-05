@@ -22,6 +22,8 @@ class surat_keluar extends Model
         'kepada', 
         'jenis', 
         'retensi', 
+        'created_by', 
+        'updated_by', 
     ];
 
     public function klasifikasi() {

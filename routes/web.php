@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LogAktivitasController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\RoleController;
@@ -73,6 +74,8 @@ Route::domain('')->group(function () { // development
             Route::delete('/{id}', [ArsipSuratController::class, 'destroy'])->name('arsip.delete');
 
         });
+        
+        
 
         Route::group(['prefix' => '/surat-keluar'], function () {
             // Route::get('/', SuratKeluar::class);
@@ -85,6 +88,18 @@ Route::domain('')->group(function () { // development
             Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
 //             Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
+        });
+
+        // Log aktivitas
+        Route::group(['prefix' => '/log-aktivitas'], function () {
+            Route::get('/', [LogAktivitasController::class, 'index'])->name('log-aktivitas.index');
+            Route::get('/data', [LogAktivitasController::class, 'data'])->name('log-aktivitas.data');
+            Route::get('/create', [LogAktivitasController::class, 'create'])->name('log-aktivitas.create');
+            Route::post('/store', [LogAktivitasController::class, 'store'])->name('log-aktivitas.store');
+            Route::get('/{id}/edit', [LogAktivitasController::class, 'edit'])->name('log-aktivitas.edit');
+            Route::put('/{id}', [LogAktivitasController::class, 'update'])->name('log-aktivitas.update');
+            Route::delete('/{id}', [LogAktivitasController::class, 'destroy'])->name('log-aktivitas.delete');
+
         });
 
         # USER SETTING
