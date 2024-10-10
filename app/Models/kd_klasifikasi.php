@@ -14,7 +14,8 @@ class kd_klasifikasi extends Model
         'nama',
     ];
 
-    public function jenis_klasifikasi() {
-        return $this->hasOne(JenisKlasifikasi::class);
+    public function jenis_klasifikasi()
+    {
+        return $this->belongsTo(JenisKlasifikasi::class, 'jenis_klasifikasi_id', 'id');
     }
 }
