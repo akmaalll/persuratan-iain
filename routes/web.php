@@ -61,7 +61,7 @@ Route::domain('')->group(function () { // development
             Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
         });
 
-        
+
 
         // Arsip surat
         Route::group(['prefix' => '/arsip'], function () {
@@ -72,10 +72,9 @@ Route::domain('')->group(function () { // development
             Route::get('/{id}/edit', [ArsipSuratController::class, 'edit'])->name('arsip.edit');
             Route::put('/{id}', [ArsipSuratController::class, 'update'])->name('arsip.update');
             Route::delete('/{id}', [ArsipSuratController::class, 'destroy'])->name('arsip.delete');
-
         });
-        
-        
+
+
 
         Route::group(['prefix' => '/surat-keluar'], function () {
             // Route::get('/', SuratKeluar::class);
@@ -86,8 +85,10 @@ Route::domain('')->group(function () { // development
             Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
             Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
             Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
-//             Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+            //             Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
+            Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])
+                ->name('surat-keluar.last-number');
         });
 
         // Log aktivitas
@@ -99,7 +100,6 @@ Route::domain('')->group(function () { // development
             Route::get('/{id}/edit', [LogAktivitasController::class, 'edit'])->name('log-aktivitas.edit');
             Route::put('/{id}', [LogAktivitasController::class, 'update'])->name('log-aktivitas.update');
             Route::delete('/{id}', [LogAktivitasController::class, 'destroy'])->name('log-aktivitas.delete');
-
         });
 
         # USER SETTING

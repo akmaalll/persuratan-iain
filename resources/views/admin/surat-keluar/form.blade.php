@@ -49,25 +49,21 @@
 
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
-                                <input type="hidden" name="kd_klasifikasi_id" value="1" id="kd_klasifikasi_id">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
-                                    <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
-                                        value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Perihal</label>
-                                    <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                    <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
+                                    <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
+                                        data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Kode Klasifikasi">
+                                        <option value="">--- Pilih Kode Klasifikasi ---</option>
+                                        @foreach (Helper::getData('kd_klasifikasis') as $v)
+                                            <option
+                                                {{ isset($data->kd_klasifikasi_id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}" data-kode="{{ $v->jenis_klasifikasi->kode }}"
+                                                data-nomor="{{ $v->nomor }}">
+                                                {{ $v->jenis_klasifikasi->nama . ' - ' . $v->nomor ?? null }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
@@ -85,23 +81,44 @@
                             </div>
 
                             <div class="row g-9 mb-8">
-
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
+                                            <option {{ isset($data->kode) && $data->kode == $v->kode ? 'selected' : '' }}
+                                                value="{{ $v->kode }}" data-nomor="{{ $v->nomor }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
+                                    <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
+                                        value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
+                                </div>
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
                                     <input type="date" class="form-control" name="tgl_kirim" id="tgl_kirim"
                                         value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Perihal</label>
+                                    <input type="text" class="form-control" name="perihal" id="perihal"
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-12 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor" id="nomor"
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
                                 </div>
                             </div>
 
@@ -135,9 +152,8 @@
                                 </div>
                             </div>
 
+
                             <div class="row g-9 mb-8">
-
-
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -162,28 +178,8 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <select class="form-control" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Retensi" name="retensi" id="retensi" required>
-                                        <option value="">Pilih Retensi</option>
-                                        <option value="1"
-                                            {{ isset($data->retensi) && $data->retensi == 1 ? 'selected' : '' }}>1 Tahun
-                                        </option>
-                                        <option value="3"
-                                            {{ isset($data->retensi) && $data->retensi == 3 ? 'selected' : '' }}>3 Tahun
-                                        </option>
-                                        <option value="5"
-                                            {{ isset($data->retensi) && $data->retensi == 5 ? 'selected' : '' }}>5 Tahun
-                                        </option>
-                                        <option value="8"
-                                            {{ isset($data->retensi) && $data->retensi == 8 ? 'selected' : '' }}>8 Tahun
-                                        </option>
-                                        <option value="10"
-                                            {{ isset($data->retensi) && $data->retensi == 10 ? 'selected' : '' }}>10 Tahun
-                                        </option>
-                                        <option value="15"
-                                            {{ isset($data->retensi) && $data->retensi == 15 ? 'selected' : '' }}>15 Tahun
-                                        </option>
-                                    </select>
+                                    <input type="date" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" />
 
                                 </div>
                             </div>
@@ -230,7 +226,126 @@
 
 @push('jsScriptForm')
     <script type="text/javascript">
-        // Define form element
+        // generate no surat
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = {
+                kdKlasifikasi: document.getElementById('kd_klasifikasi_id'),
+                status: document.getElementById('status'),
+                tglSurat: document.getElementById('tgl_surat'),
+                asal: document.getElementById('asal'),
+                nomorField: document.getElementById('nomor')
+            };
+
+            let counter = 0;
+            let previousValues = {
+                kdKlasifikasi: '',
+                status: '',
+                tglSurat: '',
+                asal: ''
+            };
+
+            // Add event listeners
+            ['kdKlasifikasi', 'status', 'tglSurat', 'asal'].forEach(field => {
+                if (form[field]) {
+                    form[field].addEventListener('change', () => {
+                        // console.log(`${field} changed`);
+                        handleInputChange(field);
+                    });
+                }
+            });
+
+            function handleInputChange(changedField) {
+                // Check if the value actually changed
+                const currentValue = form[changedField].value;
+                if (previousValues[changedField] === currentValue) {
+                    return;
+                }
+
+                // Update previous value
+                previousValues[changedField] = currentValue;
+
+                if (areAllFieldsFilled()) {
+                    counter++;
+                    generateNomor();
+                } else {
+                    form.nomorField.value = '';
+                }
+            }
+
+            function generateNomor() {
+                $.ajax({
+                    url: '/admin/surat-keluar/last-number',
+                    method: 'POST',
+                    data: {
+                        kd_klasifikasi: form.kdKlasifikasi.value,
+                        status: form.status.value,
+                        asal: form.asal.value,
+                        _token: document.querySelector('meta[name="csrf-token"]').content // CSRF token
+                    },
+                    success: function(data) {
+                        const nextNumber = (data.last_number + 1).toString().padStart(3, '0');
+                        console.log(nextNumber);
+
+                        const values = {
+                            status: form.status.value,
+                            klasifikasi: form.kdKlasifikasi.options[form.kdKlasifikasi
+                                .selectedIndex],
+                            asal: form.asal.options[form.asal.selectedIndex],
+                            date: new Date(form.tglSurat.value)
+                        };
+
+                        const components = {
+                            status: getStatus(values.status),
+                            counterNoSurat: nextNumber,
+                            asalCode: values.asal.value,
+                            asalNomor: values.asal.dataset.nomor,
+                            kodeKlasifikasi: values.klasifikasi.dataset.kode,
+                            noKlasifikasi: values.klasifikasi.dataset.nomor,
+                            month: String(values.date.getMonth() + 1).padStart(2, '0'),
+                            year: values.date.getFullYear(),
+                            isFTAR: values.asal.value === 'FTAR'
+                        };
+
+                        const documentNumber = formatDocumentNumber(components);
+                        form.nomorField.value = documentNumber;
+                    },
+                    error: function(error) {
+                        console.error('Error generating nomor:', error);
+                    }
+                });
+            }
+
+            function noKlasifkasi(text) {
+                const parts = text.split('-').map(part => part.trim().replace(/\n/g, ''));
+                return parts[1] || '';
+            }
+
+            function areAllFieldsFilled() {
+                return form.status.value &&
+                    form.kdKlasifikasi.selectedIndex !== 0 &&
+                    form.asal.selectedIndex !== 0 &&
+                    form.tglSurat.value;
+            }
+
+            function getStatus(status) {
+                const prefixMap = {
+                    'rahasia': 'R',
+                    'biasa': 'B',
+                    'penting': 'P'
+                };
+                return prefixMap[status] || '';
+            }
+
+            function formatDocumentNumber(components) {
+                if (components.isFTAR) {
+                    return `${components.status}-${components.counterNoSurat}/ln.39/${components.asalCode}.${components.asalNomor}/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
+                } else {
+                    return `${components.status}-${components.counterNoSurat}/ln.39/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
+                }
+            }
+        });
+
+
         const form = document.getElementById('kt_modal_new_target_form');
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/

@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\JenisKlasifikasi;
+use App\Models\kd_klasifikasi;
 use App\Models\log_surat;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -140,7 +142,22 @@ class Helper
     // cek data menu role user
     public static function getData($param)
     {
-        $data = DB::table($param)->get();
+        switch ($param) {
+            case 'kd_klasifikasis':
+                // Gunakan model Eloquent untuk KdKlasifikasi dan include relasi 'jenis_klasifikasi'
+                $data = kd_klasifikasi::with('jenis_klasifikasi')->get();
+                break;
+
+            case 'jenis_klasifikasis':
+                // Gunakan model Eloquent untuk JenisKlasifikasi jika diperlukan
+                $data = JenisKlasifikasi::all();
+                break;
+
+            default:
+                // Jika tidak dikenali, fallback ke query builder (tanpa relasi)
+                $data = DB::table($param)->get();
+                break;
+        }
         return isset($data) ? $data : null;
     }
 

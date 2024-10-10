@@ -174,31 +174,9 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <select class="form-control" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Retensi" name="retensi" id="retensi" required>
-                                        <option value="">Pilih Retensi</option>
-                                        <option value="1"
-                                            {{ isset($data->retensi) && $data->retensi == 1 ? 'selected' : '' }}>1 Tahun
-                                        </option>
-                                        <option value="3"
-                                            {{ isset($data->retensi) && $data->retensi == 3 ? 'selected' : '' }}>3 Tahun
-                                        </option>
-                                        <option value="5"
-                                            {{ isset($data->retensi) && $data->retensi == 5 ? 'selected' : '' }}>5 Tahun
-                                        </option>
-                                        <option value="8"
-                                            {{ isset($data->retensi) && $data->retensi == 8 ? 'selected' : '' }}>8 Tahun
-                                        </option>
-                                        <option value="10"
-                                            {{ isset($data->retensi) && $data->retensi == 10 ? 'selected' : '' }}>10 Tahun
-                                        </option>
-                                        <option value="15"
-                                            {{ isset($data->retensi) && $data->retensi == 15 ? 'selected' : '' }}>15 Tahun
-                                        </option>
-                                    </select>
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-                                    {{-- <input type="date" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" /> --}}
+                                    <input type="date" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" />
                                 </div>
                             </div>
                             <!--end::Input group-->

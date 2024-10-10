@@ -12,4 +12,6 @@ interface SuratKeluarContract
 	*/
 
 	public function paginated(array $request);
+
+	public function getLastNumber(array $criteria);
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SuratKeluarController extends Controller
 {
@@ -55,6 +56,7 @@ class SuratKeluarController extends Controller
         }
     }
 
+
     public function store(Request $request)
     {
         try {
@@ -97,6 +99,24 @@ class SuratKeluarController extends Controller
             return response()->json($data);
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function getLastNumber(Request $request)
+    {
+        try {
+            $criteria = [
+                'kd_klasifikasi' => $request->input('kd_klasifikasi'),
+                'status' => $request->input('status'),
+                'asal' => $request->input('asal'),
+            ];
+
+            $lastNumber = $this->repo->getLastNumber($criteria);
+
+            return response()->json(['last_number' => $lastNumber]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 }
