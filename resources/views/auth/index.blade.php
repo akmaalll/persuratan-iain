@@ -3,13 +3,13 @@
 <!--begin::Head-->
 
 <head>
-    <title>Sign In - BPFK Makassar</title>
+    <title>Sign In - IAIN Parepare</title>
     <meta charset="utf-8" />
-    <meta name="description" content="bpfk." />
-    <meta name="keywords" content="bpfk" />
+    <meta name="description" content="iain." />
+    <meta name="keywords" content="iain" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="BPFK Makassar" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <meta property="og:title" content="IAIN Parepare" />
+    <link rel="shortcut icon" href="{{ asset('/logo/logo.ico') }}" />
 
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -52,27 +52,27 @@
         <!--begin::Page bg image-->
         <style>
             body {
-                background-image: url('{{ asset('/') }}themes/dist/assets/media/auth/bg4.jpg');
+                background-image: url('{{ asset('/') }}logo/bg-iain.png');
             }
 
             [data-bs-theme="dark"] body {
-                background-image: url('{{ asset('/') }}themes/dist/assets/media/auth/bg4-dark.jpg');
+                background-image: url('{{ asset('/') }}logo/bg-iain.png');
             }
         </style>
         <!--end::Page bg image-->
         <!--begin::Authentication - Sign-in -->
-        <div class="d-flex flex-column flex-column-fluid flex-lg-row">
+        <div class="d-flex flex-column flex-column-fluid flex-xl-row">
             <!--begin::Aside-->
-            <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
+            <div class="d-flex flex-center w-xl-50 pt-15 pt-xl-0 px-10">
                 <!--begin::Aside-->
-                <div class="d-flex flex-center flex-lg-start flex-column">
+                <div class="d-flex flex-center flex-xl-start flex-column">
                     <!--begin::Logo-->
-                    <a href="index.html" class="mb-7">
-                        <img alt="Logo" src="{{ asset('/logo/logo-name.png') }}"  />
+                    <a href="#" class="mb-7">
+                        <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h2 class="text-white fw-normal m-0">Balai Pengamanan Fasilitas Kesehatan Makassar</h2>
+                    {{-- <h2 class="text-white fw-normal m-0">Institut Agama Islam Negeri Parepare</h2> --}}
                     <!--end::Title-->
                 </div>
                 <!--begin::Aside-->
@@ -80,7 +80,7 @@
             <!--begin::Aside-->
             <!--begin::Body-->
             <div
-                class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
+                class="d-flex flex-column-fluid flex-xl-row-auto justify-content-center justify-content-xl-end p-12 p-xl-20">
                 <!--begin::Card-->
                 <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
                     <!--begin::Wrapper-->
@@ -92,10 +92,11 @@
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3">Sign In to IAIN Parepare</h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
-                                <div class="text-gray-500 fw-semibold fs-6">Input your account</div>
+                                <div class="text-gray-500 fw-semibold fs-6">Enter your details to login to your account:
+                                </div>
                                 <!--end::Subtitle=-->
                             </div>
                             <!--begin::Heading-->
@@ -118,7 +119,7 @@
 
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
-                                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-success">
                                     <!--begin::Indicator label-->
                                     <span class="indicator-label">Sign In</span>
                                     <!--end::Indicator label-->
