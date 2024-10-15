@@ -31,9 +31,7 @@ Route::get('/', [DashboardController::class, 'home'])->name('index');
 Route::get('/data', [DashboardController::class, 'data'])->name('index.data');
 
 
-Route::domain('')->group(function () { // development
-    // Route::domain('permohonan.bpfkmakassar.go.id')->group(function () { // production
-
+Route::domain('')->group(function () {
     // Auth::routes();
 
     Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');

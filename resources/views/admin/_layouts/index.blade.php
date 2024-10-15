@@ -3,12 +3,12 @@
 <!--begin::Head-->
 
 <head>
-    <title>Admin Apps - BPFK Makassar</title>
+    <title>Persuratan - IAIN Parepare</title>
     <meta charset="utf-8" />
-    <meta name="description" content="bpfk." />
-    <meta name="keywords" content="bpfk" />
+    <meta name="description" content="iain." />
+    <meta name="keywords" content="iain" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="BPFK Makassar" />
+    <meta property="og:title" content="IAIN Parepare" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" href="{{ asset('/') }}logo/logo.png" />
 
