@@ -13,4 +13,5 @@ interface ArsipSuratContract
 
 	public function paginated(array $request);
 	public function paginate($request);
+	public function filter(array $request);
 }
