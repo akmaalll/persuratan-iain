@@ -64,6 +64,7 @@ Route::domain('')->group(function () {
         // Arsip surat
         Route::group(['prefix' => '/arsip'], function () {
             Route::get('/', [ArsipSuratController::class, 'index'])->name('arsip.index');
+            Route::get('/filter', [ArsipSuratController::class, 'filter'])->name('arsip.filter');
             Route::get('/data', [ArsipSuratController::class, 'data'])->name('arsip.data');
             Route::get('/create', [ArsipSuratController::class, 'create'])->name('arsip.create');
             Route::post('/store', [ArsipSuratController::class, 'store'])->name('arsip.store');

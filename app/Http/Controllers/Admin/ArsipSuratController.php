@@ -34,7 +34,13 @@ class ArsipSuratController extends Controller
     {
         try {
             $title = $this->title;
-            $data = $this->repo->paginated($request->all());
+            if(is_array($request->search)) {
+                $data = $this->repo->filter($request->all());
+            }
+            else {
+                $data = $this->repo->paginated($request->all());
+            }
+            // dd($data);
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
@@ -121,5 +127,16 @@ class ArsipSuratController extends Controller
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
+    }
+    
+    public function filter(Request $request) {
+        try {
+            dd($request->all());
+            $data = $this->repo->filter($request->all());
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+
     }
 }

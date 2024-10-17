@@ -15,6 +15,8 @@
                         submitButtonUpdate.setAttribute('data-kt-indicator', 'on');
                         submitButtonUpdate.disabled = true;
                         let formData = new FormData(kt_modal_new_target_form);
+                        console.log(kt_modal_new_target_form);
+                        console.log(formData);
                         let id = $('#formId').val();
                         if (window.editor) {
                             const editorContent = window.editor.getData();
@@ -45,9 +47,9 @@
                                 } else {
                                     toastr.success("Successful update data!");
                                     setTimeout(() => {
-                                        window.location.replace(
-                                            "{{ route($title . '.index') }}"
-                                        );
+                                        // window.location.replace(
+                                        //     "{{ route($title . '.index') }}"
+                                        // );
                                     }, 750);
                                 }
 
