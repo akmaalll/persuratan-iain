@@ -229,7 +229,7 @@
         // generate no surat
         document.addEventListener('DOMContentLoaded', function() {
             const form = {
-                kdKlasifikasi: document.getElementById('kd_klasifikasi_id'),
+                kd_klasifikasi_id: document.getElementById('kd_klasifikasi_id'),
                 status: document.getElementById('status'),
                 tglSurat: document.getElementById('tgl_surat'),
                 asal: document.getElementById('asal'),
@@ -238,17 +238,26 @@
 
             let counter = 0;
             let previousValues = {
-                kdKlasifikasi: '',
+                kd_klasifikasi_id: '',
                 status: '',
                 tglSurat: '',
                 asal: ''
             };
 
             // Add event listeners
-            ['kdKlasifikasi', 'status', 'tglSurat', 'asal'].forEach(field => {
+            ['tglSurat'].forEach(field => {
                 if (form[field]) {
                     form[field].addEventListener('change', () => {
-                        // console.log(`${field} changed`);
+                        console.log(`${field} changed`);
+                        handleInputChange(field);
+                    });
+                }
+            });
+
+            ['kd_klasifikasi_id', 'status', 'asal'].forEach(field => {
+                if (form[field]) {
+                    $(document.body).on("change", `#${field}`, function() {
+                        console.log(`${field} changed`);
                         handleInputChange(field);
                     });
                 }
@@ -260,6 +269,7 @@
                 if (previousValues[changedField] === currentValue) {
                     return;
                 }
+
 
                 // Update previous value
                 previousValues[changedField] = currentValue;
@@ -277,7 +287,7 @@
                     url: '/admin/surat-keluar/last-number',
                     method: 'POST',
                     data: {
-                        kd_klasifikasi: form.kdKlasifikasi.value,
+                        kd_klasifikasi: form.kd_klasifikasi_id.value,
                         status: form.status.value,
                         asal: form.asal.value,
                         _token: document.querySelector('meta[name="csrf-token"]').content // CSRF token
@@ -288,7 +298,7 @@
 
                         const values = {
                             status: form.status.value,
-                            klasifikasi: form.kdKlasifikasi.options[form.kdKlasifikasi
+                            klasifikasi: form.kd_klasifikasi_id.options[form.kd_klasifikasi_id
                                 .selectedIndex],
                             asal: form.asal.options[form.asal.selectedIndex],
                             date: new Date(form.tglSurat.value)
@@ -322,7 +332,7 @@
 
             function areAllFieldsFilled() {
                 return form.status.value &&
-                    form.kdKlasifikasi.selectedIndex !== 0 &&
+                    form.kd_klasifikasi_id.selectedIndex !== 0 &&
                     form.asal.selectedIndex !== 0 &&
                     form.tglSurat.value;
             }
