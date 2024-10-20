@@ -5,6 +5,9 @@ namespace App\Helpers;
 use App\Models\JenisKlasifikasi;
 use App\Models\kd_klasifikasi;
 use App\Models\log_surat;
+use App\Models\surat_masuk;
+use App\Models\surat_keluar;
+use App\Models\ArsipSurat;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -131,6 +134,57 @@ class Helper
 
         return $edit . $delete;
     }
+    public static function suratkadaluarsa()
+    {
+
+        $suratmasuk = surat_masuk::all();
+        $suratkeluar = surat_keluar::all();
+        $arsipsurat = ArsipSurat::all();
+
+        $expiredSurat = collect();
+
+        $tomorrow = \Carbon\Carbon::today()->addDay();
+
+        foreach ($suratmasuk as $surat) {
+            $retensi = \Carbon\Carbon::parse($surat->retensi);
+            if ($retensi->isSameDay($tomorrow)) {
+                $expiredSurat->push($surat);
+            }
+        }
+
+        foreach ($suratkeluar as $surat) {
+            $retensi = \Carbon\Carbon::parse($surat->retensi);
+            if ($retensi->isSameDay($tomorrow)) {
+                $expiredSurat->push($surat);
+            }
+        }
+
+        foreach ($arsipsurat as $surat) {
+            $retensi = \Carbon\Carbon::parse($surat->retensi);
+            if ($retensi->isSameDay($tomorrow)) {
+                $expiredSurat->push($surat);
+            }
+        }
+
+        $data = '';
+        if ($expiredSurat->isNotEmpty()) {
+            foreach ($expiredSurat as $surat) {
+                $data .= '<div class="menu-item px-5">
+                        <a href="#" class="menu-link px-5">surat dengan nomor <br> ' . $surat->nomor . '
+                            <br> akan kadaluwarsa pada tanggal ' . \Carbon\Carbon::parse($surat->retensi)->format('Y-m-d') . '</a>
+                    </div>
+                    <!--end::Menu item-->
+
+                    <!--begin::Menu separator-->
+                    <div class="separator my-2"></div>';
+            }
+        }
+
+        return $data;
+    }
+
+    // Usage
+
 
     // get cek menu
     public static function countMenu($param)

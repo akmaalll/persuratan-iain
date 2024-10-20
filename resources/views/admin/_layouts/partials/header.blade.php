@@ -57,6 +57,52 @@
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
 
+                <!--begin::notifikasi-->
+                <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
+                    <!--begin::notifikasi wrapper-->
+                    <a href="#"
+                        class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px"
+                        data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent"
+                        data-kt-menu-placement="bottom-end">
+                        <i class="fas fa-bell fs-1 theme-light-show">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                            <span class="path6"></span>
+                            <span class="path7"></span>
+                            <span class="path8"></span>
+                            <span class="path9"></span>
+                            <span class="path10"></span>
+                        </i>
+                        <i class="fas fa-bell fs-1 theme-dark-show">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </a>
+                    <!--begin::notifikasi menu-->
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                        data-kt-menu="true" style="max-height: 300px; overflow-y: auto;">
+                        <!-- Tambahkan max-height dan overflow -->
+                        {!! Helper::suratkadaluarsa() !!}
+                       
+
+                      
+
+
+
+                        <!-- Add more menu items here if necessary -->
+
+                    </div>
+                    <!--end::notifikasi menu-->
+                    <!--end::Menu wrapper-->
+                </div>
+                <!--end::notifikasi-->
+
+
+
+
                 <!--begin::Theme mode-->
                 <div class="app-navbar-item ms-1 ms-md-4">
                     <!--begin::Menu toggle-->
@@ -87,7 +133,8 @@
                         data-kt-menu="true" data-kt-element="theme-mode-menu">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
-                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
+                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                data-kt-value="light">
                                 <span class="menu-icon" data-kt-element="icon">
                                     <i class="ki-duotone ki-night-day fs-2">
                                         <span class="path1"></span>
@@ -108,7 +155,8 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
-                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
+                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                data-kt-value="dark">
                                 <span class="menu-icon" data-kt-element="icon">
                                     <i class="ki-duotone ki-moon fs-2">
                                         <span class="path1"></span>
@@ -224,3 +272,22 @@
     </div>
     <!--end::Header container-->
 </div>
+
+<style>
+    @media (max-width: 768px) {
+        .menu-sub {
+            max-height: 200px;
+            /* Batasi ketinggian sub-menu untuk layar kecil */
+            overflow-y: auto;
+            /* Aktifkan scroll */
+        }
+    }
+
+    /* Untuk layar lebih besar */
+    .menu-sub {
+        max-height: 300px;
+        /* Batasi ketinggian sub-menu */
+        overflow-y: auto;
+        /* Aktifkan scroll */
+    }
+</style>
