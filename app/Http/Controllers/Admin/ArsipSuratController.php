@@ -126,9 +126,19 @@ class ArsipSuratController extends Controller
     public function filter(Request $request)
     {
         try {
-            dd($request->all());
             $data = $this->repo->filter($request->all());
             return response()->json($data);
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function detail($id)
+    {
+        try {
+            $title = $this->title;
+            $data = $this->repo->find($id);
+            return view('admin.' . $title . '.detail', compact('title', 'data'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }

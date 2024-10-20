@@ -56,16 +56,19 @@ class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 			->where('kd_klasifikasi_id', '=', $kd_klasifikasi_id)
 			->where('nomor', 'like', "%" . $nomor . "%")
 			->where('uraian', 'like', "%" . $uraian . "%")
-			->where('lokal', 'like', '%'. $lokal . '%')
-			->where('pencipta', 'like', '%'. $pencipta . '%')
-			->where('retensi', 'like', '%'. $retensi . '%')
-			->where('unit_pengolah', 'like', '%'. $unit_pengolah . '%')
-			->where('jenis_media', 'like', '%'. $media . '%')
-			->where('tgl', 'like', '%'. $tgl . '%')
-			->where('ket_keaslian', 'like', '%'. $ket . '%')
+			->where('lokal', 'like', '%' . $lokal . '%')
+			->where('pencipta', 'like', '%' . $pencipta . '%')
+			->where('retensi', 'like', '%' . $retensi . '%')
+			->where('unit_pengolah', 'like', '%' . $unit_pengolah . '%')
+			->where('jenis_media', 'like', '%' . $media . '%')
+			->where('tgl', 'like', '%' . $tgl . '%')
+			->where('ket_keaslian', 'like', '%' . $ket . '%')
 			->orderBy($field, $sortOrder)
 			->paginate($perPage);
-		// dd($filter);
 		return $filter;
+	}
+
+	public function getFile($request) {
+		
 	}
 }

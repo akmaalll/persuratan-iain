@@ -43,7 +43,7 @@
         </td> --}}
         <td>
             <span class="fw-semibold">
-                {!! $v->uraian !!} 
+                {!! $v->uraian !!}
             </span>
         </td>
         <td>
@@ -61,12 +61,13 @@
             <td>
                 <span class="fw-semibold">
                     {{-- {{ $v->file }}  --}}
-                    <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                    <a href="{{ asset('uploads/arsip/' . $v->file) }}"
+                        class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
                         <i class="ki-duotone ki-folder-down fs-2">
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
-                    </button>
+                    </a>
                 </span>
             </td>
         @endif
@@ -97,7 +98,8 @@
             </span>
         </td>
         <td class="text-nowrap">
-            <a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $id . '" title="Detail" class="DetailData">
+            <a href="{{ route('arsip.detail' , $v->id) }}" data-toggle="tooltip" data-id="' . $id . '" title="Detail"
+                class="DetailData">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
                     <i class="ki-duotone ki-information fs-2">
                         <span class="path1"></span>

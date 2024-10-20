@@ -46,7 +46,8 @@
                     <div class="card card-flush h-xl-100">
                         <!--begin::Heading-->
                         <div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px"
-                            style="background-image:url({{ asset('themes/dist/assets/media/svg/shapes/top-green.png') }})"
+                            {{-- style="background-image:url({{ asset('themes/dist/assets/media/svg/shapes/top-green.png') }})" --}}
+                            style="background-color: #337ab7"
                             data-bs-theme="light">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column text-white pt-15">
