@@ -1,4 +1,4 @@
-<div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+<div id="kt_app_sidebar" style="background-color: #337ab7;" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
     <!--begin::Logo-->
@@ -40,9 +40,9 @@
                     <!--begin:Menu item-->
 
 
-                    <div data-kt-menu-trigger="click" class="menu-item @stack('dashboard')  menu-accordion">
+                    <div data-kt-menu-trigger="click"  class="menu-item @stack('dashboard') menu-dashboard  menu-accordion">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('admin/') }}">
+                        <a class="menu-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ url('admin/') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-element-11 fs-2">
                                     <span class="path1"></span>
