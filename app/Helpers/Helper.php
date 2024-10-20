@@ -178,6 +178,10 @@ class Helper
                     <!--begin::Menu separator-->
                     <div class="separator my-2"></div>';
             }
+        } else {
+            $data = '<div class="menu-item px-5">
+                        <p class="menu-link px-5">Tidak ada</p>
+                    </div>';
         }
 
         return $data;
