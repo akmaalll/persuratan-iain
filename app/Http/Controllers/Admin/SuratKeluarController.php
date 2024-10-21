@@ -140,4 +140,15 @@ class SuratKeluarController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function detail($id)
+    {
+        try {
+            $title = $this->title;
+            $data = $this->repo->find($id);
+            return view('admin.' . $title . '.detail', compact('title', 'data'));
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
 }

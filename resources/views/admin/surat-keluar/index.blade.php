@@ -44,18 +44,13 @@
                                 <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-20px pe-2">No</th>
                                     <th class="min-w-140px">Tanggal Surat</th>
-                                    <th class="min-w-120px">Nomor Surat</th>
+                                    <th class="min-w-200px">Nomor Surat</th>
                                     <th class="min-w-120px">Perihal Surat</th>
                                     <th class="min-w-120px">Status Surat</th>
                                     <th class="min-w-120px">Asal Surat</th>
-                                    <th class="min-w-120px">Tanggal Kirim Surat</th>
-                                    <th class="min-w-120px">Tanggal Input</th>
-                                    <th class="min-w-120px">Ttd Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
-                                    <th class="min-w-120px">Cq.</th>
-                                    <th class="min-w-120px">Jenis Surat</th>
                                     <th class="min-w-120px">Retensi</th>
-                                    <th class="text-end min-w-70px">Actions</th>
+                                    <th class="text-center min-w-70px">Actions</th>
                                 </tr>
                             </thead>
 

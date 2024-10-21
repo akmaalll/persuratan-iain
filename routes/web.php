@@ -50,6 +50,7 @@ Route::domain('')->group(function () {
         # APPS 
         Route::group(['prefix' => '/surat-masuk'], function () {
             Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+            Route::get('/detail/{id}', [SuratMasukController::class, 'detail'])->name('surat-masuk.detail');
             Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
             Route::get('/create', [SuratMasukController::class, 'create'])->name('surat-masuk.create');
             Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
@@ -79,16 +80,15 @@ Route::domain('')->group(function () {
         Route::group(['prefix' => '/surat-keluar'], function () {
             // Route::get('/', SuratKeluar::class);
             Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+            Route::get('/detail/{id}', [SuratKeluarController::class, 'detail'])->name('surat-keluar.detail');
             Route::get('/data', [SuratKeluarController::class, 'data'])->name('surat-keluar.data');
             Route::get('/create', [SuratKeluarController::class, 'create'])->name('surat-keluar.create');
             Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
             Route::get('/{id}/edit', [SuratKeluarController::class, 'edit'])->name('surat-keluar.edit');
             Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
             Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
-            //             Route::patch('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
-            Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])
-                ->name('surat-keluar.last-number');
+            Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])->name('surat-keluar.last-number');
         });
 
         // Log aktivitas

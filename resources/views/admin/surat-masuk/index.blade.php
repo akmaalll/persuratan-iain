@@ -48,20 +48,14 @@
                                     <th class="min-w-120px">Perihal Surat</th>
                                     <th class="min-w-120px">Status Surat</th>
                                     <th class="min-w-120px">Asal Surat</th>
-                                    <th class="min-w-120px">Tanggal Terima Surat</th>
-                                    <th class="min-w-120px">Tanggal Input</th>
-                                    <th class="min-w-120px">Ttd Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
-                                    <th class="min-w-120px">Cq.</th>
-                                    <th class="min-w-120px">Jenis Surat</th>
                                     <th class="min-w-120px">Retensi</th>
-                                    <th class="min-w-120px">Riwayat Mutasi Surat</th>
-                                    <th class="text-end min-w-70px">Actions</th>
+                                    <th class="text-center min-w-70px">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="fw-semibold text-gray-600 datatables">
-                                
+
                             </tbody>
 
                             {{-- <tbody class="fw-semibold text-gray-600">

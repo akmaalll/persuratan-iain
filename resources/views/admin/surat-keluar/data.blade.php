@@ -7,7 +7,7 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tgl_surat }}
+                {{ Helper::getDateIndo($v->tgl_surat) }}
             </span>
         </td>
         <td>
@@ -32,40 +32,25 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tgl_kirim }}
-            </span>
-        </td>
-        <td>
-            <span class="fw-semibold">
-                {{ $v->tgl_input }}
-            </span>
-        </td>
-        <td>
-            <span class="fw-semibold">
-                <img src="{{ asset('uploads/ttd/surat-keluar/' . $v->ttd) }}" width="100" alt="tdk ada ">
-            </span>
-        </td>
-        <td>
-            <span class="fw-semibold">
                 {{ $v->tujuan }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->kepada }}
+                {{ Helper::getDateIndo($v->retensi) }}
             </span>
         </td>
-        <td>
-            <span class="fw-semibold">
-                {{ $v->jenis }}
-            </span>
-        </td>
-        <td>
-            <span class="fw-semibold">
-                {{ $v->retensi }}
-            </span>
-        </td>
-        <td class="text-end">
+        <td class="text-nowrap">
+            <a href="{{ route('surat-keluar.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
+                title="Detail" class="DetailData">
+                <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
+                    <i class="ki-duotone ki-eye fs-2">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
+                </button>
+            </a>
             {!! Helper::btnAction($v->id, $title) !!}
         </td>
     </tr>
