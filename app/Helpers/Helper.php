@@ -171,7 +171,7 @@ class Helper
             foreach ($expiredSurat as $surat) {
                 $data .= '<div class="menu-item px-5">
                         <a href="#" class="menu-link px-5">surat dengan nomor <br> ' . $surat->nomor . '
-                            <br> akan kadaluwarsa pada tanggal ' . \Carbon\Carbon::parse($surat->retensi)->format('Y-m-d') . '</a>
+                            <br> akan kadaluwarsa pada tanggal ' . Helper::getDateIndo(\Carbon\Carbon::parse($surat->retensi)->format('Y-m-d'))  . '</a>
                     </div>
                     <!--end::Menu item-->
 

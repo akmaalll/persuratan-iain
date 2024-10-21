@@ -6,7 +6,7 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
+            <span class="fw-semibold text-nowrap">
                 {{ Helper::getDateIndo($v->tgl_surat) }}
             </span>
         </td>
@@ -26,8 +26,8 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
-                {{ $v->asal }}
+            <span class="fw-semibold text-nowrap">
+                {{ $v->asalSurat->kode .' - '. $v->asalSurat->nama }} 
             </span>
         </td>
         <td>
@@ -36,7 +36,7 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
+            <span class="fw-semibold text-nowrap">
                 {{ Helper::getDateIndo($v->retensi) }}
             </span>
         </td>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArsipSurat;
+use App\Models\surat_keluar;
+use App\Models\surat_masuk;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,7 +20,16 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        try {
+            $data = array(
+                'countMasuk' => surat_masuk::get()->count(),
+                'countKeluar' => surat_keluar::get()->count(),
+                'countArsip' => ArsipSurat::get()->count(),
+            );
+            return view('admin.dashboard', compact('data'));
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
     }
 
     public function getIndikatorKinerja($id)

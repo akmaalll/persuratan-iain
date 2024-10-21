@@ -67,7 +67,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asal : '' }}" readonly />
+                                        value="{{ isset($data->asal) ? $data->asal . ' - ' . $data->asalSurat->nama : '' }}" readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
