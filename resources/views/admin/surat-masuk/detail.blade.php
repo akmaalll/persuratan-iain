@@ -31,7 +31,7 @@
                 <!--begin::Header-->
                 <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Form {{ isset($data->id) ? 'Edit' : 'Input' }}</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Detail Surat Masuk</span>
                     </h3>
                 </div>
                 <!--end::Header-->
