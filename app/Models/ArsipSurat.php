@@ -31,4 +31,8 @@ class ArsipSurat extends Model
     public function klasifikasi() {
         return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
     }
+
+    public function penciptaSurat() {
+        return $this->hasOne(JenisKlasifikasi::class, 'id', 'pencipta');
+    }
 }

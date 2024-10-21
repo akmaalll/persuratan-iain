@@ -98,8 +98,8 @@
             </span>
         </td>
         <td class="text-nowrap">
-            <a href="{{ route('arsip.detail' , $v->id) }}" data-toggle="tooltip" data-id="' . $id . '" title="Detail"
-                class="DetailData">
+            <a href="{{ route('arsip.detail' , $v->id) }}" target="_blank" data-toggle="tooltip" data-id="' . $id . '" title="Detail"
+                class="DetailData me-1">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
                     <i class="ki-duotone ki-information fs-2">
                         <span class="path1"></span>

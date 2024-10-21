@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
-
+use Illuminate\Support\Facades\Redirect;
 
 // Route::get('suratmasuk', SuratMasuk::class);
 
@@ -26,8 +26,8 @@ use App\Http\Controllers\Auth\LoginController as Auths;
 // Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
 // Route::resource('photos', PhotoController::class)->only(['index', 'show']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [DashboardController::class, 'home'])->name('index');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [DashboardController::class, 'home'])->name('index');
 Route::get('/data', [DashboardController::class, 'data'])->name('index.data');
 
 
@@ -41,7 +41,7 @@ Route::domain('')->group(function () {
 
 
     // ADMIN_ROUTES
-    Route::group(['prefix' => 'admin',   'middleware' => ['web']], function () {
+    Route::group(['prefix' => 'admin',   'middleware' => ['web', 'auth']], function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);

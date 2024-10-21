@@ -26,4 +26,8 @@ class surat_masuk extends Model
         'updated_by', 
     ];
     
+    public function asalSurat() {
+        return $this->hasOne(kd_unit::class, 'id', 'asal');
+    }
+
 }

@@ -30,6 +30,10 @@ class surat_keluar extends Model
         return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
     }
 
+    public function asalSurat() {
+        return $this->hasOne(kd_unit::class, 'kode', 'asal');
+    }
+
     
 }
 

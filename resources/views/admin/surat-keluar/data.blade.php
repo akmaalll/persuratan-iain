@@ -6,12 +6,12 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
+            <span class="fw-semibold text-nowrap">
                 {{ Helper::getDateIndo($v->tgl_surat) }}
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
+            <span class="fw-semibold text-nowrap">
                 {{ $v->nomor }}
             </span>
         </td>
@@ -36,7 +36,7 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
+            <span class="fw-semibold text-nowrap">
                 {{ Helper::getDateIndo($v->retensi) }}
             </span>
         </td>

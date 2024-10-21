@@ -86,9 +86,9 @@
                         data-kt-menu="true" style="max-height: 300px; overflow-y: auto;">
                         <!-- Tambahkan max-height dan overflow -->
                         {!! Helper::suratkadaluarsa() !!}
-                       
 
-                      
+
+
 
 
 
@@ -133,8 +133,7 @@
                         data-kt-menu="true" data-kt-element="theme-mode-menu">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
-                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
-                                data-kt-value="light">
+                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
                                 <span class="menu-icon" data-kt-element="icon">
                                     <i class="ki-duotone ki-night-day fs-2">
                                         <span class="path1"></span>
