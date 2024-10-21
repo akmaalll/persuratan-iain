@@ -104,14 +104,14 @@
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Username" name="username" autocomplete="off"
+                                <input type="text" placeholder="Username" name="username" value="superadmin" autocomplete="off"
                                     class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
                             <div class="fv-row mb-10">
                                 <!--begin::Password-->
-                                <input type="password" placeholder="Password" name="password" autocomplete="off"
+                                <input type="password" placeholder="Password" value="123" name="password" autocomplete="off"
                                     class="form-control bg-transparent" />
                                 <!--end::Password-->
                             </div>
