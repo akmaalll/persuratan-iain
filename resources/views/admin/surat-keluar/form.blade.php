@@ -87,7 +87,7 @@
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->kode) && $data->kode == $v->kode ? 'selected' : '' }}
+                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->kode }}" data-nomor="{{ $v->nomor }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
@@ -132,8 +132,10 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <input type="text" class="form-control" name="ttd" id="ttd"
-                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" />
+                                    <input type="file" onchange="return validateFile(this)" class="form-control"
+                                        name="ttd" id="ttd" />
+                                    <input type="hidden" value="{{ isset($data->ttd) ? $data->ttd : '' }}"
+                                        name="ttd_old" id="ttd_old" />
                                 </div>
                             </div>
 
@@ -389,6 +391,16 @@
 
             }
         );
+
+        function validateFile(fld) {
+            if (fld.files[0].size / 1024 / 1024 > 2) {
+                Swal.fire('File terlalu besar !', 'maksimum ukuran file : 2 MB', 'error')
+                fld.value = "";
+                fld.focus();
+                return (false);
+            }
+            return (true);
+        }
     </script>
 
     @if (isset($data->id))

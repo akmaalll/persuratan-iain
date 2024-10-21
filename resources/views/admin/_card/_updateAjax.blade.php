@@ -47,9 +47,9 @@
                                 } else {
                                     toastr.success("Successful update data!");
                                     setTimeout(() => {
-                                        // window.location.replace(
-                                        //     "{{ route($title . '.index') }}"
-                                        // );
+                                        window.location.replace(
+                                            "{{ route($title . '.index') }}"
+                                        );
                                     }, 750);
                                 }
 
