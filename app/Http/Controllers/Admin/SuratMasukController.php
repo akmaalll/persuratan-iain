@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
+use App\Traits\Uploadable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SuratMasukController extends Controller
 {
+    use Uploadable;
     protected $title, $repo, $response;
+    protected $image_path = "uploads/ttd/surat-masuk";
+
 
     public function __construct(SuratMasukContract $repo)
     {
@@ -60,7 +64,12 @@ class SuratMasukController extends Controller
     {
         try {
             $req = $request->all();
-            // dd($req);
+            if ($request->hasFile('ttd')) {
+                $image = $request->file('ttd')->getClientOriginalName();
+                $image_name = pathinfo($image, PATHINFO_FILENAME);
+                $image_name = $this->uploadFile2($request->file('ttd'), $this->image_path, '');
+                $req['ttd'] = $image_name;
+            }
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
@@ -80,10 +89,18 @@ class SuratMasukController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         try {
             $req = $request->all();
+            if ($request->hasFile('ttd')) {
+                $image = $request->file('ttd')->getClientOriginalName();
+                $image_name = pathinfo($image, PATHINFO_FILENAME);
+                $image_name = $this->uploadFile2($request->file('ttd'), $this->image_path, $req['ttd_old']);
+                $req['ttd'] = $image_name;
+            } else {
+                $req['ttd'] = $req['ttd_old'];
+            }
             $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $request->id);
             return response()->json(['data' => $data, 'success' => true]);

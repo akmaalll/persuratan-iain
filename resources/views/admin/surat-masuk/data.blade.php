@@ -42,7 +42,8 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->ttd }}
+                <img src="{{ asset('uploads/ttd/surat-masuk/' . $v->ttd) }}" width="100" alt="tdk ada ">
+
             </span>
         </td>
         <td>

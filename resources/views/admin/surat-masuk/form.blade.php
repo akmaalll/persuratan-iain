@@ -138,8 +138,10 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <input type="text" class="form-control" name="ttd" id="ttd"
-                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" />
+                                    <input type="file" onchange="return validateFile(this)" class="form-control"
+                                        name="ttd" id="ttd" />
+                                    <input type="hidden" value="{{ isset($data->ttd) ? $data->ttd : '' }}" name="ttd_old"
+                                        id="ttd_old" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -254,6 +256,16 @@
 
             }
         );
+
+        function validateFile(fld) {
+            if (fld.files[0].size / 1024 / 1024 > 2) {
+                Swal.fire('File terlalu besar !', 'maksimum ukuran file : 2 MB', 'error')
+                fld.value = "";
+                fld.focus();
+                return (false);
+            }
+            return (true);
+        }
     </script>
 
     @if (isset($data->id))
