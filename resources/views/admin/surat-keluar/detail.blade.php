@@ -81,12 +81,12 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
                                     <input type="date" class="form-control" name="tgl_kirim" id="tgl_kirim"
-                                        value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" />
+                                        value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" readonly/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly/>
                                 </div>
                             </div>
 

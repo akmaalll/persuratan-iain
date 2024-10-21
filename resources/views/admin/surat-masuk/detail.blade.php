@@ -66,12 +66,12 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Nomor Surat</label>
                                     <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Kepada</label>
                                     <input type="text" class="form-control" name="kepada" id="kepada"
-                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
+                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" readonly/>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal </label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly/>
                                 </div>
                             </div>
 
