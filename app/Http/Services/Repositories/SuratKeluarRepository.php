@@ -24,7 +24,14 @@ class SuratKeluarRepository extends BaseRepository implements SuratKeluarContrac
 		$perPage = $criteria['per_page'] ?? 5;
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
-		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
+		$search = $criteria['search'] ?? '';
+		return $this->model->when($search, function ($query) use ($search) {
+			$query->where('nomor', 'like', "%" .$search . "%");
+			$query->orWhere('perihal', 'like', "%" .$search . "%");
+			$query->orWhere('status', 'like', "%" .$search . "%");
+			$query->orWhere('asal', 'like', "%" .$search . "%");
+		})
+		->orderBy($field, $sortOrder)->paginate($perPage);
 	}
 
 	public function getLastNumber(array $criteria)

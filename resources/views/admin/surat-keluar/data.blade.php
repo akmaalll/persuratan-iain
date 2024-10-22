@@ -22,12 +22,12 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->status }}
+                {{ $v->status }} 
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
-                {{ $v->asal }}
+            <span class="fw-semibold text-nowrap">
+                {{ $v->asal . ' - '. $v->asalSurat->nama }}
             </span>
         </td>
         <td>
