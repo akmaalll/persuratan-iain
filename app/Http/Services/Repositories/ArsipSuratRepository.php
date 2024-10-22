@@ -23,7 +23,13 @@ class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 		$perPage = $criteria['per_page'] ?? 5;
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
-		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
+		$search = $criteria['search'] ?? '';
+		return $this->model->when($search, function ($query) use ($search) {
+			$query->where('nomor', 'like', "%" .$search . "%");
+			$query->orWhere('uraian', 'like', "%" .$search . "%");
+		})
+			->orderBy($field, $sortOrder)
+			->paginate($perPage);
 	}
 
 	public function paginate($criteria)
@@ -68,7 +74,5 @@ class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 		return $filter;
 	}
 
-	public function getFile($request) {
-		
-	}
+	public function getFile($request) {}
 }

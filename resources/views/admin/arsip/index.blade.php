@@ -47,8 +47,8 @@
                             </select>
                         </div>
                         <div class="d-flex">
-                            <input id="input_search" type="text" class="form-control form-control-solid w-250px me-3"
-                                placeholder="nomor arsip/kata kunci uraian">
+                            <input id="input_search" type="text" class="form-control form-control-solid w-300px me-3"
+                                placeholder="cari nomor / uraian">
 
                             <button id="button_search" class="btn btn-secondary me-3">
                                 <span class="btn-label">
