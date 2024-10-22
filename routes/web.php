@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Redirect;
 // Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
 // Route::resource('photos', PhotoController::class)->only(['index', 'show']);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
 // Route::get('/', [DashboardController::class, 'home'])->name('index');
 Route::get('/data', [DashboardController::class, 'data'])->name('index.data');
 
@@ -143,6 +143,7 @@ Route::domain('')->group(function () {
             Route::get('/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
             Route::put('/{id}', [UsersController::class, 'update'])->name('users.update');
             Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.delete');
+            Route::get('/profile/{id}', [UsersController::class, 'profile'])->name('users.profile');
         });
     });
 });

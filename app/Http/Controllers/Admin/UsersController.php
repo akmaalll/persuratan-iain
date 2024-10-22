@@ -94,10 +94,11 @@ class UsersController extends Controller
         try {
             $req = $request->all();
             $data = $this->repo->find($request->id);
-            if ($req['password'] == $data->password) {
-                $req['password'] = $data->password;
-            } else {
+            if ($req['password'] != null) {
+                // $req['password'] = $data->password;
                 $req['password'] = Hash::make($req['password']);
+            } else {
+                unset($req['password']);
             }
             $data = $this->repo->update($req, $request->id);
             return response()->json(['data' => $data, 'success' => true]);
@@ -111,6 +112,17 @@ class UsersController extends Controller
         try {
             $data = $this->repo->delete($id);
             return response()->json($data);
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function profile($id)
+    {
+        try {
+            $title = $this->title;
+            $data = $this->repo->find($id);
+            return view('admin.' . $title . '.profile', compact('title', 'data'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }

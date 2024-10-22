@@ -229,7 +229,8 @@
 
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
+                            <a href="{{ route('users.profile', Auth::user()->id) }}" class="menu-link px-5">My
+                                Profile</a>
                         </div>
                         <!--end::Menu item-->
 
