@@ -15,7 +15,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="index.html" class="text-muted text-hover-primary">Home</a>
+                        <a href="/admin" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -46,9 +46,7 @@
                     <div class="card card-flush h-xl-100">
                         <!--begin::Heading-->
                         <div class="card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-250px"
-                            {{-- style="background-image:url({{ asset('themes/dist/assets/media/svg/shapes/top-green.png') }})" --}}
-                            style="background-color: #337ab7"
-                            data-bs-theme="light">
+                            {{-- style="background-image:url({{ asset('themes/dist/assets/media/svg/shapes/top-green.png') }})" --}} style="background-color: #337ab7" data-bs-theme="light">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column text-white pt-15">
                                 <span class="fw-bold fs-2x">
