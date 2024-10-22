@@ -68,7 +68,7 @@
                 <div class="d-flex flex-center flex-xl-start flex-column">
                     <!--begin::Logo-->
                     <a href="#" class="mb-7">
-                        <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}" />
+                        <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}" style="width:100%" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
@@ -104,15 +104,15 @@
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Username" name="username" value="superadmin" autocomplete="off"
-                                    class="form-control bg-transparent" />
+                                <input type="text" placeholder="Username" name="username" value="superadmin"
+                                    autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
                             <div class="fv-row mb-10">
                                 <!--begin::Password-->
-                                <input type="password" placeholder="Password" value="123" name="password" autocomplete="off"
-                                    class="form-control bg-transparent" />
+                                <input type="password" placeholder="Password" value="123" name="password"
+                                    autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Password-->
                             </div>
                             <!--end::Input group=-->
