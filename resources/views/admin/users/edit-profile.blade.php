@@ -32,14 +32,37 @@
                             <input name="_method" type="hidden" id="methodId"
                                 value="{{ isset($data->id) ? 'PUT' : 'POST' }}">
                             <input type="hidden" name="id" id="formId" value="{{ $data->id ?? null }}">
+                            <input type="hidden" class="form-control" placeholder="Profile" name="profileOld"
+                                id="profileOld" value="{{ $data->profile ?? '' }}" />
                             @csrf
 
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Profile</label>
+                                    <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                        <img src="{{ asset('uploads/user/' . $data->profile) }}" alt="image" />
+                                        {{-- <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div> --}}
+                                        <input type="file" class="form-control mt-3" placeholder="Profile"
+                                            name="profile" id="profile" value="" />
+                                    </div>
+
+                                </div>
+                            </div>
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <div class="col-md fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Nama</label>
                                     <input type="text" class="form-control" placeholder="Name" name="name"
                                         id="name" value="{{ $data->name ?? '' }}" />
+                                </div>
+                            </div>
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+                                <div class="col-md fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Email</label>
+                                    <input type="text" class="form-control" placeholder="Email" name="email"
+                                        id="email" value="{{ $data->email ?? '' }}" />
                                 </div>
                             </div>
                             <div class="row g-9 mb-8">

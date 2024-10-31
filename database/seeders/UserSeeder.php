@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123'),
+                'profile' => 'blank.png',
                 'role' => 2,
             ],
             [
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
                 'username' => 'superadmin',
                 'email' => 'superadmin@gmail.com',
                 'password' => bcrypt('123'),
+                'profile' => 'blank.png',
                 'role' => 1,
             ]
         ];
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
                 'username' => $v['username'],
                 'email' => $v['email'],
                 'password' => $v['password'],
+                'profile' => $v['profile'],
                 'id_role' => $v['role'],
             ]);
         };

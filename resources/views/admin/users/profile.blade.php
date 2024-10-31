@@ -47,11 +47,38 @@
                     <!--begin::Row-->
                     <div class="row mb-7">
                         <!--begin::Label-->
+                        <label class="col-lg-4 fw-semibold text-muted">Profile</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8">
+                            <div class="symbol symbol-150px symbol-lg-200px symbol-fixed position-relative">
+                                <img src="{{ asset('uploads/user/' . $data->profile) }}" alt="image" />
+                                {{-- <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div> --}}
+                            </div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row mb-7">
+                        <!--begin::Label-->
                         <label class="col-lg-4 fw-semibold text-muted">Nama</label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8">
                             <span class="fw-bold fs-6 text-gray-800">{{ $data->name }}</span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row mb-7">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 fw-semibold text-muted">Email</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8">
+                            <span class="fw-bold fs-6 text-gray-800">{{ $data->email }}</span>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -192,6 +219,7 @@
 
                                 },
                                 error: function(data) {
+                                    console.log(data);
                                     submitButtonUpdate.removeAttribute(
                                         'data-kt-indicator');
                                     submitButtonUpdate.disabled = false;

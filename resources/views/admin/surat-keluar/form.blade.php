@@ -287,7 +287,7 @@
             function generateNomor() {
                 $.ajax({
                     //url: '/admin/surat-keluar/last-number',
-                    url: '{{route("surat-keluar.last-number")}}',
+                    url: '{{ route('surat-keluar.last-number') }}',
                     method: 'POST',
                     data: {
                         kd_klasifikasi: form.kd_klasifikasi_id.value,

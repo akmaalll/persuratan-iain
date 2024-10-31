@@ -193,7 +193,7 @@
                     <div class="cursor-pointer symbol symbol-35px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
-                        <img src="{{ asset('/') }}themes/dist/assets/media/avatars/300-3.jpg" class="rounded-3"
+                        <img src="{{ asset('uploads/user/'. auth()->user()->profile) }}" class="rounded-3"
                             alt="user" />
                     </div>
                     <!--begin::User account menu-->
@@ -206,7 +206,7 @@
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
                                     <img alt="Logo"
-                                        src="{{ asset('/') }}themes/dist/assets/media/avatars/300-3.jpg" />
+                                        src="{{ asset('uploads/user/'. auth()->user()->profile) }}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->

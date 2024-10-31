@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\UsersContract;
 use Illuminate\Http\Request;
+use App\Traits\Uploadable;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    use Uploadable;
     protected $title, $repo, $response;
+    protected $files_path = "uploads/user";
+
 
     public function __construct(UsersContract $repo)
     {
@@ -94,8 +98,20 @@ class UsersController extends Controller
         try {
             $req = $request->all();
             $data = $this->repo->find($request->id);
+
+            // dd($req);
+            // update profile
+            if ($request->hasFile('profile')) {
+                $files = $request->file('profile')->getClientOriginalName();
+                $files_name = pathinfo($files, PATHINFO_FILENAME);
+                $files_name = $this->uploadFile2($request->file('profile'), $this->files_path, $data->profile);
+                $req['profile'] = $files_name;
+            } else {
+                $req['profile'] = $req['profileOld'];
+            }
+
+            // update password
             if ($req['password'] != null) {
-                // $req['password'] = $data->password;
                 $req['password'] = Hash::make($req['password']);
             } else {
                 unset($req['password']);
@@ -106,6 +122,7 @@ class UsersController extends Controller
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
+
 
     public function destroy($id)
     {
