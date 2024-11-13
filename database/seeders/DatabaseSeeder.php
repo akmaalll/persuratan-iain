@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\AsalSurat;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JenisKlasifikasi::class);
         $this->call(KdKlasifikasi::class);
         $this->call(KdUnit::class);
+        $this->call(AsalSuratSeeder::class);
 
     }
 }

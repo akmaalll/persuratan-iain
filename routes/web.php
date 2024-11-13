@@ -68,6 +68,9 @@ Route::domain('')->group(function () {
             Route::get('/filter', [ArsipSuratController::class, 'filter'])->name('arsip.filter');
             Route::get('/detail/{id}', [ArsipSuratController::class, 'detail'])->name('arsip.detail');
             Route::get('/data', [ArsipSuratController::class, 'data'])->name('arsip.data');
+            Route::get('/dashboard/data', [ArsipSuratController::class, 'dataDashboard'])->name('arsip.data.dashboard');
+            Route::get('/dashboard/cetak', [ArsipSuratController::class, 'cetakPdf'])->name('arsip.data.pdf');
+            Route::get('/dashboard/export', [ArsipSuratController::class, 'export'])->name('arsip.data.export');
             Route::get('/create', [ArsipSuratController::class, 'create'])->name('arsip.create');
             Route::post('/store', [ArsipSuratController::class, 'store'])->name('arsip.store');
             Route::get('/{id}/edit', [ArsipSuratController::class, 'edit'])->name('arsip.edit');
