@@ -76,6 +76,11 @@
                                             value="biasa">Biasa</option>
                                         <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }}
                                             value="penting">Penting</option>
+                                        <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
+                                            value="terbatas">Terbatas</option>
+                                        <option
+                                            {{ isset($data->status) && $data->status == 'sangat_terbatas' ? 'selected' : '' }}
+                                            value="sangat_terbatas">Sangat Terbatas</option>
                                     </select>
                                 </div>
                             </div>
@@ -131,11 +136,9 @@
                                         readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <input type="file" onchange="return validateFile(this)" class="form-control"
-                                        name="ttd" id="ttd" />
-                                    <input type="hidden" value="{{ isset($data->ttd) ? $data->ttd : '' }}"
-                                        name="ttd_old" id="ttd_old" />
+                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
+                                    <input type="text" class="form-control" name="ttd" id="ttd"
+                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" />
                                 </div>
                             </div>
 
@@ -144,8 +147,15 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
-                                    <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" />
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Tujuan" name="Tujuan" id="Tujuan">
+                                        <option value="">Pilih Tujuan...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->kode }}" data-nomor="{{ $v->nomor }}">
+                                                {{ $v->nama }} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Kepada</label>
@@ -161,28 +171,37 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Status" name="jenis" id="jenis">
                                         <option value="">Jenis...</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'dinamis' ? 'selected' : '' }}
-                                            value="dinamis">Dinamis</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'statis' ? 'selected' : '' }}
-                                            value="statis">Statis</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'vital' ? 'selected' : '' }}
                                             value="vital">Vital</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'umum' ? 'selected' : '' }}
                                             value="umum">Umum</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
                                             value="terjaga">Terjaga</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'aktif' ? 'selected' : '' }}
-                                            value="aktif">Aktif</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'inaktif' ? 'selected' : '' }}
-                                            value="inaktif">Inaktif</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="date" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" />
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Retensi" name="retensi" id="retensi">
+                                        <option value="">retensi...</option>
+                                        <option {{ isset($data->retensi) && $data->retensi == 'aktif' ? 'selected' : '' }}
+                                            value="aktif">Aktif</option>
+                                        <option
+                                            {{ isset($data->retensi) && $data->retensi == 'inaktif' ? 'selected' : '' }}
+                                            value="inaktif">Inaktif</option>
+                                        <option {{ isset($data->retensi) && $data->retensi == 'nasib' ? 'selected' : '' }}
+                                            value="nasib">Nasib</option>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">File</label>
+                                    <input type="file" class="form-control" name="file" id="file" />
+                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
+                                        name="file_old" id="file_old" />
                                 </div>
                             </div>
 
@@ -344,7 +363,9 @@
                 const prefixMap = {
                     'rahasia': 'R',
                     'biasa': 'B',
-                    'penting': 'P'
+                    'penting': 'P',
+                    'terbatas': 'T',
+                    'sangat_terbatas': 'ST',
                 };
                 return prefixMap[status] || '';
             }

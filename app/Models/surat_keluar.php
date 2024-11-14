@@ -22,6 +22,7 @@ class surat_keluar extends Model
         'kepada', 
         'jenis', 
         'retensi', 
+        'file', 
         'created_by', 
         'updated_by', 
     ];

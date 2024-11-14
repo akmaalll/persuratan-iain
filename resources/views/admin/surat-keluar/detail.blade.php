@@ -67,7 +67,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asal . ' - ' . $data->asalSurat->nama : '' }}" readonly />
+                                        value="{{ isset($data->asal) ? $data->asal . ' - ' . $data->asalSurat->nama : '' }}"
+                                        readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
@@ -81,12 +82,12 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
                                     <input type="date" class="form-control" name="tgl_kirim" id="tgl_kirim"
-                                        value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" readonly/>
+                                        value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly/>
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly />
                                 </div>
                             </div>
 
@@ -108,8 +109,8 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <img src="{{ asset('uploads/ttd/surat-keluar/' . $data->ttd) }}" alt="tdk ada"
-                                        class="form-control">
+                                    <input type="text" class="form-control" name="ttd" id="ttd"
+                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" readonly />
                                 </div>
                             </div>
 
@@ -143,6 +144,17 @@
 
                                 </div>
                             </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">File</label>
+                                    <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}" target="_blank"
+                                        class="btn btn-bg-secondary btn-active-color-primary">
+                                        Lihat File
+                                    </a>
+                                </div>
+                            </div>
+
                             <!--end::Input group-->
                             <div class="d-flex justify-content-end">
                                 <a href="{{ route($title . '.index') }}">
