@@ -71,7 +71,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Kepada</label>
                                     <input type="text" class="form-control" name="kepada" id="kepada"
-                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" readonly/>
+                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" readonly />
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal </label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly/>
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" readonly />
                                 </div>
                             </div>
 
@@ -99,7 +99,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asalSurat->kode . ' - ' . $data->asalSurat->nama : '' }}" readonly />
+                                        value="{{ isset($data->asal) ? $data->asalSurat->kode . ' - ' . $data->asalSurat->nama : '' }}"
+                                        readonly />
                                 </div>
                             </div>
 
@@ -121,14 +122,14 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <img src="{{ asset('uploads/ttd/surat-masuk/' . $data->ttd) }}" alt="tdk ada"
-                                        class="form-control">
+                                    <input type="text" class="form-control" name="ttd" id="ttd"
+                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" readonly />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" />
+                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" readonly />
                                 </div>
                             </div>
 
@@ -142,8 +143,25 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-                                    <input type="date" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" readonly />
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi_kategori) ? $data->retensi_kategori : '' }}"
+                                        readonly />
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">File</label>
+                                    <img src="{{ asset('uploads/ttd/surat-masuk/' . $data->upload_file) }}"
+                                        alt="tdk ada" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
+                                    <input type="date" class="form-control" name="tujuan" id="tujuan"
+                                        value="{{ isset($data->retensi) ? \Carbon\Carbon::parse($data->retensi)->format('Y-m-d') : '' }}"
+                                        readonly />
+
                                 </div>
                             </div>
                             <!--end::Input group-->

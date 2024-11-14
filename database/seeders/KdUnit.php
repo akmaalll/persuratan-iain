@@ -32,7 +32,7 @@ class KdUnit extends Seeder
             [
                 'kode'  => 'FEBI',
                 'nomor' => '04',
-                'nama'  => 'Fakultas Ekonomi Bisnis dan Islam',
+                'nama'  => 'Fakultas Ekonomi dan Bisnis Islam',
             ],
             [
                 'kode'  => 'PPS',
@@ -52,7 +52,7 @@ class KdUnit extends Seeder
             [
                 'kode'  => 'SPI',
                 'nomor' => '08',
-                'nama'  => 'Satuan Pengawas Internal',
+                'nama'  => 'Satuan Pengawasan Internal',
             ],
             [
                 'kode'  => 'UPS',
@@ -74,15 +74,49 @@ class KdUnit extends Seeder
                 'nomor' => '12',
                 'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah ",
             ],
+            [
+                'kode'  => 'BRA',
+                'nomor' => '13',
+                'nama'  => 'BIRO AUAK',
+            ],
+            [
+                'kode'  => 'BKP',
+                'nomor' => '14',
+                'nama'  => 'Bagian Kepegawaian',
+            ],
+            [
+                'kode'  => 'BKU',
+                'nomor' => '15',
+                'nama'  => 'Bagian Keuangan',
+            ],
+            [
+                'kode'  => 'BU',
+                'nomor' => '16',
+                'nama'  => 'Bagian Umum',
+            ],
+            [
+                'kode'  => 'BAK',
+                'nomor' => '17',
+                'nama'  => 'Bagian Akademik',
+            ],
+            [
+                'kode'  => 'BKH',
+                'nomor' => '18',
+                'nama'  => 'Bagian Kehumasan',
+            ],
+            [
+                'kode'  => 'BKA',
+                'nomor' => '19',
+                'nama'  => 'Bagian Kearsipan',
+            ],
         ];
 
-        foreach($unit as $i => $v) {
+        foreach ($unit as $i => $v) {
             kd_unit::create([
                 'kode'  => $v['kode'],
                 'nomor'  => $v['nomor'],
                 'nama'  => $v['nama'],
             ]);
         };
-
     }
 }

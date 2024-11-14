@@ -146,9 +146,11 @@ class Helper
         $tomorrow = \Carbon\Carbon::today()->addDay();
 
         foreach ($suratmasuk as $surat) {
-            $retensi = \Carbon\Carbon::parse($surat->retensi);
-            if ($retensi->isSameDay($tomorrow)) {
-                $expiredSurat->push($surat);
+            if ($surat->retensi && strtotime($surat->retensi)) {
+                $retensi = \Carbon\Carbon::parse($surat->retensi);
+                if ($retensi->isSameDay($tomorrow)) {
+                    $expiredSurat->push($surat);
+                }
             }
         }
 
