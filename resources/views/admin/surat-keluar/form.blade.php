@@ -92,8 +92,9 @@
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->kode }}" data-nomor="{{ $v->nomor }}">
+                                            <option {{ isset($data->id) && $data->asal == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}" data-kode="{{ $v->kode }}"
+                                                data-nomor="{{ $v->nomor }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
                                     </select>
@@ -103,7 +104,14 @@
                                     <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
                                         value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
                                 </div>
-
+                            </div>
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row asal-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Asal Lainnya</label>
+                                    <input value="{{ isset($data->asal) ? $data->asal : '' }}" type="text"
+                                        class="form-control" name="asalLain" id="asalLain"
+                                        placeholder="Masukkan asal lain" />
+                                </div>
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -143,16 +151,14 @@
                             </div>
 
                             <div class="row g-9 mb-8">
-
-
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Tujuan" name="Tujuan" id="Tujuan">
+                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
                                         <option value="">Pilih Tujuan...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->kode }}" data-nomor="{{ $v->nomor }}">
+                                            <option {{ isset($data->id) && $data->tujuan == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
                                     </select>
@@ -164,6 +170,15 @@
                                 </div>
                             </div>
 
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row tujuan-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Tujuan Lainnya</label>
+                                    <input
+                                        value="{{ isset($data->tujuan) && !is_numeric($data->tujuan) ? $data->tujuan : '' }}"
+                                        type="text" class="form-control" name="tujuanLain" id="tujuanLain"
+                                        placeholder="Masukkan tujuan lain" />
+                                </div>
+                            </div>
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
@@ -182,17 +197,18 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Retensi" name="retensi" id="retensi">
-                                        <option value="">retensi...</option>
-                                        <option {{ isset($data->retensi) && $data->retensi == 'aktif' ? 'selected' : '' }}
-                                            value="aktif">Aktif</option>
-                                        <option
-                                            {{ isset($data->retensi) && $data->retensi == 'inaktif' ? 'selected' : '' }}
-                                            value="inaktif">Inaktif</option>
-                                        <option {{ isset($data->retensi) && $data->retensi == 'nasib' ? 'selected' : '' }}
-                                            value="nasib">Nasib</option>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+
+                                    <select class="form-select mb-2" name="retensi_kategori" id="retensi_category">
+                                        <option value="">Pilih Retensi...</option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="inaktif">Inaktif</option>
+                                        <option value="nasib">Nasib</option>
                                     </select>
+
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
                                 </div>
                             </div>
 
@@ -202,6 +218,12 @@
                                     <input type="file" class="form-control" name="file" id="file" />
                                     <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
                                         name="file_old" id="file_old" />
+                                </div>
+                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
+                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
+                                    <select class="form-select mb-2" name="retensi" id="retensi">
+                                        <!-- Options will be populated dynamically -->
+                                    </select>
                                 </div>
                             </div>
 
@@ -247,6 +269,110 @@
 
 @push('jsScriptForm')
     <script type="text/javascript">
+        const asalOption = $('.asal-lain');
+        const asalForm = $('#asalLain');
+
+        const tujuanOption = $('.tujuan-lain');
+        const tujuanForm = $('#tujuanLain');
+
+
+        asalOption.hide();
+        tujuanOption.hide();
+
+
+        const getValueAsalOption = $('#asal option').filter((i, v) => {
+            return v.value == asalForm.val();
+        });
+
+        if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
+            asalOption.show();
+            asalForm.val(asalForm.val());
+            $('#asal').val('20').change();
+        } else {
+            asalOption.hide();
+        }
+
+        $('#asal').on('change', function() {
+            let asalValue = $(this).val();
+
+            console.log($('#asal option:selected').text());
+            if (asalValue == '20') {
+                asalOption.show();
+            } else {
+                asalOption.hide();
+            }
+        });
+
+        const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
+            return v.value == tujuanForm.val();
+        });
+
+        if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
+            tujuanOption.show();
+            tujuanForm.val(tujuanForm.val());
+            $('#tujuan').val('20').change();
+        } else {
+            tujuanOption.hide();
+        }
+
+        $('#tujuan').on('change', function() {
+            let tujuanValue = $(this).val();
+
+            console.log($('#tujuan option:selected').text());
+            if (tujuanValue == '20') {
+                tujuanOption.show();
+            } else {
+                tujuanOption.hide();
+            }
+        });
+
+        const retensiCategory = document.getElementById('retensi_category');
+        const retensiDuration = document.getElementById('retensi');
+        const retensiTampil = document.getElementById('retensi_tampil');
+        const retensiDate = document.getElementById('retensi_date');
+        const retensiWarning = document.getElementById('retensi_warning');
+
+        retensiCategory.addEventListener('change', function() {
+            retensiTampil.style.display = 'block';
+            retensiDuration.innerHTML = '';
+
+            if (this.value === 'aktif') {
+                retensiDuration.innerHTML = `
+                <option value="">Pilih Durasi...</option>
+                <option value="{{ $tahun->addYears(1) }}">1 Tahun</option>
+                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
+                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
+                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
+                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
+            `;
+            } else if (this.value === 'inaktif') {
+                retensiDuration.innerHTML = `
+                <option value="">Pilih Durasi...</option>
+                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
+                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
+                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
+                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
+                <option value="{{ $tahun->addYears(6) }}">6 Tahun</option>
+                <option value="{{ $tahun->addYears(7) }}">7 Tahun</option>
+                <option value="{{ $tahun->addYears(8) }}">8 Tahun</option>
+                <option value="{{ $tahun->addYears(9) }}">9 Tahun</option>
+                <option value="{{ $tahun->addYears(10) }}">10 Tahun</option>
+                <option value="{{ $tahun->addYears(11) }}">11 Tahun</option>
+                <option value="{{ $tahun->addYears(12) }}">12 Tahun</option>
+                <option value="{{ $tahun->addYears(13) }}">13 Tahun</option>
+                <option value="{{ $tahun->addYears(14) }}">14 Tahun</option>
+                <option value="{{ $tahun->addYears(15) }}">15 Tahun</option>
+            `;
+            } else if (this.value === 'nasib') {
+                retensiDuration.innerHTML = `
+                <option value="musnah">Musnah</option>
+                <option value="permanen">Permanen</option>
+            `;
+            } else {
+                retensiDuration.style.display = 'none';
+            }
+        });
+
         // generate no surat
         document.addEventListener('DOMContentLoaded', function() {
             const form = {
@@ -329,13 +455,13 @@
                         const components = {
                             status: getStatus(values.status),
                             counterNoSurat: nextNumber,
-                            asalCode: values.asal.value,
+                            asalCode: values.asal.dataset.kode,
                             asalNomor: values.asal.dataset.nomor,
                             kodeKlasifikasi: values.klasifikasi.dataset.kode,
                             noKlasifikasi: values.klasifikasi.dataset.nomor,
                             month: String(values.date.getMonth() + 1).padStart(2, '0'),
                             year: values.date.getFullYear(),
-                            isFTAR: values.asal.value === 'FTAR'
+                            isFTAR: values.asal.dataset.kode === 'FTAR'
                         };
 
                         const documentNumber = formatDocumentNumber(components);
@@ -413,16 +539,6 @@
 
             }
         );
-
-        function validateFile(fld) {
-            if (fld.files[0].size / 1024 / 1024 > 2) {
-                Swal.fire('File terlalu besar !', 'maksimum ukuran file : 2 MB', 'error')
-                fld.value = "";
-                fld.focus();
-                return (false);
-            }
-            return (true);
-        }
     </script>
 
     @if (isset($data->id))

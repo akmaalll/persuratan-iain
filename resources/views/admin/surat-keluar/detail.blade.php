@@ -67,7 +67,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asal . ' - ' . $data->asalSurat->nama : '' }}"
+                                        value="{{ isset($data->asal) ? (is_numeric($data->asal) ? $data->asalSurat->kode . ' - ' . ($data->asalSurat ? $data->asalSurat->nama : 'Lainnya') : $data->asal) : '' }}"
                                         readonly />
                                 </div>
                                 <div class="col-md-6 fv-row">
@@ -120,7 +120,9 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" readonly />
+                                        value="{{ isset($data->tujuan) ? (is_numeric($data->tujuan) ? $data->tujuanSurat->kode . ' - ' . ($data->tujuanSurat ? $data->tujuanSurat->nama : 'Lainnya') : $data->tujuan) : '' }}"
+                                        readonly />
+
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Kepada</label>

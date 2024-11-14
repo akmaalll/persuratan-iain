@@ -72,7 +72,47 @@ class KdUnit extends Seeder
             [
                 'kode'  => 'MJ',
                 'nomor' => '12',
-                'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah ",
+                'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '13',
+                'nama'  => "BIRO AUAK",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '14',
+                'nama'  => "Bagian Kepegawaian",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '15',
+                'nama'  => "Bagian Keuangan",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '16',
+                'nama'  => "Bagian Umum",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '17',
+                'nama'  => "Bagian Akademik",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '18',
+                'nama'  => "Bagian Kehumasan",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '19',
+                'nama'  => "Bagian Kearsipan",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '20',
+                'nama'  => "Lainnya",
             ],
         ];
 

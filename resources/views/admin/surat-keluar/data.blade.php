@@ -27,17 +27,30 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->asal . ' - ' . $v->asalSurat->nama }}
+                @if (is_numeric($v->asal))
+                    {{ $v->asalsurat->kode . ' - ' . $v->asalSurat->nama }}
+                @else
+                    {{ $v->asal }}
+                @endif
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tujuan }}
+                @if (is_numeric($v->tujuan))
+                    {{ $v->tujuanSurat->nama }}
+                @else
+                    {{ $v->tujuan }}
+                @endif
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ Helper::getDateIndo($v->retensi) }}
+                {{ $v->retensi_kategori }}
+                @if (strtotime($v->retensi))
+                    ({{ Helper::getDateIndo($v->retensi) }})
+                @else
+                    ({{ $v->retensi }})
+                @endif
             </span>
         </td>
         @if (empty($v->file))

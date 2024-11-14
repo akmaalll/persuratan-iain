@@ -19,23 +19,25 @@ class surat_keluar extends Model
         'tgl_input',
         'ttd',
         'tujuan',
-        'kepada', 
-        'jenis', 
-        'retensi', 
-        'file', 
-        'created_by', 
-        'updated_by', 
+        'kepada',
+        'jenis',
+        'retensi',
+        'file',
+        'created_by',
+        'updated_by',
     ];
 
-    public function klasifikasi() {
+    public function klasifikasi()
+    {
         return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
     }
 
-    public function asalSurat() {
-        return $this->hasOne(kd_unit::class, 'kode', 'asal');
+    public function asalSurat()
+    {
+        return $this->hasOne(kd_unit::class, 'id', 'asal');
     }
-
-    
+    public function tujuanSurat()
+    {
+        return $this->hasOne(kd_unit::class, 'id', 'tujuan');
+    }
 }
-
-

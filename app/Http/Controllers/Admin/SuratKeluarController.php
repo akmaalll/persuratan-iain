@@ -37,6 +37,7 @@ class SuratKeluarController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
+
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
@@ -55,7 +56,8 @@ class SuratKeluarController extends Controller
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.form', compact('title'));
+            $tahun = Carbon::now();
+            return view('admin.' . $title . '.form', compact('title', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -72,11 +74,20 @@ class SuratKeluarController extends Controller
                 $file_name = $this->uploadFile2($request->file('file'), $this->file_path, '');
                 $req['file'] = $file_name;
             }
+
+            if ($req['asal'] == '20') {
+                $req['asal'] = $req['asalLain'];
+            }
+
+            if ($req['tujuan'] == '20') {
+                $req['tujuan'] = $req['tujuanLain'];
+            }
+
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
@@ -85,8 +96,9 @@ class SuratKeluarController extends Controller
     {
         try {
             $title = $this->title;
+            $tahun = Carbon::now();
             $data = $this->repo->find($id);
-            return view('admin.' . $title . '.form', compact('title', 'data'));
+            return view('admin.' . $title . '.form', compact('title', 'data', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -104,6 +116,14 @@ class SuratKeluarController extends Controller
             } else {
                 $req['file'] = $req['file_old'];
             }
+
+            if ($req['asal'] == '20') {
+                $req['asal'] = $req['asalLain'];
+            }
+            if ($req['tujuan'] == '20') {
+                $req['tujuan'] = $req['tujuanLain'];
+            }
+
             $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $id);
             return response()->json(['data' => $data, 'success' => true]);
