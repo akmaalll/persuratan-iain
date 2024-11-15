@@ -152,8 +152,13 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">File</label>
-                                    <img src="{{ asset('uploads/ttd/surat-masuk/' . $data->upload_file) }}"
-                                        alt="tdk ada" class="form-control">
+                                    @if (isset($data->upload_file) && !empty($data->upload_file))
+                                        <!-- Display the existing file link if it exists -->
+                                        <div class="mb-2">
+                                            <a href="{{ asset('uploads/ttd/surat-masuk/' . $data->upload_file) }}"
+                                                target="_blank" class="form-control">Lihat File</a>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-6 fv-row">
