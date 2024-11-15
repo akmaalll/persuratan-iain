@@ -21,6 +21,7 @@ class surat_keluar extends Model
         'tujuan',
         'kepada',
         'jenis',
+        'retensi_kategori',
         'retensi',
         'file',
         'created_by',

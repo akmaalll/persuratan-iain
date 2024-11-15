@@ -373,36 +373,6 @@
             }
         });
 
-        retensiDate.addEventListener('change', function() {
-            checkRetentionExpiration();
-        });
-
-        retensiDuration.addEventListener('change', function() {
-            // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
-            if (retensiCategory.value !== 'nasib') {
-                checkRetentionExpiration();
-            }
-        });
-
-        function checkRetentionExpiration() {
-            const selectedDate = new Date(retensiDate.value);
-            const duration = parseInt(retensiDuration.value);
-
-            if (!isNaN(duration) && retensiCategory.value !== 'nasib') {
-                const expirationDate = new Date(selectedDate);
-                expirationDate.setFullYear(expirationDate.getFullYear() + duration);
-
-                const currentDate = new Date();
-                if (currentDate > expirationDate) {
-                    retensiWarning.style.display = 'block';
-                } else {
-                    retensiWarning.style.display = 'none';
-                }
-            } else {
-                retensiWarning.style.display = 'none';
-            }
-        }
-
         // generate no surat
         document.addEventListener('DOMContentLoaded', function() {
             const form = {

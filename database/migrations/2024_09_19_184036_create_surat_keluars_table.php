@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('kepada');
             $table->string('jenis');
             $table->string('retensi');
+            $table->string('retensi_kategori');
             $table->string('file');
             $table->unsignedInteger('created_by'); 
             $table->unsignedInteger('updated_by')->nullable(); 
