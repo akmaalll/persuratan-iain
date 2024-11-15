@@ -329,7 +329,6 @@
         const retensiCategory = document.getElementById('retensi_category');
         const retensiDuration = document.getElementById('retensi');
         const retensiTampil = document.getElementById('retensi_tampil');
-        const retensiDate = document.getElementById('retensi_date');
         const retensiWarning = document.getElementById('retensi_warning');
 
         retensiCategory.addEventListener('change', function() {
@@ -372,6 +371,42 @@
                 retensiDuration.style.display = 'none';
             }
         });
+
+        document.addEventListener('change', function() {
+            const retensiDate = document.getElementById('retensi_date');
+
+            if (retensiDate) {
+                element.addEventListener('change', function() {
+                    checkRetentionExpiration();
+                }); 
+            }
+        });
+
+        retensiDuration.addEventListener('change', function() {
+            // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
+            if (retensiCategory.value !== 'nasib') {
+                checkRetentionExpiration();
+            }
+        });
+
+        function checkRetentionExpiration() {
+            const selectedDate = new Date(retensiDate.value);
+            const duration = parseInt(retensiDuration.value);
+
+            if (!isNaN(duration) && retensiCategory.value !== 'nasib') {
+                const expirationDate = new Date(selectedDate);
+                expirationDate.setFullYear(expirationDate.getFullYear() + duration);
+
+                const currentDate = new Date();
+                if (currentDate > expirationDate) {
+                    retensiWarning.style.display = 'block';
+                } else {
+                    retensiWarning.style.display = 'none';
+                }
+            } else {
+                retensiWarning.style.display = 'none';
+            }
+        }
 
         // generate no surat
         document.addEventListener('DOMContentLoaded', function() {

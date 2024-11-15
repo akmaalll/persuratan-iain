@@ -155,10 +155,12 @@ class Helper
         }
 
         foreach ($suratkeluar as $surat) {
-            $retensi = \Carbon\Carbon::parse($surat->retensi);
-            if ($retensi->isPast($tomorrow)) {
-                $surat->kategori = 'surat keluar';
-                $expiredSurat->push($surat);
+            if ($surat->retensi && strtotime($surat->retensi)) {
+                $retensi = \Carbon\Carbon::parse($surat->retensi);
+                if ($retensi->isPast($tomorrow)) {
+                    $surat->kategori = 'surat keluar';
+                    $expiredSurat->push($surat);
+                }
             }
         }
 
