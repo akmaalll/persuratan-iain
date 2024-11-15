@@ -186,9 +186,15 @@
 
                                     <select class="form-select mb-2" name="retensi_kategori" id="retensi_category">
                                         <option value="">Pilih Retensi...</option>
-                                        <option value="aktif">Aktif</option>
-                                        <option value="inaktif">Inaktif</option>
-                                        <option value="nasib">Nasib</option>
+                                        <option value="aktif"
+                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'aktif' ? 'selected' : '' }}>
+                                            Aktif</option>
+                                        <option value="inaktif"
+                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'inaktif' ? 'selected' : '' }}>
+                                            Inaktif</option>
+                                        <option value="nasib"
+                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'nasib' ? 'selected' : '' }}>
+                                            Nasib</option>
                                     </select>
 
 
@@ -204,10 +210,20 @@
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
                                         name="upload_file" id="upload_file" />
+
+                                    @if (isset($data->upload_file) && !empty($data->upload_file))
+                                        <!-- Display the existing file link if it exists -->
+                                        <div class="mb-2">
+                                            <a href="{{ asset('uploads/ttd/surat-masuk/' . $data->upload_file) }}"
+                                                target="_blank">Lihat File Saat Ini</a>
+                                        </div>
+                                    @endif
+
                                     <input type="hidden"
                                         value="{{ isset($data->upload_file) ? $data->upload_file : '' }}"
                                         name="upload_file_old" id="upload_file_old" />
                                 </div>
+
 
                                 <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
                                     <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
