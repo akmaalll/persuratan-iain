@@ -26,7 +26,6 @@
                         } else {
                             console.warn('CKEditor not found');
                         }
-
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(

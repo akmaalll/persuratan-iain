@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataKlasifikasiController;
 use App\Http\Controllers\Admin\LogAktivitasController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SuratMasukController;
@@ -103,6 +104,17 @@ Route::domain('')->group(function () {
             Route::get('/{id}/edit', [LogAktivitasController::class, 'edit'])->name('log-aktivitas.edit');
             Route::put('/{id}', [LogAktivitasController::class, 'update'])->name('log-aktivitas.update');
             Route::delete('/{id}', [LogAktivitasController::class, 'destroy'])->name('log-aktivitas.delete');
+        });
+
+        // Data klasifikasi
+        Route::group(['prefix' => '/data-klasifikasi'], function () {
+            Route::get('/', [DataKlasifikasiController::class, 'index'])->name('data-klasifikasi.index');
+            Route::get('/data', [DataKlasifikasiController::class, 'data'])->name('data-klasifikasi.data');
+            Route::get('/create', [DataKlasifikasiController::class, 'create'])->name('data-klasifikasi.create');
+            Route::post('/store', [DataKlasifikasiController::class, 'store'])->name('data-klasifikasi.store');
+            Route::get('/{id}/edit', [DataKlasifikasiController::class, 'edit'])->name('data-klasifikasi.edit');
+            Route::put('/{id}', [DataKlasifikasiController::class, 'update'])->name('data-klasifikasi.update');
+            Route::delete('/{id}', [DataKlasifikasiController::class, 'destroy'])->name('data-klasifikasi.delete');
         });
 
         # USER SETTING

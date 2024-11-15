@@ -3,22 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Repositories\Contracts\SuratMasukContract;
-use App\Traits\Uploadable;
-use Carbon\Carbon;
+use App\Http\Services\Repositories\Contracts\DataKlasifikasiContract;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class SuratMasukController extends Controller
+class DataKlasifikasiController extends Controller
 {
-    use Uploadable;
     protected $title, $repo, $response;
-    protected $image_path = "uploads/ttd/surat-masuk";
 
-
-    public function __construct(SuratMasukContract $repo)
+    public function __construct(DataKlasifikasiContract $repo)
     {
-        $this->title = 'surat-masuk';
+        $this->title = 'data-klasifikasi';
         $this->repo = $repo;
     }
 
@@ -37,7 +31,6 @@ class SuratMasukController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
-            // dd($data);
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
@@ -55,8 +48,7 @@ class SuratMasukController extends Controller
     {
         try {
             $title = $this->title;
-            $tahun = Carbon::now();
-            return view('admin.' . $title . '.form', compact('title', 'tahun'));
+            return view('admin.' . $title . '.form', compact('title'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -66,13 +58,6 @@ class SuratMasukController extends Controller
     {
         try {
             $req = $request->all();
-            if ($request->hasFile('upload_file')) {
-                $image = $request->file('upload_file')->getClientOriginalName();
-                $image_name = pathinfo($image, PATHINFO_FILENAME);
-                $image_name = $this->uploadFile2($request->file('upload_file'), $this->image_path, '');
-                $req['upload_file'] = $image_name;
-            }
-            $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
@@ -91,19 +76,10 @@ class SuratMasukController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         try {
             $req = $request->all();
-            if ($request->hasFile('upload_file')) {
-                $image = $request->file('upload_file')->getClientOriginalName();
-                $image_name = pathinfo($image, PATHINFO_FILENAME);
-                $image_name = $this->uploadFile2($request->file('upload_file'), $this->image_path, $req['upload_file_old']);
-                $req['upload_file'] = $image_name;
-            } else {
-                $req['upload_file'] = $req['upload_file_old'];
-            }
-            $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $request->id);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
@@ -116,17 +92,6 @@ class SuratMasukController extends Controller
         try {
             $data = $this->repo->delete($id);
             return response()->json($data);
-        } catch (\Exception $e) {
-            return view('errors.message', ['message' => $e->getMessage()]);
-        }
-    }
-
-    public function detail($id)
-    {
-        try {
-            $title = $this->title;
-            $data = $this->repo->find($id);
-            return view('admin.' . $title . '.detail', compact('title', 'data'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }

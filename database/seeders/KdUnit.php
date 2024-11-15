@@ -74,6 +74,7 @@ class KdUnit extends Seeder
                 'nomor' => '12',
                 'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah ",
             ],
+            [
                 'kode'  => '-',
                 'nomor' => '13',
                 'nama'  => "BIRO AUAK",
