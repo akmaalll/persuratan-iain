@@ -50,7 +50,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column text-white pt-15">
                                 <span class="fw-bold fs-2x">
-                                    Selamat Datang - Persuratan IAIN Pare-Pare
+                                    Selamat Datang - Kearsipan IAIN Pare-Pare
                                 </span>
                             </h3>
                             <!--end::Title-->
