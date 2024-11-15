@@ -43,7 +43,6 @@ class Helper
     {
         Session::forget('main_menu');
         Session::forget('menu');
-        // Session::forget('sub_menu');
         Session::forget('roles');
 
         $data = UserMenu::join('menus', 'menus.id', '=', 'user_menus.id_menu')
@@ -148,7 +147,8 @@ class Helper
         foreach ($suratmasuk as $surat) {
             if ($surat->retensi && strtotime($surat->retensi)) {
                 $retensi = \Carbon\Carbon::parse($surat->retensi);
-                if ($retensi->isToday($tomorrow)) {
+                if ($retensi->isPast($tomorrow)) {
+                    $surat->kategori = 'surat masuk';
                     $expiredSurat->push($surat);
                 }
             }
@@ -156,14 +156,16 @@ class Helper
 
         foreach ($suratkeluar as $surat) {
             $retensi = \Carbon\Carbon::parse($surat->retensi);
-            if ($retensi->isToday($tomorrow)) {
+            if ($retensi->isPast($tomorrow)) {
+                $surat->kategori = 'surat keluar';
                 $expiredSurat->push($surat);
             }
         }
 
         foreach ($arsipsurat as $surat) {
             $retensi = \Carbon\Carbon::parse($surat->retensi);
-            if ($retensi->isSameDay($tomorrow)) {
+            if ($retensi->isPast($tomorrow)) {
+                $surat->kategori = 'arsip surat';
                 $expiredSurat->push($surat);
             }
         }
@@ -172,7 +174,7 @@ class Helper
         if ($expiredSurat->isNotEmpty()) {
             foreach ($expiredSurat as $surat) {
                 $data .= '<div class="menu-item px-5">
-                        <a href="#" class="menu-link px-5">surat dengan nomor <br> ' . $surat->nomor . '
+                        <a href="#" class="menu-link px-5">' . ucfirst($surat->kategori) . ' dengan nomor <br> ' . $surat->nomor . '
                             <br> telah kadaluwarsa </a>
                     </div>
                     <!--end::Menu item-->
