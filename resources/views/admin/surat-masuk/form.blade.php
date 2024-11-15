@@ -158,7 +158,7 @@
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
                                             <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
+                                                value="{{ $v->nama }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
                                     </select>
