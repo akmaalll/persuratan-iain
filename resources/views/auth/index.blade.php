@@ -3,12 +3,12 @@
 <!--begin::Head-->
 
 <head>
-    <title>Sign In - IAIN Parepare</title>
+    <title>Sign In - SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </title>
     <meta charset="utf-8" />
     <meta name="description" content="iain." />
     <meta name="keywords" content="iain" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="IAIN Parepare" />
+    <meta property="og:title" content="SISTEM INFORMASI KEARSIPAN IAIN PAREPARE " />
     <link rel="shortcut icon" href="{{ asset('/logo/logo.ico') }}" />
 
     <!--begin::Fonts(mandatory for all pages)-->
@@ -92,7 +92,7 @@
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3">Sign In to IAIN Parepare</h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3">Sign In to <br> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
                                 <div class="text-gray-500 fw-semibold fs-6">Enter your details to login to your account:
