@@ -136,6 +136,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
     ])->toArray(),
 
     /*

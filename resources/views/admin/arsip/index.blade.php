@@ -62,13 +62,13 @@
                                 </span>
                             </button>
 
-                            <button id="button_filter" class="btn btn-secondary">
+                            {{-- <button id="button_filter" class="btn btn-secondary">
                                 Pencarian lanjut
-                            </button>
+                            </button> --}}
 
-                            <button id="button_hideFilter" class="btn btn-secondary">
+                            {{-- <button id="button_hideFilter" class="btn btn-secondary">
                                 Sembunyikan pencarian
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <!--end::Card title-->
@@ -319,6 +319,8 @@
             };
             $pagination.twbsPagination(defaultOpts);
 
+
+
             function loaddata(page, per_page, search) {
                 $.ajax({
                     url: '{{ route($title . '.data') }}',
@@ -470,6 +472,8 @@
                     }
                 });
             });
+
+            
 
 
         });

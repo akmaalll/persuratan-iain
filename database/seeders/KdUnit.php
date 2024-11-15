@@ -75,39 +75,44 @@ class KdUnit extends Seeder
                 'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah ",
             ],
             [
-                'kode'  => 'BRA',
+                'kode'  => '-',
                 'nomor' => '13',
-                'nama'  => 'BIRO AUAK',
+                'nama'  => "BIRO AUAK",
             ],
             [
-                'kode'  => 'BKP',
+                'kode'  => '-',
                 'nomor' => '14',
-                'nama'  => 'Bagian Kepegawaian',
+                'nama'  => "Bagian Kepegawaian",
             ],
             [
-                'kode'  => 'BKU',
+                'kode'  => '-',
                 'nomor' => '15',
-                'nama'  => 'Bagian Keuangan',
+                'nama'  => "Bagian Keuangan",
             ],
             [
-                'kode'  => 'BU',
+                'kode'  => '-',
                 'nomor' => '16',
-                'nama'  => 'Bagian Umum',
+                'nama'  => "Bagian Umum",
             ],
             [
-                'kode'  => 'BAK',
+                'kode'  => '-',
                 'nomor' => '17',
-                'nama'  => 'Bagian Akademik',
+                'nama'  => "Bagian Akademik",
             ],
             [
-                'kode'  => 'BKH',
+                'kode'  => '-',
                 'nomor' => '18',
-                'nama'  => 'Bagian Kehumasan',
+                'nama'  => "Bagian Kehumasan",
             ],
             [
-                'kode'  => 'BKA',
+                'kode'  => '-',
                 'nomor' => '19',
-                'nama'  => 'Bagian Kearsipan',
+                'nama'  => "Bagian Kearsipan",
+            ],
+            [
+                'kode'  => '-',
+                'nomor' => '20',
+                'nama'  => "Lainnya",
             ],
         ];
 

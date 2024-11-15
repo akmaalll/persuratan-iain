@@ -100,10 +100,10 @@
                                         <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }}
                                             value="penting">Penting</option>
                                         <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
-                                            value="penting">Terbatas</option>
+                                            value="terbatas">Terbatas</option>
                                         <option
                                             {{ isset($data->status) && $data->status == 'sangat terbatas' ? 'selected' : '' }}
-                                            value="penting">Sangat Terbatas</option>
+                                            value="sangat terbatas">Sangat Terbatas</option>
                                         <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
                                             value="rahasia">Rahasia</option>
                                     </select>
@@ -339,8 +339,10 @@
         retensiCategory.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
+            console.log(this.value);
+            if (this.value == 'aktif') {
+                retensiDuration.style.display = 'block';
 
-            if (this.value === 'aktif') {
                 retensiDuration.innerHTML = `
                 <option value="">Pilih Durasi...</option>
                 <option value="{{ $tahun->addYears(1) }}">1 Tahun</option>
@@ -348,8 +350,9 @@
                 <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
                 <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
                 <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
-            `;
-            } else if (this.value === 'inaktif') {
+                `;
+            } else if (this.value == 'inaktif') {
+                retensiDuration.style.display = 'block';
                 retensiDuration.innerHTML = `
                 <option value="">Pilih Durasi...</option>
                 <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
@@ -366,8 +369,9 @@
                 <option value="{{ $tahun->addYears(13) }}">13 Tahun</option>
                 <option value="{{ $tahun->addYears(14) }}">14 Tahun</option>
                 <option value="{{ $tahun->addYears(15) }}">15 Tahun</option>
-            `;
-            } else if (this.value === 'nasib') {
+                `;
+            } else if (this.value == 'nasib') {
+                retensiDuration.style.display = 'block';
                 retensiDuration.innerHTML = `
                 <option value="musnah">Musnah</option>
                 <option value="permanen">Permanen</option>
