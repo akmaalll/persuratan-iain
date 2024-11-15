@@ -21,11 +21,13 @@ return new class extends Migration
             $table->string('asal');
             $table->date('tgl_kirim');
             $table->date('tgl_input')->default(date('Y-m-d'));
-            $table->string('ttd');
+            $table->string('ttd')->nullable();
             $table->string('tujuan');
             $table->string('kepada');
             $table->string('jenis');
             $table->string('retensi');
+            $table->string('retensi_kategori');
+            $table->string('file');
             $table->unsignedInteger('created_by'); 
             $table->unsignedInteger('updated_by')->nullable(); 
             $table->timestamps();
