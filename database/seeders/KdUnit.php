@@ -74,7 +74,6 @@ class KdUnit extends Seeder
                 'nomor' => '12',
                 'nama'  => "Unit Pelaksana Teknis Ma'had al-Jami'ah ",
             ],
-            [
                 'kode'  => '-',
                 'nomor' => '13',
                 'nama'  => "BIRO AUAK",
@@ -116,13 +115,12 @@ class KdUnit extends Seeder
             ],
         ];
 
-        foreach($unit as $i => $v) {
+        foreach ($unit as $i => $v) {
             kd_unit::create([
                 'kode'  => $v['kode'],
                 'nomor'  => $v['nomor'],
                 'nama'  => $v['nama'],
             ]);
         };
-
     }
 }

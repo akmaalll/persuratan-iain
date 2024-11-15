@@ -95,12 +95,17 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Status" name="status" id="status">
                                         <option value="">Status...</option>
-                                        <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
-                                            value="rahasia">Rahasia</option>
                                         <option {{ isset($data->status) && $data->status == 'biasa' ? 'selected' : '' }}
                                             value="biasa">Biasa</option>
                                         <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }}
                                             value="penting">Penting</option>
+                                        <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
+                                            value="penting">Terbatas</option>
+                                        <option
+                                            {{ isset($data->status) && $data->status == 'sangat terbatas' ? 'selected' : '' }}
+                                            value="penting">Sangat Terbatas</option>
+                                        <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
+                                            value="rahasia">Rahasia</option>
                                     </select>
                                 </div>
 
@@ -110,14 +115,16 @@
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
+                                            <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}">
-                                                {{ $v->nama }} </option>
+                                                {{ $v->nama }}
+                                            </option>
                                         @endforeach
+                                        {{-- <option value="other">Lainnya (Ketikkan Asal Surat)</option> --}}
+                                        <!-- Menambahkan opsi 'lainnya' -->
                                     </select>
-                                    {{-- <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asal) ? $data->asal : '' }}" /> --}}
                                 </div>
+
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -137,17 +144,24 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">TTD</label>
-                                    <input type="file" onchange="return validateFile(this)" class="form-control"
-                                        name="ttd" id="ttd" />
-                                    <input type="hidden" value="{{ isset($data->ttd) ? $data->ttd : '' }}" name="ttd_old"
-                                        id="ttd_old" />
+                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
+
+                                    <input type="text" class="form-control" name="ttd"
+                                        placeholder="Nama Penandatangan" value="{{ isset($data->ttd) ? $data->ttd : '' }}"
+                                        id="ttd" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
-                                    <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" />
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
+                                        <option value="">Pilih Asal...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}">
+                                                {{ $v->nama }} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -155,32 +169,54 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Status" name="jenis" id="jenis">
+                                        data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
                                         <option value="">Jenis...</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'dinamis' ? 'selected' : '' }}
-                                            value="dinamis">Dinamis</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'statis' ? 'selected' : '' }}
-                                            value="statis">Statis</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'vital' ? 'selected' : '' }}
                                             value="vital">Vital</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'umum' ? 'selected' : '' }}
                                             value="umum">Umum</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
                                             value="terjaga">Terjaga</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'aktif' ? 'selected' : '' }}
-                                            value="aktif">Aktif</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'inaktif' ? 'selected' : '' }}
-                                            value="inaktif">Inaktif</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi</label>
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-                                    <input type="date" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" />
+
+                                    <select class="form-select mb-2" name="retensi_kategori" id="retensi_category">
+                                        <option value="">Pilih Retensi...</option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="inaktif">Inaktif</option>
+                                        <option value="nasib">Nasib</option>
+                                    </select>
+
+
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Upload File</label>
+                                    <input type="file" onchange="return validateFile(this)" class="form-control"
+                                        name="upload_file" id="upload_file" />
+                                    <input type="hidden"
+                                        value="{{ isset($data->upload_file) ? $data->upload_file : '' }}"
+                                        name="upload_file_old" id="upload_file_old" />
+                                </div>
+
+                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
+                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
+                                    <select class="form-select mb-2" name="retensi" id="retensi">
+                                        <!-- Options will be populated dynamically -->
+                                    </select>
                                 </div>
                             </div>
+
                             <!--end::Input group-->
 
                             <!--begin::Actions-->
@@ -221,7 +257,17 @@
 @endsection
 
 @push('jsScriptForm')
+
     <script type="text/javascript">
+        $(document).ready(function() {
+            // Inisialisasi select2
+            $('#asal').select2({
+                tags: true, // Memungkinkan input manual
+                placeholder: "Pilih Asal..."
+            });
+        });
+
+
         // Define form element
         const form = document.getElementById('kt_modal_new_target_form');
 
@@ -265,6 +311,85 @@
                 return (false);
             }
             return (true);
+        }
+
+        const retensiCategory = document.getElementById('retensi_category');
+        const retensiDuration = document.getElementById('retensi');
+        const retensiTampil = document.getElementById('retensi_tampil');
+        const retensiDate = document.getElementById('retensi_date');
+        const retensiWarning = document.getElementById('retensi_warning');
+
+        // Populate duration options based on selected category
+        retensiCategory.addEventListener('change', function() {
+            retensiTampil.style.display = 'block';
+            retensiDuration.innerHTML = '';
+
+            if (this.value === 'aktif') {
+                retensiDuration.innerHTML = `
+                <option value="">Pilih Durasi...</option>
+                <option value="{{ $tahun->addYears(1) }}">1 Tahun</option>
+                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
+                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
+                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
+                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
+            `;
+            } else if (this.value === 'inaktif') {
+                retensiDuration.innerHTML = `
+                <option value="">Pilih Durasi...</option>
+                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
+                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
+                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
+                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
+                <option value="{{ $tahun->addYears(6) }}">6 Tahun</option>
+                <option value="{{ $tahun->addYears(7) }}">7 Tahun</option>
+                <option value="{{ $tahun->addYears(8) }}">8 Tahun</option>
+                <option value="{{ $tahun->addYears(9) }}">9 Tahun</option>
+                <option value="{{ $tahun->addYears(10) }}">10 Tahun</option>
+                <option value="{{ $tahun->addYears(11) }}">11 Tahun</option>
+                <option value="{{ $tahun->addYears(12) }}">12 Tahun</option>
+                <option value="{{ $tahun->addYears(13) }}">13 Tahun</option>
+                <option value="{{ $tahun->addYears(14) }}">14 Tahun</option>
+                <option value="{{ $tahun->addYears(15) }}">15 Tahun</option>
+            `;
+            } else if (this.value === 'nasib') {
+                retensiDuration.innerHTML = `
+                <option value="musnah">Musnah</option>
+                <option value="permanen">Permanen</option>
+            `;
+            } else {
+                retensiDuration.style.display = 'none';
+            }
+        });
+
+        // Check if the retention period has expired
+        retensiDate.addEventListener('change', function() {
+            checkRetentionExpiration();
+        });
+
+        retensiDuration.addEventListener('change', function() {
+            // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
+            if (retensiCategory.value !== 'nasib') {
+                checkRetentionExpiration();
+            }
+        });
+
+        function checkRetentionExpiration() {
+            const selectedDate = new Date(retensiDate.value);
+            const duration = parseInt(retensiDuration.value);
+
+            if (!isNaN(duration) && retensiCategory.value !== 'nasib') {
+                const expirationDate = new Date(selectedDate);
+                expirationDate.setFullYear(expirationDate.getFullYear() + duration);
+
+                const currentDate = new Date();
+                if (currentDate > expirationDate) {
+                    retensiWarning.style.display = 'block';
+                } else {
+                    retensiWarning.style.display = 'none';
+                }
+            } else {
+                retensiWarning.style.display = 'none';
+            }
         }
     </script>
 

@@ -18,16 +18,18 @@ class surat_masuk extends Model
         'tgl_input',
         'ttd',
         'tujuan',
-        'kepada', 
-        'jenis', 
-        'retensi', 
-        'riwayat_mutasi', 
-        'created_by', 
-        'updated_by', 
+        'kepada',
+        'jenis',
+        'retensi',
+        'retensi_kategori',
+        'riwayat_mutasi',
+        'upload_file',
+        'created_by',
+        'updated_by',
     ];
-    
-    public function asalSurat() {
+
+    public function asalSurat()
+    {
         return $this->hasOne(kd_unit::class, 'id', 'asal');
     }
-
 }

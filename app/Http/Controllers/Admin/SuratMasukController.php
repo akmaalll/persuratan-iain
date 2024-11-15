@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\SuratMasukContract;
 use App\Traits\Uploadable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,7 +55,8 @@ class SuratMasukController extends Controller
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.form', compact('title'));
+            $tahun = Carbon::now();
+            return view('admin.' . $title . '.form', compact('title', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -64,11 +66,11 @@ class SuratMasukController extends Controller
     {
         try {
             $req = $request->all();
-            if ($request->hasFile('ttd')) {
-                $image = $request->file('ttd')->getClientOriginalName();
+            if ($request->hasFile('upload_file')) {
+                $image = $request->file('upload_file')->getClientOriginalName();
                 $image_name = pathinfo($image, PATHINFO_FILENAME);
-                $image_name = $this->uploadFile2($request->file('ttd'), $this->image_path, '');
-                $req['ttd'] = $image_name;
+                $image_name = $this->uploadFile2($request->file('upload_file'), $this->image_path, '');
+                $req['upload_file'] = $image_name;
             }
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);

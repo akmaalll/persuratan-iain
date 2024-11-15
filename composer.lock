@@ -4209,6 +4209,7 @@
         },
         {
             "name": "symfony/console",
+
             "version": "v7.1.8",
             "source": {
                 "type": "git",
@@ -4729,6 +4730,7 @@
         },
         {
             "name": "symfony/http-foundation",
+
             "version": "v7.1.8",
             "source": {
                 "type": "git",
@@ -4802,6 +4804,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2024-11-09T09:16:45+00:00"
         },
         {
@@ -5720,6 +5723,7 @@
         },
         {
             "name": "symfony/process",
+
             "version": "v7.1.8",
             "source": {
                 "type": "git",

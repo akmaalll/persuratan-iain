@@ -27,7 +27,7 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->asalSurat->kode .' - '. $v->asalSurat->nama }} 
+                {{ $v->asalSurat->kode . ' - ' . $v->asalSurat->nama }}
             </span>
         </td>
         <td>
@@ -37,7 +37,11 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ Helper::getDateIndo($v->retensi) }}
+                {{ $v->retensi_kategori }} @if (strtotime($v->retensi))
+                    ({{ Helper::getDateIndo($v->retensi) }})
+                @else
+                    ({{ $v->retensi }})
+                @endif
             </span>
         </td>
         <td class="text-nowrap">
