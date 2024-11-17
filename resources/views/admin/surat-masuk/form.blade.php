@@ -78,7 +78,7 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
+                                    <input type="date" class="form-control" placeholder="dd-mm-yyyy"  name="tgl_surat" id="tgl_surat"
                                         value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
                                 </div>
 
@@ -130,13 +130,21 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Terima</label>
-                                    <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
+                                    <input type="date" class="form-control" name="tgl_terima" id="tgl_terima" placeholder="dd-mm-yyyy" 
                                         value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" />
                                 </div>
 
+
+                                <div class="col-md-6 fv-row asal-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Asal</label>
+                                    <input value="{{ isset($data->asal) ? $data->asal : '' }}" type="text"
+                                        class="form-control" name="asalLain" id="asalLain"
+                                        placeholder="masukkan asal lain" />
+                                </div>
+
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label> 
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" placeholder="dd-mm-yyyy" 
                                         value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
                                         readonly />
                                 </div>
@@ -144,11 +152,11 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
+                                    <label class="fs-6 fw-semibold mb-2">TTD (opsional)</label>
 
                                     <input type="text" class="form-control" name="ttd"
-                                        placeholder="Nama Penandatangan" value="{{ isset($data->ttd) ? $data->ttd : '' }}"
-                                        id="ttd" />
+                                        placeholder="Nama Penandatangan"
+                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" id="ttd" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -158,7 +166,7 @@
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
                                             <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->nama }}">
+                                                value="{{ $v->id }}">
                                                 {{ $v->nama }} </option>
                                         @endforeach
                                     </select>
@@ -178,6 +186,13 @@
                                         <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
                                             value="terjaga">Terjaga</option>
                                     </select>
+                                </div>
+
+                                <div class="col-md-6 fv-row tujuan-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Tujuan</label>
+                                    <input value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" type="text"
+                                        class="form-control" name="tujuanLain" id="tujuanLain"
+                                        placeholder="masukkan tujuan lain" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -206,6 +221,14 @@
                             </div>
 
                             <div class="row g-9 mb-8">
+
+                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
+                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
+                                    <select class="form-select mb-2" name="retensi" id="retensi">
+                                        <!-- Options will be populated dynamically -->
+                                    </select>
+                                </div>
+                                
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
@@ -225,12 +248,7 @@
                                 </div>
 
 
-                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
-                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
-                                    <select class="form-select mb-2" name="retensi" id="retensi">
-                                        <!-- Options will be populated dynamically -->
-                                    </select>
-                                </div>
+                                
                             </div>
 
                             <!--end::Input group-->
@@ -281,6 +299,60 @@
                 tags: true, // Memungkinkan input manual
                 placeholder: "Pilih Asal..."
             });
+
+            const asalOption = $('.asal-lain');
+            const asalForm = $('#asalLain');
+            asalOption.hide();
+
+            const tujuanOption = $('.tujuan-lain');
+            const tujuanForm = $('#tujuanLain');
+            tujuanOption.hide();
+
+            // jika form edit
+            const getValueAsalOption = $('#asal option').filter((i, v) => {
+                return v.value == asalForm.val();
+            });
+
+            if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
+                asalOption.show();
+                asalForm.val(asalForm.val());
+                $('#asal').val('20').change();
+            } else {
+                asalOption.hide();
+            }
+
+            $('#asal').on('change', function() {
+                let asalValue = $(this).val();
+                if (asalValue == '20') {
+                    asalOption.show();
+                } else {
+                    asalOption.hide();
+                }
+            });
+
+            // jika form edit
+            const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
+                return v.value == tujuanForm.val();
+            });
+
+            if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
+                tujuanOption.show();
+                tujuanForm.val(tujuanForm.val());
+                $('#tujuan').val('20').change();
+            } else {
+                tujuanOption.hide();
+            }
+
+            $('#tujuan').on('change', function() {
+                let tujuanValue = $(this).val();
+
+                if (tujuanValue == '20') {
+                    tujuanOption.show();
+                } else {
+                    tujuanOption.hide();
+                }
+            });
+
         });
 
 

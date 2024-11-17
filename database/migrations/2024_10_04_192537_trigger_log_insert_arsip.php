@@ -30,6 +30,8 @@ return new class extends Migration
     public function down(): void
     {
         //
-        DB::unprepared('DROP TRIGGER `log_insert_arsip`');
+        // DB::unprepared('DROP TRIGGER `log_insert_arsip`');
+        Schema::dropIfExists('log_insert_arsip');
+
     }
 };

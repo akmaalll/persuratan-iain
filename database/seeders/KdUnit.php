@@ -114,46 +114,6 @@ class KdUnit extends Seeder
                 'nomor' => '20',
                 'nama'  => "Lainnya",
             ],
-            [
-                'kode'  => '-',
-                'nomor' => '13',
-                'nama'  => "BIRO AUAK",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '14',
-                'nama'  => "Bagian Kepegawaian",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '15',
-                'nama'  => "Bagian Keuangan",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '16',
-                'nama'  => "Bagian Umum",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '17',
-                'nama'  => "Bagian Akademik",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '18',
-                'nama'  => "Bagian Kehumasan",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '19',
-                'nama'  => "Bagian Kearsipan",
-            ],
-            [
-                'kode'  => '-',
-                'nomor' => '20',
-                'nama'  => "Lainnya",
-            ],
         ];
 
         foreach ($unit as $i => $v) {

@@ -29,6 +29,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP TRIGGER `log_delete_arsip`');
+        // DB::unprepared('DROP TRIGGER `log_delete_arsip`');
+        Schema::dropIfExists('log_delete_arsip');
+
+
     }
 };

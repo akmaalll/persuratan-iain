@@ -61,7 +61,7 @@
             <td>
                 <span class="fw-semibold">
                     {{-- {{ $v->file }}  --}}
-                    <a href="{{ asset('uploads/arsip/' . $v->file) }}"
+                    <a href="{{ asset('uploads/arsip/' . $v->file) }}" target="_blank"
                         class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
                         <i class="ki-duotone ki-folder-down fs-2">
                             <span class="path1"></span>

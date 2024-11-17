@@ -52,11 +52,11 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Main Menu</label>
                                     <input type="text" class="form-control" name="main_menu" id="main_menu"
-                                        value="{{ isset($data->main_menu) ? $data->main_menu : '' }}" />
+                                        value="APPS" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Parent</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Parent (label menu)</label>
                                     <select class="form-select" data-control="select2" data-hide-search="true"
                                         data-placeholder="Select a Roles" name="parent" id="parent">
                                         <option value="">Select user...</option>
@@ -71,7 +71,7 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Menu Name</label>
+                                    <label class="fs-6 fw-semibold mb-2">Nama menu</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         value="{{ isset($data->name) ? $data->name : '' }}" />
                                 </div>
@@ -92,7 +92,7 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Url</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Url (link untuk mengakses menu)</label>
                                     <input type="text" class="form-control" name="url" id="url"
                                         value="{{ isset($data->url) ? $data->url : '' }}" />
                                 </div>
@@ -100,10 +100,11 @@
                                 <div class="col-md-3 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Index</label>
                                     <input type="text" class="form-control" name="index" id="index"
-                                        value="{{ isset($data->index) ? $data->index : '' }}" />
+                                        value="1" />
+                                        {{-- value="{{ isset($data->index) ? $data->index : '' }}" /> --}}
                                 </div>
                                 <div class="col-md-3 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Sub Parent</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Sub Parent (Menu utama/Menu cabang)</label>
                                     <label class="form-check form-switch form-check-custom form-check-solid">
                                         <input class="form-check-input" name="sub_parent" id="sub_parent" type="checkbox"
                                             value="1" checked="checked" />

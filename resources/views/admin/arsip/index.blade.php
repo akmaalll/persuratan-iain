@@ -319,8 +319,6 @@
             };
             $pagination.twbsPagination(defaultOpts);
 
-
-
             function loaddata(page, per_page, search) {
                 $.ajax({
                     url: '{{ route($title . '.data') }}',

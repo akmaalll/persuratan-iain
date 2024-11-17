@@ -48,13 +48,12 @@ class Helper
         $data = UserMenu::join('menus', 'menus.id', '=', 'user_menus.id_menu')
             ->select('menus.*', 'user_menus.read', 'user_menus.create', 'user_menus.read', 'user_menus.edit', 'user_menus.delete', 'user_menus.report')
             ->where('user_menus.id_role', auth()->user()->id_role)
-            ->orderBy('menus.index', 'asc')->get();
+            ->orderBy('menus.id', 'asc')->get();
 
         $main_menu = $data->where('parent', '0')->toArray();
         $menu = $data->where('parent', '<>', 0)->where('read', '1')->toArray();
         // $sub_menu = $data->where('parent', '<>', 0)->where('read', '1')->toArray();
         $data = $data->toArray();
-
         $menuAll = [];
         // create session role menu
         foreach ($data as $m) {

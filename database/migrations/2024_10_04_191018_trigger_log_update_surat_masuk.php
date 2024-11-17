@@ -29,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP TRIGGER `log_update_surat_masuk`');
+        // DB::unprepared('DROP TRIGGER `log_update_surat_masuk`');
+        Schema::dropIfExists('log_update_surat_masuk');
+
     }
 };

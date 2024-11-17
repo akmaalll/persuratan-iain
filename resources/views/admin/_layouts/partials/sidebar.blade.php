@@ -69,7 +69,6 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
-
                     @foreach (Session::get('main_menu') as $mm)
                         <!--begin:Menu item-->
                         <div class="menu-item pt-5">

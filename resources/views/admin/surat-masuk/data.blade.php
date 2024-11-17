@@ -1,4 +1,5 @@
 @foreach ($data as $key => $v)
+{{-- {{ dd($v) }} --}}
     <tr class="text-start text-gray-600 fs-7">
         <td>
             <span class="fw-semibold">

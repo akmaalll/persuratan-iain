@@ -106,7 +106,8 @@
                                             <option
                                                 {{ isset($data->id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}">
-                                                {{ $v->nomor }} - {{ $v->nama }}
+                                                {{ $v->jenis_klasifikasi->kode }} {{ $v->nomor }} -
+                                                {{ $v->nama }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -164,8 +165,8 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Jenis Media</label>
-                                    <select data-placeholder="-- Pilih jenis media --" name="jenis_media" id="jenis_media"
-                                        class="form-select">
+                                    <select data-placeholder="-- Pilih jenis media --" name="jenis_media"
+                                        id="jenis_media" class="form-select">
                                         <option value="">-- Pilih jenis media --</option>
                                         <option {{ isset($data->id) && $data->jenis_media == 'Audio' ? 'selected' : '' }}
                                             value="Audio">Audio</option>
@@ -207,8 +208,8 @@
 
                                 <div class="col-md-6 fv-row media-lain">
                                     <label class="fs-6 fw-semibold mb-2">Media Lain</label>
-                                    <input value="{{ isset($data->jenis_media) ? $data->jenis_media : '' }}" type="text"
-                                        class="form-control"  name="mediaLain" id="mediaLain"
+                                    <input value="{{ isset($data->jenis_media) ? $data->jenis_media : '' }}"
+                                        type="text" class="form-control" name="mediaLain" id="mediaLain"
                                         placeholder="masukkan media lain" />
                                 </div>
 
@@ -309,7 +310,7 @@
             const unitOption = $('.unit-lain');
             const lokalOption = $('.lokal-lain');
             const mediaOption = $('.media-lain');
-            
+
             const penciptaForm = $('#penciptaLain');
             const unitForm = $('#unitLain');
             const lokalForm = $('#lokalLain');
@@ -367,12 +368,12 @@
                     unitOption.hide();
                 }
             });
-            
+
             // lokal arsip
             const getValueLokalOption = $('#lokal option').filter((i, v) => {
                 return v.value == lokalForm.val();
             });
-            
+
             if (getValueLokalOption.length === 0 && lokalForm.val() !== '') {
                 lokalOption.show();
                 lokalForm.val(lokalForm.val());
