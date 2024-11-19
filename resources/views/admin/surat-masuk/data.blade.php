@@ -1,5 +1,5 @@
 @foreach ($data as $key => $v)
-{{-- {{ dd($v) }} --}}
+    {{-- {{ dd($v) }} --}}
     <tr class="text-start text-gray-600 fs-7">
         <td>
             <span class="fw-semibold">
@@ -38,11 +38,9 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->retensi_kategori }} @if (strtotime($v->retensi))
-                    ({{ Helper::getDateIndo($v->retensi) }})
-                @else
-                    ({{ $v->retensi }})
-                @endif
+                Aktif ({{ Helper::getDateIndo($v->retensi) }}) <br>
+                Inaktif ({{ Helper::getDateIndo($v->retensi2) }}) <br>
+                Nasib ({{ Helper::getDateIndo($v->retensi3) }}) <br>
             </span>
         </td>
         <td class="text-nowrap">

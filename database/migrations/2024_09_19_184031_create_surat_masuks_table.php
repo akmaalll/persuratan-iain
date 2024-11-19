@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('kepada');
             $table->string('jenis');
             $table->string('retensi');
-            $table->string('retensi_kategori');
+            $table->string('retensi2');
+            $table->string('retensi3');
             $table->string('riwayat_mutasi');
             $table->string('upload_file');
             $table->unsignedInteger('created_by');
