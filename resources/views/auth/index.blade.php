@@ -68,7 +68,7 @@
                 <div class="d-flex flex-center flex-xl-start flex-column">
                     <!--begin::Logo-->
                     <a href="#" class="mb-7">
-                        <img alt="Logo" src="{{ asset('/logo/logo-admin-white.png') }}" style="width:100%" />
+                        <img alt="Logo" src="{{ asset('/logo/bg-logo-login.png') }}" style="width:100%" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
