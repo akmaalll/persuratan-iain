@@ -165,11 +165,12 @@
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
-                                        <option value="">Pilih Asal...</option>
+                                        <option value="">Pilih Tujuan...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->id == $v->id ? 'selected' : '' }}
+                                            <option {{ isset($data->tujuan) && $data->tujuan == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}">
-                                                {{ $v->nama }} </option>
+                                                {{ $v->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -228,7 +229,7 @@
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
 
                                     <select class="form-select mb-2" data-control="select2" name="retensi"
-                                        id="retensi">
+                                        id="retensi" data-selected="{{ $data->retensi ?? '' }}">
                                         <option value="">Pilih Retensi...</option>
                                         <!-- Opsi retensi akan ditambahkan melalui JavaScript -->
                                     </select>
@@ -242,7 +243,7 @@
                                     <input type="hidden" name="riwayat_mutasi" value="tes" id="">
 
                                     <select class="form-select mb-2" data-control="select2" name="retensi2"
-                                        id="retensi2">
+                                        id="retensi2" data-selected="{{ $data->retensi2 ?? '' }}">
                                         <option value="">Pilih Retensi...</option>
                                         <!-- Opsi retensi inaktif akan ditambahkan melalui JavaScript -->
                                     </select>
@@ -258,10 +259,10 @@
                                     <select class="form-select mb-2" data-control="select2" name="retensi3">
                                         <option value="">Pilih Retensi...</option>
                                         <option value="musnah"
-                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'musnah' ? 'selected' : '' }}>
+                                            {{ isset($data->retensi3) && $data->retensi3 == 'musnah' ? 'selected' : '' }}>
                                             Musnah</option>
                                         <option value="permanen"
-                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'permanen' ? 'selected' : '' }}>
+                                            {{ isset($data->retensi3) && $data->retensi3 == 'permanen' ? 'selected' : '' }}>
                                             Permanen</option>
                                     </select>
                                     <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
@@ -323,6 +324,10 @@
                 var retensiSelect = document.getElementById('retensi');
                 var retensiSelect2 = document.getElementById('retensi2');
 
+                // Ambil nilai yang sudah dipilih dari atribut data-selected
+                var selectedRetensi = retensiSelect.getAttribute('data-selected');
+                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
+
                 // Membersihkan opsi sebelumnya
                 retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
                 retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
@@ -335,7 +340,9 @@
                     var option = document.createElement("option");
                     option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
                     option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
-
+                    if (option.value === selectedRetensi) {
+                        option.selected = true;
+                    }
                     retensiSelect.appendChild(option);
                 }
 
@@ -347,7 +354,9 @@
                     var option2 = document.createElement("option");
                     option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
                     option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
-
+                    if (option2.value === selectedRetensi2) {
+                        option2.selected = true;
+                    }
                     retensiSelect2.appendChild(option2);
                 }
             }
