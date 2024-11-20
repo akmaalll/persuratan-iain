@@ -33,18 +33,16 @@
         </td>
         <td>
             <span class="fw-semibold">
-<<<<<<< HEAD
                 {{ $v->tujuanSurat->kode . ' - ' . $v->tujuanSurat->nama }}
-=======
-                {{ isset($v->tujuanSurat->nama) ? $v->tujuanSurat->nama : $v->tujuan }}
->>>>>>> 5596161615edc32639a4c98e94b20ab522cc97e4
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                Aktif ({{ Helper::getDateIndo($v->retensi) }}) <br>
-                Inaktif ({{ Helper::getDateIndo($v->retensi2) }}) <br>
-                Nasib ({{ $v->retensi3 }}) <br>
+                {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi) }} (Aktif Hingga
+                {{ Helper::getDateIndo($v->retensi) }}) <br>
+                {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi2) }} (Inaktif Hingga
+                {{ Helper::getDateIndo($v->retensi2) }}) <br>
+                {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
         <td class="text-nowrap">

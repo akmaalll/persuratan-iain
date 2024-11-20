@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\UserMenu;
+use DateTime;
 
 class Helper
 {
@@ -132,6 +133,19 @@ class Helper
 
         return $edit . $delete;
     }
+
+    public static function getRentangTanggal($tglSurat, $retensi)
+    {
+        $tglSurat = new DateTime($tglSurat);
+        $retensi = new DateTime($retensi);
+
+        // Menghitung selisih tanggal
+        $interval = $tglSurat->diff($retensi);
+
+        // Format rentang waktu
+        return $interval->y . ' Tahun';
+    }
+    
     public static function suratkadaluarsa()
     {
 
