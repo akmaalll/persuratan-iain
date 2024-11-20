@@ -33,14 +33,14 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tujuan }}
+                {{ $v->tujuanSurat->kode . ' - ' . $v->tujuanSurat->nama }}
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
                 Aktif ({{ Helper::getDateIndo($v->retensi) }}) <br>
                 Inaktif ({{ Helper::getDateIndo($v->retensi2) }}) <br>
-                Nasib ({{$v->retensi3}}) <br>
+                Nasib ({{ $v->retensi3 }}) <br>
             </span>
         </td>
         <td class="text-nowrap">

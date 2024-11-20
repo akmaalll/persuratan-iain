@@ -154,6 +154,27 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
+                                        <option value="">Pilih Tujuan...</option>
+                                        @foreach (Helper::getData('kd_units') as $a)
+                                            <option {{ isset($data->tujuan) && $data->tujuan == $a->id ? 'selected' : '' }}
+                                                value="{{ $a->id }}">
+                                                {{ $a->nama }}
+                                            </option>
+                                        @endforeach
+                                        <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 fv-row tujuan-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Tujuan Lain</label>
+                                    <input value="{{ isset($data->tujuanLain) ? $data->tujuanLain : '' }}" type="text"
+                                        class="form-control" name="tujuanLain" id="tujuanLain"
+                                        placeholder="Masukkan tujuan lain" />
+                                </div>
+
+                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">TTD (opsional)</label>
 
                                     <input type="text" class="form-control" name="ttd"
@@ -161,19 +182,7 @@
                                         value="{{ isset($data->ttd) ? $data->ttd : '' }}" id="ttd" />
                                 </div>
 
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
-                                        <option value="">Pilih Tujuan...</option>
-                                        @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->tujuan) && $data->tujuan == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
-                                                {{ $v->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
                             </div>
 
                             <div class="row g-9 mb-8">
