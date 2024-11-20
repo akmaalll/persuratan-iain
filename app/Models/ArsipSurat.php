@@ -32,9 +32,9 @@ class ArsipSurat extends Model
         return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
     }
 
-    public function penciptaSurat() {
-        return $this->hasOne(JenisKlasifikasi::class, 'id', 'pencipta');
-    }
+    // public function penciptaSurat() {
+    //     return $this->hasOne(JenisKlasifikasi::class, 'id', 'pencipta');
+    // }
 
     public function cipta() {
         return $this->hasOne(kd_unit::class, 'id', 'pencipta');
@@ -42,5 +42,9 @@ class ArsipSurat extends Model
 
     public function unit() {
         return $this->hasOne(kd_unit::class, 'id', 'unit_pengolah');
+    }
+
+    public function lokasi() {
+        return $this->hasOne(kd_unit::class, 'id', 'lokal');
     }
 }
