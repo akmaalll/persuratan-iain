@@ -140,21 +140,38 @@
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="date" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" readonly />
-
+                                    <label class="required fs-6 fw-semibold mb-2">File</label>
+                                    @if (isset($data->file) && !empty($data->file))
+                                        <!-- Display the existing file link if it exists -->
+                                        <div class="mb-2">
+                                            <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}"
+                                                target="_blank" class="form-control">Lihat File</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">File</label>
-                                    <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}" target="_blank"
-                                        class="btn btn-bg-secondary btn-active-color-primary">
-                                        Lihat File
-                                    </a>
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" readonly />
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" readonly />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi3) ? $data->retensi3 : '' }}" readonly />
+                                </div>
+
+
                             </div>
 
                             <!--end::Input group-->
