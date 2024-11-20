@@ -142,6 +142,7 @@ class Helper
         $expiredSurat = collect();
 
         $tomorrow = \Carbon\Carbon::today();
+        // $tomorrow = $suratmasuk->tgl_surat;
 
         foreach ($suratmasuk as $surat) {
             if ($surat->retensi && strtotime($surat->retensi)) {

@@ -78,8 +78,8 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input type="date" class="form-control" placeholder="dd-mm-yyyy"  name="tgl_surat" id="tgl_surat"
-                                        value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
+                                    <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
+                                        id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -130,7 +130,8 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Terima</label>
-                                    <input type="date" class="form-control" name="tgl_terima" id="tgl_terima" placeholder="dd-mm-yyyy" 
+                                    <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
+                                        placeholder="dd-mm-yyyy"
                                         value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" />
                                 </div>
 
@@ -143,8 +144,9 @@
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label> 
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input" placeholder="dd-mm-yyyy" 
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
+                                        placeholder="dd-mm-yyyy"
                                         value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
                                         readonly />
                                 </div>
@@ -188,47 +190,6 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-6 fv-row tujuan-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Tujuan</label>
-                                    <input value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" type="text"
-                                        class="form-control" name="tujuanLain" id="tujuanLain"
-                                        placeholder="masukkan tujuan lain" />
-                                </div>
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-
-                                    <select class="form-select mb-2" name="retensi_kategori" id="retensi_category">
-                                        <option value="">Pilih Retensi...</option>
-                                        <option value="aktif"
-                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'aktif' ? 'selected' : '' }}>
-                                            Aktif</option>
-                                        <option value="inaktif"
-                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'inaktif' ? 'selected' : '' }}>
-                                            Inaktif</option>
-                                        <option value="nasib"
-                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'nasib' ? 'selected' : '' }}>
-                                            Nasib</option>
-                                    </select>
-
-
-                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
-                                        <strong>Warning:</strong> Retensi period has expired!
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row g-9 mb-8">
-
-                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
-                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
-                                    <select class="form-select mb-2" name="retensi" id="retensi">
-                                        <!-- Options will be populated dynamically -->
-                                    </select>
-                                </div>
-                                
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
@@ -248,7 +209,67 @@
                                 </div>
 
 
-                                
+
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
+
+                                {{-- <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
+                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
+                                    <select class="form-select mb-2" name="retensi" id="retensi">
+                                        <!-- Options will be populated dynamically -->
+                                    </select>
+                                </div> --}}
+
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi"
+                                        id="retensi">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi2"
+                                        id="retensi2">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi inaktif akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi3">
+                                        <option value="">Pilih Retensi...</option>
+                                        <option value="musnah"
+                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'musnah' ? 'selected' : '' }}>
+                                            Musnah</option>
+                                        <option value="permanen"
+                                            {{ isset($data->retensi_kategori) && $data->retensi_kategori == 'permanen' ? 'selected' : '' }}>
+                                            Permanen</option>
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <!--end::Input group-->
@@ -293,11 +314,64 @@
 @push('jsScriptForm')
 
     <script type="text/javascript">
+        // Fungsi untuk memperbarui pilihan retensi aktif dan inaktif
+        function updateRetensi() {
+            var tglSurat = document.getElementById('tgl_surat').value;
+
+            if (tglSurat) {
+                var baseDate = new Date(tglSurat); // Mengambil nilai tgl_surat
+                var retensiSelect = document.getElementById('retensi');
+                var retensiSelect2 = document.getElementById('retensi2');
+
+                // Membersihkan opsi sebelumnya
+                retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
+                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+
+                // Menambahkan opsi retensi aktif (1-5 Tahun)
+                for (var i = 1; i <= 5; i++) {
+                    var retensiDate = new Date(baseDate);
+                    retensiDate.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option = document.createElement("option");
+                    option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
+
+                    retensiSelect.appendChild(option);
+                }
+
+                // Menambahkan opsi retensi inaktif (2-15 Tahun)
+                for (var i = 2; i <= 15; i++) {
+                    var retensiDate2 = new Date(baseDate);
+                    retensiDate2.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option2 = document.createElement("option");
+                    option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
+
+                    retensiSelect2.appendChild(option2);
+                }
+            }
+        }
+
+        // Event listener untuk memperbarui retensi setiap kali tgl_surat diubah
+        document.getElementById('tgl_surat').addEventListener('change', updateRetensi);
+
+        // Memanggil fungsi saat halaman pertama kali dimuat jika tgl_surat sudah ada
+        if (document.getElementById('tgl_surat').value) {
+            updateRetensi();
+        }
+
+
+
         $(document).ready(function() {
             // Inisialisasi select2
             $('#asal').select2({
                 tags: true, // Memungkinkan input manual
                 placeholder: "Pilih Asal..."
+            });
+            $('#tujuan').select2({
+                tags: true, // Memungkinkan input manual
+                placeholder: "Pilih Tujuan..."
             });
 
             const asalOption = $('.asal-lain');
