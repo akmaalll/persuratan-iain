@@ -33,4 +33,8 @@ class surat_masuk extends Model
     {
         return $this->hasOne(kd_unit::class, 'id', 'asal');
     }
+    public function tujuanSurat()
+    {
+        return $this->hasOne(kd_unit::class, 'id', 'tujuan');
+    }
 }
