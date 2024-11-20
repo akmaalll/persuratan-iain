@@ -28,7 +28,7 @@ class UsersRepository extends BaseRepository implements UsersContract
 			$query->where('name', 'like', "%{$search}%")
 				->orWhere('username', 'like', "%{$search}%");
 		})
-			->where('id', '<>', auth()->user()->id_role)
+			// ->where('id', '<>', auth()->user()->id_role)
 			->orderBy($field, $sortOrder)
 			->paginate($perPage);
 	}
