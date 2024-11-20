@@ -37,8 +37,8 @@ class SuratMasukController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
-            // dd($data);
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
+            // dd($perPage);
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
             return response()->json([
@@ -95,6 +95,7 @@ class SuratMasukController extends Controller
             $title = $this->title;
             $data = $this->repo->find($id);
             $tahun = Carbon::now();
+            // dd($data->tujuan);
             return view('admin.' . $title . '.form', compact('title', 'data', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);

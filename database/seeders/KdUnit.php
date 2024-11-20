@@ -109,11 +109,6 @@ class KdUnit extends Seeder
                 'nomor' => '19',
                 'nama'  => "Bagian Kearsipan",
             ],
-            [
-                'kode'  => '-',
-                'nomor' => '20',
-                'nama'  => "Lainnya",
-            ],
         ];
 
         foreach ($unit as $i => $v) {

@@ -40,7 +40,7 @@
             <span class="fw-semibold text-nowrap">
                 Aktif ({{ Helper::getDateIndo($v->retensi) }}) <br>
                 Inaktif ({{ Helper::getDateIndo($v->retensi2) }}) <br>
-                Nasib ({{ Helper::getDateIndo($v->retensi3) }}) <br>
+                Nasib ({{$v->retensi3}}) <br>
             </span>
         </td>
         <td class="text-nowrap">
