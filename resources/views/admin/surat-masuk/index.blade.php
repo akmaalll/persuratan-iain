@@ -295,6 +295,8 @@
 
                 </div>
 
+
+
                 <!--end::Card body-->
             </div>
             <!--end::Products-->
@@ -386,6 +388,32 @@
                 });
             }
 
+            // document.getElementById('button_advanced_submit').addEventListener('click', function() {
+            //     const formData = {
+            //         nomor: document.getElementById('input_nomor_surat').value || null,
+            //         kepada: document.getElementById('input_kepada').value || null,
+            //         tanggal_surat: document.getElementById('input_tanggal_surat').value || null,
+            //         perihal: document.getElementById('input_perihal').value || null,
+            //         status: document.getElementById('input_status').value || null,
+            //         asal: document.getElementById('input_asal').value || null,
+            //         tanggal_terima: document.getElementById('input_tanggal_terima').value || null,
+            //         tanggal_input: document.getElementById('input_tanggal_input').value || null,
+            //         ttd: document.getElementById('input_ttd').value || null,
+            //         tujuan: document.getElementById('input_tujuan').value || null,
+            //         jenis_surat: document.getElementById('input_jenis_surat').value || null,
+            //         retensi_aktif: document.getElementById('input_retensi_aktif').value || null,
+            //         retensi_inaktif: document.getElementById('input_retensi_inaktif').value || null,
+            //         retensi_nasib: document.getElementById('input_retensi_nasib').value || null,
+            //     };
+
+            //     // Cek apakah semua nilai kosong
+            //     const isEmpty = Object.values(formData).every(value => value === null || value === '');
+
+            //     // Tampilkan hasil ke console untuk debugging
+            //     console.log('Form Data Advanced Search:', formData);
+            //     let per_page = $('#perPage').val() ?? 5;
+            //     loadpage(per_page, formData);
+            // });
             $("#perPage").on('click change', function(event) {
                 let per_page = $('#perPage').val() || 5;
                 loadpage(per_page, '');
@@ -435,9 +463,9 @@
                     'retensi3': retensi3 || null,
                 }
 
-                Object.values(formData).forEach((key) => {
-                    console.log(key, formData[key]);
-                });
+                // Object.values(formData).forEach((key) => {
+                //     console.log(key, formData[key]);
+                // });
                 console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
@@ -448,7 +476,11 @@
 
 
             });
-
+            $("#button_search, #perPage").on('click change', function(event) {
+                let search = $('#input_search').val();
+                let per_page = $('#perPage').val() ?? 5;
+                loadpage(per_page, search);
+            });
 
             // proses delete data
             $('body').on('click', '.deleteData', function() {
