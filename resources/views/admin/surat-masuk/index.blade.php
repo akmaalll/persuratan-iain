@@ -32,7 +32,196 @@
             <div class="card card-flush">
 
                 <!--begin::Card header-->
-                @include('admin._card.action')
+                {{-- @include('admin._card.action2') --}}
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <div class="mw-100px me-3">
+                            <select class="form-select form-select-solid me-3" data-control="select2" data-hide-search="true"
+                                data-placeholder="Per Page" id="perPage">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                        <div class="d-flex">
+                            <input id="input_search" type="text" class="form-control form-control-solid w-250px me-3"
+                                placeholder="Search">
+
+                            <button id="button_search" class="btn btn-secondary me-3">
+                                <span class="btn-label">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </button>
+
+                            <button id="button_advanced_search" class="btn btn-secondary me-3 text-gray-600">
+                                <span class="btn-label">
+                                    <i class="fa fa-sliders "></i>
+                                </span>
+                            </button>
+
+                            <button id="button_refresh" class="btn btn-secondary">
+                                <span class="btn-label">
+                                    <i class="fa fa-sync"></i>
+                                </span>
+                            </button>
+
+                        </div>
+                    </div>
+                    <!--end::Card title-->
+
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <a href="{{ route($title . '.create') }}" class="btn btn-success">
+                            <span class="btn-label">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            Add New
+                        </a>
+                    </div>
+
+                    <!--end::Card toolbar-->
+                </div>
+
+                <!-- Advanced Search Fields (Hidden by Default) -->
+                <div id="advanced_search_fields" class="mt-3 card-header align-items-center py-5 gap-2 gap-md-5"
+                    style="display: none;">
+                    <div class="row">
+                        <!-- Input for Nomor Surat -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_nomor_surat" class="form-label">Nomor Surat</label>
+                            <input id="nomor" type="text" class="form-control" placeholder="Masukkan Nomor Surat">
+                        </div>
+
+                        <!-- Input for Kepada -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_kepada" class="form-label">Kepada</label>
+                            <input id="kepada" type="text" class="form-control" placeholder="Masukkan Kepada">
+                        </div>
+
+                        <!-- Input for Tanggal Surat -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
+                            <input id="tgl_surat" type="date" class="form-control">
+                        </div>
+
+                        <!-- Input for Perihal -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_perihal" class="form-label">Perihal</label>
+                            <input id="perihal" type="text" class="form-control" placeholder="Masukkan Perihal">
+                        </div>
+
+                        <!-- Input for Status -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_status" class="form-label">Status</label>
+                            <select class="form-select" data-control="select2" data-hide-search="false"
+                                data-placeholder="Pilih Status" name="status" id="status">
+                                <option value="">Status...</option>
+                                <option value="biasa">Biasa</option>
+                                <option value="penting">Penting</option>
+                                <option value="terbatas">Terbatas</option>
+                                <option value="sangat terbatas">Sangat Terbatas</option>
+                                <option value="rahasia">Rahasia</option>
+                            </select>
+                        </div>
+
+                        <!-- Input for Asal -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_asal" class="form-label">Asal</label>
+                            <select class="form-select" data-control="select2" data-hide-search="false"
+                                data-placeholder="Pilih Asal" name="asal" id="asal">
+                                <option value="">Pilih Asal...</option>
+                                @foreach (Helper::getData('kd_units') as $v)
+                                    <option value="{{ $v->id }}">
+                                        {{ $v->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Input for Tanggal Terima -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_tanggal_terima" class="form-label">Tanggal Terima</label>
+                            <input id="tgl_terima" type="date" class="form-control">
+                        </div>
+
+                        <!-- Input for Tanggal Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
+                            <input id="tgl_input" type="date" class="form-control">
+                        </div>
+
+                        <!-- Input for TTD -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_ttd" class="form-label">TTD</label>
+                            <input id="ttd" type="text" class="form-control" placeholder="Masukkan TTD">
+                        </div>
+
+                        <!-- Input for Tujuan -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_tujuan" class="form-label">Tujuan</label>
+                            <select class="form-select" data-control="select2" data-hide-search="false"
+                                data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
+                                <option value="">Pilih Tujuan...</option>
+                                @foreach (Helper::getData('kd_units') as $a)
+                                    <option value="{{ $a->id }}">
+                                        {{ $a->nama }}
+                                    </option>
+                                @endforeach
+                                <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
+                            </select>
+                        </div>
+
+                        <!-- Input for Jenis Surat -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_jenis_surat" class="form-label">Jenis Surat</label>
+                            <select class="form-select" data-control="select2" data-hide-search="false"
+                                data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
+                                <option value="">Jenis...</option>
+                                <option value="vital">Vital</option>
+                                <option value="umum">Umum</option>
+                                <option value="terjaga">Terjaga</option>
+                            </select>
+                        </div>
+
+                        <!-- Input for Retensi Aktif -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
+                            <input id="retensi" type="text" class="form-control"
+                                placeholder="Masukkan Retensi Aktif">
+                        </div>
+
+                        <!-- Input for Retensi Inaktif -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
+                            <input id="retensi2" type="text" class="form-control"
+                                placeholder="Masukkan Retensi Inaktif">
+                        </div>
+
+                        <!-- Input for Retensi Nasib -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
+                            <select class="form-select mb-2" data-control="select2" name="retensi3">
+                                <option value="">Pilih Retensi...</option>
+                                <option value="musnah">
+                                    Musnah</option>
+                                <option value="permanen">
+                                    Permanen</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Button for Advanced Search -->
+                    <div class="mt-3">
+                        <button id="search_filter" class="btn btn-primary">
+                            <span class="btn-label">
+                                <i class="fa fa-search"></i> Submit
+                            </span>
+                        </button>
+                    </div>
+                </div>
                 <!--end::Card header-->
 
                 <!--begin::Card body-->
@@ -106,8 +295,6 @@
 
                 </div>
 
-
-
                 <!--end::Card body-->
             </div>
             <!--end::Products-->
@@ -119,6 +306,15 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        document.getElementById('button_advanced_search').addEventListener('click', function() {
+            const advancedFields = document.getElementById('advanced_search_fields');
+            if (advancedFields.style.display === 'none' || advancedFields.style.display === '') {
+                advancedFields.style.display = 'block';
+            } else {
+                advancedFields.style.display = 'none';
+            }
+        });
+
         $(document).ready(function() {
             loadpage(5, '');
             var $pagination = $('.twbs-pagination');
@@ -190,15 +386,67 @@
                 });
             }
 
-            $("#button_search, #perPage").on('click change', function(event) {
-                let search = $('#input_search').val();
-                let per_page = $('#perPage').val() ?? 5;
-                loadpage(per_page, search);
+            $("#perPage").on('click change', function(event) {
+                let per_page = $('#perPage').val() || 5;
+                loadpage(per_page, '');
             });
+
+            // $("#button_search, #perPage").on('click change', function(event) {
+            //     let search = $('#input_search').val();
+            //     let per_page = $('#perPage').val() ?? 5;
+            //     loadpage(per_page, search);
+            // });
 
             $("#button_refresh").on('click', function(event) {
                 $('#input_search').val('');
                 loadpage(5, '');
+            });
+
+            $('#search_filter').on('click', function() {
+                let tgl_surat = $('#tgl_surat').val()
+                let nomor = $('#nomor').val()
+                let perihal = $('#perihal').val()
+                let status = $('#status').val()
+                let asal = $('#asal').val()
+                let tgl_terima = $('#tgl_terima').val()
+                let tgl_input = $('#tgl_input').val()
+                let ttd = $('#ttd').val()
+                let tujuan = $('#tujuan').val()
+                let kepada = $('#kepada').val()
+                let jenis = $('#jenis').val()
+                let retensi = $('#retensi').val()
+                let retensi2 = $('#retensi2').val()
+                let retensi3 = $('#retensi3').val()
+
+                const formData = {
+                    'tgl_surat': tgl_surat || null,
+                    'nomor': nomor || null,
+                    'perihal': perihal || null,
+                    'status': status || null,
+                    'asal': asal || null,
+                    'tgl_terima': tgl_terima || null,
+                    'tgl_input': tgl_input || null,
+                    'ttd': ttd || null,
+                    'tujuan': tujuan || null,
+                    'kepada': kepada || null,
+                    'jenis': jenis || null,
+                    'retensi': retensi || null,
+                    'retensi2': retensi2 || null,
+                    'retensi3': retensi3 || null,
+                }
+
+                Object.values(formData).forEach((key) => {
+                    console.log(key, formData[key]);
+                });
+                console.log(formData);
+                let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
+                if (cekValue) {
+                    loadpage(5, '');
+                } else {
+                    loadpage(5, formData);
+                }
+
+
             });
 
 
