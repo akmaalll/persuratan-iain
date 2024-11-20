@@ -33,7 +33,11 @@
         </td>
         <td>
             <span class="fw-semibold">
+<<<<<<< HEAD
+                {{ $v->tujuanSurat->kode . ' - ' . $v->tujuanSurat->nama }}
+=======
                 {{ isset($v->tujuanSurat->nama) ? $v->tujuanSurat->nama : $v->tujuan }}
+>>>>>>> 5596161615edc32639a4c98e94b20ab522cc97e4
             </span>
         </td>
         <td>

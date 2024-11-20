@@ -129,7 +129,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuan : '' }}" readonly />
+                                        value="{{ isset($data->tujuan) ? $data->tujuanSurat->kode . ' - ' . $data->tujuanSurat->nama : '' }}"
+                                        readonly />
                                 </div>
                             </div>
 
@@ -141,16 +142,6 @@
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-                                    <input type="text" class="form-control" name="retensi" id="retensi"
-                                        value="{{ isset($data->retensi_kategori) ? $data->retensi_kategori : '' }}"
-                                        readonly />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">File</label>
                                     @if (isset($data->upload_file) && !empty($data->upload_file))
                                         <!-- Display the existing file link if it exists -->
@@ -161,13 +152,30 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
-                                    <input type="date" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->retensi) ? \Carbon\Carbon::parse($data->retensi)->format('Y-m-d') : '' }}"
-                                        readonly />
 
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi) ? $data->retensi : '' }}" readonly />
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" readonly />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
+                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
+                                    <input type="text" class="form-control" name="retensi" id="retensi"
+                                        value="{{ isset($data->retensi3) ? $data->retensi3 : '' }}" readonly />
+                                </div>
+
+
                             </div>
                             <!--end::Input group-->
 
