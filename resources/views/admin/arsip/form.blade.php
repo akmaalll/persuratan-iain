@@ -66,10 +66,9 @@
                             <!-- Nomor Surat dan Perihal -->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Pencipta Arsip ( ketik langsung untuk opsi lain
-                                        )</label>
+                                    <label class="fs-6 fw-semibold mb-2">Pencipta Arsip </label>
                                     <select class="form-select opsiLain" name="pencipta" id="pencipta" data-tags="true"
-                                        data-control="select2" data-hide-search="false" data-placeholder="-- Pilih unit --">
+                                        data-control="select2" data-hide-search="false" data-placeholder="-- Pilih  atau Ketikkan unit --">
                                         <option value="">-- Pilih unit --</option>
                                         @if (isset($data->pencipta) && !in_array($data->pencipta, Helper::getData('kd_units')->pluck('id')->toArray()))
                                             <option value="{{ $data->pencipta }}" selected>
@@ -122,11 +121,10 @@
 
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Unit Pengolah ( ketik langsung untuk opsi lain
-                                        )</label>
+                                    <label class="fs-6 fw-semibold mb-2">Unit Pengolah </label>
                                     <select class="form-select opsiLain" name="unit_pengolah" id="unit_pengolah"
                                         data-control="select2" data-hide-search="false"
-                                        data-placeholder="-- Pilih pengolah --">
+                                        data-placeholder="-- Pilih atau Ketikkan pengolah --">
                                         <option value="">-- Pilih pengolah --</option>
                                         @if (isset($data->unit_pengolah) && !in_array($data->unit_pengolah, Helper::getData('kd_units')->pluck('id')->toArray()))
                                             <option value="{{ $data->unit_pengolah }}" selected>
@@ -148,8 +146,7 @@
                             <!-- Tanggal Terima dan Tanggal Input -->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Lokal Arsip ( ketik langsung untuk opsi lain
-                                        )</label>
+                                    <label class="fs-6 fw-semibold mb-2">Lokal Arsip </label>
                                     <select class="form-select opsiLain" name="lokal" id="lokal"
                                         data-control="select2" data-hide-search="false"
                                         data-placeholder="-- Pilih lokal --">
@@ -183,9 +180,8 @@
                                 </div> --}}
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Jenis Media ( ketik langsung untuk opsi lain
-                                        )</label>
-                                    <select data-placeholder="-- Pilih jenis media --" name="jenis_media"
+                                    <label class="fs-6 fw-semibold mb-2">Jenis Media </label>
+                                    <select data-placeholder="-- Pilih atau Ketikkan jenis media --" name="jenis_media"
                                         data-control="select2" id="jenis_media" class="form-select opsiLain">
                                         <option value="">-- Pilih jenis media --</option>
                                         @if (isset($data->jenis_media) && !in_array($data->jenis_media, Helper::getData('kd_units')->pluck('id')->toArray()))
