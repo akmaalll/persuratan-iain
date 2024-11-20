@@ -92,25 +92,19 @@
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->asal == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}" data-kode="{{ $v->kode }}"
-                                                data-nomor="{{ $v->nomor }}">
-                                                {{ $v->nama }} </option>
+                                            <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}">
+                                                {{ $v->nama }}
+                                            </option>
                                         @endforeach
+                                        {{-- <option value="other">Lainnya (Ketikkan Asal Surat)</option> --}}
+                                        <!-- Menambahkan opsi 'lainnya' -->
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
                                     <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
                                         value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
-                                </div>
-                            </div>
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row asal-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Asal Lainnya</label>
-                                    <input value="{{ isset($data->asal) ? $data->asal : '' }}" type="text"
-                                        class="form-control" name="asalLain" id="asalLain"
-                                        placeholder="Masukkan asal lain" />
                                 </div>
                             </div>
 
@@ -156,27 +150,19 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
                                         <option value="">Pilih Tujuan...</option>
-                                        @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->tujuan == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
-                                                {{ $v->nama }} </option>
+                                        @foreach (Helper::getData('kd_units') as $a)
+                                            <option {{ isset($data->tujuan) && $data->tujuan == $a->id ? 'selected' : '' }}
+                                                value="{{ $a->id }}">
+                                                {{ $a->nama }}
+                                            </option>
                                         @endforeach
+                                        <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Kepada</label>
                                     <input type="text" class="form-control" name="kepada" id="kepada"
                                         value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row tujuan-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Tujuan Lainnya</label>
-                                    <input
-                                        value="{{ isset($data->tujuan) && !is_numeric($data->tujuan) ? $data->tujuan : '' }}"
-                                        type="text" class="form-control" name="tujuanLain" id="tujuanLain"
-                                        placeholder="Masukkan tujuan lain" />
                                 </div>
                             </div>
 
@@ -196,37 +182,57 @@
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Retensi</label>
-                                    <input type="hidden" name="riwayat_mutasi" value="tes" id="">
-
-                                    <select class="form-select mb-2" name="retensi_kategori" id="retensi_category">
-                                        <option value="">Pilih Retensi...</option>
-                                        <option value="aktif">Aktif</option>
-                                        <option value="inaktif">Inaktif</option>
-                                        <option value="nasib">Nasib</option>
-                                    </select>
-
-                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
-                                        <strong>Warning:</strong> Retensi period has expired!
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">File</label>
                                     <input type="file" class="form-control" name="file" id="file" />
                                     <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
                                         name="file_old" id="file_old" />
                                 </div>
-                                <div class="col-md-6 fv-row" id="retensi_tampil" style="display: none;">
-                                    <label class="required fs-6 fw-semibold mb-2">Durasi Retensi</label>
-                                    <select class="form-select mb-2" name="retensi" id="retensi">
-                                        <!-- Options will be populated dynamically -->
-                                    </select>
-                                </div>
                             </div>
 
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi"
+                                        id="retensi" data-selected="{{ $data->retensi ?? '' }}">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi2"
+                                        id="retensi2" data-selected="{{ $data->retensi2 ?? '' }}">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi inaktif akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
+
+                                    <select class="form-select mb-2" data-control="select2" name="retensi3">
+                                        <option value="">Pilih Retensi...</option>
+                                        <option value="musnah"
+                                            {{ isset($data->retensi3) && $data->retensi3 == 'musnah' ? 'selected' : '' }}>
+                                            Musnah</option>
+                                        <option value="permanen"
+                                            {{ isset($data->retensi3) && $data->retensi3 == 'permanen' ? 'selected' : '' }}>
+                                            Permanen</option>
+                                    </select>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                </div>
+                            </div>
 
                             <!--end::Input group-->
 
@@ -269,144 +275,187 @@
 
 @push('jsScriptForm')
     <script type="text/javascript">
-        const asalOption = $('.asal-lain');
-        const asalForm = $('#asalLain');
+        function updateRetensi() {
+            var tglSurat = document.getElementById('tgl_surat').value;
 
-        const tujuanOption = $('.tujuan-lain');
-        const tujuanForm = $('#tujuanLain');
+            if (tglSurat) {
+                var baseDate = new Date(tglSurat); // Mengambil nilai tgl_surat
+                var retensiSelect = document.getElementById('retensi');
+                var retensiSelect2 = document.getElementById('retensi2');
 
+                // Ambil nilai yang sudah dipilih dari atribut data-selected
+                var selectedRetensi = retensiSelect.getAttribute('data-selected');
+                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
 
-        asalOption.hide();
-        tujuanOption.hide();
+                // Membersihkan opsi sebelumnya
+                retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
+                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
 
+                // Menambahkan opsi retensi aktif (1-5 Tahun)
+                for (var i = 1; i <= 5; i++) {
+                    var retensiDate = new Date(baseDate);
+                    retensiDate.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
 
-        const getValueAsalOption = $('#asal option').filter((i, v) => {
-            return v.value == asalForm.val();
-        });
+                    var option = document.createElement("option");
+                    option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
+                    if (option.value === selectedRetensi) {
+                        option.selected = true;
+                    }
+                    retensiSelect.appendChild(option);
+                }
 
-        if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
-            asalOption.show();
-            asalForm.val(asalForm.val());
-            $('#asal').val('20').change();
-        } else {
-            asalOption.hide();
+                // Menambahkan opsi retensi inaktif (2-15 Tahun)
+                for (var i = 2; i <= 15; i++) {
+                    var retensiDate2 = new Date(baseDate);
+                    retensiDate2.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option2 = document.createElement("option");
+                    option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
+                    if (option2.value === selectedRetensi2) {
+                        option2.selected = true;
+                    }
+                    retensiSelect2.appendChild(option2);
+                }
+            }
         }
 
-        $('#asal').on('change', function() {
-            let asalValue = $(this).val();
+        // Event listener untuk memperbarui retensi setiap kali tgl_surat diubah
+        document.getElementById('tgl_surat').addEventListener('change', updateRetensi);
 
-            console.log($('#asal option:selected').text());
-            if (asalValue == '20') {
+        // Memanggil fungsi saat halaman pertama kali dimuat jika tgl_surat sudah ada
+        if (document.getElementById('tgl_surat').value) {
+            updateRetensi();
+        }
+
+        $(document).ready(function() {
+            // Inisialisasi select2
+            $('#asal').select2({
+                tags: true, // Memungkinkan input manual
+                placeholder: "Pilih Asal..."
+            });
+            $('#tujuan').select2({
+                tags: true, // Memungkinkan input manual
+                placeholder: "Pilih Tujuan..."
+            });
+
+            const asalOption = $('.asal-lain');
+            const asalForm = $('#asalLain');
+            asalOption.hide();
+
+            const tujuanOption = $('.tujuan-lain');
+            const tujuanForm = $('#tujuanLain');
+            tujuanOption.hide();
+
+            // jika form edit
+            const getValueAsalOption = $('#asal option').filter((i, v) => {
+                return v.value == asalForm.val();
+            });
+
+            if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
                 asalOption.show();
+                asalForm.val(asalForm.val());
+                $('#asal').val('20').change();
             } else {
                 asalOption.hide();
             }
-        });
 
-        const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
-            return v.value == tujuanForm.val();
-        });
+            $('#asal').on('change', function() {
+                let asalValue = $(this).val();
+                if (asalValue == '20') {
+                    asalOption.show();
+                } else {
+                    asalOption.hide();
+                }
+            });
 
-        if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
-            tujuanOption.show();
-            tujuanForm.val(tujuanForm.val());
-            $('#tujuan').val('20').change();
-        } else {
-            tujuanOption.hide();
-        }
+            // jika form edit
+            const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
+                return v.value == tujuanForm.val();
+            });
 
-        $('#tujuan').on('change', function() {
-            let tujuanValue = $(this).val();
-
-            console.log($('#tujuan option:selected').text());
-            if (tujuanValue == '20') {
+            if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
                 tujuanOption.show();
+                tujuanForm.val(tujuanForm.val());
+                $('#tujuan').val('20').change();
             } else {
                 tujuanOption.hide();
             }
+
+            $('#tujuan').on('change', function() {
+                let tujuanValue = $(this).val();
+
+                if (tujuanValue == '20') {
+                    tujuanOption.show();
+                } else {
+                    tujuanOption.hide();
+                }
+            });
+
         });
 
-        const retensiCategory = document.getElementById('retensi_category');
+        // const asalOption = $('.asal-lain');
+        // const asalForm = $('#asalLain');
+
+        // const tujuanOption = $('.tujuan-lain');
+        // const tujuanForm = $('#tujuanLain');
+
+
+        // asalOption.hide();
+        // tujuanOption.hide();
+
+
+        // const getValueAsalOption = $('#asal option').filter((i, v) => {
+        //     return v.value == asalForm.val();
+        // });
+
+        // if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
+        //     asalOption.show();
+        //     asalForm.val(asalForm.val());
+        //     $('#asal').val('20').change();
+        // } else {
+        //     asalOption.hide();
+        // }
+
+        // $('#asal').on('change', function() {
+        //     let asalValue = $(this).val();
+
+        //     console.log($('#asal option:selected').text());
+        //     if (asalValue == '20') {
+        //         asalOption.show();
+        //     } else {
+        //         asalOption.hide();
+        //     }
+        // });
+
+        // const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
+        //     return v.value == tujuanForm.val();
+        // });
+
+        // if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
+        //     tujuanOption.show();
+        //     tujuanForm.val(tujuanForm.val());
+        //     $('#tujuan').val('20').change();
+        // } else {
+        //     tujuanOption.hide();
+        // }
+
+        // $('#tujuan').on('change', function() {
+        //     let tujuanValue = $(this).val();
+
+        //     console.log($('#tujuan option:selected').text());
+        //     if (tujuanValue == '20') {
+        //         tujuanOption.show();
+        //     } else {
+        //         tujuanOption.hide();
+        //     }
+        // });
+
         const retensiDuration = document.getElementById('retensi');
         const retensiTampil = document.getElementById('retensi_tampil');
+        const retensiDate = document.getElementById('retensi_date');
         const retensiWarning = document.getElementById('retensi_warning');
-
-        retensiCategory.addEventListener('change', function() {
-            retensiTampil.style.display = 'block';
-            retensiDuration.innerHTML = '';
-
-            if (this.value === 'aktif') {
-                retensiDuration.innerHTML = `
-                <option value="">Pilih Durasi...</option>
-                <option value="{{ $tahun->addYears(1) }}">1 Tahun</option>
-                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
-                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
-                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
-                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
-            `;
-            } else if (this.value === 'inaktif') {
-                retensiDuration.innerHTML = `
-                <option value="">Pilih Durasi...</option>
-                <option value="{{ $tahun->addYears(2) }}">2 Tahun</option>
-                <option value="{{ $tahun->addYears(3) }}">3 Tahun</option>
-                <option value="{{ $tahun->addYears(4) }}">4 Tahun</option>
-                <option value="{{ $tahun->addYears(5) }}">5 Tahun</option>
-                <option value="{{ $tahun->addYears(6) }}">6 Tahun</option>
-                <option value="{{ $tahun->addYears(7) }}">7 Tahun</option>
-                <option value="{{ $tahun->addYears(8) }}">8 Tahun</option>
-                <option value="{{ $tahun->addYears(9) }}">9 Tahun</option>
-                <option value="{{ $tahun->addYears(10) }}">10 Tahun</option>
-                <option value="{{ $tahun->addYears(11) }}">11 Tahun</option>
-                <option value="{{ $tahun->addYears(12) }}">12 Tahun</option>
-                <option value="{{ $tahun->addYears(13) }}">13 Tahun</option>
-                <option value="{{ $tahun->addYears(14) }}">14 Tahun</option>
-                <option value="{{ $tahun->addYears(15) }}">15 Tahun</option>
-            `;
-            } else if (this.value === 'nasib') {
-                retensiDuration.innerHTML = `
-                <option value="musnah">Musnah</option>
-                <option value="permanen">Permanen</option>
-            `;
-            } else {
-                retensiDuration.style.display = 'none';
-            }
-        });
-
-        document.addEventListener('change', function() {
-            const retensiDate = document.getElementById('retensi_date');
-
-            if (retensiDate) {
-                element.addEventListener('change', function() {
-                    checkRetentionExpiration();
-                }); 
-            }
-        });
-
-        retensiDuration.addEventListener('change', function() {
-            // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
-            if (retensiCategory.value !== 'nasib') {
-                checkRetentionExpiration();
-            }
-        });
-
-        function checkRetentionExpiration() {
-            const selectedDate = new Date(retensiDate.value);
-            const duration = parseInt(retensiDuration.value);
-
-            if (!isNaN(duration) && retensiCategory.value !== 'nasib') {
-                const expirationDate = new Date(selectedDate);
-                expirationDate.setFullYear(expirationDate.getFullYear() + duration);
-
-                const currentDate = new Date();
-                if (currentDate > expirationDate) {
-                    retensiWarning.style.display = 'block';
-                } else {
-                    retensiWarning.style.display = 'none';
-                }
-            } else {
-                retensiWarning.style.display = 'none';
-            }
-        }
 
         // generate no surat
         document.addEventListener('DOMContentLoaded', function() {
