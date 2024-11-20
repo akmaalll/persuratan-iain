@@ -74,7 +74,8 @@ class ArsipSuratController extends Controller
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.form', compact('title'));
+            $tahun = Carbon::now();
+            return view('admin.' . $title . '.form', compact('title', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -124,7 +125,8 @@ class ArsipSuratController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->find($id);
-            return view('admin.' . $title . '.form', compact('title', 'data'));
+            $tahun = Carbon::now();
+            return view('admin.' . $title . '.form', compact('title', 'data', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -164,6 +166,7 @@ class ArsipSuratController extends Controller
             $data = $this->repo->update($req, $request->id);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }

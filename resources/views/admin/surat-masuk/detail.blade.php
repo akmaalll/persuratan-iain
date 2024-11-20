@@ -129,7 +129,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <input type="text" class="form-control" name="tujuan" id="tujuan"
-                                        value="{{ isset($data->tujuan) ? $data->tujuanSurat->kode . ' - ' . $data->tujuanSurat->nama : '' }}"
+                                        value="{{ isset($data->tujuanSurat->kode) ? $data->tujuanSurat->kode . ' - ' . $data->tujuanSurat->nama : $data->tujuan }}"
                                         readonly />
                                 </div>
                             </div>

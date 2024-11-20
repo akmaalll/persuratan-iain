@@ -94,7 +94,11 @@
         </td> --}}
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ Helper::getDateIndos($v->retensi) }}
+                {{ Helper::getRentangTanggal($v->tgl, $v->retensi) }} ( Aktif Hingga
+                {{ Helper::getDateIndo($v->retensi) }} ) <br>
+                {{ Helper::getRentangTanggal($v->tgl, $v->retensi2) }} ( Inaktif Hingga
+                {{ Helper::getDateIndo($v->retensi2) }} ) <br>
+                {{ $v->retensi3 }} ( Nasib )<br>
             </span>
         </td>
         <td class="text-nowrap">

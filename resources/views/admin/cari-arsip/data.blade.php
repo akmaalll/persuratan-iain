@@ -94,12 +94,18 @@
         </td> --}}
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ Helper::getDateIndos($v->retensi) }}
+                <span class="fw-semibold text-nowrap">
+                    {{ Helper::getRentangTanggal($v->tgl, $v->retensi) }} ( Aktif Hingga
+                    {{ Helper::getDateIndo($v->retensi) }} ) <br>
+                    {{ Helper::getRentangTanggal($v->tgl, $v->retensi2) }} ( Inaktif Hingga
+                    {{ Helper::getDateIndo($v->retensi2) }} ) <br>
+                    {{ $v->retensi3 }} ( Nasib )<br>
+                </span>
             </span>
         </td>
         <td class="text-nowrap text-center">
-            <a href="{{ route('cari-arsip.detail' , $v->id) }}" data-toggle="tooltip" data-id="' . $id . '" title="Detail"
-                class="DetailData me-1">
+            <a href="{{ route('cari-arsip.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
+                title="Detail" class="DetailData me-1">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
                     <i class="ki-duotone ki-information fs-2">
                         <span class="path1"></span>

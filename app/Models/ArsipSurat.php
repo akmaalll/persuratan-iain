@@ -23,6 +23,8 @@ class ArsipSurat extends Model
         'no_rak',
         'no_box',
         'retensi',
+        'retensi2',
+        'retensi3',
         'file',
         'created_by', 
         'updated_by', 

@@ -89,8 +89,7 @@
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Unit Pengolah</label>
                                 <p class="fs-3 fw-semibold mb-2">
-                                    {{ isset($data->unit->kode) ? $data->unit->kode . ' - ' : $data->unit_pengolah }}
-                                    {{ isset($data->unit->nama) ? $data->unit->nama : $data->unit_pengolah }}</p>
+                                    {{ isset($data->unit->kode) ? $data->unit->kode . ' - ' . $data->unit->nama : $data->unit_pengolah }}
                             </div>
 
                         </div>
@@ -140,7 +139,7 @@
                             </div>
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Uraian Arsip</label>
-                                <p class="fs-3 fw-semibold mb-2">{{ strip_tags($data->uraian) }}</p>
+                                <p class="fs-3 fw-semibold mb-2">{!! $data->uraian !!}</p>
                             </div>
                         </div>
 
