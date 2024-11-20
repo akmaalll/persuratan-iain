@@ -419,6 +419,11 @@
                 loadpage(per_page, '');
             });
 
+            $("#button_refresh").on('click', function(event) {
+                $('#input_search').val('');
+                loadpage(5, '');
+            });
+
             // $("#button_search, #perPage").on('click change', function(event) {
             //     let search = $('#input_search').val();
             //     let per_page = $('#perPage').val() ?? 5;

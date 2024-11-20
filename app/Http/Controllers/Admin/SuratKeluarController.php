@@ -37,7 +37,6 @@ class SuratKeluarController extends Controller
         try {
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
-
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
