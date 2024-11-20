@@ -28,19 +28,19 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->asalSurat->kode . ' - ' . $v->asalSurat->nama }}
+                {{ isset($v->asalSurat->kode) ? $v->asalSurat->kode . ' - ' . $v->asalSurat->nama : $v->asal }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tujuan }}
+                {{ isset($v->tujuanSurat->nama) ? $v->tujuanSurat->nama : $v->tujuan }}
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
                 Aktif ({{ Helper::getDateIndo($v->retensi) }}) <br>
                 Inaktif ({{ Helper::getDateIndo($v->retensi2) }}) <br>
-                Nasib ({{$v->retensi3}}) <br>
+                Nasib ({{ $v->retensi3 }}) <br>
             </span>
         </td>
         <td class="text-nowrap">

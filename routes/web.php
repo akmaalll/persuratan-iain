@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ArsipSuratController;
+use App\Http\Controllers\Admin\CariArsipController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataKlasifikasiController;
 use App\Http\Controllers\Admin\LogAktivitasController;
@@ -77,6 +78,22 @@ Route::domain('')->group(function () {
             Route::get('/{id}/edit', [ArsipSuratController::class, 'edit'])->name('arsip.edit');
             Route::put('/{id}', [ArsipSuratController::class, 'update'])->name('arsip.update');
             Route::delete('/{id}', [ArsipSuratController::class, 'destroy'])->name('arsip.delete');
+        });
+
+        // Pencarian arsip surat
+        Route::group(['prefix' => '/cari-arsip'], function () {
+            Route::get('/', [CariArsipController::class, 'index'])->name('cari-arsip.index');
+            Route::get('/filter', [CariArsipController::class, 'filter'])->name('cari-arsip.filter');
+            Route::get('/detail/{id}', [CariArsipController::class, 'detail'])->name('cari-arsip.detail');
+            Route::get('/data', [CariArsipController::class, 'data'])->name('cari-arsip.data');
+            Route::get('/dashboard/data', [CariArsipController::class, 'dataDashboard'])->name('cari-arsip.data.dashboard');
+            Route::get('/cetak', [CariArsipController::class, 'cetakPdf'])->name('cari-arsip.data.pdf');
+            Route::get('/export', [CariArsipController::class, 'export'])->name('cari-arsip.data.export');
+            Route::get('/create', [CariArsipController::class, 'create'])->name('cari-arsip.create');
+            Route::post('/store', [CariArsipController::class, 'store'])->name('cari-arsip.store');
+            Route::get('/{id}/edit', [CariArsipController::class, 'edit'])->name('cari-arsip.edit');
+            Route::put('/{id}', [CariArsipController::class, 'update'])->name('cari-arsip.update');
+            Route::delete('/{id}', [CariArsipController::class, 'destroy'])->name('cari-arsip.delete');
         });
 
 

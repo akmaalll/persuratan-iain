@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Http\Services\Repositories\ArsipSuratRepository;
 use App\Http\Services\Repositories\BaseRepository;
+use App\Http\Services\Repositories\CariArsipRepository;
 use App\Http\Services\Repositories\Contracts\ArsipSuratContract;
 use App\Http\Services\Repositories\Contracts\BaseContract;
+use App\Http\Services\Repositories\Contracts\CariArsipContract;
 use App\Http\Services\Repositories\Contracts\DataKlasifikasiContract;
 use App\Http\Services\Repositories\Contracts\LogAktivitasContract;
 use App\Http\Services\Repositories\Contracts\MenuContract;
@@ -55,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UsersContract::class, UsersRepository::class);
         $this->app->bind(LogAktivitasContract::class, LogAktivitasRepository::class);
         $this->app->bind(DataKlasifikasiContract::class, DataKlasifikasiRepository::class);
+        $this->app->bind(CariArsipContract::class, CariArsipRepository::class);
 
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
