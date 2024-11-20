@@ -29,7 +29,13 @@ class ArsipExport implements FromCollection, WithHeadings, WithStyles, WithEvent
                 'Kode Klasifikasi' => $item->klasifikasi->nomor . ' - ' . $item->klasifikasi->nama,
                 'Nomor' => $item->nomor,
                 'Uraian' => strip_tags($item->uraian),
-                'Retensi' => Helper::getDateIndo($item->retensi),
+                'Retensi' => strip_tags('<span class="fw-semibold text-nowrap">'
+                    . Helper::getRentangTanggal($item->tgl, $item->retensi) . ' ( Aktif Hingga '
+                    . Helper::getDateIndo($item->retensi) . ' ) <br>'
+                    . Helper::getRentangTanggal($item->tgl, $item->retensi2) . ' ( Inaktif Hingga '
+                    . Helper::getDateIndo($item->retensi2) . ' ) <br>'
+                    . $item->retensi3 . ' ( Nasib )<br>'
+                    . '</span>'),
                 'Pencipta' => isset($item->cipta->nama) ? $item->cipta->nama : $item->pencipta,
                 'Unit Pengolah' => isset($item->unit->nama) ? $item->unit->nama : $item->unit_pengolah,
                 'Media' => $item->jenis_media,

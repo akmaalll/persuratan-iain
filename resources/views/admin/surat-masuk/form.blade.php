@@ -114,6 +114,11 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Asal" name="asal" id="asal">
                                         <option value="">Pilih Asal...</option>
+                                        @if (isset($data->asal) && !in_array($data->asal, Helper::getData('kd_units')->pluck('id')->toArray()))
+                                            <option value="{{ $data->asal }}" selected>
+                                                {{ $data->asal }}
+                                            </option>
+                                        @endif
                                         @foreach (Helper::getData('kd_units') as $v)
                                             <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}">
@@ -136,12 +141,12 @@
                                 </div>
 
 
-                                <div class="col-md-6 fv-row asal-lain">
+                                {{-- <div class="col-md-6 fv-row asal-lain">
                                     <label class="fs-6 fw-semibold mb-2">Asal</label>
                                     <input value="{{ isset($data->asal) ? $data->asal : '' }}" type="text"
                                         class="form-control" name="asalLain" id="asalLain"
                                         placeholder="masukkan asal lain" />
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
@@ -158,6 +163,11 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
                                         <option value="">Pilih Tujuan...</option>
+                                        @if (isset($data->tujuan) && !in_array($data->tujuan, Helper::getData('kd_units')->pluck('id')->toArray()))
+                                            <option value="{{ $data->tujuan }}" selected>
+                                                {{ $data->tujuan }}
+                                            </option>
+                                        @endif
                                         @foreach (Helper::getData('kd_units') as $a)
                                             <option {{ isset($data->tujuan) && $data->tujuan == $a->id ? 'selected' : '' }}
                                                 value="{{ $a->id }}">
@@ -167,12 +177,12 @@
                                         <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 fv-row tujuan-lain">
+                                {{-- <div class="col-md-6 fv-row tujuan-lain">
                                     <label class="fs-6 fw-semibold mb-2">Tujuan Lain</label>
                                     <input value="{{ isset($data->tujuanLain) ? $data->tujuanLain : '' }}" type="text"
                                         class="form-control" name="tujuanLain" id="tujuanLain"
                                         placeholder="Masukkan tujuan lain" />
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">TTD (opsional)</label>

@@ -67,15 +67,14 @@ class SuratMasukController extends Controller
     {
         try {
             $req = $request->all();
-
             if ($req['asal'] == '20') {
                 $req['asal'] = $req['asalLain'];
             }
-
+            
             if ($req['tujuan'] == '20') {
                 $req['tujuan'] = $req['tujuanLain'];
             }
-
+            
             if ($request->hasFile('upload_file')) {
                 $image = $request->file('upload_file')->getClientOriginalName();
                 $image_name = pathinfo($image, PATHINFO_FILENAME);
@@ -86,6 +85,7 @@ class SuratMasukController extends Controller
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
+            // dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }

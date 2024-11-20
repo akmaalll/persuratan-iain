@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('no_rak');
             $table->string('no_box');
             $table->string('retensi');
+            $table->string('retensi2');
+            $table->string('retensi3');
             $table->string('file');
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();

@@ -99,7 +99,9 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <input type="text" class="form-control" name="asal" id="asal"
+
                                         value="{{ is_numeric($data->asal) ? $data->asalSurat->kode . ' - ' . $data->asalSurat->nama : '' }}"
+
                                         readonly />
                                 </div>
                             </div>
@@ -130,6 +132,7 @@
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <input type="text" class="form-control" name="tujuan" id="tujuan"
                                         value="{{ is_numeric($data->tujuan) ? $data->tujuanSurat->kode . ' - ' . $data->tujuanSurat->nama : '' }}"
+
                                         readonly />
                                 </div>
                             </div>

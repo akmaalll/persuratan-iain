@@ -63,8 +63,16 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item->klasifikasi->nomor . ' - ' . $item->klasifikasi->nama }}</td>
                     <td>{{ $item->nomor }}</td>
-                    <td>{{ strip_tags($item->uraian) }}</td>
-                    <td style="white-space: nowrap">{{ Helper::getDateIndo($item->retensi) }}</td>
+                    <td>{!! $item->uraian !!}</td>
+                    <td style="white-space: nowrap">
+                        <span class="fw-semibold text-nowrap">
+                            {{ Helper::getRentangTanggal($item->tgl, $item->retensi) }} ( Aktif Hingga
+                            {{ Helper::getDateIndo($item->retensi) }} ) <br>
+                            {{ Helper::getRentangTanggal($item->tgl, $item->retensi2) }} ( Inaktif Hingga
+                            {{ Helper::getDateIndo($item->retensi2) }} ) <br>
+                            {{ $item->retensi3 }} ( Nasib )<br>
+                        </span>
+                    </td>
                     <td>{{ isset($item->cipta->nama) ? $item->cipta->nama : $item->pencipta }}</td>
                     <td>{{ isset($item->unit->nama) ? $item->unit->nama : $item->unit_pengolah }}</td>
                     <td>{{ $item->jenis_media }}</td>
