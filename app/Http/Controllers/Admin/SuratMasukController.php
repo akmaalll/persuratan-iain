@@ -38,7 +38,7 @@ class SuratMasukController extends Controller
             $title = $this->title;
             $data = $this->repo->paginated($request->all());
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
-            // dd($perPage);
+            // dd($data);
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
             return response()->json([
@@ -47,6 +47,7 @@ class SuratMasukController extends Controller
                 "html"       => $view,
             ]);
         } catch (\Exception $e) {
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }

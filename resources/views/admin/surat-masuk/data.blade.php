@@ -28,12 +28,20 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ isset($v->asalSurat->kode) ? $v->asalSurat->kode . ' - ' . $v->asalSurat->nama : $v->asal }}
+                @if (is_numeric($v->asal))
+                    {{ $v->asalsurat->kode . ' - ' . $v->asalSurat->nama }}
+                @else
+                    {{ $v->asal }}
+                @endif
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->tujuanSurat->kode . ' - ' . $v->tujuanSurat->nama }}
+                @if (is_numeric($v->asal))
+                    {{ $v->tujuansurat->kode . ' - ' . $v->tujuanSurat->nama }}
+                @else
+                    {{ $v->tujuan }}
+                @endif
             </span>
         </td>
         <td>
