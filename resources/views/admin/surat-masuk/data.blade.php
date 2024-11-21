@@ -53,6 +53,26 @@
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
+        @if (empty($v->upload_file))
+            <td>
+                <span class="fw-semibold">
+                    Tidak ada file
+                </span>
+            </td>
+        @else
+            <td>
+                <span class="fw-semibold">
+                    {{-- {{ $v->file }}  --}}
+                    <a href="{{ asset('uploads/ttd/surat-masuk/' . $v->upload_file) }}" target="_blank"
+                        class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                        <i class="ki-duotone ki-folder-down fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </a>
+                </span>
+            </td>
+        @endif
         <td class="text-nowrap">
             <a href="{{ route('surat-masuk.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
                 title="Detail" class="DetailData">

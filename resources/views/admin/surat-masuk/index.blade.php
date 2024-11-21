@@ -239,6 +239,7 @@
                                     <th class="min-w-120px">Asal Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
                                     <th class="min-w-120px">Retensi</th>
+                                    <th class="min-w-120px">File</th>
                                     <th class="text-center min-w-70px">Actions</th>
                                 </tr>
                             </thead>
