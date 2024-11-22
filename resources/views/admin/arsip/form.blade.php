@@ -68,7 +68,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Pencipta Arsip </label>
                                     <select class="form-select opsiLain" name="pencipta" id="pencipta" data-tags="true"
-                                        data-control="select2" data-hide-search="false" data-placeholder="-- Pilih  atau Ketikkan unit --">
+                                        data-control="select2" data-hide-search="false"
+                                        data-placeholder="-- Pilih  atau Ketikkan unit --">
                                         <option value="">-- Pilih unit --</option>
                                         @if (isset($data->pencipta) && !in_array($data->pencipta, Helper::getData('kd_units')->pluck('id')->toArray()))
                                             <option value="{{ $data->pencipta }}" selected>
@@ -149,7 +150,7 @@
                                     <label class="fs-6 fw-semibold mb-2">Lokal Arsip </label>
                                     <select class="form-select opsiLain" name="lokal" id="lokal"
                                         data-control="select2" data-hide-search="false"
-                                        data-placeholder="-- Pilih lokal --">
+                                        data-placeholder="-- Pilih atau Ketikkan lokal --">
                                         <option value="">-- Pilih lokal --</option>
                                         @if (isset($data->lokal) && !in_array($data->lokal, Helper::getData('kd_units')->pluck('id')->toArray()))
                                             <option value="{{ $data->lokal }}" selected>
@@ -294,7 +295,6 @@
 
 
                             <div class="row g-9 mb-8">
-
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>

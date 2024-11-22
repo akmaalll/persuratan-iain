@@ -64,8 +64,9 @@
                         <div class="row g-4">
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Pencipta Arsip</label>
-                                <p class="fs-3 fw-semibold mb-2">{{ $data->penciptaSurat->kode }} -
-                                    {{ $data->penciptaSurat->nama }}</p>
+                                <p class="fs-3 fw-semibold mb-2">
+                                    {{ isset($data->penciptaSurat->kode) ? $data->penciptaSurat->kode . ' - ' . $data->penciptaSurat->nama : $data->pencipta }}
+                                </p>
                             </div>
 
                             <div class="col-md-6 fv-row">
@@ -87,8 +88,9 @@
 
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Unit Pengolah</label>
-                                <p class="fs-3 fw-semibold mb-2">{{ $data->penciptaSurat->kode }} -
-                                    {{ $data->penciptaSurat->nama }}</p>
+                                <p class="fs-3 fw-semibold mb-2">
+                                    {{ isset($data->penciptaSurat->nama) ? $data->penciptaSurat->kode . ' - ' . $data->penciptaSurat->nama : $data->unit_pengolah }}
+                                </p>
                             </div>
 
                         </div>
@@ -151,7 +153,8 @@
                                     <iframe src="{{ url('uploads/arsip/' . $data->file) }}" width="100%" height="400"
                                         title="File preview"></iframe>
                                 @else
-                                    <p class="fs-3 fw-semibold mb-2">ekstensi file adalah .docx, file akan otomatis terdownload</p>
+                                    <p class="fs-3 fw-semibold mb-2">ekstensi file adalah .docx, file akan otomatis
+                                        terdownload</p>
                                 @endif
                             </div>
                         </div>

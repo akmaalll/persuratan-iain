@@ -28,7 +28,8 @@ class CariArsipController extends Controller
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.index', compact('title'));
+            $tahun = Carbon::now();
+            return view('admin.' . $title . '.index', compact('title', 'tahun'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
