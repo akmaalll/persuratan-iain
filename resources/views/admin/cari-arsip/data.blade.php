@@ -17,8 +17,8 @@
             </span>
         </td>
         <td>
-            <span class="fw-semibold">
-                {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+            <span class="fw-semibold text-nowrap">
+                {{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} - {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
             </span>
         </td>
         {{-- <td>

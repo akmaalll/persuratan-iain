@@ -58,8 +58,7 @@
                                 <!-- Tanggal Surat -->
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Tanggal Arsip</label>
-                                    <input value="{{ isset($data->tgl) ? $data->tgl : '' }}" type="date"
-                                        class="form-control" name="tgl" id="tgl" />
+                                    <input value="{{ isset($data->tgl) ? $data->tgl : '' }}" type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="tgl" id="tgl" />
                                 </div>
                             </div>
 
@@ -112,8 +111,7 @@
                                             <option
                                                 {{ isset($data->id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}">
-                                                {{ $v->jenis_klasifikasi->kode }} {{ $v->nomor }} -
-                                                {{ $v->nama }}
+                                                {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
                                             </option>
                                         @endforeach
                                     </select>
