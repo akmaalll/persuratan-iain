@@ -99,7 +99,7 @@
                                     <th class="min-w-20px pe-2">No</th>
                                     <th class="min-w-120px text-nowrap">Nomor Arsip</th>
                                     <th class="min-w-140px">Tanggal Arsip</th>
-                                    <th class="min-w-120px text-nowrap">Kodel Klasifikasi</th>
+                                    <th class="min-w-120px text-nowrap">Kode Klasifikasi</th>
                                     {{-- <th class="min-w-120px">Perihal Arsip</th> --}}
                                     {{-- <th class="min-w-120px">Unit Pengolah Arsip</th> --}}
                                     {{-- <th class="min-w-120px">Lokal Arsip</th> --}}

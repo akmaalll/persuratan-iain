@@ -81,7 +81,7 @@
                             {{-- untuk tabel kode klasifikasi --}}
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Kode Klasifikasi</label>
-                                <p class="fs-3 fw-semibold mb-2">{{ $data->klasifikasi->nomor }} -
+                                <p class="fs-3 fw-semibold mb-2"> {{ $data->klasifikasi->jenis_klasifikasi->kode . '.' . $data->klasifikasi->nomor }} -
                                     {{ $data->klasifikasi->nama }}</p>
                             </div>
 
@@ -99,7 +99,7 @@
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Lokal Arsip</label>
                                 <p class="fs-3 fw-semibold mb-2">
-                                    {{ isset($data->lokasi->nama) ? $data->lokasi->nama : '' }}</p>
+                                    {{ isset($data->lokasi->nama) ? $data->lokasi->nama : $data->lokal }}</p>
                             </div>
                             <div class="col-md-6 fv-row">
                                 <label class="fs-2 fw-bold mb-2">Jenis Media</label>
