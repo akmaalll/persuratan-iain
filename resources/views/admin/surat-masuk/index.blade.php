@@ -572,7 +572,7 @@
                 // Object.values(formData).forEach((key) => {
                 //     console.log(key, formData[key]);
                 // });
-                console.log(formData);
+                // console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
                     loadpage(5, '');

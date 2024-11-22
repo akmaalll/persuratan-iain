@@ -46,6 +46,8 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$lokal = $criteria['search']['lokal'] ?? '';
 		$pencipta = $criteria['search']['pencipta'] ?? '';
 		$retensi = $criteria['search']['retensi'] ?? '';
+		$retensi2 = $criteria['search']['retensi2'] ?? '';
+		$retensi3 = $criteria['search']['retensi3'] ?? '';
 		$unit_pengolah = $criteria['search']['unit_pengolah'] ?? '';
 		$media = $criteria['search']['media'] ?? '';
 		$tgl = $criteria['search']['tgl'] ?? '';
@@ -82,6 +84,14 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 
 		if (!empty($retensi)) {
 			$filter = $filter->where('retensi', 'like', '%' . $retensi . '%');
+		}
+
+		if (!empty($retensi2)) {
+			$filter = $filter->where('retensi2', 'like', '%' . $retensi2 . '%');
+		}
+
+		if (!empty($retensi3)) {
+			$filter = $filter->where('retensi3', 'like', '%' . $retensi3 . '%');
 		}
 
 		if (!empty($unit_pengolah)) {
