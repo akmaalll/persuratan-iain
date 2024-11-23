@@ -60,7 +60,7 @@
                                                 {{ isset($data->kd_klasifikasi_id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
                                                 value="{{ $v->id }}" data-kode="{{ $v->jenis_klasifikasi->kode }}"
                                                 data-nomor="{{ $v->nomor }}">
-                                                {{ $v->jenis_klasifikasi->nama . ' - ' . $v->nomor ?? null }}
+                                                {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -108,16 +108,18 @@
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input type="date" class="form-control" name="tgl_surat" id="tgl_surat"
-                                        value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
                             </div>
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
-                                    <input type="date" class="form-control" name="tgl_kirim" id="tgl_kirim"
-                                        value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" />
+                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
