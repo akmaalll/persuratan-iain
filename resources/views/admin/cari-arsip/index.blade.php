@@ -105,7 +105,7 @@
                         <!-- Tanggal Surat -->
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Tanggal arsip</label>
-                            <input type="date" data-placeholder="-- Pilih lokal --" name="tgl" id="tgl"
+                            <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" data-placeholder="-- Pilih lokal --" name="tgl" id="tgl"
                                 class="form-control reset-filter" />
                         </div>
 
@@ -132,7 +132,7 @@
                                 <option value="">Semua</option>
                                 @foreach (Helper::getData('kd_klasifikasis') as $v)
                                     <option value="{{ $v->id }}">
-                                        {{ $v->nama }} - {{ $v->nomor }}
+                                        {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
                                     </option>
                                 @endforeach
                             </select>
@@ -209,7 +209,7 @@
                         </div>
 
                         <div class="col-md-3 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Keterangan</label>
+                            <label class="fs-6 fw-semibold mb-2">Keterangan Keaslian</label>
                             <select data-placeholder="Semua" name="ket" id="ket"
                                 class="form-select reset-filter">
                                 <option value="">Semua</option>
@@ -229,7 +229,13 @@
                     <div class="row g-9 mt-2">
 
 
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-6 fw-semibold mb-2">Nomor Box / Bundel</label>
+                            <input type="text" class="form-control reset-filter" name="no_box" id="no_box"
+                                placeholder="Masukkan nomor box surat" />
+                        </div>
+
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
 
                             <select class="form-select mb-2" data-control="select2" name="retensi" id="retensi"
@@ -242,7 +248,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
 
                             <select class="form-select mb-2" data-control="select2" name="retensi2" id="retensi2"
@@ -255,7 +261,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
                             <select class="form-select mb-2" data-control="select2" name="retensi3">
@@ -278,11 +284,7 @@
 
 
 
-                        <div class="col-md-3 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Nomor Box / Bundel</label>
-                            <input type="text" class="form-control reset-filter" name="no_box" id="no_box"
-                                placeholder="Masukkan nomor box surat" />
-                        </div>
+                        
 
 
                         <div class="col-md-6 fv-row">
