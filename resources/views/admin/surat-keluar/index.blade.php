@@ -78,135 +78,212 @@
                             <!-- Input for Nomor Surat -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_nomor_surat" class="form-label">Nomor Surat</label>
-                                <input id="nomor" type="text" class="form-control"
-                                    placeholder="Masukkan Nomor Surat">
+                                <div class="input-group">
+                                    <input id="nomor" type="text" class="form-control"
+                                        placeholder="Masukkan Nomor Surat">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('nomor')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Kepada -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_kepada" class="form-label">Kepada</label>
-                                <input id="kepada" type="text" class="form-control" placeholder="Masukkan Kepada">
+                                <div class="input-group">
+                                    <input id="kepada" type="text" class="form-control" placeholder="Masukkan Kepada">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('kepada')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Tanggal Surat -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
-                                <input id="tgl_surat" type="date" class="form-control">
+                                <div class="input-group">
+                                    {{-- <input id="tgl_surat" type="date" class="form-control"> --}}
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_surat')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Perihal -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_perihal" class="form-label">Perihal</label>
-                                <input id="perihal" type="text" class="form-control" placeholder="Masukkan Perihal">
+                                <div class="input-group">
+                                    <input id="perihal" type="text" class="form-control"
+                                        placeholder="Masukkan Perihal">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('perihal')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Status -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_status" class="form-label">Status</label>
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Status" name="status" id="status">
-                                    <option value="">Status...</option>
-                                    <option value="biasa">Biasa</option>
-                                    <option value="penting">Penting</option>
-                                    <option value="terbatas">Terbatas</option>
-                                    <option value="sangat terbatas">Sangat Terbatas</option>
-                                    <option value="rahasia">Rahasia</option>
-                                </select>
+                                <div class="d-flex">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Status" name="status" id="status">
+                                        <option value="">Status...</option>
+                                        <option value="biasa">Biasa</option>
+                                        <option value="penting">Penting</option>
+                                        <option value="terbatas">Terbatas</option>
+                                        <option value="sangat terbatas">Sangat Terbatas</option>
+                                        <option value="rahasia">Rahasia</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Input for Asal -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_asal" class="form-label">Asal</label>
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Asal" name="asal" id="asal">
-                                    <option value="">Pilih Asal...</option>
-                                    @foreach (Helper::getData('kd_units') as $v)
-                                        <option value="{{ $v->id }}">
-                                            {{ $v->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <div class="input-group">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Asal" name="asal" id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Input for Tanggal Terima -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_tanggal_terima" class="form-label">Tanggal Terima</label>
-                                <input id="tgl_terima" type="date" class="form-control">
+                                <div class="input-group">
+                                    {{-- <input id="tgl_terima" type="date" class="form-control"> --}}
+                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_terima" id="tgl_terima" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_terima')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Tanggal Input -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
-                                <input id="tgl_input" type="date" class="form-control">
+                                <div class="input-group">
+                                    {{-- <input id="tgl_input" type="date" class="form-control"> --}}
+                                    <input value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_input" id="tgl_input" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_input')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for TTD -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_ttd" class="form-label">TTD</label>
-                                <input id="ttd" type="text" class="form-control" placeholder="Masukkan TTD">
+                                <div class="input-group">
+                                    <input id="ttd" type="text" class="form-control"
+                                        placeholder="Masukkan TTD">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('ttd')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Tujuan -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_tujuan" class="form-label">Tujuan</label>
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
-                                    <option value="">Pilih Tujuan...</option>
-                                    @foreach (Helper::getData('kd_units') as $a)
-                                        <option value="{{ $a->id }}">
-                                            {{ $a->nama }}
-                                        </option>
-                                    @endforeach
-                                    <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
-                                </select>
+                                <div class="d-flex">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
+                                        <option value="">Pilih Tujuan...</option>
+                                        @foreach (Helper::getData('kd_units') as $a)
+                                            <option value="{{ $a->id }}">{{ $a->nama }}</option>
+                                        @endforeach
+                                        <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Input for Jenis Surat -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_jenis_surat" class="form-label">Jenis Surat</label>
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
-                                    <option value="">Jenis...</option>
-                                    <option value="vital">Vital</option>
-                                    <option value="umum">Umum</option>
-                                    <option value="terjaga">Terjaga</option>
-                                </select>
+                                <div class="d-flex">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option value="vital">Vital</option>
+                                        <option value="umum">Umum</option>
+                                        <option value="terjaga">Terjaga</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Input for Retensi Aktif -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
-                                <input id="retensi" type="text" class="form-control"
-                                    placeholder="Masukkan Retensi Aktif">
+                                <div class="input-group">
+                                    <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="retensi" id="retensi" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('retensi')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Retensi Inaktif -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
-                                <input id="retensi2" type="text" class="form-control"
-                                    placeholder="Masukkan Retensi Inaktif">
+                                <div class="input-group">
+                                    <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="retensi2" id="retensi2" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('retensi2')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <!-- Input for Retensi Nasib -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
-                                <select class="form-select mb-2" data-control="select2" name="retensi3">
-                                    <option value="">Pilih Retensi...</option>
-                                    <option value="musnah">
-                                        Musnah</option>
-                                    <option value="permanen">
-                                        Permanen</option>
-                                </select>
+                                <div class="d-flex">
+                                    <select class="form-select mb-2" data-control="select2" name="retensi3"
+                                        id="retensi3">
+                                        <option value="">Status Retensi</option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="inaktif">Inaktif</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Search Button for Advanced Search -->
-                        <div class="mt-3">
-                            <button id="search_filter" class="btn btn-primary">
-                                <span class="btn-label">
-                                    <i class="fa fa-search"></i> Submit
-                                </span>
-                            </button>
+                            <!-- Global Clear All Button -->
+                            <div class="mt-3">
+                                <button id="clear_all" class="btn btn-secondary">
+                                    <span class="btn-label">
+                                        <i class="fa fa-eraser"></i> Clear All
+                                    </span>
+                                </button>
+                                <button id="search_filter" class="btn btn-primary">
+                                    <span class="btn-label">
+                                        <i class="fa fa-search"></i> Search
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <!--end::Card title-->
@@ -310,6 +387,34 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        function clearField(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                if (field.type === 'select-one') {
+                    field.selectedIndex = 0; // Reset dropdowns
+                } else {
+                    field.value = ''; // Clear text and date fields
+                }
+            }
+        }
+
+        document.getElementById('clear_all').addEventListener('click', function() {
+            const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
+                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3'
+            ];
+
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    if (field.type === 'select-one') {
+                        field.selectedIndex = 0; // Reset dropdowns
+                    } else {
+                        field.value = ''; // Clear text and date fields
+                    }
+                }
+            });
+        });
+
         document.getElementById('button_advanced_search').addEventListener('click', function() {
             const advancedFields = document.getElementById('advanced_search_fields');
             if (advancedFields.style.display === 'none' || advancedFields.style.display === '') {

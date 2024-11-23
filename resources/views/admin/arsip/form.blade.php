@@ -58,7 +58,9 @@
                                 <!-- Tanggal Surat -->
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Tanggal Arsip</label>
-                                    <input value="{{ isset($data->tgl) ? $data->tgl : '' }}" type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="tgl" id="tgl" />
+                                    <input value="{{ isset($data->tgl) ? $data->tgl : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl" id="tgl" />
                                 </div>
                             </div>
 
@@ -204,7 +206,7 @@
                                         <option {{ isset($data->id) && $data->jenis_media == 'FD' ? 'selected' : '' }}
                                             value="FD">FD</option>
                                         {{-- <option {{ isset($data->id) && $data->jenis_media == '20' ? 'selected' : '' }}
-                                            value="20">Lainnya</option> --}}
+                                            value="20">Lainnya</option> de
 
                                     </select>
                                 </div>
@@ -216,15 +218,16 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Keterangan Keaslian</label>
                                     {{-- <input type="text" class="form-control" name="ket_keaslian" /> --}}
-                                    <select data-placeholder="-- Pilih --" name="ket_keaslian" id=""
-                                        class="form-select">
-                                        <option value="">-- Pilih --</option>
-                                        <option {{ isset($data->id) && $data->ket_keaslian == 'Asli' ? 'selected' : '' }}
-                                            value="Asli">Asli</option>
-                                        <option
-                                            {{ isset($data->id) && $data->ket_keaslian == 'Salinan' ? 'selected' : '' }}
-                                            value="Salinan">Salinan</option>
-                                    </select>
+                                        <select data-placeholder="-- Pilih --" name="ket_keaslian" id=""
+                                            class="form-select">
+                                            <option value="">-- Pilih --</option>
+                                            <option
+                                                {{ isset($data->id) && $data->ket_keaslian == 'Asli' ? 'selected' : '' }}
+                                                value="Asli">Asli</option>
+                                            <option
+                                                {{ isset($data->id) && $data->ket_keaslian == 'Salinan' ? 'selected' : '' }}
+                                                value="Salinan">Salinan</option>
+                                        </select>
                                 </div>
 
                                 {{-- <div class="col-md-6 fv-row media-lain">
