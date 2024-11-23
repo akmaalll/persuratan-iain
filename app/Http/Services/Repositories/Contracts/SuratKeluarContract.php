@@ -9,9 +9,10 @@ interface SuratKeluarContract
 	/**
 	 * params string $search
 	 * @return Collection
-	*/
+	 */
 
 	public function paginated(array $request);
+	public function filter(array $request);
 
 	public function getLastNumber(array $criteria);
 }
