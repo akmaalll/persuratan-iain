@@ -78,8 +78,11 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
-                                        id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" />
+                                    {{-- <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
+                                        id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" /> --}}
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -135,9 +138,12 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Terima</label>
-                                    <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
+                                    {{-- <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
                                         placeholder="dd-mm-yyyy"
-                                        value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" />
+                                        value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" /> --}}
+                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_terima" id="tgl_terima" />
                                 </div>
 
 

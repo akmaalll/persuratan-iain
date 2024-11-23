@@ -118,7 +118,10 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
                             <div class="input-group">
-                                <input id="tgl_surat" type="date" class="form-control">
+                                {{-- <input id="tgl_surat" type="date" class="form-control"> --}}
+                                <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                    class="form-control" name="tgl_surat" id="tgl_surat" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('tgl_surat')">
                                     <i class="fa fa-times"></i>
@@ -172,7 +175,10 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_tanggal_terima" class="form-label">Tanggal Terima</label>
                             <div class="input-group">
-                                <input id="tgl_terima" type="date" class="form-control">
+                                {{-- <input id="tgl_terima" type="date" class="form-control"> --}}
+                                <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                    class="form-control" name="tgl_terima" id="tgl_terima" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('tgl_terima')">
                                     <i class="fa fa-times"></i>
@@ -184,7 +190,10 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
                             <div class="input-group">
-                                <input id="tgl_input" type="date" class="form-control">
+                                {{-- <input id="tgl_input" type="date" class="form-control"> --}}
+                                <input value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                    class="form-control" name="tgl_input" id="tgl_input" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('tgl_input')">
                                     <i class="fa fa-times"></i>
@@ -237,7 +246,9 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
                             <div class="input-group">
-                                <input id="retensi" type="date" class="form-control">
+                                <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                    class="form-control" name="retensi" id="retensi" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('retensi')">
                                     <i class="fa fa-times"></i>
@@ -249,7 +260,9 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
                             <div class="input-group">
-                                <input id="retensi2" type="date" class="form-control">
+                                <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                    class="form-control" name="retensi2" id="retensi2" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('retensi2')">
                                     <i class="fa fa-times"></i>
@@ -278,7 +291,7 @@
                             </button>
                             <button id="search_filter" class="btn btn-primary">
                                 <span class="btn-label">
-                                    <i class="fa fa-search"></i> Submit
+                                    <i class="fa fa-search"></i> Search
                                 </span>
                             </button>
                         </div>
