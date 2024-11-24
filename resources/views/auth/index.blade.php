@@ -92,7 +92,7 @@
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3">Sign In to <br> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3"> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
                                 <div class="text-gray-500 fw-semibold fs-6">Enter your details to login to your account:
@@ -109,13 +109,23 @@
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
-                            <div class="fv-row mb-10">
+                            <div class="fv-row mb-4">
                                 <!--begin::Password-->
                                 <input type="password" placeholder="Password" value="123" name="password"
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Password-->
                             </div>
                             <!--end::Input group=-->
+
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-4">
+                                <div></div>
+                                <!--begin::Link-->
+                                <a href="{{ route('reset') }}" class="link-primary">Forgot
+                                    Password ?</a>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Wrapper-->
 
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
