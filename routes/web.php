@@ -38,6 +38,8 @@ Route::domain('')->group(function () {
 
     Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
     Route::post('/auth/login', [Auths::class, 'login'])->name('login');
+    Route::get('/auth/reset', [Auths::class, 'reset'])->name('reset');
+    Route::post('/auth/reset', [Auths::class, 'reset_password'])->name('reset.password');
 
     Route::get('/logout', [Auths::class, 'logout'])->middleware('auth')->name('logout');
 
