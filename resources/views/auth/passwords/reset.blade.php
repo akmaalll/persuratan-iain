@@ -86,7 +86,7 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
                     <!--begin::Image-->
                     <a href="#" class="mb-7">
-                        <img alt="Logo" src="{{ asset('/logo/bg-logo-login.png') }}" style="width:100%" />
+                        <img alt="Logo" src="{{ asset('/logo/logo-login.png') }}" style="width:100%" />
                     </a>
                     <!--end::Image-->
                     <!--begin::Title-->
