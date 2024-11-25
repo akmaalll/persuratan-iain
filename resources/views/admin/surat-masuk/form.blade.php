@@ -69,10 +69,11 @@
                                         value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
                                 </div>
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Kepada</label>
-                                    <input type="text" class="form-control" name="kepada" id="kepada"
-                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
+                                    <label class="required fs-6 fw-semibold mb-2">Perihal </label>
+                                    <input type="text" class="form-control" name="perihal" id="perihal"
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
                                 </div>
+
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -81,18 +82,32 @@
                                     {{-- <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
                                         id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" /> --}}
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" 
                                         class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Perihal </label>
-                                    <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Terima</label>
+                                    {{-- <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
+                                        placeholder="dd-mm-yyyy"
+                                        value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" /> --}}
+                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                        class="form-control" name="tgl_terima" id="tgl_terima" />
                                 </div>
+
+
                             </div>
 
                             <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
+                                        placeholder="dd-mm-yyyy"
+                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                        readonly />
+                                </div>
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -110,6 +125,16 @@
                                         <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
                                             value="rahasia">Rahasia</option>
                                     </select>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Kepada</label>
+                                    <input type="text" class="form-control" name="kepada" id="kepada"
+                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -133,18 +158,6 @@
                                     </select>
                                 </div>
 
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Terima</label>
-                                    {{-- <input type="date" class="form-control" name="tgl_terima" id="tgl_terima"
-                                        placeholder="dd-mm-yyyy"
-                                        value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" /> --}}
-                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_terima" id="tgl_terima" />
-                                </div>
 
 
                                 {{-- <div class="col-md-6 fv-row asal-lain">
@@ -154,13 +167,7 @@
                                         placeholder="masukkan asal lain" />
                                 </div> --}}
 
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
-                                        placeholder="dd-mm-yyyy"
-                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                        readonly />
-                                </div>
+
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -183,12 +190,6 @@
                                         {{-- <option value="lainnya">Lainnya (Ketikkan Tujuan)</option> --}}
                                     </select>
                                 </div>
-                                {{-- <div class="col-md-6 fv-row tujuan-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Tujuan Lain</label>
-                                    <input value="{{ isset($data->tujuanLain) ? $data->tujuanLain : '' }}" type="text"
-                                        class="form-control" name="tujuanLain" id="tujuanLain"
-                                        placeholder="Masukkan tujuan lain" />
-                                </div> --}}
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">TTD (opsional)</label>
@@ -199,23 +200,17 @@
                                 </div>
 
 
+
+                                {{-- <div class="col-md-6 fv-row tujuan-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Tujuan Lain</label>
+                                    <input value="{{ isset($data->tujuanLain) ? $data->tujuanLain : '' }}" type="text"
+                                        class="form-control" name="tujuanLain" id="tujuanLain"
+                                        placeholder="Masukkan tujuan lain" />
+                                </div> --}}
+
                             </div>
 
                             <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
-                                        <option value="">Jenis...</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'vital' ? 'selected' : '' }}
-                                            value="vital">Vital</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'umum' ? 'selected' : '' }}
-                                            value="umum">Umum</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
-                                            value="terjaga">Terjaga</option>
-                                    </select>
-                                </div>
-
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Upload File</label>
                                     <input type="file" onchange="return validateFile(this)" class="form-control"
@@ -234,7 +229,19 @@
                                         name="upload_file_old" id="upload_file_old" />
                                 </div>
 
-
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'vital' ? 'selected' : '' }}
+                                            value="vital">Vital</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'umum' ? 'selected' : '' }}
+                                            value="umum">Umum</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'terjaga' ? 'selected' : '' }}
+                                            value="terjaga">Terjaga</option>
+                                    </select>
+                                </div>
 
 
                             </div>
@@ -297,6 +304,7 @@
 
 
                             </div>
+                            
 
                             <!--end::Input group-->
 
