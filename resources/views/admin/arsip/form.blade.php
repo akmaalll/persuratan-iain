@@ -55,6 +55,28 @@
                                         class="form-control" name="nomor" />
                                 </div>
 
+                                {{-- untuk tabel kode klasifikasi --}}
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
+                                    <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
+                                        data-control="select2" data-hide-search="false" data-placeholder="-- Pilih kode --">
+                                        <option value="">-- Pilih kode --</option>
+                                        @foreach (Helper::getData('kd_klasifikasis') as $v)
+                                            <option
+                                                {{ isset($data->id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}">
+                                                {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Nomor Surat dan Perihal -->
+                            <div class="row g-9 mb-8">
+
                                 <!-- Tanggal Surat -->
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Tanggal Arsip</label>
@@ -62,10 +84,27 @@
                                         placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
                                         class="form-control" name="tgl" id="tgl" />
                                 </div>
+
+                                {{--  --}}
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Perihal Arsip/Surat</label>
+                                    <input value="{{ isset($data->perihal) ? $data->perihal : '' }}" type="text"
+                                        class="form-control" name="perihal" />
+                                </div>
+
+                                
+                                
+                                {{-- <div class="col-md-6 fv-row pencipta-lain">
+                                    <label class="fs-6 fw-semibold mb-2">Pencipta Lain</label>
+                                    <input value="{{ isset($data->pencipta) ? $data->pencipta : '' }}" type="text"
+                                    class="form-control" name="penciptaLain" id="penciptaLain"
+                                    placeholder="masukkan pencipta lain" />
+                                </div> --}}
                             </div>
 
-                            <!-- Nomor Surat dan Perihal -->
+                            <!-- Status dan Asal -->
                             <div class="row g-9 mb-8">
+                                
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Pencipta Arsip </label>
                                     <select class="form-select opsiLain" name="pencipta" id="pencipta" data-tags="true"
@@ -85,41 +124,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Perihal Arsip/Surat</label>
-                                    <input value="{{ isset($data->perihal) ? $data->perihal : '' }}" type="text"
-                                        class="form-control" name="perihal" />
-                                </div>
-
-                                {{-- <div class="col-md-6 fv-row pencipta-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Pencipta Lain</label>
-                                    <input value="{{ isset($data->pencipta) ? $data->pencipta : '' }}" type="text"
-                                        class="form-control" name="penciptaLain" id="penciptaLain"
-                                        placeholder="masukkan pencipta lain" />
-                                </div> --}}
-                            </div>
-
-                            <!-- Status dan Asal -->
-                            <div class="row g-9 mb-8">
-
-                                {{-- untuk tabel kode klasifikasi --}}
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
-                                    <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
-                                        data-control="select2" data-hide-search="false" data-placeholder="-- Pilih kode --">
-                                        <option value="">-- Pilih kode --</option>
-                                        @foreach (Helper::getData('kd_klasifikasis') as $v)
-                                            <option
-                                                {{ isset($data->id) && $data->kd_klasifikasi_id == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
-                                                {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Unit Pengolah </label>
@@ -206,7 +210,7 @@
                                         <option {{ isset($data->id) && $data->jenis_media == 'FD' ? 'selected' : '' }}
                                             value="FD">FD</option>
                                         {{-- <option {{ isset($data->id) && $data->jenis_media == '20' ? 'selected' : '' }}
-                                            value="20">Lainnya</option> de
+                                            value="20">Lainnya</option>  --}}
 
                                     </select>
                                 </div>
@@ -218,16 +222,15 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Keterangan Keaslian</label>
                                     {{-- <input type="text" class="form-control" name="ket_keaslian" /> --}}
-                                        <select data-placeholder="-- Pilih --" name="ket_keaslian" id=""
-                                            class="form-select">
-                                            <option value="">-- Pilih --</option>
-                                            <option
-                                                {{ isset($data->id) && $data->ket_keaslian == 'Asli' ? 'selected' : '' }}
-                                                value="Asli">Asli</option>
-                                            <option
-                                                {{ isset($data->id) && $data->ket_keaslian == 'Salinan' ? 'selected' : '' }}
-                                                value="Salinan">Salinan</option>
-                                        </select>
+                                    <select data-placeholder="-- Pilih --" name="ket_keaslian" id=""
+                                        class="form-select">
+                                        <option value="">-- Pilih --</option>
+                                        <option {{ isset($data->id) && $data->ket_keaslian == 'Asli' ? 'selected' : '' }}
+                                            value="Asli">Asli</option>
+                                        <option
+                                            {{ isset($data->id) && $data->ket_keaslian == 'Salinan' ? 'selected' : '' }}
+                                            value="Salinan">Salinan</option>
+                                    </select>
                                 </div>
 
                                 {{-- <div class="col-md-6 fv-row media-lain">
