@@ -144,8 +144,8 @@
                                     @if (isset($data->file) && !empty($data->file))
                                         <!-- Display the existing file link if it exists -->
                                         <div class="mb-2">
-                                            <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}"
-                                                target="_blank" class="form-control">Lihat File</a>
+                                            <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}" target="_blank"
+                                                class="form-control">Lihat File</a>
                                         </div>
                                     @endif
                                 </div>
@@ -172,6 +172,13 @@
                                 </div>
 
 
+                            </div>
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Permintaan Nomor Surat</label>
+                                    <input type="text" class="form-control" name="permintaan" id="permintaan"
+                                        value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" readonly />
+                                </div>
                             </div>
 
                             <!--end::Input group-->

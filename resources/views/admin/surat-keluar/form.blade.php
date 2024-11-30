@@ -187,9 +187,6 @@
                                         </div>
                                     @endif
                                 </div>
-
-
-
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -249,6 +246,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Permintaan Nomor Surat</label>
+                                    <input type="text" class="form-control" name="permintaan" id="permintaan"
+                                        value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" />
+                                </div>
+                            </div>
 
                             <!--end::Input group-->
 
@@ -272,6 +276,8 @@
                                     </button>
                                 @endif
                             </div>
+
+
                             <!--end::Actions-->
 
                         </form>
