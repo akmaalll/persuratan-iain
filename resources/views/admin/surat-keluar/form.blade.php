@@ -65,6 +65,44 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor" id="nomor"
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Perihal</label>
+                                    <input type="text" class="form-control" name="perihal" id="perihal"
+                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
+                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
+                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
+                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                        readonly />
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -82,6 +120,11 @@
                                             {{ isset($data->status) && $data->status == 'sangat_terbatas' ? 'selected' : '' }}
                                             value="sangat_terbatas">Sangat Terbatas</option>
                                     </select>
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Kepada</label>
+                                    <input type="text" class="form-control" name="kepada" id="kepada"
+                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
                                 </div>
                             </div>
 
@@ -102,56 +145,8 @@
                                                 {{ $v->nama }}
                                             </option>
                                         @endforeach
-                                        {{-- <option value="other">Lainnya (Ketikkan Asal Surat)</option> --}}
-                                        <!-- Menambahkan opsi 'lainnya' -->
                                     </select>
                                 </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_surat" id="tgl_surat" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Kirim</label>
-                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Perihal</label>
-                                    <input type="text" class="form-control" name="perihal" id="perihal"
-                                        value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-12 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
-                                    <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Input</label>
-                                    <input type="date" class="form-control" name="tgl_input" id="tgl_input"
-                                        value="{{ isset($data->tgl_input) ? $data->tgl_input : \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                        readonly />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
-                                    <input type="text" class="form-control" name="ttd" id="ttd"
-                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -168,14 +163,33 @@
                                                 {{ $a->nama }}
                                             </option>
                                         @endforeach
-                                        {{-- <option value="lainnya">Lainnya (Ketikkan Tujuan)</option> --}}
                                     </select>
                                 </div>
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Kepada</label>
-                                    <input type="text" class="form-control" name="kepada" id="kepada"
-                                        value="{{ isset($data->kepada) ? $data->kepada : '' }}" />
+                                    <label class="fs-6 fw-semibold mb-2">TTD</label>
+                                    <input type="text" class="form-control" name="ttd" id="ttd"
+                                        value="{{ isset($data->ttd) ? $data->ttd : '' }}" />
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">File</label>
+                                    <input type="file" class="form-control" name="file" id="file" />
+                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
+                                        name="file_old" id="file_old" />
+                                    @if (isset($data->file) && !empty($data->file))
+                                        <!-- Display the existing file link if it exists -->
+                                        <div class="mb-2">
+                                            <a href="{{ asset('uploads/ttd/surat-masuk/' . $data->file) }}"
+                                                target="_blank">Lihat File Saat Ini</a>
+                                        </div>
+                                    @endif
+                                </div>
+
+
+
                             </div>
 
                             <div class="row g-9 mb-8">
@@ -192,16 +206,6 @@
                                             value="terjaga">Terjaga</option>
                                     </select>
                                 </div>
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">File</label>
-                                    <input type="file" class="form-control" name="file" id="file" />
-                                    <input type="hidden" value="{{ isset($data->file) ? $data->file : '' }}"
-                                        name="file_old" id="file_old" />
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
 
