@@ -29,8 +29,9 @@ return new class extends Migration
             $table->string('retensi2');
             $table->string('retensi3');
             $table->string('file');
-            $table->unsignedInteger('created_by'); 
-            $table->unsignedInteger('updated_by')->nullable(); 
+            $table->string('permintaan');
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

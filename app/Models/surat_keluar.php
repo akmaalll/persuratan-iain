@@ -25,6 +25,7 @@ class surat_keluar extends Model
         'retensi2',
         'retensi3',
         'file',
+        'permintaan',
         'created_by',
         'updated_by',
     ];
