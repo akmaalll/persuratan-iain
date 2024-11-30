@@ -160,14 +160,14 @@
 
                             <!-- Input for Tanggal Terima -->
                             <div class="col-md-4 mb-3">
-                                <label for="input_tanggal_terima" class="form-label">Tanggal Terima</label>
+                                <label for="input_tanggal_terima" class="form-label">Tanggal Kirim</label>
                                 <div class="input-group">
-                                    {{-- <input id="tgl_terima" type="date" class="form-control"> --}}
-                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                    {{-- <input id="tgl_kirim" type="date" class="form-control"> --}}
+                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
                                         placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_terima" id="tgl_terima" />
+                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
                                     <button type="button" class="btn btn-outline-danger bg-secondary"
-                                        onclick="clearField('tgl_terima')">
+                                        onclick="clearField('tgl_kirim')">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
@@ -399,7 +399,7 @@
         }
 
         document.getElementById('clear_all').addEventListener('click', function() {
-            const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
+            const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_kirim', 'tgl_input',
                 'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3'
             ];
 
@@ -521,7 +521,7 @@
                 let perihal = $('#perihal').val()
                 let status = $('#status').val()
                 let asal = $('#asal').val()
-                let tgl_terima = $('#tgl_terima').val()
+                let tgl_kirim = $('#tgl_kirim').val()
                 let tgl_input = $('#tgl_input').val()
                 let ttd = $('#ttd').val()
                 let tujuan = $('#tujuan').val()
@@ -537,7 +537,7 @@
                     'perihal': perihal || null,
                     'status': status || null,
                     'asal': asal || null,
-                    'tgl_terima': tgl_terima || null,
+                    'tgl_kirim': tgl_kirim || null,
                     'tgl_input': tgl_input || null,
                     'ttd': ttd || null,
                     'tujuan': tujuan || null,
