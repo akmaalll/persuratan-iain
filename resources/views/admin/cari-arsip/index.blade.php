@@ -177,7 +177,8 @@
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Lokal Arsip</label>
                             <select class="form-select reset-filter opsiLain" name="lokal" id="lokal"
-                                data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
+                                data-control="select2" data-tags="true" data-hide-search="false"
+                                data-placeholder="Semua">
                                 <option value="">Semua</option>
                                 @foreach (Helper::getData('kd_units') as $v)
                                     <option {{ isset($data->id) && $data->lokal == $v->id ? 'selected' : '' }}
@@ -191,7 +192,8 @@
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Jenis Media</label>
                             <select class="form-select reset-filter opsiLain" name="media" id="media"
-                                data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
+                                data-control="select2" data-tags="true" data-hide-search="false"
+                                data-placeholder="Semua">
                                 <option value="">Semua</option>
                                 <option {{ isset($data->id) && $data->jenis_media == 'Audio' ? 'selected' : '' }}
                                     value="Audio">Audio</option>
@@ -272,8 +274,8 @@
                         <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
-                            <select class="form-select mb-2 opsiLain" data-tags="true" data-control="select2" name="retensi3"
-                                id="retensi3">
+                            <select class="form-select mb-2 opsiLain" data-tags="true" data-control="select2"
+                                name="retensi3" id="retensi3">
                                 <option value="">Pilih Retensi...</option>
                                 <option value="musnah"
                                     {{ isset($data->retensi3) && $data->retensi3 == 'musnah' ? 'selected' : '' }}>
@@ -562,8 +564,8 @@
                 let nomor = $('#nomor').val()
                 let uraian = $('#uraian').val()
                 let retensi = $('#retensi').val()
-                let retensi = $('#retensi2').val()
-                let retensi = $('#retensi3').val()
+                let retensi2 = $('#retensi2').val()
+                let retensi3 = $('#retensi3').val()
                 let pencipta = $('#pencipta').val()
                 let unit_pengolah = $('#unit_pengolah').val()
                 let lokal = $('#lokal').val()
@@ -804,7 +806,7 @@
         const retensiWarning = document.getElementById('retensi_warning');
 
         // Populate duration options based on selected category
-        retensiCategory.addEventListener('change', function() {
+        retensiCategory?.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
             console.log(this.value);
@@ -850,11 +852,11 @@
         });
 
         // Check if the retention period has expired
-        retensiDate.addEventListener('change', function() {
+        retensiDate?.addEventListener('change', function() {
             checkRetentionExpiration();
         });
 
-        retensiDuration.addEventListener('change', function() {
+        retensiDuration?.addEventListener('change', function() {
             // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
             if (retensiCategory.value !== 'nasib') {
                 checkRetentionExpiration();

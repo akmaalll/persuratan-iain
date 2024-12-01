@@ -182,7 +182,7 @@
                                     @if (isset($data->file) && !empty($data->file))
                                         <!-- Display the existing file link if it exists -->
                                         <div class="mb-2">
-                                            <a href="{{ asset('uploads/ttd/surat-masuk/' . $data->file) }}"
+                                            <a href="{{ asset('uploads/surat-keluar/' . $data->file) }}"
                                                 target="_blank">Lihat File Saat Ini</a>
                                         </div>
                                     @endif
@@ -415,6 +415,16 @@
                 }
             });
 
+            const editAsal = "{{ $data->asal }}";
+            if (editAsal && editAsal?.length > 0) {
+                $("#asal").val(editAsal).trigger("change")
+            }
+
+            const editTujuan = "{{ $data->tujuan }}";
+            if (editTujuan && editTujuan?.length > 0) {
+                $("#tujuan").val(editTujuan).trigger("change")
+            }
+
         });
 
         // const asalOption = $('.asal-lain');
@@ -501,7 +511,6 @@
             ['tglSurat'].forEach(field => {
                 if (form[field]) {
                     form[field].addEventListener('change', () => {
-                        console.log(`${field} changed`);
                         handleInputChange(field);
                     });
                 }
@@ -510,7 +519,6 @@
             ['kd_klasifikasi_id', 'status', 'asal'].forEach(field => {
                 if (form[field]) {
                     $(document.body).on("change", `#${field}`, function() {
-                        console.log(`${field} changed`);
                         handleInputChange(field);
                     });
                 }
@@ -548,7 +556,6 @@
                     },
                     success: function(data) {
                         const nextNumber = (data.last_number + 1).toString().padStart(3, '0');
-                        console.log(nextNumber);
 
                         const values = {
                             status: form.status.value,
