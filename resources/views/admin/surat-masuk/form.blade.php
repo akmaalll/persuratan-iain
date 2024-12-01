@@ -82,8 +82,8 @@
                                     {{-- <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
                                         id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" /> --}}
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" 
-                                        class="form-control" name="tgl_surat" id="tgl_surat" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_surat" id="tgl_surat" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -92,8 +92,8 @@
                                         placeholder="dd-mm-yyyy"
                                         value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" /> --}}
                                     <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                                        class="form-control" name="tgl_terima" id="tgl_terima" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_terima" id="tgl_terima" />
                                 </div>
 
 
@@ -304,7 +304,7 @@
 
 
                             </div>
-                            
+
 
                             <!--end::Input group-->
 
@@ -469,6 +469,15 @@
                 }
             });
 
+            const editAsal = "{{ $data->asal }}";
+            if (editAsal && editAsal?.length > 0) {
+                $("#asal").val(editAsal).trigger("change")
+            }
+
+            const editTujuan = "{{ $data->tujuan }}";
+            if (editTujuan && editTujuan?.length > 0) {
+                $("#tujuan").val(editTujuan).trigger("change")
+            }
         });
 
 
@@ -524,7 +533,7 @@
         const retensiWarning = document.getElementById('retensi_warning');
 
         // Populate duration options based on selected category
-        retensiCategory.addEventListener('change', function() {
+        retensiCategory?.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
             console.log(this.value);
@@ -570,11 +579,11 @@
         });
 
         // Check if the retention period has expired
-        retensiDate.addEventListener('change', function() {
+        retensiDate?.addEventListener('change', function() {
             checkRetentionExpiration();
         });
 
-        retensiDuration.addEventListener('change', function() {
+        retensiDuration?.addEventListener('change', function() {
             // Hanya lakukan pengecekan durasi jika kategori bukan 'nasib'
             if (retensiCategory.value !== 'nasib') {
                 checkRetentionExpiration();

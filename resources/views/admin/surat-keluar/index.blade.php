@@ -260,6 +260,19 @@
                             </div>
                         </div>
 
+
+                            <!-- Input for Retensi Nasib kk fiqri -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
+                                <div class="d-flex">
+                                    <select class="form-select mb-2" data-control="select2" data-hide-search="false"
+                                        name="retensi3" id="retensi3" data-placeholder="Pilih Retensi Nasib">
+                                        <option value="">Status Retensi</option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="inaktif">Inaktif</option>
+                                    </select>
+                                </div>
+
                         <!-- Retensi Aktif -->
                         <div class="col-md-4 mb-3">
                             <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
@@ -271,6 +284,7 @@
                                     onclick="clearField('retensi')">
                                     <i class="fa fa-times"></i>
                                 </button>
+
                             </div>
                         </div>
 
@@ -424,6 +438,25 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        $(document).ready(function() {
+            $("#status").select2({
+                allowClear: true
+            });
+            $("#asal").select2({
+                allowClear: true
+            });
+            $("#tujuan").select2({
+                allowClear: true
+            });
+            $("#jenis").select2({
+                allowClear: true
+            });
+            $("#retensi3").select2({
+                allowClear: true
+            });
+        });
+
+
         function clearField(fieldId) {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -444,7 +477,11 @@
                 const field = document.getElementById(fieldId);
                 if (field) {
                     if (field.type === 'select-one') {
-                        field.selectedIndex = 0; // Reset dropdowns
+                        if ($(field).data('select2')) {
+                            $(field).val(null).trigger('change'); // Reset Select2
+                        } else {
+                            field.selectedIndex = 0; // Reset dropdown standar
+                        }
                     } else {
                         field.value = ''; // Clear text and date fields
                     }
