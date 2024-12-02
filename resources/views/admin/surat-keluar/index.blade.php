@@ -73,163 +73,166 @@
 
                     <!-- Advanced Search Fields (Hidden by Default) -->
                     <div id="advanced_search_fields" class="mt-3 card-header align-items-center py-5 gap-2 gap-md-5"
-                    style="display: none;">
-                    <div class="row">
-                        <!-- Nomor Surat -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_nomor_surat" class="form-label">Nomor Surat</label>
-                            <div class="input-group">
-                                <input id="nomor" type="text" class="form-control"
-                                    placeholder="Masukkan Nomor Surat">
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('nomor')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                        style="display: none;">
+                        <div class="row">
+                            <!-- Nomor Surat -->
+                            <div class="col-md mb-3">
+                                <label for="input_nomor_surat" class="form-label">Nomor Surat</label>
+                                <div class="input-group">
+                                    <input id="nomor" type="text" class="form-control"
+                                        placeholder="Masukkan Nomor Surat">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('nomor')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Perihal -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_perihal" class="form-label">Perihal</label>
-                            <div class="input-group">
-                                <input id="perihal" type="text" class="form-control" placeholder="Masukkan Perihal">
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('perihal')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Perihal -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_perihal" class="form-label">Perihal</label>
+                                <div class="input-group">
+                                    <input id="perihal" type="text" class="form-control"
+                                        placeholder="Masukkan Perihal">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('perihal')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Tanggal Surat -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
-                            <div class="input-group">
-                                <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="tgl_surat" id="tgl_surat" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('tgl_surat')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Tanggal Surat -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_surat')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Tanggal Terima -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_tanggal_terima" class="form-label">Tanggal Kirim</label>
-                            <div class="input-group">
-                                <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
-                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="tgl_kirim" id="tgl_kirim" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('tgl_kirim')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Tanggal Terima -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_tanggal_terima" class="form-label">Tanggal Kirim</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_kirim')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Tanggal Input -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
-                            <div class="input-group">
-                                <input value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" type="text"
-                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="tgl_input" id="tgl_input" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('tgl_input')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Tanggal Input -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_input" id="tgl_input" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_input')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Status -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_status" class="form-label">Status</label>
-                            <div class="input-group-btn" style="display: flex; align-items: center;">
-                                <select class="form-select" data-control="select2" style="flex: 1;"
-                                    data-hide-search="false" data-placeholder="Pilih Status" name="status"
-                                    id="status">
-                                    <option value="">Status...</option>
-                                    <option value="biasa">Biasa</option>
-                                    <option value="penting">Penting</option>
-                                    <option value="terbatas">Terbatas</option>
-                                    <option value="sangat terbatas">Sangat Terbatas</option>
-                                    <option value="rahasia">Rahasia</option>
-                                </select>
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
-                                    onclick="clearField('status')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Status -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_status" class="form-label">Status</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" data-control="select2" style="flex: 1;"
+                                        data-hide-search="false" data-placeholder="Pilih Status" name="status"
+                                        id="status">
+                                        <option value="">Status...</option>
+                                        <option value="biasa">Biasa</option>
+                                        <option value="penting">Penting</option>
+                                        <option value="terbatas">Terbatas</option>
+                                        <option value="sangat terbatas">Sangat Terbatas</option>
+                                        <option value="rahasia">Rahasia</option>
+                                    </select>
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('status')">
+                                        <i class="fa fa-times"></i>
+                                    </button> --}}
+                                </div>
                             </div>
-                        </div>
 
 
-                        <!-- Kepada -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_kepada" class="form-label">Kepada</label>
-                            <div class="input-group">
-                                <input id="kepada" type="text" class="form-control" placeholder="Masukkan Kepada">
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('kepada')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Kepada -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_kepada" class="form-label">Kepada</label>
+                                <div class="input-group">
+                                    <input id="kepada" type="text" class="form-control"
+                                        placeholder="Masukkan Kepada">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('kepada')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Asal -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_asal" class="form-label">Asal</label>
-                            <div class="input-group-btn" style="display: flex; align-items: center;">
-                                <select class="form-select" style="flex: 1;" data-control="select2"
-                                    data-hide-search="false" data-placeholder="Pilih Asal" name="asal"
-                                    id="asal">
-                                    <option value="">Pilih Asal...</option>
-                                    @foreach (Helper::getData('kd_units') as $v)
-                                        <option value="{{ $v->id }}">{{ $v->nama }}</option>
-                                    @endforeach
-                                </select>
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
-                                    onclick="clearField('asal')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Asal -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_asal" class="form-label">Asal</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" style="flex: 1;" data-control="select2"
+                                        data-hide-search="false" data-placeholder="Pilih Asal" name="asal"
+                                        id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('asal')">
+                                        <i class="fa fa-times"></i>
+                                    </button> --}}
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Tujuan -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_tujuan" class="form-label">Tujuan</label>
-                            <div class="input-group-btn" style="display: flex; align-items: center;">
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
-                                    <option value="">Pilih Tujuan...</option>
-                                    @foreach (Helper::getData('kd_units') as $a)
-                                        <option value="{{ $a->id }}">{{ $a->nama }}</option>
-                                    @endforeach
-                                    <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
-                                </select>
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
-                                    onclick="clearField('tujuan')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Tujuan -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_tujuan" class="form-label">Tujuan</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Tujuan" name="tujuan" id="tujuan">
+                                        <option value="">Pilih Tujuan...</option>
+                                        @foreach (Helper::getData('kd_units') as $a)
+                                            <option value="{{ $a->id }}">{{ $a->nama }}</option>
+                                        @endforeach
+                                        <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
+                                    </select>
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('tujuan')">
+                                        <i class="fa fa-times"></i>
+                                    </button> --}}
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- TTD -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_ttd" class="form-label">TTD</label>
-                            <div class="input-group">
-                                <input id="ttd" type="text" class="form-control" placeholder="Masukkan TTD">
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('ttd')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- TTD -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_ttd" class="form-label">TTD</label>
+                                <div class="input-group">
+                                    <input id="ttd" type="text" class="form-control"
+                                        placeholder="Masukkan TTD">
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('ttd')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        {{-- <!-- Upload -->
+                            {{-- <!-- Upload -->
                         <div class="col-md-4 mb-3">
                             <div class="input-group">
                             <label for="input_upload" class="form-label">Upload Dokumen</label>
@@ -241,27 +244,27 @@
                             </div>
                         </div> --}}
 
-                        <!-- Jenis Surat -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_jenis_surat" class="form-label">Jenis Surat</label>
-                            <div class="input-group-btn" style="display: flex; align-items: center;">
-                                <select class="form-select" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
-                                    <option value="">Jenis...</option>
-                                    <option value="vital">Vital</option>
-                                    <option value="umum">Umum</option>
-                                    <option value="terjaga">Terjaga</option>
-                                </select>
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
-                                    onclick="clearField('jenis')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Jenis Surat -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_jenis_surat" class="form-label">Jenis Surat</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Jenis Surat" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option value="vital">Vital</option>
+                                        <option value="umum">Umum</option>
+                                        <option value="terjaga">Terjaga</option>
+                                    </select>
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('jenis')">
+                                        <i class="fa fa-times"></i>
+                                    </button> --}}
+                                </div>
                             </div>
-                        </div>
 
 
-                            <!-- Input for Retensi Nasib kk fiqri -->
+                            <!-- Input for Retensi Nasib  -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
                                 <div class="d-flex">
@@ -272,53 +275,82 @@
                                         <option value="inaktif">Inaktif</option>
                                     </select>
                                 </div>
-
-                        <!-- Retensi Aktif -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
-                            <div class="input-group">
-                                <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
-                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="retensi" id="retensi" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('retensi')">
-                                    <i class="fa fa-times"></i>
-                                </button>
-
                             </div>
-                        </div>
 
-                        <!-- Retensi Inaktif -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
-                            <div class="input-group">
-                                <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
-                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="retensi2" id="retensi2" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('retensi2')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Retensi Aktif -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="retensi" id="retensi" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('retensi')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Retensi Nasib -->
-                        <div class="col-md-4 mb-3">
-                            <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
-                            <div class="input-group-btn" style="display: flex; align-items: center;">
-                                <select class="form-select mb-2"
-                                    style="flex: 1;border-top-right-radius: 0;border-bottom-right-radius: 0;"
-                                    data-control="select2" name="retensi3" id="retensi3"
-                                    data-placeholder="Pilih Retensi Nasib">
-                                    <option value="">Status Retensi</option>
-                                    <option value="aktif">Aktif</option>
-                                    <option value="inaktif">Inaktif</option>
-                                </select>
-                                <button type="button"
-                                    style="margin-left: -6px; margin-top: -7px; border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
-                                    class="btn btn-outline-danger bg-secondary" onclick="clearField('retensi3')">
-                                    <i class="fa fa-times"></i>
-                                </button>
+                            <!-- Retensi Inaktif -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="retensi2" id="retensi2" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('retensi2')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Retensi Nasib -->
+                            {{-- <div class="col-md-4 mb-3">
+                                <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select mb-2"
+                                        style="flex: 1;border-top-right-radius: 0;border-bottom-right-radius: 0;"
+                                        data-control="select2" name="retensi3" id="retensi3"
+                                        data-placeholder="Pilih Retensi Nasib">
+                                        <option value="">Status Retensi</option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="inaktif">Inaktif</option>
+                                    </select>
+                                    <button type="button"
+                                        style="margin-left: -6px; margin-top: -7px; border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        class="btn btn-outline-danger bg-secondary" onclick="clearField('retensi3')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label for="" class="form-label">Pencarian Asip dari tanggal</label>
+                                <div class="input-group">
+                                    <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                        onblur="(this.type='text')" class="form-control" name="dari_tanggal"
+                                        id="dari_tanggal" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('dari_tanggal')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="" class="form-label">Sampai tanggal</label>
+                                <div class="input-group">
+                                    <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                        onblur="(this.type='text')" class="form-control" name="sampai_tanggal"
+                                        id="sampai_tanggal" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('sampai_tanggal')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -336,7 +368,6 @@
                             </button>
                         </div>
                     </div>
-                </div>
                     <!--end::Card title-->
 
                     <!--begin::Card toolbar-->
@@ -425,13 +456,12 @@
 
                 </div>
 
-
-
                 <!--end::Card body-->
             </div>
             <!--end::Products-->
         </div>
         <!--end::Content container-->
+    </div>
     </div>
     <!--end::Content-->
 @endsection
@@ -470,7 +500,7 @@
 
         document.getElementById('clear_all').addEventListener('click', function() {
             const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_kirim', 'tgl_input',
-                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3'
+                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'dari_tanggal', 'sampai_tanggal'
             ];
 
             fields.forEach(fieldId => {
@@ -604,6 +634,8 @@
                 let retensi = $('#retensi').val()
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
+                let dari_tanggal = $('#dari_tanggal').val()
+                let sampai_tanggal = $('#sampai_tanggal').val()
 
                 const formData = {
                     'tgl_surat': tgl_surat || null,
@@ -620,12 +652,13 @@
                     'retensi': retensi || null,
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
+                    'dari_tanggal': dari_tanggal || null,
+                    'sampai_tanggal': sampai_tanggal || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
                 //     console.log(key, formData[key]);
                 // });
-                console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
                     loadpage(5, '');

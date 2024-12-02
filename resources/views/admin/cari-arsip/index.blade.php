@@ -48,35 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="card-toolbar flex-row-fluid justify-content-end gap-2">
-                        <button type="submit" id="search_filter" class="btn mb-2  btn-primary">
-                            <span class="indicator-label">Cari</span>
-                            <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </button>
-                        <button type="reset" id="clear_filter" class="btn mb-2  btn-warning">
-                            <span class="indicator-label">Clear All</span>
-                        </button>
-                        <button type="submit" id="excel_filter" class="btn mb-2  btn-success">
-                            <span class="btn-label">
-                                <i class="fa-solid fa-table fs-3"></i>
-                            </span>
-                        </button>
-                        <button type="submit" id="print_filter" class="btn mb-2  btn-info">
-                            <span class="btn-label">
-                                <i class="fa-solid fa-print fs-3"></i>
-                            </span>
-                        </button>
 
-
-                        {{-- <button id="button_filter" class="btn btn-secondary">
-                            Pencarian lanjut
-                        </button>
-
-                        <button id="button_hideFilter" class="btn btn-secondary">
-                            Sembunyikan pencarian
-                        </button> --}}
-                    </div>
                     <!--end::Card title-->
 
                     <!--begin::Card toolbar-->
@@ -101,8 +73,14 @@
                     <div class="row">
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Arsip</label>
-                            <input type="text" class="form-control reset-filter" name="nomor" id="nomor"
-                                placeholder="Masukkan nomor surat" />
+                            <div class="input-group">
+                                <input type="text" class="form-control reset-filter" name="nomor" id="nomor"
+                                    placeholder="Masukkan nomor surat" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('nomor')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                         {{-- untuk tabel kode klasifikasi --}}
@@ -124,9 +102,15 @@
                         <!-- Tanggal Surat -->
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Tanggal arsip</label>
-                            <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
-                                onblur="(this.type='text')" data-placeholder="-- Pilih lokal --" name="tgl"
-                                id="tgl" class="form-control reset-filter" />
+                            <div class="input-group">
+                                <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" data-placeholder="-- Pilih lokal --" name="tgl"
+                                    id="tgl" class="form-control reset-filter" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('tgl')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -137,8 +121,14 @@
 
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Perihal</label>
-                            <input type="text" data-placeholder="-- Pilih lokal --" name="perihal" id="perihal"
-                                class="form-control reset-filter" />
+                            <div class="input-group">
+                                <input type="text" data-placeholder="-- Pilih lokal --" name="perihal" id="perihal"
+                                    class="form-control reset-filter" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('nomor')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="col-md-4 fv-row">
@@ -177,8 +167,7 @@
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Lokal Arsip</label>
                             <select class="form-select reset-filter opsiLain" name="lokal" id="lokal"
-                                data-control="select2" data-tags="true" data-hide-search="false"
-                                data-placeholder="Semua">
+                                data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
                                 <option value="">Semua</option>
                                 @foreach (Helper::getData('kd_units') as $v)
                                     <option {{ isset($data->id) && $data->lokal == $v->id ? 'selected' : '' }}
@@ -224,14 +213,26 @@
 
                         <div class="col-md-2 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Jumlah</label>
-                            <input type="number" class="form-control reset-filter" name="no_rak" id="no_rak"
-                                placeholder="Masukkan jumlah" />
+                            <div class="input-group">
+                                <input type="number" class="form-control reset-filter" name="jumlah" id="jumlah"
+                                    placeholder="Masukkan jumlah" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('jumlah')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="col-md-2 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Rak / Lemari</label>
-                            <input type="text" class="form-control reset-filter" name="no_rak" id="no_rak"
-                                placeholder="Masukkan nomor rak surat" />
+                            <div class="input-group">
+                                <input type="text" class="form-control reset-filter" name="no_rak" id="no_rak"
+                                    placeholder="Masukkan nomor rak surat" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('no_rak')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -241,8 +242,26 @@
 
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Box / Bundel</label>
-                            <input type="text" class="form-control reset-filter" name="no_box" id="no_box"
-                                placeholder="Masukkan nomor box surat" />
+                            <div class="input-group">
+                                <input type="text" class="form-control reset-filter" name="no_box" id="no_box"
+                                    placeholder="Masukkan nomor box surat" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('no_box')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-6 fw-semibold mb-2">Upload</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control reset-filter" name="upload" id="upload"
+                                    placeholder="Masukkan nomor box surat" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('upload')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="col-md-3 fv-row">
@@ -271,6 +290,14 @@
                             </div>
                         </div>
 
+
+
+
+                    </div>
+
+                    <!-- Status dan Asal -->
+                    <div class="row g-9 mt-0">
+
                         <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
@@ -288,15 +315,75 @@
                                 <strong>Warning:</strong> Retensi period has expired!
                             </div>
                         </div>
+
+                        <div class="col-md-3 fv-row">
+                            <label class="fs-6 fw-semibold mb-2">Keterangan</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control reset-filter" name="uraian" id="uraian"
+                                    placeholder="Masukkan keterangan surat" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('uraian')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label for="dari_tanggal" class="form-label">Pencarian Asip dari tanggal</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" class="form-control" name="dari_tanggal"
+                                    id="dari_tanggal" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('dari_tanggal')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="sampai_tanggal" class="form-label">Sampai tanggal</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" class="form-control" name="sampai_tanggal"
+                                    id="sampai_tanggal" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('sampai_tanggal')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Status dan Asal -->
                     <div class="row g-9 mt-0">
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-2">
+                            <button type="submit" id="search_filter" class="btn mb-2  btn-primary">
+                                <span class="indicator-label">Cari</span>
+                                <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </button>
+                            <button type="reset" id="clear_filter" class="btn mb-2  btn-warning">
+                                <span class="indicator-label">Clear All</span>
+                            </button>
+                            <button type="submit" id="excel_filter" class="btn mb-2  btn-success">
+                                <span class="btn-label">
+                                    <i class="fa-solid fa-table fs-3"></i>
+                                </span>
+                            </button>
+                            <button type="submit" id="print_filter" class="btn mb-2  btn-info">
+                                <span class="btn-label">
+                                    <i class="fa-solid fa-print fs-3"></i>
+                                </span>
+                            </button>
 
-                        <div class="col-md-6 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Keterangan</label>
-                            <input type="text" class="form-control reset-filter" name="uraian" id="uraian"
-                                placeholder="Masukkan keterangan surat" />
+
+                            {{-- <button id="button_filter" class="btn btn-secondary">
+                                Pencarian lanjut
+                            </button>
+    
+                            <button id="button_hideFilter" class="btn btn-secondary">
+                                Sembunyikan pencarian
+                            </button> --}}
                         </div>
                     </div>
 
@@ -399,6 +486,8 @@
                 placeholder: "Pilih ...",
                 allowClear: true,
             });
+
+
 
             loadpage(5, '');
 
@@ -550,6 +639,7 @@
                 let lokal = $('#lokal').select2().val('').trigger('change')
                 let media = $('#media').select2().val('').trigger('change')
                 let tgl = $('#tgl').val('')
+                let jumlah = $('#jumlah').val('')
                 let ket = $('#ket').select2().val('').trigger('change');
                 // $('#kd_klasifikasi_id').prop('selectedIndex', 0)
                 $('#kd_klasifikasi_id').select2().val('').trigger('change');
@@ -567,6 +657,7 @@
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
                 let pencipta = $('#pencipta').val()
+                let jumlah = $('#jumlah').val()
                 let unit_pengolah = $('#unit_pengolah').val()
                 let lokal = $('#lokal').val()
                 let media = $('#media').val()
@@ -576,6 +667,9 @@
                 let perihal = $('#perihal').val()
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
+                let dari_tanggal = $('#dari_tanggal').val()
+                let sampai_tanggal = $('#sampai_tanggal').val()
+                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -584,6 +678,7 @@
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
                     'pencipta': pencipta || null,
+                    'jumlah': jumlah || null,
                     'unit_pengolah': unit_pengolah || null,
                     'lokal': lokal || null,
                     'media': media || null,
@@ -593,6 +688,9 @@
                     'perihal': perihal || null,
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
+                    'dari_tanggal': dari_tanggal || null,
+                    'sampai_tanggal': sampai_tanggal || null,
+                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -627,6 +725,8 @@
                 let perihal = $('#perihal').val()
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
+                let jumlah = $('#jumlah').val()
+                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -644,6 +744,8 @@
                     'perihal': perihal || null,
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
+                    'jumlah': jumlah || null,
+                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -679,6 +781,8 @@
                 let perihal = $('#perihal').val()
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
+                let jumlah = $('#jumlah').val()
+                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -696,6 +800,8 @@
                     'perihal': perihal || null,
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
+                    'jumlah': jumlah || null,
+                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -745,6 +851,17 @@
 
 
         });
+
+        function clearField(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                if (field.type === 'select-one') {
+                    field.selectedIndex = 0; // Reset dropdowns
+                } else {
+                    field.value = ''; // Clear text and date fields
+                }
+            }
+        }
 
         function updateRetensi() {
             var tglSurat = document.getElementById('tgl').value;

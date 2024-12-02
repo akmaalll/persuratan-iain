@@ -23,7 +23,29 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$perPage = $criteria['per_page'] ?? 5;
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
-		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
+		$search = $criteria['search'] ?? '';
+		return $this->model->when($search, function ($query) use ($search) {
+			$query->where(function ($q) use ($search) {
+				$q->where('nomor', 'like', "%" . $search . "%")
+					->orWhere('jumlah', 'like', "%" . $search . "%")
+					->orWhere('uraian', 'like', "%" . $search . "%")
+					->orWhere('lokal', 'like', "%" . $search . "%")
+					->orWhere('pencipta', 'like', "%" . $search . "%")
+					->orWhere('retensi', 'like', "%" . $search . "%")
+					->orWhere('retensi2', 'like', "%" . $search . "%")
+					->orWhere('retensi3', 'like', "%" . $search . "%")
+					->orWhere('unit_pengolah', 'like', "%" . $search . "%")
+					->orWhere('media', 'like', "%" . $search . "%")
+					->orWhere('tgl', 'like', "%" . $search . "%")
+					->orWhere('ket', 'like', "%" . $search . "%")
+					->orWhere('perihal', 'like', "%" . $search . "%")
+					->orWhere('no_rak', 'like', "%" . $search . "%")
+					->orWhere('no_box', 'like', "%" . $search . "%")
+					->orWhere('upload', 'like', "%" . $search . "%");
+			});
+		})
+			->orderBy($field, $sortOrder)
+			->paginate($perPage);
 	}
 
 	public function paginate($criteria)
@@ -42,6 +64,7 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		// criteria
 		$kd_klasifikasi_id = $criteria['search']['kd_klasifikasi_id'] ?? '';
 		$nomor = $criteria['search']['nomor'] ?? '';
+		$jumlah = $criteria['search']['jumlah'] ?? '';
 		$uraian = $criteria['search']['uraian'] ?? '';
 		$lokal = $criteria['search']['lokal'] ?? '';
 		$pencipta = $criteria['search']['pencipta'] ?? '';
@@ -55,6 +78,9 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$perihal = $criteria['search']['perihal'] ?? '';
 		$no_rak = $criteria['search']['no_rak'] ?? '';
 		$no_box = $criteria['search']['no_box'] ?? '';
+		$upload = $criteria['search']['upload'] ?? '';
+		$dari_tanggal = $criteria['search']['dari_tanggal'] ?? '';
+		$sampai_tanggal = $criteria['search']['sampai_tanggal'] ?? '';
 
 		$filter = $this->model;
 
@@ -116,6 +142,18 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 
 		if (!empty($no_box)) {
 			$filter = $filter->where('no_box', 'like', '%' . $no_box . '%');
+		}
+
+		if (!empty($jumlah)) {
+			$filter = $filter->where('jumlah', 'like', '%' . $jumlah . '%');
+		}
+
+		if (!empty($upload)) {
+			$filter = $filter->where('upload', 'like', '%' . $upload . '%');
+		}
+
+		if (!empty($dari_tanggal) || !empty($sampai_tanggal)) {
+			$filter = $filter->whereBetween('retensi2', [$dari_tanggal, $sampai_tanggal]);
 		}
 
 		$filter = $filter->orderBy($field, $sortOrder)->paginate($perPage);

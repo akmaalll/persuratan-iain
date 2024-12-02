@@ -415,12 +415,13 @@
                 }
             });
 
-            const editAsal = "{{ $data->asal }}";
+            const editAsal = "{{ isset($data->asal) ? $data->asal : '' }}";
+            console.log(editAsal);
             if (editAsal && editAsal?.length > 0) {
                 $("#asal").val(editAsal).trigger("change")
             }
 
-            const editTujuan = "{{ $data->tujuan }}";
+            const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : '' }}";
             if (editTujuan && editTujuan?.length > 0) {
                 $("#tujuan").val(editTujuan).trigger("change")
             }

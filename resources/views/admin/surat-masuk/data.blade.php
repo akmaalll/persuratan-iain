@@ -37,8 +37,8 @@
         </td>
         <td>
             <span class="fw-semibold">
-                @if (is_numeric($v->asal))
-                    {{ $v->tujuansurat->kode . ' - ' . $v->tujuanSurat->nama }}
+                @if (is_numeric($v->tujuan))
+                    {{ $v->tujuanSurat->kode . ' - ' . $v->tujuanSurat->nama }}
                 @else
                     {{ $v->tujuan }}
                 @endif

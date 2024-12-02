@@ -295,19 +295,46 @@
                             </div>
                         </div>
 
-                        <!-- Global Clear All Button -->
-                        <div class="mt-3">
-                            <button id="clear_all" class="btn btn-secondary">
-                                <span class="btn-label">
-                                    <i class="fa fa-eraser"></i> Clear All
-                                </span>
-                            </button>
-                            <button id="search_filter" class="btn btn-primary">
-                                <span class="btn-label">
-                                    <i class="fa fa-search"></i> Search
-                                </span>
-                            </button>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label for="" class="form-label">Pencarian Asip dari tanggal</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" class="form-control" name="dari_tanggal"
+                                    id="dari_tanggal" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('dari_tanggal')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
+                        <div class="col-md-4">
+                            <label for="" class="form-label">Sampai tanggal</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" class="form-control" name="sampai_tanggal"
+                                    id="sampai_tanggal" />
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('sampai_tanggal')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Global Clear All Button -->
+                    <div class="mt-3">
+                        <button id="clear_all" class="btn btn-secondary">
+                            <span class="btn-label">
+                                <i class="fa fa-eraser"></i> Clear All
+                            </span>
+                        </button>
+                        <button id="search_filter" class="btn btn-primary">
+                            <span class="btn-label">
+                                <i class="fa fa-search"></i> Search
+                            </span>
+                        </button>
                     </div>
                 </div>
 
@@ -435,7 +462,7 @@
 
         document.getElementById('clear_all').addEventListener('click', function() {
             const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
-                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'upload'
+                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'upload', 'dari_tanggal', 'sampai_tanggal'
             ];
 
             fields.forEach(fieldId => {
@@ -580,11 +607,11 @@
                 loadpage(5, '');
             });
 
-            // $("#button_search, #perPage").on('click change', function(event) {
-            //     let search = $('#input_search').val();
-            //     let per_page = $('#perPage').val() ?? 5;
-            //     loadpage(per_page, search);
-            // });
+            $("#button_search, #perPage").on('click change', function(event) {
+                let search = $('#input_search').val();
+                let per_page = $('#perPage').val() ?? 5;
+                loadpage(per_page, search);
+            });
 
             $("#button_refresh").on('click', function(event) {
                 $('#input_search').val('');
@@ -606,6 +633,8 @@
                 let retensi = $('#retensi').val()
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
+                let dari_tanggal = $('#dari_tanggal').val()
+                let sampai_tanggal = $('#sampai_tanggal').val()
 
                 const formData = {
                     'tgl_surat': tgl_surat || null,
@@ -622,6 +651,8 @@
                     'retensi': retensi || null,
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
+                    'dari_tanggal': dari_tanggal || null,
+                    'sampai_tanggal': sampai_tanggal || null,
                 }
 
                 // Object.values(formData).forEach((key) => {

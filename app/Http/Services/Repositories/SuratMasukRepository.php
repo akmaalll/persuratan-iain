@@ -25,9 +25,22 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		$search = $criteria['search'] ?? '';
 		return $this->model->when($search, function ($query) use ($search) {
-			$query->where('nomor', 'like', "%" . $search . "%");
-			$query->orWhere('perihal', 'like', "%" . $search . "%");
-			$query->orWhere('status', 'like', "%" . $search . "%");
+			$query->where(function ($q) use ($search) {
+				$q->where('nomor', 'like', "%" . $search . "%")
+					->orWhere('kepada', 'like', "%" . $search . "%")
+					->orWhere('tgl_surat', 'like', "%" . $search . "%")
+					->orWhere('perihal', 'like', "%" . $search . "%")
+					->orWhere('status', 'like', "%" . $search . "%")
+					->orWhere('asal', 'like', "%" . $search . "%")
+					->orWhere('tgl_terima', 'like', "%" . $search . "%")
+					->orWhere('tgl_input', 'like', "%" . $search . "%")
+					->orWhere('tujuan', 'like', "%" . $search . "%")
+					->orWhere('jenis', 'like', "%" . $search . "%")
+					->orWhere('retensi', 'like', "%" . $search . "%")
+					->orWhere('retensi2', 'like', "%" . $search . "%")
+					->orWhere('retensi3', 'like', "%" . $search . "%")
+					->orWhere('ttd', 'like', "%" . $search . "%");
+			});
 		})
 			->orderBy($field, $sortOrder)
 			->paginate($perPage);
@@ -54,6 +67,8 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 		$retensi = $criteria['search']['retensi'] ?? '';
 		$retensi2 = $criteria['search']['retensi2'] ?? '';
 		$retensi3 = $criteria['search']['retensi3'] ?? '';
+		$dari_tanggal = $criteria['search']['dari_tanggal'] ?? '';
+		$sampai_tanggal = $criteria['search']['sampai_tanggal'] ?? '';
 
 		$filter = $this->model;
 
@@ -115,6 +130,10 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 
 		if (!empty($retensi3)) {
 			$filter = $filter->where('retensi3', 'like', '%' . $retensi3 . '%');
+		}
+
+		if (!empty($dari_tanggal) || !empty($sampai_tanggal)) {
+			$filter = $filter->whereBetween('retensi2', [$dari_tanggal, $sampai_tanggal]);
 		}
 
 		$filter = $filter->orderBy($field, $sortOrder)->paginate($perPage);
