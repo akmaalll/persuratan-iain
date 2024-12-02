@@ -137,6 +137,7 @@ return [
         App\Providers\AppServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Livewire\LivewireServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -154,6 +155,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Helper' => App\Helpers\Helper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF'       => Barryvdh\DomPDF\Facade\Pdf::class,
     ])->toArray(),
 
 ];
