@@ -180,7 +180,7 @@
                         </div>
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Jenis Media</label>
-                            <select class="form-select reset-filter opsiLain" name="media" id="media"
+                            <select class="form-select reset-filter opsiLain" name="jenis_media" id="jenis_media"
                                 data-control="select2" data-tags="true" data-hide-search="false"
                                 data-placeholder="Semua">
                                 <option value="">Semua</option>
@@ -627,27 +627,29 @@
             });
 
             // clear filter
-            $('#clear_filter').on('click', function() {
-                console.log('clear');
-                let nomor = $('#nomor').val('')
-                let uraian = $('#uraian').val('')
-                let retensi = $('#retensi').select2().val('').trigger('change')
-                let retensi2 = $('#retensi2').select2().val('').trigger('change')
-                let retensi3 = $('#retensi3').select2().val('').trigger('change')
-                let pencipta = $('#pencipta').select2().val('').trigger('change')
-                let unit_pengolah = $('#unit_pengolah').select2().val('').trigger('change')
-                let lokal = $('#lokal').select2().val('').trigger('change')
-                let media = $('#media').select2().val('').trigger('change')
-                let tgl = $('#tgl').val('')
-                let jumlah = $('#jumlah').val('')
-                let ket = $('#ket').select2().val('').trigger('change');
-                // $('#kd_klasifikasi_id').prop('selectedIndex', 0)
-                $('#kd_klasifikasi_id').select2().val('').trigger('change');
-                let perihal = $('#perihal').val('')
-                let no_rak = $('#no_rak').val('')
-                let no_box = $('#no_box').val('')
+            document.getElementById('clear_filter').addEventListener('click', function() {
+            const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
+                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'upload', 'dari_tanggal', 'sampai_tanggal', 
+                'kd_klasifikasi_id', 'tgl', 'pencipta', 'unit_pengolah', 'lokal', 'jenis_media', 'ket_keaslian', 'jumlah', 
+                'no_rak', 'no_box', 'ket'
+            ];
 
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    if (field.type === 'select-one') {
+                        // Jika Select2 digunakan, reset dengan Select2 API
+                        if ($(field).data('select2')) {
+                            $(field).val(null).trigger('change'); // Reset Select2
+                        } else {
+                            field.selectedIndex = 0; // Reset dropdown standar
+                        }
+                    } else {
+                        field.value = ''; // Kosongkan input teks atau tanggal
+                    }
+                }
             });
+        });
 
             // more filter
             $('#search_filter').on('click', function() {
