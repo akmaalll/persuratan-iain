@@ -141,7 +141,8 @@
                                         @endif
                                         @foreach (Helper::getData('kd_units') as $v)
                                             <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
+                                                value="{{ $v->id }}" data-nomor="{{ $v->nomor }}"
+                                                data-kode="{{ $v->kode }}">
                                                 {{ $v->nama }}
                                             </option>
                                         @endforeach
@@ -577,6 +578,7 @@
                             year: values.date.getFullYear(),
                             isFTAR: values.asal.dataset.kode === 'FTAR'
                         };
+
 
                         const documentNumber = formatDocumentNumber(components);
                         form.nomorField.value = documentNumber;
