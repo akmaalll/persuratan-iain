@@ -366,6 +366,16 @@
                                     <i class="fa fa-search"></i> Search
                                 </span>
                             </button>
+                            <button type="submit" id="excel_filter" class="btn  btn-success">
+                                <span class="btn-label">
+                                    <i class="fa-solid fa-table fs-3"></i>
+                                </span>
+                            </button>
+                            <button type="submit" id="print_filter" class="btn  btn-info">
+                                <span class="btn-label">
+                                    <i class="fa-solid fa-print fs-3"></i>
+                                </span>
+                            </button>
                         </div>
                     </div>
                     <!--end::Card title-->
@@ -598,6 +608,38 @@
                 });
             }
 
+            function loadexport(search) {
+                console.log('cetak :', search);
+                const url = '{{ route('surat-keluar.export') }}' + '?search=' + encodeURIComponent(JSON
+                    .stringify(
+                        search));
+                window.open(url, '_blank');
+                return
+            }
+
+            function loadcetak(search = '') {
+                $.ajax({
+                    url: '{{ route('surat-keluar.pdf') }}',
+                    data: {
+                        "search": search,
+                    },
+                    type: "GET",
+                    datatype: "json",
+                    success: function(data) {
+                        console.log('data : ', data);
+                        if (data.pdf_url) {
+                            window.open(data.pdf_url, '_blank');
+                        } else {
+                            window.open(data.pdf_url, '_blank');
+                            console.error("PDF URL tidak ditemukan di respons");
+                        }
+                    },
+                    error: function(error) {
+                        console.error("Error:", error);
+                    }
+                });
+            }
+
             // $("#button_search, #perPage").on('click change', function(event) {
             //     let search = $('#input_search').val();
             //     let per_page = $('#perPage').val() ?? 5;
@@ -672,6 +714,114 @@
                 let search = $('#input_search').val();
                 let per_page = $('#perPage').val() ?? 5;
                 loadpage(per_page, search);
+            });
+
+            $('#excel_filter').on('click', function(e) {
+                e.preventDefault();
+
+                let tgl_surat = $('#tgl_surat').val()
+                let nomor = $('#nomor').val()
+                let perihal = $('#perihal').val()
+                let status = $('#status').val()
+                let asal = $('#asal').val()
+                let tgl_terima = $('#tgl_terima').val()
+                let tgl_input = $('#tgl_input').val()
+                let ttd = $('#ttd').val()
+                let tujuan = $('#tujuan').val()
+                let kepada = $('#kepada').val()
+                let jenis = $('#jenis').val()
+                let retensi = $('#retensi').val()
+                let retensi2 = $('#retensi2').val()
+                let retensi3 = $('#retensi3').val()
+                let dari_tanggal = $('#dari_tanggal').val()
+                let sampai_tanggal = $('#sampai_tanggal').val()
+
+                const formData = {
+                    'tgl_surat': tgl_surat || null,
+                    'nomor': nomor || null,
+                    'perihal': perihal || null,
+                    'status': status || null,
+                    'asal': asal || null,
+                    'tgl_terima': tgl_terima || null,
+                    'tgl_input': tgl_input || null,
+                    'ttd': ttd || null,
+                    'tujuan': tujuan || null,
+                    'kepada': kepada || null,
+                    'jenis': jenis || null,
+                    'retensi': retensi || null,
+                    'retensi2': retensi2 || null,
+                    'retensi3': retensi3 || null,
+                    'dari_tanggal': dari_tanggal || null,
+                    'sampai_tanggal': sampai_tanggal || null,
+                }
+
+                // Object.values(formData).forEach((key) => {
+                //     console.log(key, formData[key]);
+                // });
+                let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
+
+
+                if (cekValue) {
+                    loadexport('');
+                } else {
+                    loadexport(formData);
+                }
+
+
+            });
+
+            $('#print_filter').on('click', function(e) {
+                e.preventDefault();
+
+                let tgl_surat = $('#tgl_surat').val()
+                let nomor = $('#nomor').val()
+                let perihal = $('#perihal').val()
+                let status = $('#status').val()
+                let asal = $('#asal').val()
+                let tgl_terima = $('#tgl_terima').val()
+                let tgl_input = $('#tgl_input').val()
+                let ttd = $('#ttd').val()
+                let tujuan = $('#tujuan').val()
+                let kepada = $('#kepada').val()
+                let jenis = $('#jenis').val()
+                let retensi = $('#retensi').val()
+                let retensi2 = $('#retensi2').val()
+                let retensi3 = $('#retensi3').val()
+                let dari_tanggal = $('#dari_tanggal').val()
+                let sampai_tanggal = $('#sampai_tanggal').val()
+
+                const formData = {
+                    'tgl_surat': tgl_surat || null,
+                    'nomor': nomor || null,
+                    'perihal': perihal || null,
+                    'status': status || null,
+                    'asal': asal || null,
+                    'tgl_terima': tgl_terima || null,
+                    'tgl_input': tgl_input || null,
+                    'ttd': ttd || null,
+                    'tujuan': tujuan || null,
+                    'kepada': kepada || null,
+                    'jenis': jenis || null,
+                    'retensi': retensi || null,
+                    'retensi2': retensi2 || null,
+                    'retensi3': retensi3 || null,
+                    'dari_tanggal': dari_tanggal || null,
+                    'sampai_tanggal': sampai_tanggal || null,
+                }
+
+                // Object.values(formData).forEach((key) => {
+                //     console.log(key, formData[key]);
+                // });
+                let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
+
+
+                if (cekValue) {
+                    loadcetak('');
+                } else {
+                    loadcetak(formData);
+                }
+
+
             });
 
 
