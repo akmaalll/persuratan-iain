@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Helpers\Helper;
-use App\Models\surat_masuk;
+use App\Models\surat_keluar;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class SuratMasukExport implements FromCollection, WithHeadings, WithStyles, WithEvents
+class SuratKeluarExport implements FromCollection, WithHeadings, WithStyles, WithEvents
 {
     protected $data, $header;
 

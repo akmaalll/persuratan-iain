@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SuratKeluarExport;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
 use App\Traits\Uploadable;
@@ -9,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratKeluarController extends Controller
 {
@@ -169,6 +172,52 @@ class SuratKeluarController extends Controller
             return view('admin.' . $title . '.detail', compact('title', 'data'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function export(Request $request)
+    {
+        try {
+            $search = $request->has('search') ? json_decode($request->search, true) : null;
+
+            $data = is_array($search) ? $this->repo->filter(['search' => $search]) : $this->repo->all();
+            $header = "Surat Keluar Persuratan IAIN Parepare";
+            $fileName = 'Export-Surat-Keluar-' . date('d-m-Y') . '.xlsx';
+
+            return Excel::download(new SuratKeluarExport($data, $header), $fileName);
+        } catch (\Exception $e) {
+            return view('errors.message', ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function cetakPdf(Request $request)
+    {
+        try {
+            // Mendapatkan data
+            $title = $this->title;
+            $data = is_array($request->search) ? $this->repo->filter($request->all()) : $this->repo->all();
+            $header = "Surat Keluar Persuratan IAIN Parepare";
+
+            // Membuat file PDF
+            $pdf = Pdf::loadView('admin.' . $title . '.pdf', compact('header', 'data'));
+            $pdf->setPaper('A4', 'landscape');
+
+            // Nama dan path file
+            $fileName = 'Cetak-Surat Masuk-' . date('d-m-Y') . '.pdf';
+            $filePath = storage_path("app/public/{$fileName}");
+
+            // Menyimpan file PDF ke storage
+            $pdf->save($filePath);
+
+            // Mengembalikan URL file PDF
+            return response()->json([
+                'pdf_url' => asset("storage/{$fileName}") // Pastikan file dapat diakses dari public path
+            ]);
+        } catch (\Exception $e) {
+            // Menangani error jika ada
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat membuat PDF: ' . $e->getMessage()
+            ], 500);
         }
     }
 }

@@ -112,6 +112,7 @@ Route::domain('')->group(function () {
             Route::put('/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
             Route::delete('/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
+            Route::get('/cetak', [SuratKeluarController::class, 'cetakPdf'])->name('surat-keluar.pdf');
             Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])->name('surat-keluar.last-number');
         });
 
