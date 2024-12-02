@@ -62,6 +62,7 @@ Route::domain('')->group(function () {
             Route::put('/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
             Route::delete('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
             Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
+            Route::get('/cetak', [SuratMasukController::class, 'cetakPdf'])->name('surat-masuk.pdf');
         });
 
 
