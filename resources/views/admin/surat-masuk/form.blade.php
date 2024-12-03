@@ -82,8 +82,8 @@
                                     {{-- <input type="date" class="form-control" placeholder="dd-mm-yyyy" name="tgl_surat"
                                         id="tgl_surat" value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" /> --}}
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control"
-                                        name="tgl_surat" id="tgl_surat" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -92,8 +92,8 @@
                                         placeholder="dd-mm-yyyy"
                                         value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" /> --}}
                                     <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control"
-                                        name="tgl_terima" id="tgl_terima" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_terima" id="tgl_terima" />
                                 </div>
 
 
@@ -302,7 +302,12 @@
                                     </div>
                                 </div>
 
-
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Keterangan</label>
+                                    <textarea id="uraian" name="uraian" class="form-control" id="" rows="5">
+                                        {{ isset($data->uraian) ? strip_tags($data->uraian) : '' }}
+                                    </textarea>
+                                </div>
                             </div>
 
 
@@ -469,16 +474,26 @@
                 }
             });
 
-            const editAsal = "{{ isset($data->asal) ? $data->asal : ''  }}";
+            const editAsal = "{{ isset($data->asal) ? $data->asal : '' }}";
             if (editAsal && editAsal?.length > 0) {
                 $("#asal").val(editAsal).trigger("change")
             }
 
-            const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : ''  }}";
+            const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : '' }}";
             if (editTujuan && editTujuan?.length > 0) {
                 $("#tujuan").val(editTujuan).trigger("change")
             }
         });
+
+
+        ClassicEditor
+            .create(document.querySelector('#uraian'))
+            .then(editor => {
+                window.editor = editor
+            })
+            .catch(error => {
+                console.error('CKEditor initialization failed:', error);
+            });
 
 
         // Define form element

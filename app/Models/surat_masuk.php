@@ -25,6 +25,7 @@ class surat_masuk extends Model
         'retensi3',
         'riwayat_mutasi',
         'upload_file',
+        'uraian',
         'created_by',
         'updated_by',
     ];

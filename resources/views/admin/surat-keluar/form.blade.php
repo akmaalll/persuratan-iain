@@ -253,6 +253,12 @@
                                     <input type="text" class="form-control" name="permintaan" id="permintaan"
                                         value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" />
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Keterangan</label>
+                                    <textarea id="uraian" name="uraian" class="form-control" id="" rows="5">
+                                        {{ isset($data->uraian) ? strip_tags($data->uraian) : '' }}
+                                    </textarea>
+                                </div>
                             </div>
 
                             <!--end::Input group-->
@@ -417,7 +423,6 @@
             });
 
             const editAsal = "{{ isset($data->asal) ? $data->asal : '' }}";
-            console.log(editAsal);
             if (editAsal && editAsal?.length > 0) {
                 $("#asal").val(editAsal).trigger("change")
             }
@@ -620,6 +625,15 @@
                 }
             }
         });
+
+        ClassicEditor
+            .create(document.querySelector('#uraian'))
+            .then(editor => {
+                window.editor = editor
+            })
+            .catch(error => {
+                console.error('CKEditor initialization failed:', error);
+            });
 
 
         const form = document.getElementById('kt_modal_new_target_form');
