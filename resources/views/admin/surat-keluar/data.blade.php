@@ -28,7 +28,7 @@
         <td>
             <span class="fw-semibold text-nowrap">
                 @if (is_numeric($v->asal))
-                    {{ $v->asalsurat->kode . ' - ' . $v->asalSurat->nama }}
+                    {{ $v->asalSurat->kode == '-' ? '' : $v->asalSurat->kode . ' - ' }} {{ $v->asalSurat->nama }}
                 @else
                     {{ $v->asal }}
                 @endif
@@ -37,7 +37,7 @@
         <td>
             <span class="fw-semibold">
                 @if (is_numeric($v->tujuan))
-                    {{ $v->tujuanSurat->nama }}
+                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }} {{ $v->tujuanSurat->nama }}
                 @else
                     {{ $v->tujuan }}
                 @endif
