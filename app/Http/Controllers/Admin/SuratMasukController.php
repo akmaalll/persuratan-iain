@@ -72,7 +72,7 @@ class SuratMasukController extends Controller
     {
         try {
             $req = $request->all();
-           
+
 
             if ($request->hasFile('upload_file')) {
                 $image = $request->file('upload_file')->getClientOriginalName();

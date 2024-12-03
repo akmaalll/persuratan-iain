@@ -76,7 +76,7 @@
                         style="display: none;">
                         <div class="row">
                             <!-- Nomor Surat -->
-                            <div class="col-md mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="input_nomor_surat" class="form-label">Nomor Surat</label>
                                 <div class="input-group">
                                     <input id="nomor" type="text" class="form-control"
@@ -106,8 +106,8 @@
                                 <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
                                 <div class="input-group">
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_surat" id="tgl_surat" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_surat" id="tgl_surat" />
                                     <button type="button" class="btn btn-outline-danger bg-secondary"
                                         onclick="clearField('tgl_surat')">
                                         <i class="fa fa-times"></i>
@@ -117,13 +117,13 @@
 
                             <!-- Tanggal Terima -->
                             <div class="col-md-4 mb-3">
-                                <label for="input_tanggal_terima" class="form-label">Tanggal Kirim</label>
+                                <label for="input_tanggal_terima" class="form-label">Tanggal Terima</label>
                                 <div class="input-group">
-                                    <input value="{{ isset($data->tgl_kirim) ? $data->tgl_kirim : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_kirim" id="tgl_kirim" />
+                                    <input value="{{ isset($data->tgl_terima) ? $data->tgl_terima : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_terima" id="tgl_terima" />
                                     <button type="button" class="btn btn-outline-danger bg-secondary"
-                                        onclick="clearField('tgl_kirim')">
+                                        onclick="clearField('tgl_terima')">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
@@ -134,8 +134,8 @@
                                 <label for="input_tanggal_input" class="form-label">Tanggal Input</label>
                                 <div class="input-group">
                                     <input value="{{ isset($data->tgl_input) ? $data->tgl_input : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_input" id="tgl_input" />
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_input" id="tgl_input" />
                                     <button type="button" class="btn btn-outline-danger bg-secondary"
                                         onclick="clearField('tgl_input')">
                                         <i class="fa fa-times"></i>
@@ -157,11 +157,11 @@
                                         <option value="sangat terbatas">Sangat Terbatas</option>
                                         <option value="rahasia">Rahasia</option>
                                     </select>
-                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
                                         style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
                                         onclick="clearField('status')">
                                         <i class="fa fa-times"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                             </div>
 
@@ -191,11 +191,11 @@
                                             <option value="{{ $v->id }}">{{ $v->nama }}</option>
                                         @endforeach
                                     </select>
-                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
                                         style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
                                         onclick="clearField('asal')">
                                         <i class="fa fa-times"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                             </div>
 
@@ -209,13 +209,12 @@
                                         @foreach (Helper::getData('kd_units') as $a)
                                             <option value="{{ $a->id }}">{{ $a->nama }}</option>
                                         @endforeach
-                                        <option value="lainnya">Lainnya (Ketikkan Tujuan)</option>
                                     </select>
-                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
                                         style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
                                         onclick="clearField('tujuan')">
                                         <i class="fa fa-times"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                             </div>
 
@@ -255,58 +254,71 @@
                                         <option value="umum">Umum</option>
                                         <option value="terjaga">Terjaga</option>
                                     </select>
-                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
                                         style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
                                         onclick="clearField('jenis')">
                                         <i class="fa fa-times"></i>
-                                    </button> --}}
+                                    </button>
                                 </div>
                             </div>
 
                             <!-- Retensi Aktif -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
-                                <div class="input-group">
-                                    <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="retensi" id="retensi" />
-                                    <button type="button" class="btn btn-outline-danger bg-secondary"
-                                        onclick="clearField('retensi')">
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select mb-2" data-control="select2" name="retensi"
+                                        id="retensi" data-selected="{{ $data->retensi ?? '' }}">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <button type="button"
+                                        style="margin-left: -6px; margin-top: -7px; border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        class="btn btn-outline-danger bg-secondary" onclick="clearField('retensi')">
                                         <i class="fa fa-times"></i>
                                     </button>
-
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
+                                    {{-- <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                    name="retensi" id="retensi" /> --}}
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('retensi')">
+                                    <i class="fa fa-times"></i>
+                                </button> --}}
                                 </div>
                             </div>
 
                             <!-- Retensi Inaktif -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
-                                <div class="input-group">
-                                    <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="retensi2" id="retensi2" />
-                                    <button type="button" class="btn btn-outline-danger bg-secondary"
-                                        onclick="clearField('retensi2')">
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select mb-2" data-control="select2" name="retensi2"
+                                        id="retensi2" data-selected="{{ $data->retensi2 ?? '' }}">
+                                        <option value="">Pilih Retensi...</option>
+                                        <!-- Opsi retensi inaktif akan ditambahkan melalui JavaScript -->
+                                    </select>
+                                    <button type="button"
+                                        style="margin-left: -6px; margin-top: -7px; border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        class="btn btn-outline-danger bg-secondary" onclick="clearField('retensi2')">
                                         <i class="fa fa-times"></i>
                                     </button>
-                                </div>
-                            </div>
+                                    <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                        <strong>Warning:</strong> Retensi period has expired!
+                                    </div>
 
-                            <!-- Input for Retensi Nasib  -->
-                            <div class="col-md-4 mb-3">
-                                <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
-                                <div class="d-flex">
-                                    <select class="form-select mb-2" data-control="select2" data-hide-search="false"
-                                        name="retensi3" id="retensi3" data-placeholder="Pilih Retensi Nasib">
-                                        <option value="">Status Retensi</option>
-                                        <option value="musnah">Musnah</option>
-                                        <option value="permanen">Permanen</option>
-                                    </select>
+                                    {{-- <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
+                                    placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                    name="retensi2" id="retensi2" /> --}}
+                                    {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('retensi2')">
+                                    <i class="fa fa-times"></i>
+                                </button> --}}
                                 </div>
                             </div>
 
                             <!-- Retensi Nasib -->
-                            {{-- <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
                                 <div class="input-group-btn" style="display: flex; align-items: center;">
                                     <select class="form-select mb-2"
@@ -314,8 +326,8 @@
                                         data-control="select2" name="retensi3" id="retensi3"
                                         data-placeholder="Pilih Retensi Nasib">
                                         <option value="">Status Retensi</option>
-                                        <option value="aktif">Aktif</option>
-                                        <option value="inaktif">Inaktif</option>
+                                        <option value="musnah">Musnah</option>
+                                        <option value="permanen">Permanen</option>
                                     </select>
                                     <button type="button"
                                         style="margin-left: -6px; margin-top: -7px; border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
@@ -323,7 +335,8 @@
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
-                            </div> --}}
+                            </div>
+
                         </div>
                         <div class="row">
 
@@ -352,7 +365,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Global Clear All Button -->
                         <div class="mt-3">
                             <button id="clear_all" class="btn btn-secondary">
@@ -477,6 +489,62 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        // Fungsi untuk memperbarui pilihan retensi aktif dan inaktif
+        function updateRetensi() {
+            var tglSurat = document.getElementById('tgl_surat').value;
+
+            if (tglSurat) {
+                var baseDate = new Date(tglSurat); // Mengambil nilai tgl_surat
+                var retensiSelect = document.getElementById('retensi');
+                var retensiSelect2 = document.getElementById('retensi2');
+
+                // Ambil nilai yang sudah dipilih dari atribut data-selected
+                var selectedRetensi = retensiSelect.getAttribute('data-selected');
+                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
+
+                // Membersihkan opsi sebelumnya
+                retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
+                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+
+                // Menambahkan opsi retensi aktif (1-5 Tahun)
+                for (var i = 1; i <= 5; i++) {
+                    var retensiDate = new Date(baseDate);
+                    retensiDate.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option = document.createElement("option");
+                    option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
+                    if (option.value === selectedRetensi) {
+                        option.selected = true;
+                    }
+                    retensiSelect.appendChild(option);
+                }
+
+                // Menambahkan opsi retensi inaktif (2-15 Tahun)
+                for (var i = 2; i <= 15; i++) {
+                    var retensiDate2 = new Date(baseDate);
+                    retensiDate2.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option2 = document.createElement("option");
+                    option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
+                    if (option2.value === selectedRetensi2) {
+                        option2.selected = true;
+                    }
+                    retensiSelect2.appendChild(option2);
+                }
+            }
+        }
+
+        // Event listener untuk memperbarui retensi setiap kali tgl_surat diubah
+        document.getElementById('tgl_surat').addEventListener('change', updateRetensi);
+
+        // Memanggil fungsi saat halaman pertama kali dimuat jika tgl_surat sudah ada
+        if (document.getElementById('tgl_surat').value) {
+            updateRetensi();
+        }
+
+
         $(document).ready(function() {
             $("#status").select2({
                 allowClear: true
