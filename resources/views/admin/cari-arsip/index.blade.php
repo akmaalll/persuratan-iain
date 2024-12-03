@@ -253,18 +253,6 @@
                         </div>
 
                         <div class="col-md-3 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Upload</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control reset-filter" name="upload" id="upload"
-                                    placeholder="Masukkan nomor box surat" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
-                                    onclick="clearField('upload')">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
 
                             <select class="form-select mb-2 opsiLain" data-control="select2" name="retensi"
@@ -291,13 +279,6 @@
                         </div>
 
 
-
-
-                    </div>
-
-                    <!-- Status dan Asal -->
-                    <div class="row g-9 mt-0">
-
                         <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
@@ -315,6 +296,11 @@
                                 <strong>Warning:</strong> Retensi period has expired!
                             </div>
                         </div>
+
+                    </div>
+
+                    <!-- Status dan Asal -->
+                    <div class="row g-9 mt-0">
 
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Keterangan</label>
@@ -628,28 +614,31 @@
 
             // clear filter
             document.getElementById('clear_filter').addEventListener('click', function() {
-            const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
-                'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'upload', 'dari_tanggal', 'sampai_tanggal', 
-                'kd_klasifikasi_id', 'tgl', 'pencipta', 'unit_pengolah', 'lokal', 'jenis_media', 'ket_keaslian', 'jumlah', 
-                'no_rak', 'no_box', 'ket'
-            ];
+                const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima',
+                    'tgl_input',
+                    'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'dari_tanggal',
+                    'sampai_tanggal',
+                    'kd_klasifikasi_id', 'tgl', 'pencipta', 'unit_pengolah', 'lokal', 'jenis_media',
+                    'ket_keaslian', 'jumlah',
+                    'no_rak', 'no_box', 'ket'
+                ];
 
-            fields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field) {
-                    if (field.type === 'select-one') {
-                        // Jika Select2 digunakan, reset dengan Select2 API
-                        if ($(field).data('select2')) {
-                            $(field).val(null).trigger('change'); // Reset Select2
+                fields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        if (field.type === 'select-one') {
+                            // Jika Select2 digunakan, reset dengan Select2 API
+                            if ($(field).data('select2')) {
+                                $(field).val(null).trigger('change'); // Reset Select2
+                            } else {
+                                field.selectedIndex = 0; // Reset dropdown standar
+                            }
                         } else {
-                            field.selectedIndex = 0; // Reset dropdown standar
+                            field.value = ''; // Kosongkan input teks atau tanggal
                         }
-                    } else {
-                        field.value = ''; // Kosongkan input teks atau tanggal
                     }
-                }
+                });
             });
-        });
 
             // more filter
             $('#search_filter').on('click', function() {
@@ -671,7 +660,6 @@
                 let no_box = $('#no_box').val()
                 let dari_tanggal = $('#dari_tanggal').val()
                 let sampai_tanggal = $('#sampai_tanggal').val()
-                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -692,7 +680,6 @@
                     'no_box': no_box || null,
                     'dari_tanggal': dari_tanggal || null,
                     'sampai_tanggal': sampai_tanggal || null,
-                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -728,7 +715,6 @@
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
                 let jumlah = $('#jumlah').val()
-                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -747,7 +733,6 @@
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
                     'jumlah': jumlah || null,
-                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -784,7 +769,6 @@
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
                 let jumlah = $('#jumlah').val()
-                let upload = $('#upload').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -803,7 +787,6 @@
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
                     'jumlah': jumlah || null,
-                    'upload': upload || null,
                 }
 
                 // Object.values(formData).forEach((key) => {

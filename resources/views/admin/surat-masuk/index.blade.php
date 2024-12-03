@@ -289,8 +289,8 @@
                                     data-control="select2" name="retensi3" id="retensi3"
                                     data-placeholder="Pilih Retensi Nasib">
                                     <option value="">Status Retensi</option>
-                                    <option value="aktif">Aktif</option>
-                                    <option value="inaktif">Inaktif</option>
+                                    <option value="musnah">Musnah</option>
+                                    <option value="permanen">Permanen</option>
                                 </select>
                             </div>
                         </div>

@@ -263,20 +263,6 @@
                                 </div>
                             </div>
 
-
-                            <!-- Input for Retensi Nasib  -->
-                            <div class="col-md-4 mb-3">
-                                <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
-                                <div class="d-flex">
-                                    <select class="form-select mb-2" data-control="select2" data-hide-search="false"
-                                        name="retensi3" id="retensi3" data-placeholder="Pilih Retensi Nasib">
-                                        <option value="">Status Retensi</option>
-                                        <option value="aktif">Aktif</option>
-                                        <option value="inaktif">Inaktif</option>
-                                    </select>
-                                </div>
-                            </div>
-
                             <!-- Retensi Aktif -->
                             <div class="col-md-4 mb-3">
                                 <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
@@ -303,6 +289,19 @@
                                         onclick="clearField('retensi2')">
                                         <i class="fa fa-times"></i>
                                     </button>
+                                </div>
+                            </div>
+
+                            <!-- Input for Retensi Nasib  -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_retensi_nasib" class="form-label">Retensi Nasib</label>
+                                <div class="d-flex">
+                                    <select class="form-select mb-2" data-control="select2" data-hide-search="false"
+                                        name="retensi3" id="retensi3" data-placeholder="Pilih Retensi Nasib">
+                                        <option value="">Status Retensi</option>
+                                        <option value="musnah">Musnah</option>
+                                        <option value="permanen">Permanen</option>
+                                    </select>
                                 </div>
                             </div>
 

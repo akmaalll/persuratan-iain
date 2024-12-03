@@ -13,6 +13,9 @@ interface SuratKeluarContract
 
 	public function paginated(array $request);
 	public function filter(array $request);
-
+	public function find(int $id);
+	public function store(array $request);
+	public function update(array $request, int $id);
+	public function delete(int $id);
 	public function getLastNumber(array $criteria);
 }
