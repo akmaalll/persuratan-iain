@@ -256,13 +256,21 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_retensi_aktif" class="form-label">Retensi Aktif</label>
                             <div class="input-group">
-                                <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
+                                <select class="form-select mb-2" data-control="select2" name="retensi" id="retensi"
+                                    data-selected="{{ $data->retensi ?? '' }}">
+                                    <option value="">Pilih Retensi...</option>
+                                    <!-- Opsi retensi akan ditambahkan melalui JavaScript -->
+                                </select>
+                                <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                    <strong>Warning:</strong> Retensi period has expired!
+                                </div>
+                                {{-- <input value="{{ isset($data->retensi) ? $data->retensi : '' }}" type="text"
                                     placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="retensi" id="retensi" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    name="retensi" id="retensi" /> --}}
+                                {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('retensi')">
                                     <i class="fa fa-times"></i>
-                                </button>
+                                </button> --}}
                             </div>
                         </div>
 
@@ -270,13 +278,21 @@
                         <div class="col-md-4 mb-3">
                             <label for="input_retensi_inaktif" class="form-label">Retensi Inaktif</label>
                             <div class="input-group">
-                                <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
+                                <select class="form-select mb-2" data-control="select2" name="retensi2" id="retensi2"
+                                    data-selected="{{ $data->retensi2 ?? '' }}">
+                                    <option value="">Pilih Retensi...</option>
+                                    <!-- Opsi retensi inaktif akan ditambahkan melalui JavaScript -->
+                                </select>
+                                <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
+                                    <strong>Warning:</strong> Retensi period has expired!
+                                </div>
+                                {{-- <input value="{{ isset($data->retensi2) ? $data->retensi2 : '' }}" type="text"
                                     placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
-                                    name="retensi2" id="retensi2" />
-                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    name="retensi2" id="retensi2" /> --}}
+                                {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('retensi2')">
                                     <i class="fa fa-times"></i>
-                                </button>
+                                </button> --}}
                             </div>
                         </div>
 
@@ -436,6 +452,62 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        // Fungsi untuk memperbarui pilihan retensi aktif dan inaktif
+        function updateRetensi() {
+            var tglSurat = document.getElementById('tgl_surat').value;
+
+            if (tglSurat) {
+                var baseDate = new Date(tglSurat); // Mengambil nilai tgl_surat
+                var retensiSelect = document.getElementById('retensi');
+                var retensiSelect2 = document.getElementById('retensi2');
+
+                // Ambil nilai yang sudah dipilih dari atribut data-selected
+                var selectedRetensi = retensiSelect.getAttribute('data-selected');
+                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
+
+                // Membersihkan opsi sebelumnya
+                retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
+                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+
+                // Menambahkan opsi retensi aktif (1-5 Tahun)
+                for (var i = 1; i <= 5; i++) {
+                    var retensiDate = new Date(baseDate);
+                    retensiDate.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option = document.createElement("option");
+                    option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
+                    if (option.value === selectedRetensi) {
+                        option.selected = true;
+                    }
+                    retensiSelect.appendChild(option);
+                }
+
+                // Menambahkan opsi retensi inaktif (2-15 Tahun)
+                for (var i = 2; i <= 15; i++) {
+                    var retensiDate2 = new Date(baseDate);
+                    retensiDate2.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+
+                    var option2 = document.createElement("option");
+                    option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
+                    if (option2.value === selectedRetensi2) {
+                        option2.selected = true;
+                    }
+                    retensiSelect2.appendChild(option2);
+                }
+            }
+        }
+
+        // Event listener untuk memperbarui retensi setiap kali tgl_surat diubah
+        document.getElementById('tgl_surat').addEventListener('change', updateRetensi);
+
+        // Memanggil fungsi saat halaman pertama kali dimuat jika tgl_surat sudah ada
+        if (document.getElementById('tgl_surat').value) {
+            updateRetensi();
+        }
+
+
         $(document).ready(function() {
             $("#status").select2({
                 allowClear: true
@@ -449,6 +521,12 @@
             $("#jenis").select2({
                 allowClear: true
             });
+            // $("#retensi").select2({
+            //     allowClear: true
+            // });
+            // $("#retensi2").select2({
+            //     allowClear: true
+            // });
             $("#retensi3").select2({
                 allowClear: true
             });
