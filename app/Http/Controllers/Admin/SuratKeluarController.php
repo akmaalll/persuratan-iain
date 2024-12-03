@@ -78,13 +78,6 @@ class SuratKeluarController extends Controller
                 $req['file'] = $file_name;
             }
 
-            if ($req['asal'] == '20') {
-                $req['asal'] = $req['asalLain'];
-            }
-
-            if ($req['tujuan'] == '20') {
-                $req['tujuan'] = $req['tujuanLain'];
-            }
 
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
@@ -120,12 +113,6 @@ class SuratKeluarController extends Controller
                 $req['file'] = $req['file_old'];
             }
 
-            if ($req['asal'] == '20') {
-                $req['asal'] = $req['asalLain'];
-            }
-            if ($req['tujuan'] == '20') {
-                $req['tujuan'] = $req['tujuanLain'];
-            }
 
             $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $id);

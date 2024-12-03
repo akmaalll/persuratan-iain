@@ -97,18 +97,18 @@ class ArsipSuratController extends Controller
             }
 
             // handle pencipta option
-            if ($req['pencipta'] == '20') {
-                $req['pencipta'] = $req['penciptaLain'];
-            }
-            if ($req['unit_pengolah'] == '20') {
-                $req['unit_pengolah'] = $req['unitLain'];
-            }
-            if ($req['lokal'] == '20') {
-                $req['lokal'] = $req['lokalLain'];
-            }
-            if ($req['jenis_media'] == '20') {
-                $req['jenis_media'] = $req['mediaLain'];
-            }
+            // if ($req['pencipta'] == '20') {
+            //     $req['pencipta'] = $req['penciptaLain'];
+            // }
+            // if ($req['unit_pengolah'] == '20') {
+            //     $req['unit_pengolah'] = $req['unitLain'];
+            // }
+            // if ($req['lokal'] == '20') {
+            //     $req['lokal'] = $req['lokalLain'];
+            // }
+            // if ($req['jenis_media'] == '20') {
+            //     $req['jenis_media'] = $req['mediaLain'];
+            // }
 
 
             $req['created_by'] = Auth::user()->id;
@@ -140,18 +140,18 @@ class ArsipSuratController extends Controller
             $data = $this->repo->find($req['id']);
 
             // handle pencipta option jika "Lainnya"
-            if ($req['pencipta'] == '20') {
-                $req['pencipta'] = $req['penciptaLain'];
-            }
-            if ($req['unit_pengolah'] == '20') {
-                $req['unit_pengolah'] = $req['unitLain'];
-            }
-            if ($req['lokal'] == '20') {
-                $req['lokal'] = $req['lokalLain'];
-            }
-            if ($req['jenis_media'] == '20') {
-                $req['jenis_media'] = $req['mediaLain'];
-            }
+            // if ($req['pencipta'] == '20') {
+            //     $req['pencipta'] = $req['penciptaLain'];
+            // }
+            // if ($req['unit_pengolah'] == '20') {
+            //     $req['unit_pengolah'] = $req['unitLain'];
+            // }
+            // if ($req['lokal'] == '20') {
+            //     $req['lokal'] = $req['lokalLain'];
+            // }
+            // if ($req['jenis_media'] == '20') {
+            //     $req['jenis_media'] = $req['mediaLain'];
+            // }
 
             if ($request->hasFile('file')) {
                 $files = $request->file('file')->getClientOriginalName();
