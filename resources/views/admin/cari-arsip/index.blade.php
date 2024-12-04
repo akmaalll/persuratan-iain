@@ -86,16 +86,22 @@
                         {{-- untuk tabel kode klasifikasi --}}
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
-                            <select class="form-select reset-filter opsiLain" name="kd_klasifikasi_id"
-                                id="kd_klasifikasi_id" data-tags="true" data-control="select2" data-hide-search="false"
-                                data-placeholder="Semua">
-                                <option value="" selected>Semua</option>
-                                @foreach (Helper::getData('kd_klasifikasis') as $v)
-                                    <option value="{{ $v->id }}">
-                                        {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            {{-- <div class="input-group"> --}}
+                                <select class="form-select reset-filter opsiLain" name="kd_klasifikasi_id"
+                                    id="kd_klasifikasi_id" data-tags="true" data-control="select2" data-hide-search="false"
+                                    data-placeholder="Semua">
+                                    <option value="" selected>Semua</option>
+                                    @foreach (Helper::getData('kd_klasifikasis') as $v)
+                                        <option value="{{ $v->id }}">
+                                            {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('kd_klasifikasi_id')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div> --}}
 
                         </div>
 
@@ -167,7 +173,8 @@
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Lokal Arsip</label>
                             <select class="form-select reset-filter opsiLain" name="lokal" id="lokal"
-                                data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
+                                data-control="select2" data-tags="true" data-hide-search="false"
+                                data-placeholder="Semua">
                                 <option value="">Semua</option>
                                 @foreach (Helper::getData('kd_units') as $v)
                                     <option {{ isset($data->id) && $data->lokal == $v->id ? 'selected' : '' }}
@@ -201,7 +208,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2 fv-row">
+                        {{-- <div class="col-md-2 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Keterangan Keaslian</label>
                             <select data-placeholder="Semua" data-tags="true" name="ket" id="ket"
                                 class="form-select reset-filter opsiLain">
@@ -209,9 +216,9 @@
                                 <option value="Asli">Asli</option>
                                 <option value="Salinan">Salinan</option>
                             </select>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-2 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Jumlah</label>
                             <div class="input-group">
                                 <input type="number" class="form-control reset-filter" name="jumlah" id="jumlah"
@@ -223,7 +230,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Rak / Lemari</label>
                             <div class="input-group">
                                 <input type="text" class="form-control reset-filter" name="no_rak" id="no_rak"
