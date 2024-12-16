@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataKlasifikasiController;
 use App\Http\Controllers\Admin\LogAktivitasController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\NoSuratController;
 use App\Http\Controllers\Admin\SuratMasukController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SuratKeluarController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Auth\LoginController as Auths;
+use App\Models\NoSurat;
 use Illuminate\Support\Facades\Redirect;
 
 // Route::get('suratmasuk', SuratMasuk::class);
@@ -136,6 +138,19 @@ Route::domain('')->group(function () {
             Route::get('/{id}/edit', [DataKlasifikasiController::class, 'edit'])->name('data-klasifikasi.edit');
             Route::put('/{id}', [DataKlasifikasiController::class, 'update'])->name('data-klasifikasi.update');
             Route::delete('/{id}', [DataKlasifikasiController::class, 'destroy'])->name('data-klasifikasi.delete');
+        });
+
+        //no-surat
+        Route::group(['prefix' => '/no-surat'], function () {
+            Route::get('/', [NoSuratController::class, 'index'])->name('no-surat.index');
+            Route::get('/data', [NoSuratController::class, 'data'])->name('no-surat.data');
+            Route::get('/create', [NoSuratController::class, 'create'])->name('no-surat.create');
+            Route::post('/store', [NoSuratController::class, 'store'])->name('no-surat.store');
+            Route::get('/{id}/edit', [NoSuratController::class, 'edit'])->name('no-surat.edit');
+            Route::put('/{id}', [NoSuratController::class, 'update'])->name('no-surat.update');
+            Route::delete('/{id}', [NoSuratController::class, 'destroy'])->name('no-surat.delete');
+            Route::post('/last-number', [NoSuratController::class, 'getLastNumber'])->name('no-surat.last-number');
+
         });
 
         # USER SETTING
