@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('tgl_surat');
             $table->string('nomor');
             $table->string('status');
+            $table->string('jenis'); 
             $table->string('perihal');
             $table->string('asal');
             $table->timestamps();

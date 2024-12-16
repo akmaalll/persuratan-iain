@@ -76,9 +76,16 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
-                                    <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" readonly />
+                                    <label class="fs-6 fw-semibold mb-2">Jenis</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Jenis" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option
+                                            {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
+                                            value="nomor_surat">Nomor Surat</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
+                                            value="nomor_sk">Nomor SK</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -126,6 +133,14 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-12">
+                                <div class="col-md-12 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor" id="nomor"
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" readonly />
                                 </div>
                             </div>
                             <!--end::Input group-->

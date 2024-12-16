@@ -22,6 +22,11 @@
             </span>
         </td>
         <td>
+            <span class="fw-semibold text-nowrap">
+                {{ $v->jenis }}
+            </span>
+        </td>
+        <td>
             <span class="fw-semibold">
                 {{ $v->status }}
             </span>

@@ -86,6 +86,7 @@
                                     <th class="min-w-140px"> Tanggal Surat </th>
                                     <th class="min-w-140px"> Nomor </th>
                                     <th class="min-w-140px"> Perihal </th>
+                                    <th class="min-w-140px"> Jenis </th>
                                     <th class="min-w-140px"> Status </th>
                                     <th class="min-w-140px"> Asal </th>
                                     <th class="text-end min-w-70px"> Aksi </th>
