@@ -12,6 +12,7 @@ class NoSurat extends Model
         'kd_klasifikasi_id',
         'tgl_surat',
         'nomor',
+        'jenis',
         'perihal',
         'status',
         'asal',
