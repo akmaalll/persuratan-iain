@@ -29,7 +29,7 @@
         <td>
             <span class="fw-semibold text-nowrap">
                 @if (is_numeric($v->asal))
-                    {{ $v->asalsurat->kode == '-' ? '' : $v->asalSurat->kode . ' - '  }}  {{$v->asalSurat->nama }}
+                    {{ $v->asalsurat->kode == '-' ? '' : $v->asalSurat->kode . ' - ' }} {{ $v->asalSurat->nama }}
                 @else
                     {{ $v->asal }}
                 @endif
@@ -38,7 +38,7 @@
         <td>
             <span class="fw-semibold">
                 @if (is_numeric($v->tujuan))
-                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }}  {{ $v->tujuanSurat->nama }}
+                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }} {{ $v->tujuanSurat->nama }}
                 @else
                     {{ $v->tujuan }}
                 @endif
@@ -51,6 +51,16 @@
                 {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi2) }} (Inaktif Hingga
                 {{ Helper::getDateIndo($v->retensi2) }}) <br>
                 {{ $v->retensi3 }} (Nasib)<br>
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_box }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_rak }}
             </span>
         </td>
         @if (empty($v->upload_file))

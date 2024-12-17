@@ -133,6 +133,8 @@
                 <th>Kepada</th>
                 <th>Jenis</th>
                 <th>Tujuan Surat</th>
+                {{-- <th>Nomor Box</th>
+                <th>Nomor Rak</th> --}}
                 <th>Retensi</th>
             </tr>
         </thead>
@@ -163,6 +165,8 @@
                             {{ $item->tujuan }}
                         @endif
                     </td>
+                    {{-- <td>{{ $item->nomor_box }}</td>
+                    <td>{{ $item->nomor_rak }}</td> --}}
                     <td>
                         <span class="fw-semibold">
                             - {{ Helper::getRentangTanggal($item->tgl, $item->retensi) }} ( Aktif Hingga

@@ -52,6 +52,16 @@
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_box }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_rak }}
+            </span>
+        </td>
         @if (empty($v->file))
             <td>
                 <span class="fw-semibold">

@@ -26,6 +26,8 @@ class surat_keluar extends Model
         'retensi3',
         'file',
         'permintaan',
+        'nomor_box',
+        'nomor_rak',
         'uraian',
         'created_by',
         'updated_by',
