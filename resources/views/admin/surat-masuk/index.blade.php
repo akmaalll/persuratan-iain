@@ -348,6 +348,19 @@
                             </div>
                         </div>
 
+                        <!-- Nomor Box -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_perihal" class="form-label">Nomor Box</label>
+                            <div class="input-group">
+                                <input id="nomor_box" type="text" class="form-control"
+                                    placeholder="Masukkan Nomor Box">
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('nomor_box')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="row">
 
@@ -371,6 +384,18 @@
                                     id="sampai_tanggal" />
                                 <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('sampai_tanggal')">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Nomor Rak -->
+                        <div class="col-md-4 mb-3">
+                            <label for="input_perihal" class="form-label">Nomor Rak</label>
+                            <div class="input-group">
+                                <input id="nomor_rak" type="text" class="form-control"
+                                    placeholder="Masukkan Nomor Rak">
+                                <button type="button" class="btn btn-outline-danger bg-secondary"
+                                    onclick="clearField('nomor_rak')">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </div>
@@ -419,6 +444,8 @@
                                     <th class="min-w-120px">Asal Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
                                     <th class="min-w-120px">Retensi</th>
+                                    <th class="min-w-120px">Nomor Box</th>
+                                    <th class="min-w-120px">Nomor Rak</th>
                                     <th class="min-w-120px">File</th>
                                     <th class="text-center min-w-70px">Actions</th>
                                 </tr>
@@ -588,7 +615,7 @@
         document.getElementById('clear_all').addEventListener('click', function() {
             const fields = ['nomor', 'kepada', 'tgl_surat', 'perihal', 'status', 'asal', 'tgl_terima', 'tgl_input',
                 'ttd', 'tujuan', 'jenis', 'retensi', 'retensi2', 'retensi3', 'upload', 'dari_tanggal',
-                'sampai_tanggal'
+                'sampai_tanggal', 'nomor_rak', 'nomor_box'
             ];
 
             fields.forEach(fieldId => {
@@ -791,8 +818,10 @@
                 let retensi = $('#retensi').val()
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
+                let nomor_box = $('#nomor_box').val()
                 let dari_tanggal = $('#dari_tanggal').val()
                 let sampai_tanggal = $('#sampai_tanggal').val()
+                let nomor_rak = $('#nomor_rak').val()
 
                 const formData = {
                     'tgl_surat': tgl_surat || null,
@@ -809,8 +838,10 @@
                     'retensi': retensi || null,
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
+                    'nomor_box': nomor_box || null,
                     'dari_tanggal': dari_tanggal || null,
                     'sampai_tanggal': sampai_tanggal || null,
+                    'nomor_rak': nomor_rak || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -850,8 +881,10 @@
                 let retensi = $('#retensi').val()
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
+                let nomor_box = $('#nomor_box').val()
                 let dari_tanggal = $('#dari_tanggal').val()
                 let sampai_tanggal = $('#sampai_tanggal').val()
+                let nomor_rak = $('#nomor_rak').val()
 
                 const formData = {
                     'tgl_surat': tgl_surat || null,
@@ -868,8 +901,10 @@
                     'retensi': retensi || null,
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
+                    'nomor_box': nomor_box || null,
                     'dari_tanggal': dari_tanggal || null,
                     'sampai_tanggal': sampai_tanggal || null,
+                    'nomor_rak': nomor_rak || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -904,8 +939,10 @@
                 let retensi = $('#retensi').val()
                 let retensi2 = $('#retensi2').val()
                 let retensi3 = $('#retensi3').val()
+                let nomor_box = $('#nomor_box').val()
                 let dari_tanggal = $('#dari_tanggal').val()
                 let sampai_tanggal = $('#sampai_tanggal').val()
+                let nomor_rak = $('#nomor_rak').val()
 
                 const formData = {
                     'tgl_surat': tgl_surat || null,
@@ -922,8 +959,10 @@
                     'retensi': retensi || null,
                     'retensi2': retensi2 || null,
                     'retensi3': retensi3 || null,
+                    'nomor_box': nomor_box || null,
                     'dari_tanggal': dari_tanggal || null,
                     'sampai_tanggal': sampai_tanggal || null,
+                    'nomor_rak': nomor_rak || null,
                 }
 
                 // Object.values(formData).forEach((key) => {

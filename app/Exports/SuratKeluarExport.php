@@ -39,6 +39,8 @@ class SuratKeluarExport implements FromCollection, WithHeadings, WithStyles, Wit
                 'tujuan' => $item->tujuan,
                 'kepada' => $item->kepada,
                 'jenis' => $item->jenis,
+                'nomor_box' => $item->nomor_box,
+                'nomor_rak' => $item->nomor_rak,
                 'Retensi' => strip_tags('<span class="fw-semibold text-nowrap">'
                     . Helper::getRentangTanggal($item->tgl, $item->retensi) . ' ( Aktif Hingga '
                     . Helper::getDateIndo($item->retensi) . ' ) <br>'
@@ -56,7 +58,7 @@ class SuratKeluarExport implements FromCollection, WithHeadings, WithStyles, Wit
         return [
             [$this->header], // Judul di baris pertama
             [], // Baris kosong untuk spasi
-            ['No', 'Tanggal Surat', 'Nomor', 'Perihal', 'Status', 'Asal', 'Tanggal Terima', 'Tanggal Input', 'Ttd', 'Tujuan','kepada', 'Jenis', 'Retensi']
+            ['No', 'Tanggal Surat', 'Nomor', 'Perihal', 'Status', 'Asal', 'Tanggal Terima', 'Tanggal Input', 'Ttd', 'Tujuan', 'kepada', 'Jenis', 'Nomor Box', 'Nomor Rak', 'Retensi']
         ];
     }
 
@@ -76,12 +78,12 @@ class SuratKeluarExport implements FromCollection, WithHeadings, WithStyles, Wit
                 $sheet = $event->sheet;
 
                 // Set AutoSize untuk setiap kolom
-                foreach (range('A', 'J') as $col) {
+                foreach (range('A', 'O') as $col) {
                     $sheet->getColumnDimension($col)->setAutoSize(true);
                 }
 
                 // Set border pada tabel
-                $sheet->getStyle('A3:J' . (count($this->data) + 3))->applyFromArray([
+                $sheet->getStyle('A3:O' . (count($this->data) + 3))->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -91,7 +93,7 @@ class SuratKeluarExport implements FromCollection, WithHeadings, WithStyles, Wit
                 ]);
 
                 // Merge cell untuk judul
-                $sheet->mergeCells('A1:J1');
+                $sheet->mergeCells('A1:O1');
                 $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
             },
         ];
