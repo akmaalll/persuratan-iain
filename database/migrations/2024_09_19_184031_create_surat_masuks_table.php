@@ -28,9 +28,12 @@ return new class extends Migration
             $table->string('retensi2');
             $table->string('retensi3');
             $table->string('riwayat_mutasi');
+				$table->string('uraian');
             $table->string('upload_file');
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
+            $table->string('status')->nullable();
+				$table->string('status_arsip')->nullable();
             $table->timestamps();
         });
     }

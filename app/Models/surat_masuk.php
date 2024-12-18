@@ -28,6 +28,7 @@ class surat_masuk extends Model
         'uraian',
         'created_by',
         'updated_by',
+		  'status_arsip'
     ];
 
     public function asalSurat()

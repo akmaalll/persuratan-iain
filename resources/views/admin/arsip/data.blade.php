@@ -18,7 +18,11 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} - {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+					@if($v->kd_klasifikasi_id != 0)
+						{{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} - {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+					@else
+						Tidak ada klasifikasi
+					@endif
             </span>
         </td>
         {{-- <td>

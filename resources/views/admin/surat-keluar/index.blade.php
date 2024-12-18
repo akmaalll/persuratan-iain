@@ -23,7 +23,6 @@
         @endslot
     @endcomponent
     <!--end::Toolbar-->
-
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
@@ -420,6 +419,7 @@
                                     <th class="min-w-120px">Asal Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
                                     <th class="min-w-120px">Retensi</th>
+                                    <th class="min-w-120px">Status Arsip</th>
                                     <th class="min-w-120px">File</th>
                                     <th class="text-center min-w-70px">Actions</th>
                                 </tr>
@@ -428,7 +428,6 @@
                             <tbody class="fw-semibold text-gray-600 datatables">
 
                             </tbody>
-
                             {{-- <tbody class="fw-semibold text-gray-600">
                                 <tr>
                                     <td class="text-end">
@@ -482,7 +481,7 @@
             <!--end::Products-->
         </div>
         <!--end::Content container-->
-    </div>
+	 </div>
     </div>
     <!--end::Content-->
 @endsection
@@ -718,10 +717,10 @@
                 loadpage(per_page, '');
             });
 
-            $("#button_refresh").on('click', function(event) {
-                $('#input_search').val('');
-                loadpage(5, '');
-            });
+				$("#storeArsip").on('click', function(event) {
+					console.log('data stored');
+				});
+
 
             $("#button_refresh").on('click', function(event) {
                 $('#input_search').val('');
@@ -891,6 +890,10 @@
 
             });
 
+				let status_arsip = '{{ request()->status_arsip ?? false }}' || false;
+			  if(status_arsip) {
+				  toastr.success("Berhasil arsipkan surat!")
+			  }
 
             // proses delete data
             $('body').on('click', '.deleteData', function() {
