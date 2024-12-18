@@ -94,7 +94,7 @@
         @endif
         <td class="text-nowrap">
             @if ($v->status_arsip != 'arsip')
-                @if ('2027-10-17' == $v->retensi)
+                @if (date('Y-m-d') == $v->retensi)
                     <a href="{{ route('surat-masuk.arsip', $v->id) }}" data-toggle="tooltip"
                         title="Export data ke arsip">
                         <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
