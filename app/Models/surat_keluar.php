@@ -31,6 +31,7 @@ class surat_keluar extends Model
         'uraian',
         'created_by',
         'updated_by',
+		  'status_arsip'
     ];
 
     public function klasifikasi()

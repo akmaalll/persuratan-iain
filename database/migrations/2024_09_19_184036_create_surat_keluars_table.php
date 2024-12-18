@@ -30,10 +30,12 @@ return new class extends Migration
             $table->string('retensi3');
             $table->string('file');
             $table->string('permintaan');
+            $table->text('uraian');
             $table->string('nomor_box')->nullable();
             $table->string('nomor_rak')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
+            $table->string('status_arsip')->nullable();
             $table->timestamps();
         });
     }

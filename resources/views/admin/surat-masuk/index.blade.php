@@ -444,6 +444,7 @@
                                     <th class="min-w-120px">Asal Surat</th>
                                     <th class="min-w-120px">Tujuan Surat</th>
                                     <th class="min-w-120px">Retensi</th>
+                                    <th class="min-w-120px">Status Arsip</th>
                                     <th class="min-w-120px">Nomor Box</th>
                                     <th class="min-w-120px">Nomor Rak</th>
                                     <th class="min-w-120px">File</th>
@@ -979,6 +980,11 @@
 
 
             });
+
+				let status_arsip = '{{ request()->status_arsip ?? false }}' || false;
+			  if(status_arsip) {
+				  toastr.success("Berhasil arsipkan surat!")
+			  }
 
             // proses delete data
             $('body').on('click', '.deleteData', function() {

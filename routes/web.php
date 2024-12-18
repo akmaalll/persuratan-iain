@@ -65,6 +65,7 @@ Route::domain('')->group(function () {
             Route::delete('/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
             Route::get('/export', [SuratMasukController::class, 'export'])->name('surat-masuk.export');
             Route::get('/cetak', [SuratMasukController::class, 'cetakPdf'])->name('surat-masuk.pdf');
+            Route::get('/arsip/{id}', [SuratMasukController::class, 'storeArsip'])->name('surat-masuk.arsip');
         });
 
 
@@ -116,6 +117,7 @@ Route::domain('')->group(function () {
             Route::get('/export', [SuratKeluarController::class, 'export'])->name('surat-keluar.export');
             Route::get('/cetak', [SuratKeluarController::class, 'cetakPdf'])->name('surat-keluar.pdf');
             Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])->name('surat-keluar.last-number');
+            Route::get('/arsip/{id}', [SuratKeluarController::class, 'storeArsip'])->name('surat-keluar.arsip');
         });
 
         // Log aktivitas

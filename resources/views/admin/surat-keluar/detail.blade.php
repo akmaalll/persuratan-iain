@@ -198,6 +198,13 @@
                                     <input type="text" class="form-control" name="permintaan" id="permintaan"
                                         value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" readonly />
                                 </div>
+										  <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Keterangan</label>
+                                    <textarea id="uraian" name="uraian" class="form-control" readonly id="" rows="5">
+                                            {{ isset($data->uraian) ? strip_tags($data->uraian) : '' }}
+                                        </textarea>
+                                </div>
+
                             </div>
 
                             <!--end::Input group-->
@@ -222,3 +229,18 @@
     </div>
     <!--end::Content-->
 @endsection
+
+@push('jsScriptForm')
+	<script>
+        ClassicEditor
+            .create(document.querySelector('#uraian'))
+            .then(editor => {
+                window.editor = editor
+            })
+            .catch(error => {
+                console.error('CKEditor initialization failed:', error);
+            });
+
+	</script>
+
+@endpush

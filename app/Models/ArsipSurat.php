@@ -28,6 +28,8 @@ class ArsipSurat extends Model
         'file',
         'created_by', 
         'updated_by', 
+        'tujuan', 
+		  'ttd', 
     ];
 
     public function klasifikasi() {

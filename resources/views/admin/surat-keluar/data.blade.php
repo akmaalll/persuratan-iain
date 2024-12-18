@@ -52,6 +52,15 @@
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
+			<td class="text-nowrap">
+				<span class="fw-bold badge badge-{{ $v->status_arsip == 'arsip' ? 'danger' : 'primary' }}">
+                @if ($v->status_arsip == 'arsip')
+						 Telah di arsipkan
+                @else
+						Masih aktif
+                @endif
+        </span>
+      </td>
         <td>
             <span class="fw-semibold">
                 {{ $v->nomor_box }}
@@ -83,6 +92,17 @@
             </td>
         @endif
         <td class="text-nowrap">
+			  {{--  @if('2025-12-18' == $v->retensi) --}}
+			@if($v->status_arsip != 'arsip')
+			  @if(date('Y-m-d') == $v->retensi)
+					<a href="{{ route('surat-keluar.arsip', $v->id) }}"  data-toggle="tooltip"
+						  title="Export data ke arsip">
+						  <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
+							 Export ke arsip 
+						  </button>
+					 </a>
+				@endif
+			@endif
             <a href="{{ route('surat-keluar.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
                 title="Detail" class="DetailData">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
