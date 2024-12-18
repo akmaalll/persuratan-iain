@@ -41,16 +41,6 @@
 
                     <div class="row mt-5">
                         <!--begin:Form-->
-
-
-
-
-
-
-
-
-
-
                         <form id="kt_modal_new_target_form" class="form" action="#">
                             <input name="_method" type="hidden" id="methodId"
                                 value="{{ isset($data->id) ? 'PUT' : 'POST' }}">

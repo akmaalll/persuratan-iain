@@ -59,6 +59,16 @@
                 @else
 						Masih aktif
                 @endif
+        </span>
+      </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_box }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_rak }}
             </span>
         </td>
         @if (empty($v->file))

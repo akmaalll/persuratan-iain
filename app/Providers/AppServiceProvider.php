@@ -11,6 +11,7 @@ use App\Http\Services\Repositories\Contracts\CariArsipContract;
 use App\Http\Services\Repositories\Contracts\DataKlasifikasiContract;
 use App\Http\Services\Repositories\Contracts\LogAktivitasContract;
 use App\Http\Services\Repositories\Contracts\MenuContract;
+use App\Http\Services\Repositories\Contracts\NoSuratContract;
 use App\Http\Services\Repositories\Contracts\PostContract;
 use App\Http\Services\Repositories\Contracts\RoleContract;
 use App\Http\Services\Repositories\Contracts\SuratKeluarContract;
@@ -20,6 +21,7 @@ use App\Http\Services\Repositories\Contracts\UsersContract;
 use App\Http\Services\Repositories\DataKlasifikasiRepository;
 use App\Http\Services\Repositories\LogAktivitasRepository;
 use App\Http\Services\Repositories\MenuRepository;
+use App\Http\Services\Repositories\NoSuratRepository;
 use App\Http\Services\Repositories\PostRepository;
 use App\Http\Services\Repositories\RoleRepository;
 use App\Http\Services\Repositories\SuratKeluarRepository;
@@ -58,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LogAktivitasContract::class, LogAktivitasRepository::class);
         $this->app->bind(DataKlasifikasiContract::class, DataKlasifikasiRepository::class);
         $this->app->bind(CariArsipContract::class, CariArsipRepository::class);
+        $this->app->bind(NoSuratContract::class, NoSuratRepository::class);
 
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');

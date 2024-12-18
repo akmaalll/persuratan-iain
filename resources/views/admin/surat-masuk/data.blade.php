@@ -29,7 +29,7 @@
         <td>
             <span class="fw-semibold text-nowrap">
                 @if (is_numeric($v->asal))
-                    {{ $v->asalsurat->kode == '-' ? '' : $v->asalSurat->kode . ' - '  }}  {{$v->asalSurat->nama }}
+                    {{ $v->asalsurat->kode == '-' ? '' : $v->asalSurat->kode . ' - ' }} {{ $v->asalSurat->nama }}
                 @else
                     {{ $v->asal }}
                 @endif
@@ -38,7 +38,7 @@
         <td>
             <span class="fw-semibold">
                 @if (is_numeric($v->tujuan))
-                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }}  {{ $v->tujuanSurat->nama }}
+                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }} {{ $v->tujuanSurat->nama }}
                 @else
                     {{ $v->tujuan }}
                 @endif
@@ -53,13 +53,23 @@
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
-			<td class="text-nowrap">
-				<span class="fw-bold badge badge-{{ $v->status_arsip == 'arsip' ? 'danger' : 'primary' }}">
+        <td class="text-nowrap">
+            <span class="fw-bold badge badge-{{ $v->status_arsip == 'arsip' ? 'danger' : 'primary' }}">
                 @if ($v->status_arsip == 'arsip')
-						 Telah di arsipkan
+                    Telah di arsipkan
                 @else
-						Masih aktif
+                    Masih aktif
                 @endif
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_box }}
+            </span>
+        </td>
+        <td>
+            <span class="fw-semibold">
+                {{ $v->nomor_rak }}
             </span>
         </td>
         @if (empty($v->upload_file))
@@ -83,16 +93,16 @@
             </td>
         @endif
         <td class="text-nowrap">
-				@if($v->status_arsip != 'arsip')
-				  @if('2027-10-17' == $v->retensi)
-						<a href="{{ route('surat-masuk.arsip', $v->id) }}"  data-toggle="tooltip"
-							  title="Export data ke arsip">
-							  <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
-								 Export ke arsip 
-							  </button>
-						 </a>
-					@endif
-				@endif
+            @if ($v->status_arsip != 'arsip')
+                @if ('2027-10-17' == $v->retensi)
+                    <a href="{{ route('surat-masuk.arsip', $v->id) }}" data-toggle="tooltip"
+                        title="Export data ke arsip">
+                        <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
+                            Export ke arsip
+                        </button>
+                    </a>
+                @endif
+            @endif
             <a href="{{ route('surat-masuk.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
                 title="Detail" class="DetailData">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">

@@ -249,6 +249,21 @@
                             </div>
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
+
+                                    <input type="text" class="form-control" name="nomor_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->nomor_box) ? $data->nomor_box : '' }}" id="nomor_box" />
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
+
+                                    <input type="text" class="form-control" name="nomor_rak" placeholder="Nomor Rak"
+                                        value="{{ isset($data->nomor_rak) ? $data->nomor_rak : '' }}" id="nomor_rak" />
+                                </div>
+                            </div>
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Permintaan Nomor Surat</label>
                                     <input type="text" class="form-control" name="permintaan" id="permintaan"
                                         value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" />

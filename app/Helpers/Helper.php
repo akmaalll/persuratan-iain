@@ -189,10 +189,22 @@ class Helper
         $data = '';
         if ($expiredSurat->isNotEmpty()) {
             foreach ($expiredSurat as $surat) {
-                $data .= '<div class="menu-item px-5">
-                        <a href="#" class="menu-link px-5">' . ucfirst($surat->kategori) . ' dengan nomor <br> ' . $surat->nomor . '
-                            <br> telah kadaluwarsa </a>
-                    </div>
+                $icon = '';
+                // Cek kategori surat
+                if ($surat->kategori == 'surat masuk') {
+                    $icon = '<i class="fas fa-envelope-open-text text-success"></i>'; // Ikon surat masuk
+                } elseif ($surat->kategori == 'surat keluar') {
+                    $icon = '<i class="fas fa-paper-plane text-primary"></i>'; // Ikon surat keluar
+                } elseif ($surat->kategori == 'arsip') {
+                    $icon = '<i class="fas fa-archive text-warning"></i>'; // Ikon arsip
+                }
+                $data .= '<div class="menu-item px-5 d-flex align-items-center">
+        ' . $icon . '
+        <a href="#" class="menu-link px-5 ms-3">
+            ' . ucfirst($surat->kategori) . ' dengan nomor <br>
+            ' . $surat->nomor . ' <br> telah kadaluwarsa
+        </a>
+    </div>
                     <!--end::Menu item-->
 
                     <!--begin::Menu separator-->
