@@ -118,6 +118,8 @@ Route::domain('')->group(function () {
             Route::get('/cetak', [SuratKeluarController::class, 'cetakPdf'])->name('surat-keluar.pdf');
             Route::post('/last-number', [SuratKeluarController::class, 'getLastNumber'])->name('surat-keluar.last-number');
             Route::get('/arsip/{id}', [SuratKeluarController::class, 'storeArsip'])->name('surat-keluar.arsip');
+            Route::post('/get-no-surat-data', [SuratKeluarController::class, 'getNoSuratData'])->name('get.no.surat.data');
+
         });
 
         // Log aktivitas
@@ -152,7 +154,6 @@ Route::domain('')->group(function () {
             Route::put('/{id}', [NoSuratController::class, 'update'])->name('no-surat.update');
             Route::delete('/{id}', [NoSuratController::class, 'destroy'])->name('no-surat.delete');
             Route::post('/last-number', [NoSuratController::class, 'getLastNumber'])->name('no-surat.last-number');
-
         });
 
         # USER SETTING

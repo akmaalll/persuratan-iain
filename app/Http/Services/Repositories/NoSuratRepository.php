@@ -38,12 +38,15 @@ class NoSuratRepository extends BaseRepository implements NoSuratContract
 		$exploded = explode('-', $lastNumber);
 
 		if (count($exploded) > 1) {
-			$numberPart = explode('/', $exploded[1])[0]; 
+			$numberPart = explode('/', $exploded[1])[0];
 		} else {
 			$numberPart = '0';
 		}
 
-		return intval($numberPart)?? 0;
+		return intval($numberPart) ?? 0;
 	}
-
+	public function findByNomor(string $nomor)
+	{
+		return $this->model->with('klasifikasi')->where('nomor', $nomor)->first();
+	}
 }

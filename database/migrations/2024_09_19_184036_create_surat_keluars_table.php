@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('perihal');
             $table->string('status');
             $table->string('asal');
+            $table->string('jenis_nosurat');
             $table->date('tgl_kirim');
             $table->date('tgl_input')->default(date('Y-m-d'));
             $table->string('ttd')->nullable();
@@ -30,7 +31,6 @@ return new class extends Migration
             $table->string('retensi3');
             $table->string('file');
             $table->string('permintaan');
-            $table->text('uraian');
             $table->string('nomor_box')->nullable();
             $table->string('nomor_rak')->nullable();
             $table->unsignedInteger('created_by');
