@@ -11,10 +11,11 @@ class surat_keluar extends Model
     protected $fillable = [
         'kd_klasifikasi_id',
         'tgl_surat',
-        'nomor',
         'perihal',
         'status',
         'asal',
+        'jenis_nosurat',
+        'nomor',
         'tgl_kirim',
         'tgl_input',
         'ttd',
@@ -31,12 +32,17 @@ class surat_keluar extends Model
         'uraian',
         'created_by',
         'updated_by',
-		  'status_arsip'
+		'status_arsip'
     ];
 
     public function klasifikasi()
     {
         return $this->hasOne(kd_klasifikasi::class, 'id', 'kd_klasifikasi_id');
+    }
+
+    public function noSurat()
+    {
+        return $this->hasOne(NoSurat::class, 'nomor', 'nomor');
     }
 
     public function asalSurat()

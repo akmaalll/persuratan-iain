@@ -13,5 +13,6 @@ interface NoSuratContract
 
 	public function paginated(array $request);
 	public function getLastNumber(array $criteria);
+	public function findByNomor(string $nomor);
 
 }
