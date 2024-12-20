@@ -139,4 +139,9 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 		$filter = $filter->orderBy($field, $sortOrder)->paginate($perPage);
 		return $filter;
 	}
+
+	public function findByNomor(string $nomor)
+	{
+		return $this->model->with(['klasifikasi', 'asalSurat'])->where('nomor', $nomor)->first();
+	}
 }

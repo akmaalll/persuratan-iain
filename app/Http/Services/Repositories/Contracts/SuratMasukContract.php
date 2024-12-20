@@ -17,4 +17,5 @@ interface SuratMasukContract
 	public function delete(int $id);
 	public function find(int $id);
 	public function filter(array $request);
+	public function findByNomor(string $nomor);
 }

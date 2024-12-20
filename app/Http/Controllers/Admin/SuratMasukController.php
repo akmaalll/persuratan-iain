@@ -251,4 +251,33 @@ class SuratMasukController extends Controller
         }
 
     }
+
+    public function getNoSuratData(Request $request)
+    {
+        try {
+            $request->validate([
+                'nomor' => 'required|string',
+            ]);
+
+            $noSurat = $this->repo->findByNomor($request->nomor);
+            // dd($noSurat);
+
+            if ($noSurat) {
+                return response()->json([
+                    'success' => true,
+                    'data' => $noSurat,
+                ]);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Nomor Surat tidak ditemukan.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+            ]);
+        }
+    }
 }

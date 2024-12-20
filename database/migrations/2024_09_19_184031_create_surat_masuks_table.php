@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('perihal');
             $table->string('status', 100);
             $table->string('asal');
+            $table->string('jenis_nosurat');
             $table->date('tgl_terima');
             $table->date('tgl_input')->default(date('Y-m-d'));
             $table->string('ttd')->nullable();

@@ -47,6 +47,6 @@ class NoSuratRepository extends BaseRepository implements NoSuratContract
 	}
 	public function findByNomor(string $nomor)
 	{
-		return $this->model->with('klasifikasi')->where('nomor', $nomor)->first();
+		return $this->model->with(['klasifikasi', 'asalSurat'])->where('nomor', $nomor)->first();
 	}
 }
