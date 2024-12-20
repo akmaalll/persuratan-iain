@@ -50,12 +50,15 @@
 
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
-                                <div class="col-md-12 fv-row">
+                                <div class="col-md-10 fv-row">
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                        <label class="fs-6 fw-semibold mb-2">Nomor Surat (pilih jenis nomor surat)</label>
                                         <input type="text" class="form-control" name="nomor" id="nomor"
                                             value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
                                     </div>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary" id="fetchData">Cek Nomor Surat</button>
                                 </div>
                             </div>
                             <div class="row g-9 mb-8">
@@ -99,7 +102,7 @@
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                                     <input type="text" class="form-control" name="kd_klasifikasi_id"
                                         id="kd_klasifikasi_id"
-                                        value="{{ $data->id }}
+                                        value="{{ isset($data->id) ? $data->id : '' }}
                                         ">
                                 </div>
 
@@ -322,39 +325,48 @@
 
 @push('jsScriptForm')
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#nomor').on('blur', function() {
-                let nomor = $(this).val();
-                if (nomor) {
-                    $.ajax({
-                        url: "{{ route('get.no.surat.data') }}",
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            nomor: nomor
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                // Isi form dengan data dari NoSurat
-                                $('#perihal').val(response.data.perihal);
-                                $('#kd_klasifikasi_id').val(response.data.kd_klasifikasi_id);
-                                $('#tgl_surat').val(response.data.tgl_surat);
-                                $('#asal').val(response.data.asal);
-                                $('#jenis_nosurat').val(response.data.jenis).change();
-                                $('#status').val(response.data.status).change();
+        function fetchNomorSuratData() {
+        let nomor = $('#nomor').val();
+        if (nomor) {
+            $.ajax({
+                url: "{{ route('get.no.surat.data') }}",
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    nomor: nomor
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log(response.data.asal_surat.nama);
+                        // Isi form dengan data dari NoSurat
+                        $('#perihal').val(response.data.perihal);
+                        $('#kd_klasifikasi_id').val(response.data.klasifikasi.nama);
+                        $('#tgl_surat').val(response.data.tgl_surat);
+                        $('#asal').val(response.data.asal_surat.nama);
+                        $('#jenis_nosurat').val(response.data.jenis).change();
+                        $('#status').val(response.data.status).change();
 
-                                updateRetensi();
-                            } else {
-                                alert(response.message);
-                            }
-                        },
-                        error: function(xhr) {
-                            alert('Terjadi kesalahan. Silakan coba lagi.');
-                        }
-                    });
+                        updateRetensi();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
                 }
             });
-        });
+        } else {
+            toastr.error("Silakan isi Nomor Surat terlebih dahulu");
+        }
+    }
+
+    $('#fetchData').on('click', function() {
+        fetchNomorSuratData();
+    });
+
+    $('#nomor').on('blur', function() {
+        fetchNomorSuratData();
+    });
 
         function updateRetensi() {
             var tglSurat = document.getElementById('tgl_surat').value;

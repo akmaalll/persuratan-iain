@@ -25,6 +25,7 @@ class surat_masuk extends Model
         'retensi3',
         'riwayat_mutasi',
         'upload_file',
+        'jenis_nosurat',
 
         'nomor_box',
         'nomor_rak',
@@ -42,5 +43,9 @@ class surat_masuk extends Model
     public function tujuanSurat()
     {
         return $this->hasOne(kd_unit::class, 'id', 'tujuan');
+    }
+    public function noSurat()
+    {
+        return $this->hasOne(NoSurat::class, 'nomor', 'nomor');
     }
 }

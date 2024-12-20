@@ -49,6 +49,18 @@
 
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
+
+                                <div class="col-md-10 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor" id="nomor"
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary" id="fetchData">Cek Nomor Surat</button>
+                                </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
                                 {{-- <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                                     <select class="form-select" id="kd_klasifikasi_id" data-control="select2"
@@ -64,9 +76,17 @@
                                 </div> --}}
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Nomor Surat</label>
-                                    <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
+                                    <label class="required fs-6 fw-semibold mb-2">Jenis Nomor Surat</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih Jenis No Surat" name="jenis_nosurat" id="jenis_nosurat">
+                                        <option value="">Pilih Jenis No Surat...</option>
+                                        <option
+                                            {{ isset($data->jenis_nosurat) && $data->jenis_nosurat == 'nomor_sk' ? 'selected' : '' }}
+                                            value="nomor_sk">Nomor SK</option>
+                                        <option
+                                            {{ isset($data->jenis_nosurat) && $data->jenis_nosurat == 'nomor_surat' ? 'selected' : '' }}
+                                            value="nomor_surat">Nomor Surat</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal </label>
@@ -138,24 +158,9 @@
                                 </div>
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Asal</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih atau Ketikkan Asal" name="asal" id="asal">
-                                        <option value="">Pilih Asal...</option>
-                                        @if (isset($data->asal) && !in_array($data->asal, Helper::getData('kd_units')->pluck('id')->toArray()))
-                                            <option value="{{ $data->asal }}" selected>
-                                                {{ $data->asal }}
-                                            </option>
-                                        @endif
-                                        @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
-                                                {{ $v->nama }}
-                                            </option>
-                                        @endforeach
-                                        {{-- <option value="other">Lainnya (Ketikkan Asal Surat)</option> --}}
-                                        <!-- Menambahkan opsi 'lainnya' -->
-                                    </select>
+                                    <label class="required fs-6 fw-semibold mb-2">Asal </label>
+                                    <input type="text" class="form-control" name="asal" id="asal"
+                                        value="{{ isset($data->asalSurat->asal) ? $data->asalSurat->asal : '' }}" />
                                 </div>
 
 
@@ -370,6 +375,48 @@
 @push('jsScriptForm')
 
     <script type="text/javascript">
+function fetchNomorSuratData() {
+        let nomor = $('#nomor').val();
+        if (nomor) {
+            $.ajax({
+                url: "{{ route('get.no.surat.data') }}",
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    nomor: nomor
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log(response.data.asal_surat.nama);
+                        // Isi form dengan data dari NoSurat
+                        $('#perihal').val(response.data.perihal);
+                        $('#tgl_surat').val(response.data.tgl_surat);
+                        $('#asal').val(response.data.asal_surat.nama);
+                        $('#jenis_nosurat').val(response.data.jenis).change();
+                        $('#status').val(response.data.status).change();
+
+                        updateRetensi();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                }
+            });
+        } else {
+            toastr.error("Silakan isi Nomor Surat terlebih dahulu");
+        }
+    }
+
+    $('#fetchData').on('click', function() {
+        fetchNomorSuratData();
+    });
+
+    $('#nomor').on('blur', function() {
+        fetchNomorSuratData();
+    });
+
         // Fungsi untuk memperbarui pilihan retensi aktif dan inaktif
         function updateRetensi() {
             var tglSurat = document.getElementById('tgl_surat').value;
@@ -438,44 +485,14 @@
 
         $(document).ready(function() {
             // Inisialisasi select2
-            $('#asal').select2({
-                tags: true, // Memungkinkan input manual
-                placeholder: "Pilih Asal..."
-            });
             $('#tujuan').select2({
                 tags: true, // Memungkinkan input manual
                 placeholder: "Pilih Tujuan..."
             });
 
-            const asalOption = $('.asal-lain');
-            const asalForm = $('#asalLain');
-            asalOption.hide();
-
             const tujuanOption = $('.tujuan-lain');
             const tujuanForm = $('#tujuanLain');
             tujuanOption.hide();
-
-            // jika form edit
-            const getValueAsalOption = $('#asal option').filter((i, v) => {
-                return v.value == asalForm.val();
-            });
-
-            if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
-                asalOption.show();
-                asalForm.val(asalForm.val());
-                $('#asal').val('20').change();
-            } else {
-                asalOption.hide();
-            }
-
-            $('#asal').on('change', function() {
-                let asalValue = $(this).val();
-                if (asalValue == '20') {
-                    asalOption.show();
-                } else {
-                    asalOption.hide();
-                }
-            });
 
             // jika form edit
             const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
@@ -499,11 +516,6 @@
                     tujuanOption.hide();
                 }
             });
-
-            const editAsal = "{{ isset($data->asal) ? $data->asal : '' }}";
-            if (editAsal && editAsal?.length > 0) {
-                $("#asal").val(editAsal).trigger("change")
-            }
 
             const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : '' }}";
             if (editTujuan && editTujuan?.length > 0) {

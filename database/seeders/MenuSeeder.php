@@ -29,7 +29,7 @@ class MenuSeeder extends Seeder
             ['name' => 'Data Arsip', 'icon' => 'bi-stack', 'url' => 'arsip', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Pencarian Arsip', 'icon' => 'bi-stack', 'url' => 'cari-arsip', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Klasifikasi Arsip dan JRA', 'icon' => 'bi-stack', 'url' => 'data-klasifikasi', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
-            ['name' => 'Manajemen Nomor Surat', 'icon' => 'bi-stack', 'url' => 'no-surat', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
+            ['name' => 'Pengambilan Nomor Surat', 'icon' => 'bi-stack', 'url' => 'no-surat', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
             ['name' => 'Log Aktivitas', 'icon' => 'bi-people-fill', 'url' => 'log-aktivitas', 'index' => 1, 'main_menu' => 'APPS', 'active' => '1', 'parent' => '1'],
 
             ['name' => 'User', 'icon' => 'bi-people-fill', 'url' => 'users', 'index' => 0, 'main_menu' => 'USERS', 'active' => '1', 'parent' => '2'],
