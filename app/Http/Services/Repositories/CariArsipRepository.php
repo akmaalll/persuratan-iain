@@ -5,17 +5,21 @@ namespace App\Http\Services\Repositories;
 use App\Http\Services\Repositories\BaseRepository;
 use App\Http\Services\Repositories\Contracts\CariArsipContract;
 use App\Models\ArsipSurat;
+use App\Models\surat_keluar;
+use App\Models\surat_masuk;
 
 class CariArsipRepository extends BaseRepository implements CariArsipContract
 {
 	/**
 	 * @var
 	 */
-	protected $model;
+	protected $model, $suratMasuk, $suratKeluar;
 
-	public function __construct(ArsipSurat $model)
+	public function __construct(ArsipSurat $model, surat_masuk $suratMasuk, surat_keluar $suratKeluar)
 	{
 		$this->model = $model;
+		$this->suratKeluar = $suratKeluar;
+		$this->suratMasuk = $suratMasuk;
 	}
 
 	public function paginated(array $criteria)
@@ -24,6 +28,18 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		$search = $criteria['search'] ?? '';
+
+		// $type = $criteria['type_surat'] ?? 'Arsip';
+
+		// if ($type === 'Surat Masuk') {
+		// 	$filter = $this->suratMasuk;
+		// } elseif ($type === 'Surat Keluar') {
+		// 	$filter = $this->suratKeluar;
+		// } else {
+		// 	$filter = $this->model;
+		// }
+
+
 		return $this->model->when($search, function ($query) use ($search) {
 			$query->where(function ($q) use ($search) {
 				$q->where('nomor', 'like', "%" . $search . "%")
@@ -61,7 +77,19 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$perPage = $criteria['per_page'] ?? 5;
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
-		// criteria
+
+		$type = $criteria['search']['type_surat'] ?? 'Arsip';
+
+		if ($type === 'Surat Masuk') {
+			$filter = $this->suratMasuk;
+		} elseif ($type === 'Surat Keluar') {
+			$filter = $this->suratKeluar;
+		} else if ($type == 'Arsip') {
+			$filter = $this->model;
+		} else {
+			$filter = '';
+		}
+		// Proses filtering
 		$kd_klasifikasi_id = $criteria['search']['kd_klasifikasi_id'] ?? '';
 		$nomor = $criteria['search']['nomor'] ?? '';
 		$jumlah = $criteria['search']['jumlah'] ?? '';
@@ -82,8 +110,7 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		$dari_tanggal = $criteria['search']['dari_tanggal'] ?? '';
 		$sampai_tanggal = $criteria['search']['sampai_tanggal'] ?? '';
 
-		$filter = $this->model;
-
+		// Terapkan filter
 		if (!empty($kd_klasifikasi_id)) {
 			$filter = $filter->where('kd_klasifikasi_id', '=', $kd_klasifikasi_id);
 		}
@@ -156,9 +183,14 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 			$filter = $filter->whereBetween('retensi2', [$dari_tanggal, $sampai_tanggal]);
 		}
 
-		$filter = $filter->orderBy($field, $sortOrder)->paginate($perPage);
-		return $filter;
+		// Pengurutan dan paginasi
+		$data = array(
+			'filter' 	=> $filter->orderBy($field, $sortOrder)->paginate($perPage),
+			'type'		=> $type
+		);
+		return $data;
 	}
+
 
 	public function getFile($request) {}
 }

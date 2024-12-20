@@ -255,15 +255,15 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
 
-                                    <input type="text" class="form-control" name="nomor_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->nomor_box) ? $data->nomor_box : '' }}" id="nomor_box" />
+                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
-                                    <input type="text" class="form-control" name="nomor_rak" placeholder="Nomor Rak"
-                                        value="{{ isset($data->nomor_rak) ? $data->nomor_rak : '' }}" id="nomor_rak" />
+                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
+                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
                                 </div>
                             </div>
 

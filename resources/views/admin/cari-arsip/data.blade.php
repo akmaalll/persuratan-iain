@@ -8,21 +8,24 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->nomor }} {{-- Nomor Surat --}}
+                {{ $v->nomor . ' - ' }}
+                {{ $v->jenis_nosurat == 'nomor_sk' ? 'Nomor SK' : ($v->jenis_nosurat == 'nomor_surat' ? 'Nomor Surat' : '') }}
+                {{-- Nomor Surat --}}
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ Helper::getDateIndo($v->tgl) }} {{-- Tanggal Surat --}}
+                {{ Helper::getDateIndo($v->tgl ?? $v->tgl_surat) }} {{-- Tanggal Surat --}}
             </span>
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-					@if($v->kd_klasifikasi_id != 0)
-						{{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} - {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
-					@else
-						Tidak ada klasifikasi
-					@endif
+                @if ($v->kd_klasifikasi_id != 0)
+                    {{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} -
+                    {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+                @else
+                    Tidak ada klasifikasi
+                @endif
             </span>
         </td>
         {{-- <td>
@@ -52,7 +55,7 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->ket_keaslian }} {{-- Tanggal Input --}}
+                {{ $v->ket_keaslian ?? '-' }} {{-- Tanggal Input --}}
             </span>
         </td>
         @if (empty($v->file))
@@ -64,17 +67,42 @@
         @else
             <td>
                 <span class="fw-semibold">
-                    {{-- {{ $v->file }}  --}}
-                    <a href="{{ asset('uploads/arsip/' . $v->file) }}" target="_blank"
-                        class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
-                        <i class="ki-duotone ki-folder-down fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </a>
+                    @if ($type == 'Surat Keluar')
+                        <a href="{{ asset('uploads/surat-keluar/' . $v->file) }}" target="_blank"
+                            class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                            <i class="ki-duotone ki-folder-down fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </a>
+                    @elseif($type == 'Surat Masuk')
+                        <a href="{{ asset('uploads/ttd/surat-masuk/' . $v->file) }}" target="_blank"
+                            class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                            <i class="ki-duotone ki-folder-down fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </a>
+                    @else
+                        <a href="{{ asset('uploads/arsip/' . $v->file) }}" target="_blank"
+                            class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                            <i class="ki-duotone ki-folder-down fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </a>
+                        <a href="{{ asset('uploads/arsip/' . $v->file) }}" target="_blank"
+                            class="btn btn-icon btn-bg-secondary btn-active-color-primary btn-sm">
+                            <i class="ki-duotone ki-folder-down fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </a>
+                    @endif
                 </span>
             </td>
         @endif
+
         {{-- <td>
             <span class="fw-semibold">
                 {{ $v->no_rak }} 
@@ -82,7 +110,7 @@
         </td> --}}
         <td>
             <span class="fw-semibold">
-                {{ $v->jumlah }} {{-- TTD --}}
+                {{ $v->jumlah ?? '-' }} {{-- TTD --}}
             </span>
         </td>
         <td>
@@ -99,25 +127,49 @@
         <td>
             <span class="fw-semibold text-nowrap">
                 <span class="fw-semibold text-nowrap">
-                    {{ Helper::getRentangTanggal($v->tgl, $v->retensi) }} ( Aktif Hingga
+                    {{ Helper::getRentangTanggal($v->tgl ?? $v->tgl_surat, $v->retensi) }} ( Aktif Hingga
                     {{ Helper::getDateIndo($v->retensi) }} ) <br>
-                    {{ Helper::getRentangTanggal($v->tgl, $v->retensi2) }} ( Inaktif Hingga
+                    {{ Helper::getRentangTanggal($v->tgl ?? $v->tgl_surat, $v->retensi2) }} ( Inaktif Hingga
                     {{ Helper::getDateIndo($v->retensi2) }} ) <br>
                     {{ $v->retensi3 }} ( Nasib )<br>
                 </span>
             </span>
         </td>
         <td class="text-nowrap text-center">
-            <a href="{{ route('cari-arsip.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
-                title="Detail" class="DetailData me-1">
-                <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
-                    <i class="ki-duotone ki-information fs-2">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                    </i>
-                </button>
-            </a>
+            @if ($type == 'Surat Keluar')
+                <a href="{{ route('surat-keluar.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
+                    title="Detail" class="DetailData me-1">
+                    <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
+                        <i class="ki-duotone ki-information fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
+                    </button>
+                </a>
+            @elseif ($type == 'Surat Masuk')
+                <a href="{{ route('surat-masuk.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
+                    title="Detail" class="DetailData me-1">
+                    <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
+                        <i class="ki-duotone ki-information fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
+                    </button>
+                </a>
+            @else
+                <a href="{{ route('cari-arsip.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
+                    title="Detail" class="DetailData me-1">
+                    <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
+                        <i class="ki-duotone ki-information fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
+                    </button>
+                </a>
+            @endif
             {{-- Tombol aksi --}}
             {{-- {!! Helper::btnAction($v->id, $title) !!}  --}}
         </td>
