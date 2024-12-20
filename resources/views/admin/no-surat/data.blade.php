@@ -23,12 +23,12 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->jenis }}
+                {{ $v->jenis == 'nomor_sk' ? 'SK' : 'Surat'  }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->status }}
+                {{ ucwords($v->status) }}
             </span>
         </td>
         <td>

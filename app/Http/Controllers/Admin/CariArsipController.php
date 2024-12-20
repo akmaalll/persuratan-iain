@@ -39,16 +39,21 @@ class CariArsipController extends Controller
     {
         try {
             $title = $this->title;
-            $data = is_array($request->search) ? $this->repo->filter($request->all()) : $this->repo->paginated($request->all());
+            // $data = is_array($request->search) ? $this->repo->filter($request->all()) : $this->repo->paginated($request->all());
+            $dataFilter = $this->repo->filter($request->all());
+            $data = $dataFilter['filter'];
+            $type = $dataFilter['type'] ?? '-';
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
-            $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
+            $view = view('admin.' . $title . '.data', compact('data', 'title', 'type'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
             return response()->json([
                 "total_page" => $data->lastpage(),
                 "total_data" => $data->total(),
                 "html"       => $view,
+                "type"       => $type,
             ]);
         } catch (\Exception $e) {
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }

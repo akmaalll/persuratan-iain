@@ -212,7 +212,7 @@ class Helper
             }
         } else {
             $data = '<div class="menu-item px-5">
-                        <p class="menu-link px-5">Tidak ada</p>
+                        <p class="menu-link px-5">Notifikasi kosong</p>
                     </div>';
         }
 

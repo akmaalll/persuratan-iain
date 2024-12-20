@@ -27,8 +27,8 @@ class surat_masuk extends Model
         'upload_file',
         'jenis_nosurat',
 
-        'nomor_box',
-        'nomor_rak',
+        'no_box',
+        'no_rak',
 
         'uraian',
         'created_by',

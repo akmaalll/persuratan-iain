@@ -69,6 +69,20 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
+                    <div class="row pb-5">
+                        <div class="col-md-4  fv-row">
+                            <label class="fs-6 fw-semibold mb-2">Jenis Surat</label>
+                            <select class="form-select reset-filter opsiLain" name="type_surat"
+                                id="type_surat"  data-control="select2" data-hide-search="false"
+                                data-placeholder="-- pilih jenis --">
+                                <option value="-- pilih jenis --" >-- pilih jenis --</option>
+                                <option value="Arsip" >Arsip</option>
+                                <option value="Surat Masuk" >Surat Masuk</option>
+                                <option value="Surat Keluar" >Surat Keluar</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                     <!-- Kode Klasifikasi -->
                     <div class="row">
                         <div class="col-md-4 fv-row">
@@ -87,17 +101,17 @@
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                             {{-- <div class="input-group"> --}}
-                                <select class="form-select reset-filter opsiLain" name="kd_klasifikasi_id"
-                                    id="kd_klasifikasi_id" data-tags="true" data-control="select2" data-hide-search="false"
-                                    data-placeholder="Semua">
-                                    <option value="" selected>Semua</option>
-                                    @foreach (Helper::getData('kd_klasifikasis') as $v)
-                                        <option value="{{ $v->id }}">
-                                            {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
+                            <select class="form-select reset-filter opsiLain" name="kd_klasifikasi_id"
+                                id="kd_klasifikasi_id" data-tags="true" data-control="select2" data-hide-search="false"
+                                data-placeholder="Semua">
+                                <option value="" selected>Semua</option>
+                                @foreach (Helper::getData('kd_klasifikasis') as $v)
+                                    <option value="{{ $v->id }}">
+                                        {{ $v->jenis_klasifikasi->kode . '.' . $v->nomor }} - {{ $v->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <button type="button" class="btn btn-outline-danger bg-secondary"
                                     onclick="clearField('kd_klasifikasi_id')">
                                     <i class="fa fa-times"></i>
                                 </button>
@@ -323,7 +337,7 @@
 
 
                         <div class="col-md-3">
-                            <label for="dari_tanggal" class="form-label">Pencarian Asip dari tanggal</label>
+                            <label for="dari_tanggal" class="form-label">Pencarian Surat dari tanggal</label>
                             <div class="input-group">
                                 <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                                     onblur="(this.type='text')" class="form-control" name="dari_tanggal"
@@ -389,20 +403,20 @@
                             <thead>
                                 <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-20px pe-2">No</th>
-                                    <th class="min-w-120px text-nowrap">Nomor Arsip</th>
-                                    <th class="min-w-140px text-nowrap">Tanggal Arsip</th>
+                                    <th class="min-w-120px text-nowrap">Nomor</th>
+                                    <th class="min-w-140px text-nowrap">Tanggal</th>
                                     <th class="min-w-120px text-nowrap">Kodel Klasifikasi</th>
-                                    {{-- <th class="min-w-120px">Perihal Arsip</th> --}}
-                                    {{-- <th class="min-w-120px">Unit Pengolah Arsip</th> --}}
-                                    {{-- <th class="min-w-120px">Lokal Arsip</th> --}}
-                                    {{-- <th class="min-w-120px">Jenis Media Arsip</th> --}}
-                                    <th class="min-w-300px">Uraian Arsip</th>
+                                    {{-- <th class="min-w-120px">Perihal</th> --}}
+                                    {{-- <th class="min-w-120px">Unit Pengolah</th> --}}
+                                    {{-- <th class="min-w-120px">Lokal</th> --}}
+                                    {{-- <th class="min-w-120px">Jenis Media</th> --}}
+                                    <th class="min-w-300px">Uraian</th>
                                     <th class="min-w-120px">Keterangan</th>
                                     <th class="min-w-120px">File</th>
                                     {{-- <th class="min-w-120px">Nomor Rak</th> --}}
                                     <th class="min-w-120px">Jumlah </th>
                                     <th class="min-w-120px text-nowrap">Nomor Box</th>
-                                    {{-- <th class="min-w-120px">Pencipta Arsip</th> --}}
+                                    {{-- <th class="min-w-120px">Pencipta</th> --}}
                                     <th class="min-w-120px">Retensi</th>
                                     <th class="text-end ">Actions</th>
                                 </tr>
@@ -548,7 +562,7 @@
                 return
             }
 
-
+            let type_surat = ''
             function loaddata(page, per_page, search) {
                 $.ajax({
                     url: '{{ route('cari-arsip' . '.data') }}',
@@ -562,6 +576,8 @@
                     success: function(data) {
                         console.log(data);
                         $(".datatables").html(data.html);
+                        type_surat = data.type
+                        console.log(type_surat);
                     }
                 });
             }
@@ -627,7 +643,7 @@
                     'sampai_tanggal',
                     'kd_klasifikasi_id', 'tgl', 'pencipta', 'unit_pengolah', 'lokal', 'jenis_media',
                     'ket_keaslian', 'jumlah',
-                    'no_rak', 'no_box', 'ket'
+                    'no_rak', 'no_box', 'ket', 'type_surat'
                 ];
 
                 fields.forEach(fieldId => {
@@ -667,6 +683,7 @@
                 let no_box = $('#no_box').val()
                 let dari_tanggal = $('#dari_tanggal').val()
                 let sampai_tanggal = $('#sampai_tanggal').val()
+                let type_surat = $('#type_surat').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -687,6 +704,7 @@
                     'no_box': no_box || null,
                     'dari_tanggal': dari_tanggal || null,
                     'sampai_tanggal': sampai_tanggal || null,
+                    'type_surat': type_surat || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
@@ -722,6 +740,7 @@
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
                 let jumlah = $('#jumlah').val()
+                let type_surat = $('#type_surat').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -740,13 +759,14 @@
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
                     'jumlah': jumlah || null,
+                    'type_surat': type_surat || null,
                 }
 
                 // Object.values(formData).forEach((key) => {
                 //     console.log(key, formData[key]);
                 // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
-
+                
 
                 if (cekValue) {
                     loadcetak('');
@@ -776,6 +796,7 @@
                 let no_rak = $('#no_rak').val()
                 let no_box = $('#no_box').val()
                 let jumlah = $('#jumlah').val()
+                let type_surat = $('#type_surat').val()
 
                 const formData = {
                     'nomor': nomor || null,
@@ -793,6 +814,7 @@
                     'perihal': perihal || null,
                     'no_rak': no_rak || null,
                     'no_box': no_box || null,
+                    'type_surat': type_surat || null,
                     'jumlah': jumlah || null,
                 }
 

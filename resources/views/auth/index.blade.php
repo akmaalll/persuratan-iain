@@ -84,14 +84,18 @@
                 <!--begin::Card-->
                 <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
                     <!--begin::Wrapper-->
-                    <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
+                    <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-7 pb-lg-10">
                         <!--begin::Form-->
                         <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url=""
                             action="{{ url('/auth/login') }}" method="POST">
                             @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
+                                <img alt="Logo" src="{{ asset('/logo/logo.png') }}"
+                                    class="h-100px " />
+
                                 <!--begin::Title-->
+                                <h1 class="text-gray-900 fw-bolder mb-3"> SISKAE </h1>
                                 <h1 class="text-gray-900 fw-bolder mb-3"> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->

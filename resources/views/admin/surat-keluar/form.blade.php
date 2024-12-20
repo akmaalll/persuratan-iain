@@ -100,8 +100,12 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
-                                    <input type="text" class="form-control" name="kd_klasifikasi_id"
+                                    <input type="text" class="form-control" name=""
                                         id="kd_klasifikasi_id"
+                                        value="{{ isset($data->id) ? $data->id : '' }}
+                                        ">
+                                    <input type="hidden" class="form-control" name="kd_klasifikasi_id"
+                                        id="kd_klasifikasi_id_hidden"
                                         value="{{ isset($data->id) ? $data->id : '' }}
                                         ">
                                 </div>
@@ -257,23 +261,23 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
 
-                                    <input type="text" class="form-control" name="nomor_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->nomor_box) ? $data->nomor_box : '' }}" id="nomor_box" />
+                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
-                                    <input type="text" class="form-control" name="nomor_rak" placeholder="Nomor Rak"
-                                        value="{{ isset($data->nomor_rak) ? $data->nomor_rak : '' }}" id="nomor_rak" />
+                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
+                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
                                 </div>
                             </div>
                             <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
+                                {{-- <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Permintaan Nomor Surat</label>
                                     <input type="text" class="form-control" name="permintaan" id="permintaan"
                                         value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" />
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Keterangan</label>
                                     <textarea id="uraian" name="uraian" class="form-control" id="" rows="5">
@@ -341,6 +345,7 @@
                         // Isi form dengan data dari NoSurat
                         $('#perihal').val(response.data.perihal);
                         $('#kd_klasifikasi_id').val(response.data.klasifikasi.nama);
+                        $('#kd_klasifikasi_id_hidden').val(response.data.kd_klasifikasi_id);
                         $('#tgl_surat').val(response.data.tgl_surat);
                         $('#asal').val(response.data.asal_surat.nama);
                         $('#jenis_nosurat').val(response.data.jenis).change();

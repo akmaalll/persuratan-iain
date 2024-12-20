@@ -64,12 +64,12 @@
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->nomor_box }}
+                {{ $v->no_box }}
             </span>
         </td>
         <td>
             <span class="fw-semibold">
-                {{ $v->nomor_rak }}
+                {{ $v->no_rak }}
             </span>
         </td>
         @if (empty($v->upload_file))

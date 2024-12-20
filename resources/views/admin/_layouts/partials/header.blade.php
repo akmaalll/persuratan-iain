@@ -106,7 +106,7 @@
                 <!--begin::Theme mode-->
                 <div class="app-navbar-item ms-1 ms-md-4">
                     <!--begin::Menu toggle-->
-                    <a href="#"
+                    {{-- <a href="#"
                         class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px"
                         data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
@@ -126,10 +126,10 @@
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
-                    </a>
+                    </a> --}}
                     <!--begin::Menu toggle-->
                     <!--begin::Menu-->
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
+                    {{-- <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
                         data-kt-menu="true" data-kt-element="theme-mode-menu">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
@@ -182,7 +182,7 @@
                             </a>
                         </div>
                         <!--end::Menu item-->
-                    </div>
+                    </div> --}}
                     <!--end::Menu-->
                 </div>
                 <!--end::Theme mode-->

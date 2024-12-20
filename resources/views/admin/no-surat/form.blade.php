@@ -140,7 +140,7 @@
                                 <div class="col-md-12 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
                                     <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}" readonly />
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}"  />
                                 </div>
                             </div>
                             <!--end::Input group-->
