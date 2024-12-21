@@ -30,10 +30,8 @@
         <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Products-->
             <div class="card card-flush">
-                @include('admin._card.action')
-
-                <!--begin::Card header-->
-                {{-- <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                {{-- @include('admin._card.action') --}}
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                     <!--begin::Card title-->
                     <div class="card-title">
                         <div class="mw-100px me-3">
@@ -65,12 +63,29 @@
                     </div>
                     <!--end::Card title-->
 
-                    <!--begin::Card toolbar-->
-                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5 me-3">
+                            <a href="{{ route($title . '.create') }}" class="btn btn-success">
+                                <span class="btn-label">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                                Tambah Nomor
+                            </a>
+                        </div>
 
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                            <a href="{{ route($title . '.create', ['type' => 'sisip']) }}" class="btn btn-primary">
+                                <span class="btn-label">
+                                    <i class="ki-duotone ki-black-right"></i>
+                                </span>
+                                Sisipkan Nomor
+                            </a>
+                        </div>
+                        <!--end::Card toolbar-->
                     </div>
-                    <!--end::Card toolbar-->
-                </div> --}}
+                </div>
+
 
                 <!--end::Card header-->
 
