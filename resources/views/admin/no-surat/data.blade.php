@@ -40,7 +40,7 @@
                 @endif
             </span>
         </td>
-        <td class="text-end">
+        <td class="text-end text-nowrap">
             {!! Helper::btnAction($v->id, $title) !!}
         </td>
     </tr>
