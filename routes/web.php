@@ -35,7 +35,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middlewa
 Route::get('/data', [DashboardController::class, 'data'])->name('index.data');
 
 
-Route::domain('')->group(function () {
+Route::domain('')->group(function (): void {
     // Auth::routes();
 
     Route::get('/auth/login', [Auths::class, 'index'])->name('admin.login');
@@ -47,14 +47,14 @@ Route::domain('')->group(function () {
 
 
     // ADMIN_ROUTES
-    Route::group(['prefix' => 'admin',   'middleware' => ['web', 'auth']], function () {
+    Route::group(['prefix' => 'admin',   'middleware' => ['web', 'auth']], function (): void {
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 
         # APPS 
-        Route::group(['prefix' => '/surat-masuk'], function () {
+        Route::group(['prefix' => '/surat-masuk'], function (): void {
             Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
             Route::get('/detail/{id}', [SuratMasukController::class, 'detail'])->name('surat-masuk.detail');
             Route::get('/data', [SuratMasukController::class, 'data'])->name('surat-masuk.data');
@@ -71,7 +71,7 @@ Route::domain('')->group(function () {
 
 
         // Arsip surat
-        Route::group(['prefix' => '/arsip'], function () {
+        Route::group(['prefix' => '/arsip'], function (): void {
             Route::get('/', [ArsipSuratController::class, 'index'])->name('arsip.index');
             Route::get('/filter', [ArsipSuratController::class, 'filter'])->name('arsip.filter');
             Route::get('/detail/{id}', [ArsipSuratController::class, 'detail'])->name('arsip.detail');
@@ -87,7 +87,7 @@ Route::domain('')->group(function () {
         });
 
         // Pencarian arsip surat
-        Route::group(['prefix' => '/cari-arsip'], function () {
+        Route::group(['prefix' => '/cari-arsip'], function (): void {
             Route::get('/', [CariArsipController::class, 'index'])->name('cari-arsip.index');
             Route::get('/filter', [CariArsipController::class, 'filter'])->name('cari-arsip.filter');
             Route::get('/detail/{id}', [CariArsipController::class, 'detail'])->name('cari-arsip.detail');
@@ -104,7 +104,7 @@ Route::domain('')->group(function () {
 
 
 
-        Route::group(['prefix' => '/surat-keluar'], function () {
+        Route::group(['prefix' => '/surat-keluar'], function (): void {
             // Route::get('/', SuratKeluar::class);
             Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
             Route::get('/detail/{id}', [SuratKeluarController::class, 'detail'])->name('surat-keluar.detail');
@@ -123,7 +123,7 @@ Route::domain('')->group(function () {
         });
 
         // Log aktivitas
-        Route::group(['prefix' => '/log-aktivitas'], function () {
+        Route::group(['prefix' => '/log-aktivitas'], function (): void {
             Route::get('/', [LogAktivitasController::class, 'index'])->name('log-aktivitas.index');
             Route::get('/data', [LogAktivitasController::class, 'data'])->name('log-aktivitas.data');
             Route::get('/create', [LogAktivitasController::class, 'create'])->name('log-aktivitas.create');
@@ -134,7 +134,7 @@ Route::domain('')->group(function () {
         });
 
         // Data klasifikasi
-        Route::group(['prefix' => '/data-klasifikasi'], function () {
+        Route::group(['prefix' => '/data-klasifikasi'], function (): void {
             Route::get('/', [DataKlasifikasiController::class, 'index'])->name('data-klasifikasi.index');
             Route::get('/data', [DataKlasifikasiController::class, 'data'])->name('data-klasifikasi.data');
             Route::get('/create', [DataKlasifikasiController::class, 'create'])->name('data-klasifikasi.create');
@@ -145,7 +145,7 @@ Route::domain('')->group(function () {
         });
 
         //no-surat
-        Route::group(['prefix' => '/no-surat'], function () {
+        Route::group(['prefix' => '/no-surat'], function (): void {
             Route::get('/', [NoSuratController::class, 'index'])->name('no-surat.index');
             Route::get('/data', [NoSuratController::class, 'data'])->name('no-surat.data');
             Route::get('/create', [NoSuratController::class, 'create'])->name('no-surat.create');
@@ -157,7 +157,7 @@ Route::domain('')->group(function () {
         });
 
         # USER SETTING
-        Route::group(['prefix' => '/roles'], function () {
+        Route::group(['prefix' => '/roles'], function (): void {
             Route::get('/', [RoleController::class, 'index'])->name('roles.index');
             Route::get('/data', [RoleController::class, 'data'])->name('roles.data');
             Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
@@ -167,7 +167,7 @@ Route::domain('')->group(function () {
             Route::delete('/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
         });
 
-        Route::group(['prefix' => '/menus'], function () {
+        Route::group(['prefix' => '/menus'], function (): void {
             Route::get('/', [MenuController::class, 'index'])->name('menus.index');
             Route::get('/data', [MenuController::class, 'data'])->name('menus.data');
             Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
@@ -178,7 +178,7 @@ Route::domain('')->group(function () {
         });
 
 
-        Route::group(['prefix' => '/user-menus'], function () {
+        Route::group(['prefix' => '/user-menus'], function (): void {
             Route::get('/', [UserMenuController::class, 'index'])->name('user-menus.index');
             Route::get('/data', [UserMenuController::class, 'data'])->name('user-menus.data');
             Route::post('/store', [UserMenuController::class, 'store'])->name('user-menus.store');
@@ -189,7 +189,7 @@ Route::domain('')->group(function () {
         Route::get('user-menus/create/{id}', [UserMenuController::class, 'create'])->name('user-menus.create');
 
 
-        Route::group(['prefix' => '/users'], function () {
+        Route::group(['prefix' => '/users'], function (): void {
             Route::get('/', [UsersController::class, 'index'])->name('users.index');
             Route::get('/data', [UsersController::class, 'data'])->name('users.data');
             Route::get('/create', [UsersController::class, 'create'])->name('users.create');

@@ -419,7 +419,6 @@
             $('#pencipta').on('change', function() {
                 let penciptaValue = $(this).val();
 
-                console.log($('#pencipta option:selected').text());
                 if (penciptaValue == '20') {
                     penciptaOption.show();
                 } else {
@@ -443,7 +442,6 @@
             $('#unit_pengolah').on('change', function() {
                 let unitValue = $(this).val();
 
-                console.log($('#unit_pengolah option:selected').text());
                 if (unitValue == '20') {
                     unitOption.show();
                 } else {
@@ -467,7 +465,6 @@
             $('#lokal').on('change', function() {
                 let lokalValue = $(this).val();
 
-                console.log($('#lokal option:selected').text());
                 if (lokalValue == '20') {
                     lokalOption.show();
                 } else {
@@ -480,7 +477,6 @@
             const getValueMediaOption = $('#jenis_media option').filter((i, v) => {
                 return v.value == mediaForm.val();
             });
-            console.log(mediaForm.val());
 
             if (getValueMediaOption.length === 0 && mediaForm.val() !== '') {
                 mediaOption.show();
@@ -493,7 +489,6 @@
             $('#jenis_media').on('change', function() {
                 let mediaValue = $(this).val();
 
-                console.log($('#jenis_media option:selected').text());
                 if (mediaValue == '20') {
                     mediaOption.show();
                 } else {
@@ -508,7 +503,6 @@
             .create(document.querySelector('#uraian'))
             .then(editor => {
                 window.editor = editor
-                console.log(editor);
 
             })
             .catch(error => {
@@ -631,7 +625,6 @@
         retensiCategory.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
-            console.log(this.value);
             if (this.value == 'aktif') {
                 retensiDuration.style.display = 'block';
 

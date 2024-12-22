@@ -238,7 +238,6 @@ License: For each use you must have a valid license purchased only from above li
                                 processData: false,
                                 contentType: false,
                                 success: function(data) {
-                                    console.log(data.success);
                                     if (data.success) {
                                         toastr.success("Successful reset password!");
                                         setTimeout(() => {

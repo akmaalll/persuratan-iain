@@ -67,7 +67,7 @@ class ArsipExport implements FromCollection, WithHeadings, WithStyles, WithEvent
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function (AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event): void {
                 $sheet = $event->sheet;
 
                 // Set AutoSize untuk setiap kolom

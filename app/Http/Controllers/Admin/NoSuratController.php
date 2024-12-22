@@ -30,7 +30,7 @@ class NoSuratController extends Controller
     {
         try {
             $title = $this->title;
-            $data = $this->repo->paginated($request->all());
+            $data = is_array($request->search) ? $this->repo->filter($request->all()) : $this->repo->paginated($request->all());
             // dd($data);
             $perPage = $request->per_page == '' ? 5 : $request->per_page;
             $view = view('admin.' . $title . '.data', compact('data', 'title'))->with('i', ($request->input('page', 1) -
@@ -46,11 +46,12 @@ class NoSuratController extends Controller
         }
     }
 
-    public function create()
+    public function create(Request $request)
     {
         try {
             $title = $this->title;
-            return view('admin.' . $title . '.form', compact('title'));
+            $formTitle = $request->input('type') == "sisip" ? "Tambah Nomor Sisipan" : 'Tambah Nomor';
+            return view('admin.' . $title . '.form', compact('title', 'formTitle'));
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
@@ -60,6 +61,8 @@ class NoSuratController extends Controller
     {
         try {
             $req = $request->all();
+
+
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {

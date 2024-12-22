@@ -60,7 +60,7 @@ class MakeContract extends Command
      */
     public function createContract($contractName)
     {
-        $contractName = $contractName . "Contract";
+        $contractName .= "Contract";
         // create if folder Contracts not exists 
         if (!File::exists($this->getBaseDirectory($this->basePathService, $contractName))) {
             File::makeDirectory($this->getBaseDirectory($this->basePathService, $contractName), 0777, true);
@@ -100,7 +100,7 @@ class MakeContract extends Command
      */
     public function createRepository($repoName)
     {
-        $repoName = $repoName . "Repository";
+        $repoName .= "Repository";
         // create if folder Contracts not exists 
         if (!File::exists($this->getBaseDirectory($this->basePathRepository, $repoName))) {
             File::makeDirectory($this->getBaseDirectory($this->basePathRepository, $repoName), 0777, true);

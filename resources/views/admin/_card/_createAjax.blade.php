@@ -10,19 +10,16 @@
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function(status) {
-                    console.log('validated!');
 
                     if (status == 'Valid') {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         submitButton.disabled = true;
                         let formData = new FormData(kt_modal_new_target_form);
-                        console.log(formData);
                         if (window.editor) {
                             const editorContent = window.editor.getData();
 
                             formData.set('uraian', editorContent);
-                            console.log('Added editor content to form data');
                         } else {
                             console.warn('CKEditor not found');
                         }
@@ -50,7 +47,6 @@
                             error: function(data) {
                                 submitButton.removeAttribute('data-kt-indicator');
                                 submitButton.disabled = false;
-                                console.log('Error:', data);
                                 toastr.error("Failed to save data!");
                             }
                         });

@@ -74,7 +74,7 @@ class SuratMasukExport implements FromCollection, WithHeadings, WithStyles, With
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function (AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event): void {
                 $sheet = $event->sheet;
 
                 // Set AutoSize untuk setiap kolom

@@ -726,7 +726,7 @@
             }
 
             function loadexport(search) {
-                console.log('cetak :', search);
+
                 const url = '{{ route('surat-masuk.export') }}' + '?search=' + encodeURIComponent(JSON
                     .stringify(
                         search));
@@ -743,7 +743,6 @@
                     type: "GET",
                     datatype: "json",
                     success: function(data) {
-                        console.log('data : ', data);
                         if (data.pdf_url) {
                             window.open(data.pdf_url, '_blank');
                         } else {
@@ -779,7 +778,6 @@
             //     const isEmpty = Object.values(formData).every(value => value === null || value === '');
 
             //     // Tampilkan hasil ke console untuk debugging
-            //     console.log('Form Data Advanced Search:', formData);
             //     let per_page = $('#perPage').val() ?? 5;
             //     loadpage(per_page, formData);
             // });
@@ -845,10 +843,6 @@
                     'nomor_rak': nomor_rak || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
-                // console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
                     loadpage(5, '');
@@ -908,9 +902,6 @@
                     'nomor_rak': nomor_rak || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
 
 
@@ -966,9 +957,6 @@
                     'nomor_rak': nomor_rak || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
 
 

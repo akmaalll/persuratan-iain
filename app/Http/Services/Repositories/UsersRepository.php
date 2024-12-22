@@ -24,7 +24,7 @@ class UsersRepository extends BaseRepository implements UsersContract
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		$search = $criteria['search'] ?? '';
-		return $this->model->when($search, function ($query) use ($search) {
+		return $this->model->when($search, function ($query) use ($search): void {
 			$query->where('name', 'like', "%{$search}%")
 				->orWhere('username', 'like', "%{$search}%");
 		})

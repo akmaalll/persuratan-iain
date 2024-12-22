@@ -31,7 +31,7 @@
                 <!--begin::Header-->
                 <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Form {{ isset($data->id) ? 'Edit' : 'Input' }}</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Form {{ isset($data->id) ? 'Edit' : $formTitle }}</span>
                     </h3>
                 </div>
                 <!--end::Header-->
@@ -47,9 +47,8 @@
                             <input type="hidden" name="id" id="formId" value="{{ $data->id ?? null }}">
                             @csrf
 
-                            <!--begin::Input group-->
                             <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-12 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                                     <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
                                         data-control="select2" data-hide-search="false"
@@ -65,15 +64,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
-                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
-                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
-                                        class="form-control" name="tgl_surat" id="tgl_surat" />
-                                </div>
                             </div>
 
+                            <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Jenis</label>
@@ -86,6 +79,24 @@
                                         <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
                                             value="nomor_sk">Nomor SK</option>
                                     </select>
+                                </div>
+
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor" id="nomor"
+                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}"
+                                        {{ request()->type == 'sisip' ? '' : 'readonly' }} />
+                                </div>
+
+
+                            </div>
+
+                            <div class="row g-9 mb-8">
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
 
                                 <div class="col-md-6 fv-row">
@@ -133,15 +144,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="row g-9 mb-12">
-                                <div class="col-md-12 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
-                                    <input type="text" class="form-control" name="nomor" id="nomor"
-                                        value="{{ isset($data->nomor) ? $data->nomor : '' }}"
-                                        {{ request()->type == 'sisip' ? 'readonly' : '' }} />
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -292,7 +294,6 @@
                     },
                     success: function(data) {
                         const nextNumber = (data.last_number + 1).toString().padStart(3, '0');
-
                         const values = {
                             status: form.status.value,
                             klasifikasi: form.kd_klasifikasi_id.options[form.kd_klasifikasi_id
