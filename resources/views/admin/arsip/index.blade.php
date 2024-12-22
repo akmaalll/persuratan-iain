@@ -262,14 +262,12 @@
             hideBtnFilter.hide()
 
             showBtnFilter.on('click', function(e) {
-                console.log('show filter');
                 filterForm.show()
                 hideBtnFilter.show()
                 showBtnFilter.hide()
             });
 
             hideBtnFilter.on('click', function(e) {
-                console.log('hide filter');
                 filterForm.hide()
                 hideBtnFilter.hide()
                 showBtnFilter.show()

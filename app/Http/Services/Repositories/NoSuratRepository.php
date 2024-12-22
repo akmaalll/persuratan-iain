@@ -49,4 +49,23 @@ class NoSuratRepository extends BaseRepository implements NoSuratContract
 	{
 		return $this->model->with(['klasifikasi', 'asalSurat'])->where('nomor', $nomor)->first();
 	}
+
+	public function filter(array $criteria)
+	{
+		$perPage = $criteria['per_page'] ?? 5;
+		$field = $criteria['sort_field'] ?? 'id';
+		$sortOrder = $criteria['sort_order'] ?? 'desc';
+		// criteria
+		$tgl_surat = $criteria['search']['tgl_surat'] ?? '';
+		$asal = $criteria['search']['asal'] ?? '';
+
+		return $this->model->when($tgl_surat, function ($query) use ($tgl_surat): void {
+			$query->where('tgl_surat', 'like', "%" . $tgl_surat . "%");
+		})
+			->when($asal, function ($query) use ($asal): void {
+				$query->where('asal', 'like', "%" . $asal . "%");
+			})
+			->orderBy($field, $sortOrder)
+			->paginate($perPage);
+	}
 }

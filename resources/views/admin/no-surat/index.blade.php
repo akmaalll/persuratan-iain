@@ -16,7 +16,7 @@
     <!--begin::Toolbar-->
     @component('admin._card.breadcrumb')
         @slot('header')
-            {{ $title }}
+            Pencarian
         @endslot
         @slot('page')
             Data
@@ -31,9 +31,9 @@
             <!--begin::Products-->
             <div class="card card-flush">
                 {{-- @include('admin._card.action') --}}
-                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5 flex-column flex-md-row">
                     <!--begin::Card title-->
-                    <div class="card-title">
+                    <div class="card-title flex-column flex-sm-row gap-2 gap-md-0">
                         <div class="mw-100px me-3">
                             <select class="form-select form-select-solid me-3" data-control="select2" data-hide-search="true"
                                 data-placeholder="Per Page" id="perPage">
@@ -44,28 +44,91 @@
                                 <option>100</option>
                             </select>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex flex-column flex-sm-row gap-2 gap-md-0">
                             <input id="input_search" type="text" class="form-control form-control-solid w-250px me-3"
                                 placeholder="Search">
 
-                            <button id="button_search" class="btn btn-secondary me-3">
-                                <span class="btn-label">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </button>
+                            <div class="d-flex">
+                                <button id="button_search" class="btn btn-secondary me-3">
+                                    <span class="btn-label">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </button>
 
-                            <button id="button_refresh" class="btn btn-secondary">
-                                <span class="btn-label">
-                                    <i class="fa fa-sync"></i>
-                                </span>
-                            </button>
+                                <button id="button_advanced_search" class="btn btn-secondary me-3 text-gray-600">
+                                    <span class="btn-label">
+                                        <i class="fa fa-sliders "></i>
+                                    </span>
+                                </button>
+
+                                <button id="button_refresh" class="btn btn-secondary">
+                                    <span class="btn-label">
+                                        <i class="fa fa-sync"></i>
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <!--end::Card title-->
 
-                    <div class="d-flex justify-content-end">
+                    <!-- Advanced Search Fields (Hidden by Default) -->
+                    <div id="advanced_search_fields"
+                        class="mt-3 card-header align-items-center py-5 gap-2 gap-md-5 col-md-12 p-0"
+                        style="display: none;">
+                        <div class="row">
+                            <!-- Tanggal Surat -->
+                            <div class="col-md-6 mb-3">
+                                <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
+                                <div class="input-group">
+                                    <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
+                                        placeholder="dd/mm/yyyy" onfocus="(this.type='date')" class="form-control"
+                                        name="tgl_surat" id="tgl_surat" />
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        onclick="clearField('tgl_surat')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Asal -->
+                            <div class="col-md-6 mb-3">
+                                <label for="input_asal" class="form-label">Asal</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" style="flex: 1;" data-control="select2"
+                                        data-hide-search="false" data-placeholder="Pilih Asal" name="asal"
+                                        id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('asal')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Global Clear All Button -->
+                        <div class="mt-3">
+                            <button id="clear_all" class="btn btn-secondary">
+                                <span class="btn-label">
+                                    <i class="fa fa-eraser"></i> Clear All
+                                </span>
+                            </button>
+                            <button id="search_filter" class="btn btn-primary">
+                                <span class="btn-label">
+                                    <i class="fa fa-search"></i> Search
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <!--end::Advanced Search Fields (Hidden by Default)-->
+
+                    <div class="d-flex justify-content-end" style="flex: 1">
                         <!--begin::Card toolbar-->
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5 me-3">
+                        <div class="card-toolbar justify-content-end gap-5 me-3">
                             <a href="{{ route($title . '.create') }}" class="btn btn-success">
                                 <span class="btn-label">
                                     <i class="fa fa-plus"></i>
@@ -74,7 +137,7 @@
                             </a>
                         </div>
 
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <div class="card-toolbar justify-content-end gap-5">
                             <a href="{{ route($title . '.create', ['type' => 'sisip']) }}" class="btn btn-primary">
                                 <span class="btn-label">
                                     <i class="ki-duotone ki-black-right"></i>
@@ -172,6 +235,15 @@
 
 @push('jsScript')
     <script type="text/javascript">
+        document.getElementById('button_advanced_search').addEventListener('click', function() {
+            const advancedFields = document.getElementById('advanced_search_fields');
+            if (advancedFields.style.display === 'none' || advancedFields.style.display === '') {
+                advancedFields.style.display = 'block';
+            } else {
+                advancedFields.style.display = 'none';
+            }
+        });
+
         $(document).ready(function() {
             loadpage(5, '');
             var $pagination = $('.twbs-pagination');
@@ -254,6 +326,45 @@
                 loadpage(5, '');
             });
 
+            $('#search_filter').on('click', function() {
+                const tgl_surat = $('#tgl_surat').val() || null;
+                const asal = $('#asal').val() || null;
+
+                const checkVal = Object.values({
+                    tgl_surat,
+                    asal
+                }).every(v => v == '' || v == null || v == undefined);
+
+                if (checkVal) {
+                    loadpage(5, '');
+                } else {
+                    loadpage(5, {
+                        tgl_surat,
+                        asal
+                    });
+                }
+            });
+
+            document.getElementById('clear_all').addEventListener('click', function() {
+                const fields = ['tgl_surat', 'asal'];
+
+                fields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        if (field.type === 'select-one') {
+                            if ($(field).data('select2')) {
+                                $(field).val(null).trigger('change'); // Reset Select2
+                            } else {
+                                field.selectedIndex = 0; // Reset dropdown standar
+                            }
+                        } else {
+                            field.value = ''; // Clear text and date fields
+                        }
+
+                        loadpage(5, '');
+                    }
+                });
+            });
 
             // proses delete data
             $('body').on('click', '.deleteData', function() {

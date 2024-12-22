@@ -69,24 +69,22 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
-                    <div class="row pb-5">
-                        <div class="col-md-4  fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Jenis Surat</label>
-                            <select class="form-select reset-filter opsiLain" name="type_surat"
-                                id="type_surat"  data-control="select2" data-hide-search="false"
-                                data-placeholder="-- pilih jenis --">
-                                <option value="-- pilih jenis --" >-- pilih jenis --</option>
-                                <option value="Arsip" >Arsip</option>
-                                <option value="Surat Masuk" >Surat Masuk</option>
-                                <option value="Surat Keluar" >Surat Keluar</option>
-                                
-                            </select>
-                        </div>
-                    </div>
                     <!-- Kode Klasifikasi -->
                     <div class="row">
+                        <div class="col-md-4  fv-row">
+                            <label class="fs-6 fw-semibold mb-2">Jenis Surat</label>
+                            <select class="form-select reset-filter opsiLain" name="type_surat" id="type_surat"
+                                data-control="select2" data-hide-search="false" data-placeholder="-- pilih jenis --">
+                                <option value="-- pilih jenis --">-- pilih jenis --</option>
+                                <option value="Arsip">Arsip</option>
+                                <option value="Surat Masuk">Surat Masuk</option>
+                                <option value="Surat Keluar">Surat Keluar</option>
+
+                            </select>
+                        </div>
+
                         <div class="col-md-4 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Nomor Arsip</label>
+                            <label class="fs-6 fw-semibold mb-2">Nomor</label>
                             <div class="input-group">
                                 <input type="text" class="form-control reset-filter" name="nomor" id="nomor"
                                     placeholder="Masukkan nomor surat" />
@@ -119,6 +117,10 @@
 
                         </div>
 
+                    </div>
+
+                    <!-- Nomor Surat dan Perihal -->
+                    <div class="row g-9 mt-0">
                         <!-- Tanggal Surat -->
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Tanggal arsip</label>
@@ -132,12 +134,6 @@
                                 </button>
                             </div>
                         </div>
-
-                    </div>
-
-                    <!-- Nomor Surat dan Perihal -->
-                    <div class="row g-9 mt-0">
-
 
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Perihal</label>
@@ -164,8 +160,10 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
 
-                        <div class="col-md-4 fv-row">
+                    <div class="row g-9 mt-0">
+                        <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Unit pengolah</label>
                             <select class="form-select  reset-filter opsiLain" name="unit_pengolah" id="unit_pengolah"
                                 data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
@@ -180,10 +178,6 @@
                             </select>
                         </div>
 
-
-                    </div>
-
-                    <div class="row g-9 mt-0">
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Lokal Arsip</label>
                             <select class="form-select reset-filter opsiLain" name="lokal" id="lokal"
@@ -243,7 +237,9 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row g-9 mt-2">
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Rak / Lemari</label>
                             <div class="input-group">
@@ -255,11 +251,6 @@
                                 </button>
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="row g-9 mt-2">
-
 
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Nomor Box / Bundel</label>
@@ -298,8 +289,10 @@
                                 <strong>Warning:</strong> Retensi period has expired!
                             </div>
                         </div>
+                    </div>
 
-
+                    <!-- Status dan Asal -->
+                    <div class="row g-9 mt-0">
                         <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
@@ -317,11 +310,6 @@
                                 <strong>Warning:</strong> Retensi period has expired!
                             </div>
                         </div>
-
-                    </div>
-
-                    <!-- Status dan Asal -->
-                    <div class="row g-9 mt-0">
 
                         <div class="col-md-3 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Keterangan</label>
@@ -506,14 +494,12 @@
             hideBtnFilter.hide()
 
             showBtnFilter.on('click', function(e) {
-                console.log('show filter');
                 filterForm.show()
                 hideBtnFilter.show()
                 showBtnFilter.hide()
             });
 
             hideBtnFilter.on('click', function(e) {
-                console.log('hide filter');
                 filterForm.hide()
                 hideBtnFilter.hide()
                 showBtnFilter.show()
@@ -539,7 +525,6 @@
                     type: "GET",
                     datatype: "json",
                     success: function(data) {
-                        console.log('data : ', data);
                         if (data.pdf_url) {
                             window.open(data.pdf_url, '_blank');
                         } else {
@@ -554,7 +539,6 @@
             }
 
             function loadexport(search) {
-                console.log('cetak :', search);
                 const url = '{{ route('cari-arsip.data.export') }}' + '?search=' + encodeURIComponent(JSON
                     .stringify(
                         search));
@@ -563,6 +547,7 @@
             }
 
             let type_surat = ''
+
             function loaddata(page, per_page, search) {
                 $.ajax({
                     url: '{{ route('cari-arsip' . '.data') }}',
@@ -574,10 +559,8 @@
                     type: "GET",
                     datatype: "json",
                     success: function(data) {
-                        console.log(data);
                         $(".datatables").html(data.html);
                         type_surat = data.type
-                        console.log(type_surat);
                     }
                 });
             }
@@ -707,10 +690,6 @@
                     'type_surat': type_surat || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
-                console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
                     loadpage(5, '');
@@ -761,12 +740,8 @@
                     'jumlah': jumlah || null,
                     'type_surat': type_surat || null,
                 }
-
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
-                
+
 
                 if (cekValue) {
                     loadcetak('');
@@ -818,9 +793,6 @@
                     'jumlah': jumlah || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
 
 
@@ -940,7 +912,6 @@
         retensiCategory?.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
-            console.log(this.value);
             if (this.value == 'aktif') {
                 retensiDuration.style.display = 'block';
 

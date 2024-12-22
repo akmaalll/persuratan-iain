@@ -123,7 +123,6 @@
             .create(document.querySelector('#uraian'))
             .then(editor => {
                 window.editor = editor
-                console.log(editor);
 
             })
             .catch(error => {

@@ -74,7 +74,6 @@
         $("#pencarian, #perPage").on('keyup change', function(event) {
             let search = $('#pencarian').val();
             let per_page = $('#perPage').val();
-            console.log(per_page);
             if (per_page != '' || search.length >= 3) {
                 loadpage(search, per_page);
             }
@@ -90,7 +89,6 @@
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function(status) {
-                    console.log('validated!');
 
                     if (status == 'Valid') {
                         // Show loading indication
@@ -120,7 +118,6 @@
                             error: function(data) {
                                 submitButton.removeAttribute('data-kt-indicator');
                                 submitButton.disabled = false;
-                                console.log('Error:', data);
                                 $('#kt_modal_new_target_form').trigger("reset");
                                 $('#kt_modal_new_target').modal('hide');
                                 toastr.error("Failed to save data!");
@@ -140,7 +137,6 @@
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function(status) {
-                    console.log('validated!');
 
                     if (status == 'Valid') {
                         // Show loading indication
@@ -172,7 +168,6 @@
                                 submitButtonUpdate.removeAttribute(
                                     'data-kt-indicator');
                                 submitButtonUpdate.disabled = false;
-                                console.log('Error:', data);
                                 $('#kt_modal_new_target_form').trigger("reset");
                                 $('#kt_modal_new_target').modal('hide');
                                 toastr.error("Failed to update data!");

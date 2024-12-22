@@ -195,7 +195,6 @@
         //                     error: function(data) {
         //                         submitButton.removeAttribute('data-kt-indicator');
         //                         submitButton.disabled = false;
-        //                         console.log('Error:', data);
         //                         toastr.error("Failed to save data!");
         //                     }
         //                 });

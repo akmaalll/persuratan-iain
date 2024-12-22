@@ -178,9 +178,6 @@
                             submitButtonUpdate.disabled = true;
                             let formData = new FormData(kt_modal_new_target_form);
                             let id = $('#formId').val();
-                            // for (const [key, value] of formData) {
-                            //     console.log(`${key}: ${value}\n`); 
-                            // }
                             $.ajax({
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
@@ -193,7 +190,6 @@
                                 processData: false,
                                 contentType: false,
                                 success: function(data) {
-                                    console.log(data);
                                     if (data == 'konfirmasi password salah') {
                                         toastr.error("Konfirmasi password salah!");
                                         submitButtonUpdate.removeAttribute(
@@ -219,7 +215,6 @@
 
                                 },
                                 error: function(data) {
-                                    console.log(data);
                                     submitButtonUpdate.removeAttribute(
                                         'data-kt-indicator');
                                     submitButtonUpdate.disabled = false;

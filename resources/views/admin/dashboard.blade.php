@@ -183,14 +183,12 @@
             hideBtnFilter.hide()
 
             showBtnFilter.on('click', function(e) {
-                console.log('show filter');
                 filterForm.show()
                 hideBtnFilter.show()
                 showBtnFilter.hide()
             });
 
             hideBtnFilter.on('click', function(e) {
-                console.log('hide filter');
                 filterForm.hide()
                 hideBtnFilter.hide()
                 showBtnFilter.show()
@@ -208,7 +206,6 @@
             $pagination.twbsPagination(defaultOpts);
 
             function loadcetak(search) {
-                console.log('cetak :', search);
                 $.ajax({
                     url: '{{ route('arsip.data.pdf') }}',
                     data: {
@@ -231,7 +228,6 @@
             }
 
             function loadexport(search) {
-                console.log('cetak :', search);
                 const url = '{{ route('arsip.data.export') }}' + '?search=' + encodeURIComponent(JSON.stringify(
                     search));
                 window.open(url, '_blank');
@@ -250,7 +246,6 @@
                     type: "GET",
                     datatype: "json",
                     success: function(data) {
-                        console.log(data);
                         $(".datatables").html(data.html);
                     }
                 });
@@ -341,10 +336,6 @@
                     'no_box': no_box || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
-                console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
                 if (cekValue) {
                     loadpage(5, '');
@@ -388,10 +379,6 @@
                     'no_box': no_box || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
-                console.log(formData);
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
 
 
@@ -437,9 +424,6 @@
                     'no_box': no_box || null,
                 }
 
-                // Object.values(formData).forEach((key) => {
-                //     console.log(key, formData[key]);
-                // });
                 let cekValue = Object.values(formData).every(v => v == '' || v == null || v == undefined);
 
 

@@ -241,9 +241,7 @@
                         $('#formId').val(data.id);
                         $('#id_role').val(data.id).trigger('change');
                     },
-                    error: function() {
-                        console.log('error');
-                    }
+                    error: function() {}
                 });
             }
 

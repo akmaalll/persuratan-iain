@@ -20,7 +20,6 @@
                             const editorContent = window.editor.getData();
 
                             formData.set('uraian', editorContent);
-                            console.log('Added editor content to form data');
                         } else {
                             console.warn('CKEditor not found');
                         }
@@ -36,7 +35,6 @@
                             processData: false,
                             contentType: false,
                             success: function(data) {
-                                console.log('data');
                                 if (data == 'konfirmasi password salah') {
                                     toastr.error("Konfirmasi password salah!");
                                     submitButtonUpdate.removeAttribute(

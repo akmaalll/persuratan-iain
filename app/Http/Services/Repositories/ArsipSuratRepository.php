@@ -24,7 +24,7 @@ class ArsipSuratRepository extends BaseRepository implements ArsipSuratContract
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		$search = $criteria['search'] ?? '';
-		return $this->model->when($search, function ($query) use ($search) {
+		return $this->model->when($search, function ($query) use ($search): void {
 			$query->where('nomor', 'like', "%" . $search . "%");
 			$query->orWhere('uraian', 'like', "%" . $search . "%");
 		})

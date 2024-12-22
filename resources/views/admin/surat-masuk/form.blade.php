@@ -159,8 +159,26 @@
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal </label>
-                                    <input type="text" class="form-control" name="asal" id="asal"
-                                        value="{{ isset($data->asalSurat->asal) ? $data->asalSurat->asal : '' }}" />
+                                    {{-- <input type="text" class="form-control" name="asal" id="asal"
+                                        value="{{ isset($data->asalSurat->asal) ? $data->asalSurat->asal : '' }}" /> --}}
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih atau Ketikkan Asal" name="asal" id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @if (isset($data->asalSurat?->id) &&
+                                                !in_array($data->asalSurat?->id, Helper::getData('kd_units')->pluck('id')->toArray()))
+                                            <option value="{{ $data->asalSurat?->id }}" selected>
+                                                {{ $data->asalSurat?->id }}
+                                            </option>
+                                        @endif
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option
+                                                {{ isset($data->asalSurat?->id) && $data->asalSurat?->id == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}" data-nomor="{{ $v->nomor }}"
+                                                data-kode="{{ $v->kode }}">
+                                                {{ $v->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
 
@@ -253,17 +271,16 @@
 
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
-
-                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
-                                </div>
-
-                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
                                     <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
                                         value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
+
+                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
                                 </div>
                             </div>
 
@@ -375,47 +392,46 @@
 @push('jsScriptForm')
 
     <script type="text/javascript">
-function fetchNomorSuratData() {
-        let nomor = $('#nomor').val();
-        if (nomor) {
-            $.ajax({
-                url: "{{ route('get.no.surat.data') }}",
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    nomor: nomor
-                },
-                success: function(response) {
-                    if (response.success) {
-                        console.log(response.data.asal_surat.nama);
-                        // Isi form dengan data dari NoSurat
-                        $('#perihal').val(response.data.perihal);
-                        $('#tgl_surat').val(response.data.tgl_surat);
-                        $('#asal').val(response.data.asal_surat.nama);
-                        $('#jenis_nosurat').val(response.data.jenis).change();
-                        $('#status').val(response.data.status).change();
+        function fetchNomorSuratData() {
+            let nomor = $('#nomor').val();
+            if (nomor) {
+                $.ajax({
+                    url: "{{ route('get.no.surat.data') }}",
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        nomor: nomor
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Isi form dengan data dari NoSurat
+                            $('#perihal').val(response.data.perihal);
+                            $('#tgl_surat').val(response.data.tgl_surat);
+                            $('#asal').val(response.data.asal_surat.id).change();
+                            $('#jenis_nosurat').val(response.data.jenis).change();
+                            $('#status').val(response.data.status).change();
 
-                        updateRetensi();
-                    } else {
-                        alert(response.message);
+                            updateRetensi();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Terjadi kesalahan. Silakan coba lagi.');
                     }
-                },
-                error: function(xhr) {
-                    alert('Terjadi kesalahan. Silakan coba lagi.');
-                }
-            });
-        } else {
-            toastr.error("Silakan isi Nomor Surat terlebih dahulu");
+                });
+            } else {
+                toastr.error("Silakan isi Nomor Surat terlebih dahulu");
+            }
         }
-    }
 
-    $('#fetchData').on('click', function() {
-        fetchNomorSuratData();
-    });
+        $('#fetchData').on('click', function() {
+            fetchNomorSuratData();
+        });
 
-    $('#nomor').on('blur', function() {
-        fetchNomorSuratData();
-    });
+        $('#nomor').on('blur', function() {
+            fetchNomorSuratData();
+        });
 
         // Fungsi untuk memperbarui pilihan retensi aktif dan inaktif
         function updateRetensi() {
@@ -579,7 +595,7 @@ function fetchNomorSuratData() {
         retensiCategory?.addEventListener('change', function() {
             retensiTampil.style.display = 'block';
             retensiDuration.innerHTML = '';
-            console.log(this.value);
+
             if (this.value == 'aktif') {
                 retensiDuration.style.display = 'block';
 

@@ -25,8 +25,8 @@ class SuratKeluarRepository extends BaseRepository implements SuratKeluarContrac
 		$field = $criteria['sort_field'] ?? 'id';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		$search = $criteria['search'] ?? '';
-		return $this->model->when($search, function ($query) use ($search) {
-			$query->where(function ($q) use ($search) {
+		return $this->model->when($search, function ($query) use ($search): void {
+			$query->where(function ($q) use ($search): void {
 				$q->where('nomor', 'like', "%" . $search . "%")
 					->orWhere('kepada', 'like', "%" . $search . "%")
 					->orWhere('tgl_surat', 'like', "%" . $search . "%")

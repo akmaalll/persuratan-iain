@@ -40,8 +40,8 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		// }
 
 
-		return $this->model->when($search, function ($query) use ($search) {
-			$query->where(function ($q) use ($search) {
+		return $this->model->when($search, function ($query) use ($search): void {
+			$query->where(function ($q) use ($search): void {
 				$q->where('nomor', 'like', "%" . $search . "%")
 					->orWhere('jumlah', 'like', "%" . $search . "%")
 					->orWhere('uraian', 'like', "%" . $search . "%")
