@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('no_surats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kd_klasifikasi_id');
+            $table->unsignedBigInteger('kd_klasifikasi_id')->nullable();
             $table->date('tgl_surat');
             $table->string('nomor');
             $table->string('status');

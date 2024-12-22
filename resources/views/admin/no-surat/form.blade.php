@@ -48,7 +48,7 @@
                             @csrf
 
                             <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
+                                {{-- <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                                     <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
                                         data-control="select2" data-hide-search="false"
@@ -63,7 +63,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Jenis</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -249,21 +249,148 @@
         });
 
         // generate no surat
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const form = {
+        //         kd_klasifikasi_id: document.getElementById('kd_klasifikasi_id'),
+        //         status: document.getElementById('status'),
+        //         tglSurat: document.getElementById('tgl_surat'),
+        //         asal: document.getElementById('asal'),
+        //         nomorField: document.getElementById('nomor')
+        //     };
+
+        //     let counter = 0;
+        //     let previousValues = {
+        //         kd_klasifikasi_id: '',
+        //         status: '',
+        //         tglSurat: '',
+        //         asal: ''
+        //     };
+
+        //     // Add event listeners
+        //     ['tglSurat'].forEach(field => {
+        //         if (form[field]) {
+        //             form[field].addEventListener('change', () => {
+        //                 handleInputChange(field);
+        //             });
+        //         }
+        //     });
+
+        //     ['kd_klasifikasi_id', 'status', 'asal'].forEach(field => {
+        //         if (form[field]) {
+        //             $(document.body).on("change", `#${field}`, function() {
+        //                 handleInputChange(field);
+        //             });
+        //         }
+        //     });
+
+        //     function handleInputChange(changedField) {
+        //         // Check if the value actually changed
+        //         const currentValue = form[changedField].value;
+        //         if (previousValues[changedField] === currentValue) {
+        //             return;
+        //         }
+
+
+        //         // Update previous value
+        //         previousValues[changedField] = currentValue;
+
+        //         if (areAllFieldsFilled()) {
+        //             counter++;
+        //             generateNomor();
+        //         } else {
+        //             form.nomorField.value = '';
+        //         }
+        //     }
+
+        //     function generateNomor() {
+        //         $.ajax({
+        //             //url: '/admin/surat-keluar/last-number',
+        //             url: '{{ route('no-surat.last-number') }}',
+        //             method: 'POST',
+        //             data: {
+        //                 kd_klasifikasi: form.kd_klasifikasi_id.value,
+        //                 status: form.status.value,
+        //                 asal: form.asal.value,
+        //                 _token: document.querySelector('meta[name="csrf-token"]').content // CSRF token
+        //             },
+        //             success: function(data) {
+        //                 const nextNumber = (data.last_number + 1).toString().padStart(3, '0');
+        //                 const values = {
+        //                     status: form.status.value,
+        //                     klasifikasi: form.kd_klasifikasi_id.options[form.kd_klasifikasi_id
+        //                         .selectedIndex],
+        //                     asal: form.asal.options[form.asal.selectedIndex],
+        //                     date: new Date(form.tglSurat.value)
+        //                 };
+
+        //                 const components = {
+        //                     status: getStatus(values.status),
+        //                     counterNoSurat: nextNumber,
+        //                     asalCode: values.asal.dataset.kode,
+        //                     asalNomor: values.asal.dataset.nomor,
+        //                     kodeKlasifikasi: values.klasifikasi.dataset.kode,
+        //                     noKlasifikasi: values.klasifikasi.dataset.nomor,
+        //                     month: String(values.date.getMonth() + 1).padStart(2, '0'),
+        //                     year: values.date.getFullYear(),
+        //                     isFTAR: values.asal.dataset.kode === 'FTAR'
+        //                 };
+
+
+        //                 const documentNumber = formatDocumentNumber(components);
+        //                 form.nomorField.value = documentNumber;
+        //             },
+        //             error: function(error) {
+        //                 console.error('Error generating nomor:', error);
+        //             }
+        //         });
+        //     }
+
+        //     function noKlasifkasi(text) {
+        //         const parts = text.split('-').map(part => part.trim().replace(/\n/g, ''));
+        //         return parts[1] || '';
+        //     }
+
+        //     function areAllFieldsFilled() {
+        //         return form.status.value &&
+        //             form.kd_klasifikasi_id.selectedIndex !== 0 &&
+        //             form.asal.selectedIndex !== 0 &&
+        //             form.tglSurat.value;
+        //     }
+
+        //     function getStatus(status) {
+        //         const prefixMap = {
+        //             'rahasia': 'R',
+        //             'biasa': 'B',
+        //             'penting': 'P',
+        //             'terbatas': 'T',
+        //             'sangat_terbatas': 'ST',
+        //         };
+        //         return prefixMap[status] || '';
+        //     }
+
+        //     function formatDocumentNumber(components) {
+        //         if (components.isFTAR) {
+        //             return `${components.status}-${components.counterNoSurat}/ln.39/${components.asalCode}.${components.asalNomor}/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
+        //         } else {
+        //             return `${components.status}-${components.counterNoSurat}/ln.39/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
+        //         }
+        //     }
+        // });
+
         document.addEventListener('DOMContentLoaded', function() {
             const form = {
-                kd_klasifikasi_id: document.getElementById('kd_klasifikasi_id'),
                 status: document.getElementById('status'),
                 tglSurat: document.getElementById('tgl_surat'),
                 asal: document.getElementById('asal'),
-                nomorField: document.getElementById('nomor')
+                nomorField: document.getElementById('nomor'),
+                jenis: document.getElementById('jenis') // Tambahkan field jenis jika diperlukan
             };
 
-            let counter = 0;
             let previousValues = {
-                kd_klasifikasi_id: '',
                 status: '',
                 tglSurat: '',
-                asal: ''
+                asal: '',
+                jenis: '' // Tambahkan untuk jenis
             };
 
             // Add event listeners
@@ -275,7 +402,7 @@
                 }
             });
 
-            ['kd_klasifikasi_id', 'status', 'asal'].forEach(field => {
+            ['status', 'asal', 'jenis'].forEach(field => {
                 if (form[field]) {
                     $(document.body).on("change", `#${field}`, function() {
                         handleInputChange(field);
@@ -284,18 +411,14 @@
             });
 
             function handleInputChange(changedField) {
-                // Check if the value actually changed
                 const currentValue = form[changedField].value;
                 if (previousValues[changedField] === currentValue) {
                     return;
                 }
 
-
-                // Update previous value
                 previousValues[changedField] = currentValue;
 
                 if (areAllFieldsFilled()) {
-                    counter++;
                     generateNomor();
                 } else {
                     form.nomorField.value = '';
@@ -304,40 +427,21 @@
 
             function generateNomor() {
                 $.ajax({
-                    //url: '/admin/surat-keluar/last-number',
-                    url: '{{ route('no-surat.last-number') }}',
+                    url: '{{ route('no-surat.last-number') }}', // Ganti dengan route sesuai
                     method: 'POST',
                     data: {
-                        kd_klasifikasi: form.kd_klasifikasi_id.value,
                         status: form.status.value,
                         asal: form.asal.value,
-                        _token: document.querySelector('meta[name="csrf-token"]').content // CSRF token
+                        jenis: form.jenis.value, // Tambahkan jenis dalam permintaan
+                        _token: document.querySelector('meta[name="csrf-token"]').content
                     },
                     success: function(data) {
-                        const nextNumber = (data.last_number + 1).toString().padStart(3, '0');
-                        const values = {
-                            status: form.status.value,
-                            klasifikasi: form.kd_klasifikasi_id.options[form.kd_klasifikasi_id
-                                .selectedIndex],
-                            asal: form.asal.options[form.asal.selectedIndex],
-                            date: new Date(form.tglSurat.value)
-                        };
-
-                        const components = {
-                            status: getStatus(values.status),
-                            counterNoSurat: nextNumber,
-                            asalCode: values.asal.dataset.kode,
-                            asalNomor: values.asal.dataset.nomor,
-                            kodeKlasifikasi: values.klasifikasi.dataset.kode,
-                            noKlasifikasi: values.klasifikasi.dataset.nomor,
-                            month: String(values.date.getMonth() + 1).padStart(2, '0'),
-                            year: values.date.getFullYear(),
-                            isFTAR: values.asal.dataset.kode === 'FTAR'
-                        };
-
-
-                        const documentNumber = formatDocumentNumber(components);
-                        form.nomorField.value = documentNumber;
+                        // Pastikan `data.last_number` adalah angka terakhir yang digunakan
+                        console.log(data);
+                        const nextNumber = (data.last_number).toString().padStart(3, '0');
+                        
+                        // Simpan nomor ke field
+                        form.nomorField.value = nextNumber;
                     },
                     error: function(error) {
                         console.error('Error generating nomor:', error);
@@ -345,37 +449,14 @@
                 });
             }
 
-            function noKlasifkasi(text) {
-                const parts = text.split('-').map(part => part.trim().replace(/\n/g, ''));
-                return parts[1] || '';
-            }
-
             function areAllFieldsFilled() {
                 return form.status.value &&
-                    form.kd_klasifikasi_id.selectedIndex !== 0 &&
                     form.asal.selectedIndex !== 0 &&
-                    form.tglSurat.value;
-            }
-
-            function getStatus(status) {
-                const prefixMap = {
-                    'rahasia': 'R',
-                    'biasa': 'B',
-                    'penting': 'P',
-                    'terbatas': 'T',
-                    'sangat_terbatas': 'ST',
-                };
-                return prefixMap[status] || '';
-            }
-
-            function formatDocumentNumber(components) {
-                if (components.isFTAR) {
-                    return `${components.status}-${components.counterNoSurat}/ln.39/${components.asalCode}.${components.asalNomor}/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
-                } else {
-                    return `${components.status}-${components.counterNoSurat}/ln.39/${components.kodeKlasifikasi}.${components.noKlasifikasi}/${components.month}/${components.year}`;
-                }
+                    form.tglSurat.value &&
+                    form.jenis.value; // Pastikan jenis terisi
             }
         });
+
 
         // Define form element
         const form = document.getElementById('kt_modal_new_target_form');

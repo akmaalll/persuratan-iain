@@ -8,9 +8,9 @@
                 {{ $v->nomor }}
             </span>
         </td>
-        <td class="text-gray-600 fw-semibold">
+        {{-- <td class="text-gray-600 fw-semibold">
             {{ $v->klasifikasi->nama . ' - ' . $v->klasifikasi->nomor }}
-        </td>
+        </td> --}}
         <td>
             <span class="fw-semibold text-nowrap">
                 {{ Helper::getDateIndo($v->tgl_surat) }}

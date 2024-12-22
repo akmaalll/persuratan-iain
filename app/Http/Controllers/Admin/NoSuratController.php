@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Repositories\Contracts\NoSuratContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NoSuratController extends Controller
 {
@@ -105,15 +106,27 @@ class NoSuratController extends Controller
     public function getLastNumber(Request $request)
     {
         try {
-            $criteria = [
-                'kd_klasifikasi' => $request->input('kd_klasifikasi'),
-                'status' => $request->input('status'),
-                'asal' => $request->input('asal'),
-            ];
+            // $criteria = [
+            //     'kd_klasifikasi' => $request->input('kd_klasifikasi'),
+            //     'status' => $request->input('status'),
+            //     'asal' => $request->input('asal'),
+            // ];
 
-            $lastNumber = $this->repo->getLastNumber($criteria);
+            // $lastNumber = $this->repo->getLastNumber($criteria);
 
-            return response()->json(['last_number' => $lastNumber]);
+            $jenis = $request->input('jenis');
+            $lastNumber = DB::table('no_surats')
+                ->where('jenis', $jenis)
+                ->orderBy('created_at', 'desc')
+                ->value('nomor');
+
+            // Jika tidak ada nomor, mulai dari 001
+            $nextNumber = $lastNumber ? intval($lastNumber) + 1 : 1;
+
+            // Format menjadi 3 digit (001, 002, dst.)
+            $formattedNumber = str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            return response()->json(['last_number' => $formattedNumber]);
+            // return response()->json(['last_number' => $lastNumber]);
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
