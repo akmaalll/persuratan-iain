@@ -3,6 +3,11 @@
         <td class="text-gray-600 fw-semibold">
             {{ ++$i }}
         </td>
+        <td>
+            <span class="fw-semibold text-nowrap">
+                {{ $v->nomor }}
+            </span>
+        </td>
         <td class="text-gray-600 fw-semibold">
             {{ $v->klasifikasi->nama . ' - ' . $v->klasifikasi->nomor }}
         </td>
@@ -11,11 +16,7 @@
                 {{ Helper::getDateIndo($v->tgl_surat) }}
             </span>
         </td>
-        <td>
-            <span class="fw-semibold text-nowrap">
-                {{ $v->nomor }}
-            </span>
-        </td>
+        
         <td>
             <span class="fw-semibold text-nowrap">
                 {{ $v->perihal }}

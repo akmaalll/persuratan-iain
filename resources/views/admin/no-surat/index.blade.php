@@ -160,9 +160,9 @@
                             <thead>
                                 <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-20px pe-2"> No </th>
+                                    <th class="min-w-140px"> Nomor </th>
                                     <th class="min-w-20px pe-2"> Kode Klasifikasi </th>
                                     <th class="min-w-140px"> Tanggal Surat </th>
-                                    <th class="min-w-140px"> Nomor </th>
                                     <th class="min-w-140px"> Perihal </th>
                                     <th class="min-w-140px"> Jenis </th>
                                     <th class="min-w-140px"> Status </th>

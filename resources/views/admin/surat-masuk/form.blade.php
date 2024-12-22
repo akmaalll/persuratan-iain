@@ -196,8 +196,9 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
-                                    <select class="form-select" data-control="select2" data-tags="true" data-hide-search="false"
-                                        data-placeholder="Pilih atau Ketikkan Tujuan" name="tujuan" id="tujuan">
+                                    <select class="form-select" data-control="select2" data-tags="true"
+                                        data-hide-search="false" data-placeholder="Pilih atau Ketikkan Tujuan"
+                                        name="tujuan" id="tujuan">
                                         <option value="">Pilih Tujuan...</option>
                                         @if (isset($data->tujuan) && !in_array($data->tujuan, Helper::getData('kd_units')->pluck('id')->toArray()))
                                             <option value="{{ $data->tujuan }}" selected>
@@ -413,11 +414,12 @@
 
                             updateRetensi();
                         } else {
-                            alert(response.message);
+                            toastr.error("Nomor surat telah digunakan");
+
                         }
                     },
                     error: function(xhr) {
-                        alert('Terjadi kesalahan. Silakan coba lagi.');
+                        toastr.error('Terjadi kesalahan. Silakan coba lagi.');
                     }
                 });
             } else {
