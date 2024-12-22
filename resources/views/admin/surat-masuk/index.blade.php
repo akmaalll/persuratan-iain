@@ -403,15 +403,13 @@
                     </div>
                     <!-- Global Clear All Button -->
                     <div class="mt-3">
-                        <button id="clear_all" class="btn btn-secondary">
-                            <span class="btn-label">
-                                <i class="fa fa-eraser"></i> Clear All
-                            </span>
+                        <button type="submit" id="search_filter" class="btn mb-2  btn-primary">
+                            <span class="indicator-label">Cari</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </button>
-                        <button id="search_filter" class="btn btn-primary">
-                            <span class="btn-label">
-                                <i class="fa fa-search"></i> Search
-                            </span>
+                        <button type="reset" id="clear_all" class="btn mb-2  btn-warning">
+                            <span class="indicator-label">Clear All</span>
                         </button>
                         <button type="submit" id="excel_filter" class="btn  btn-success">
                             <span class="btn-label">

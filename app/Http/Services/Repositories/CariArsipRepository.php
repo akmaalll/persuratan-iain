@@ -7,6 +7,7 @@ use App\Http\Services\Repositories\Contracts\CariArsipContract;
 use App\Models\ArsipSurat;
 use App\Models\surat_keluar;
 use App\Models\surat_masuk;
+use Illuminate\Support\Facades\Schema;
 
 class CariArsipRepository extends BaseRepository implements CariArsipContract
 {
@@ -119,6 +120,7 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 			$filter = $filter->where('ket_keaslian', '=', $ket);
 		}
 
+
 		if (!empty($nomor)) {
 			$filter = $filter->where('nomor', 'like', "%" . $nomor . "%");
 		}
@@ -132,7 +134,8 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		}
 
 		if (!empty($pencipta)) {
-			$filter = $filter->where('pencipta', 'like', '%' . $pencipta . '%');
+			$filter = Schema::hasColumn($filter->getTable(), 'pencipta') ? $filter->where('pencipta', 'like', '%' . $pencipta . '%')
+				: $filter->where('asal', 'like', '%' . $pencipta . '%');
 		}
 
 		if (!empty($retensi)) {
@@ -156,7 +159,8 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		}
 
 		if (!empty($tgl)) {
-			$filter = $filter->where('tgl', 'like', '%' . $tgl . '%');
+			$filter = Schema::hasColumn($filter->getTable(), 'tgl') ? $filter->where('tgl', 'like', '%' . $tgl . '%')
+				: $filter->where('tgl_surat', 'like', '%' . $tgl . '%');
 		}
 
 		if (!empty($perihal)) {

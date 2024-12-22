@@ -40,6 +40,15 @@
                 @endif
             </span>
         </td>
+        <td>
+            <span class="fw-semibold text-nowrap">
+                @if (is_numeric($v->tujuan))
+                    {{ $v->tujuanSurat->kode == '-' ? '' : $v->tujuanSurat->kode . ' - ' }} {{ $v->tujuanSurat->nama }}
+                @else
+                    {{ $v->tujuan }}
+                @endif
+            </span>
+        </td>
         <td class="text-end text-nowrap">
             {!! Helper::btnAction($v->id, $title) !!}
         </td>

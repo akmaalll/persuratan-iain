@@ -123,7 +123,7 @@
                     <div class="row g-9 mt-0">
                         <!-- Tanggal Surat -->
                         <div class="col-md-4 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Tanggal arsip</label>
+                            <label class="fs-6 fw-semibold mb-2">Tanggal surat/arsip</label>
                             <div class="input-group">
                                 <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')"
                                     onblur="(this.type='text')" data-placeholder="-- Pilih lokal --" name="tgl"
@@ -148,7 +148,7 @@
                         </div>
 
                         <div class="col-md-4 fv-row">
-                            <label class="fs-6 fw-semibold mb-2">Pencipta Arsip</label>
+                            <label class="fs-6 fw-semibold mb-2">Pencipta Arsip/Asal Surat</label>
                             <select class="form-select reset-filter opsiLain" name="pencipta" id="pencipta"
                                 data-control="select2" data-tags="true" data-hide-search="false" data-placeholder="Semua">
                                 <option value="">Semua</option>
@@ -393,7 +393,7 @@
                                     <th class="min-w-20px pe-2">No</th>
                                     <th class="min-w-120px text-nowrap">Nomor</th>
                                     <th class="min-w-140px text-nowrap">Tanggal</th>
-                                    <th class="min-w-120px text-nowrap">Kodel Klasifikasi</th>
+                                    <th class="min-w-120px text-nowrap">Kode Klasifikasi</th>
                                     {{-- <th class="min-w-120px">Perihal</th> --}}
                                     {{-- <th class="min-w-120px">Unit Pengolah</th> --}}
                                     {{-- <th class="min-w-120px">Lokal</th> --}}

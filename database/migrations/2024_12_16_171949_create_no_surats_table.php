@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('jenis'); 
             $table->string('perihal');
             $table->string('asal');
+            $table->string('tujuan');
             $table->timestamps();
         });
     }

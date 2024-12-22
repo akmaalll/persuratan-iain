@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('no_rak')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
-				$table->string('status_arsip')->nullable();
+            $table->string('status_arsip')->nullable();
             $table->timestamps();
         });
     }

@@ -48,7 +48,7 @@
                             @csrf
 
                             <div class="row g-9 mb-8">
-                                <div class="col-md-12 fv-row">
+                                <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Kode Klasifikasi</label>
                                     <select class="form-select" name="kd_klasifikasi_id" id="kd_klasifikasi_id"
                                         data-control="select2" data-hide-search="false"
@@ -64,10 +64,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-
-                            <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Jenis</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -80,6 +76,10 @@
                                             value="nomor_sk">Nomor SK</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
 
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
@@ -88,10 +88,6 @@
                                         {{ request()->type == 'sisip' ? '' : 'readonly' }} />
                                 </div>
 
-
-                            </div>
-
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
@@ -99,14 +95,15 @@
                                         class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
 
+                            </div>
+
+                            <div class="row g-9 mb-8">
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
                                         value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
                                 </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -125,6 +122,9 @@
                                             value="sangat_terbatas">Sangat Terbatas</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
@@ -145,6 +145,27 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
+                                    <select class="form-select" data-control="select2" data-hide-search="false"
+                                        data-placeholder="Pilih atau Ketikkan Tujuan" name="tujuan" id="tujuan">
+                                        <option value="">Pilih Tujuan...</option>
+                                        @if (isset($data->tujuan) && !in_array($data->tujuan, Helper::getData('kd_units')->pluck('id')->toArray()))
+                                            <option value="{{ $data->tujuan }}" selected>
+                                                {{ $data->tujuan }}
+                                            </option>
+                                        @endif
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option {{ isset($data->tujuan) && $data->tujuan == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}" data-nomor="{{ $v->nomor }}"
+                                                data-kode="{{ $v->kode }}">
+                                                {{ $v->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-9 mb-8">
                             </div>
                             <!--end::Input group-->
 

@@ -16,6 +16,7 @@ class NoSurat extends Model
         'perihal',
         'status',
         'asal',
+        'tujuan',
     ];
 
     public function klasifikasi()
@@ -25,5 +26,9 @@ class NoSurat extends Model
     public function asalSurat()
     {
         return $this->hasOne(kd_unit::class, 'id', 'asal');
+    }
+    
+    public function tujuanSurat() {
+        return $this->hasOne(kd_unit::class, 'id', 'tujuan');
     }
 }

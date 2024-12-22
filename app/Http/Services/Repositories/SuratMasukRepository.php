@@ -77,7 +77,7 @@ class SuratMasukRepository extends BaseRepository implements SuratMasukContract
 		}
 
 		if (!empty($tujuan)) {
-			$filter = $filter->where('ket_keaslian', '=', $tujuan);
+			$filter = $filter->where('tujuan', '=', $tujuan);
 		}
 
 		if (!empty($nomor)) {

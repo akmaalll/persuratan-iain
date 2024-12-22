@@ -167,6 +167,7 @@
                                     <th class="min-w-140px"> Jenis </th>
                                     <th class="min-w-140px"> Status </th>
                                     <th class="min-w-140px"> Asal </th>
+                                    <th class="min-w-140px"> Tujuan </th>
                                     <th class="text-end min-w-70px"> Aksi </th>
                                 </tr>
                             </thead>
