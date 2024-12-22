@@ -395,15 +395,18 @@
     <script type="text/javascript">
         function fetchNomorSuratData() {
             let nomor = $('#nomor').val();
-            if (nomor) {
+            let jenis_nosurat = $('#jenis_nosurat').val();
+            if (jenis_nosurat) {
                 $.ajax({
                     url: "{{ route('get.no.surat.data') }}",
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        nomor: nomor
+                        nomor: nomor,
+                        jenis_nosurat: jenis_nosurat
                     },
                     success: function(response) {
+                        console.log(response);
                         if (response.success) {
                             // Isi form dengan data dari NoSurat
                             $('#perihal').val(response.data.perihal);
@@ -411,19 +414,20 @@
                             $('#asal').val(response.data.asal_surat.id).change();
                             $('#jenis_nosurat').val(response.data.jenis).change();
                             $('#status').val(response.data.status).change();
+                            $('#tujuan').val(response.data.tujuan).change();
 
                             updateRetensi();
                         } else {
-                            toastr.error("Nomor surat telah digunakan");
+                            toastr.error(response.message);
 
                         }
                     },
                     error: function(xhr) {
-                        toastr.error('Terjadi kesalahan. Silakan coba lagi.');
+                        toastr.error('Terjadi kesalahan. Silakan coba lagi.' . xhr);
                     }
                 });
             } else {
-                toastr.error("Silakan isi Nomor Surat terlebih dahulu");
+                toastr.error("Silakan pilih jenis nomor surat terlebih dahulu.");
             }
         }
 

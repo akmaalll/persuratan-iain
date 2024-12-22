@@ -76,17 +76,17 @@
                                             value="nomor_sk">Nomor SK</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
-
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
                                     <input type="text" class="form-control" name="nomor" id="nomor"
                                         value="{{ isset($data->nomor) ? $data->nomor : '' }}"
                                         {{ request()->type == 'sisip' ? '' : 'readonly' }} />
                                 </div>
+                            </div>
+
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tanggal Surat</label>
@@ -94,16 +94,16 @@
                                         placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
                                         class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
-
-                            </div>
-
-                            <div class="row g-9 mb-8">
-
+                                
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
                                         value="{{ isset($data->perihal) ? $data->perihal : '' }}" />
                                 </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -118,14 +118,10 @@
                                         <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
                                             value="terbatas">Terbatas</option>
                                         <option
-                                            {{ isset($data->status) && $data->status == 'sangat_terbatas' ? 'selected' : '' }}
-                                            value="sangat_terbatas">Sangat Terbatas</option>
+                                            {{ isset($data->status) && $data->status == 'sangat terbatas' ? 'selected' : '' }}
+                                            value="sangat terbatas">Sangat Terbatas</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
-
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -145,6 +141,10 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"

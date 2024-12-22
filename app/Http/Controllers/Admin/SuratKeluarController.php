@@ -274,10 +274,10 @@ class SuratKeluarController extends Controller
         try {
             $request->validate([
                 'nomor' => 'required|string',
+                'jenis_nosurat' => 'required|string',
             ]);
 
             $noSurat = $this->noSurat->findByNomor($request->nomor);
-            // dd($noSurat);
 
             if ($noSurat) {
                 return response()->json([

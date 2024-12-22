@@ -257,10 +257,10 @@ class SuratMasukController extends Controller
         try {
             $request->validate([
                 'nomor' => 'required|string',
+                'jenis_nosurat' => 'required|string',
             ]);
 
             $noSurat = $this->repo->findByNomor($request->nomor);
-            // dd($noSurat);
 
             if ($noSurat) {
                 return response()->json([
