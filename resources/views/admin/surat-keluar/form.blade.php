@@ -241,6 +241,18 @@
                                             value="terjaga">Terjaga</option>
                                     </select>
                                 </div>
+										  <div class="col-md-6 fv-row">
+												<label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
+
+												<input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
+													 value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
+										  </div>
+											<div class="col-md-6 fv-row">
+												 <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
+
+												 <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+													  value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
+											</div>
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
 
@@ -270,8 +282,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
-                                    <select class="form-select mb-2" data-control="select2" name="retensi3">
-                                        <option value="">Pilih Retensi...</option>
+                                    <select class="form-select mb-2" data-control="select2" name="retensi3"> <option value="">Pilih Retensi...</option>
                                         <option value="musnah"
                                             {{ isset($data->retensi3) && $data->retensi3 == 'musnah' ? 'selected' : '' }}>
                                             Musnah</option>
@@ -282,20 +293,6 @@
                                     <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
                                         <strong>Warning:</strong> Retensi period has expired!
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
-
-                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
-                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
-
-                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
                                 </div>
                             </div>
                             <div class="row g-9 mb-8">

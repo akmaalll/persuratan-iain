@@ -63,7 +63,6 @@ class NoSuratController extends Controller
         try {
             $req = $request->all();
 
-
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
@@ -113,7 +112,6 @@ class NoSuratController extends Controller
             // ];
 
             // $lastNumber = $this->repo->getLastNumber($criteria);
-
             $jenis = $request->input('jenis');
             $lastNumber = DB::table('no_surats')
                 ->where('jenis', $jenis)

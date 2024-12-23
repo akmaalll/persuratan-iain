@@ -76,7 +76,7 @@
                             <select class="form-select reset-filter opsiLain" name="type_surat" id="type_surat"
                                 data-control="select2" data-hide-search="false" data-placeholder="-- pilih jenis --">
                                 <option value="-- pilih jenis --">-- pilih jenis --</option>
-                                <option value="Arsip">Arsip</option>
+                                <option value="Arsip" selected>Arsip</option>
                                 <option value="Surat Masuk">Surat Masuk</option>
                                 <option value="Surat Keluar">Surat Keluar</option>
 
