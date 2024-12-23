@@ -95,7 +95,7 @@
                                     class="h-100px " />
 
                                 <!--begin::Title-->
-                                <h1 class="text-gray-900 fw-bolder mb-3"> SISKAE </h1>
+                                <h1 class="text-gray-900 fw-bolder mb-3"> SISKA </h1>
                                 <h1 class="text-gray-900 fw-bolder mb-3"> SISTEM INFORMASI KEARSIPAN IAIN PAREPARE </h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
