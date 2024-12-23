@@ -76,8 +76,27 @@
                         class="mt-3 card-header align-items-center py-5 gap-2 gap-md-5 col-md-12 p-0"
                         style="display: none;">
                         <div class="row">
+                            <!-- Jenis Surat -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_jenis" class="form-label">Jenis Surat</label>
+                                <div class="input-group-btn" style="display: flex; align-items: center;">
+                                    <select class="form-select" style="flex: 1;" data-control="select2"
+                                        data-hide-search="false" data-placeholder="Pilih Jenis Surat" name="jenis"
+                                        id="jenis">
+                                        <option value="">Pilih Jenis Surat...</option>
+                                        <option value="nomor_surat" selected>Nomor Surat</option>
+                                        <option value="nomor_sk">Nomor SK</option>
+                                    </select>
+                                    <button type="button" class="btn btn-outline-danger bg-secondary"
+                                        style="margin-left: -6px;  border-top-left-radius: 0; border-bottom-left-radius: 0; z-index: 1;"
+                                        onclick="clearField('jenis_surat')">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                             <!-- Tanggal Surat -->
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="input_tanggal_surat" class="form-label">Tanggal Surat</label>
                                 <div class="input-group">
                                     <input value="{{ isset($data->tgl_surat) ? $data->tgl_surat : '' }}" type="text"
@@ -91,7 +110,7 @@
                             </div>
 
                             <!-- Asal -->
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="input_asal" class="form-label">Asal</label>
                                 <div class="input-group-btn" style="display: flex; align-items: center;">
                                     <select class="form-select" style="flex: 1;" data-control="select2"
@@ -165,7 +184,7 @@
                                     <th class="min-w-140px"> Tanggal Surat </th>
                                     <th class="min-w-140px"> Perihal </th>
                                     <th class="min-w-140px"> Jenis </th>
-                                    <th class="min-w-140px"> Status </th>
+                                    {{-- <th class="min-w-140px"> Status </th> --}}
                                     <th class="min-w-140px"> Asal </th>
                                     <th class="min-w-140px"> Tujuan </th>
                                     <th class="text-end min-w-70px"> Aksi </th>
@@ -330,10 +349,12 @@
             $('#search_filter').on('click', function() {
                 const tgl_surat = $('#tgl_surat').val() || null;
                 const asal = $('#asal').val() || null;
+                const jenis = $('#jenis').val() || null;
 
                 const checkVal = Object.values({
                     tgl_surat,
-                    asal
+                    asal,
+                    jenis
                 }).every(v => v == '' || v == null || v == undefined);
 
                 if (checkVal) {
@@ -341,13 +362,14 @@
                 } else {
                     loadpage(5, {
                         tgl_surat,
-                        asal
+                        asal,
+                        jenis
                     });
                 }
             });
 
             document.getElementById('clear_all').addEventListener('click', function() {
-                const fields = ['tgl_surat', 'asal'];
+                const fields = ['tgl_surat', 'asal', 'jenis'];
 
                 fields.forEach(fieldId => {
                     const field = document.getElementById(fieldId);

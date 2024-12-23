@@ -69,9 +69,8 @@
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Jenis" name="jenis" id="jenis">
                                         <option value="">Jenis...</option>
-                                        <option
-                                            {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
-                                            value="nomor_surat">Nomor Surat</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
+                                            value="nomor_surat" selected>Nomor Surat</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
                                             value="nomor_sk">Nomor SK</option>
                                     </select>
@@ -94,7 +93,7 @@
                                         placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')"
                                         class="form-control" name="tgl_surat" id="tgl_surat" />
                                 </div>
-                                
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Perihal</label>
                                     <input type="text" class="form-control" name="perihal" id="perihal"
@@ -104,7 +103,7 @@
 
                             <div class="row g-9 mb-8">
 
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-6 fv-row d-none">
                                     <label class="required fs-6 fw-semibold mb-2">Status</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
                                         data-placeholder="Pilih Status" name="status" id="status">
@@ -112,7 +111,7 @@
                                         <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
                                             value="rahasia">Rahasia</option>
                                         <option {{ isset($data->status) && $data->status == 'biasa' ? 'selected' : '' }}
-                                            value="biasa">Biasa</option>
+                                            value="biasa" selected>Biasa</option>
                                         <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }}
                                             value="penting">Penting</option>
                                         <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
@@ -141,9 +140,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="row g-9 mb-8">
 
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
@@ -164,8 +160,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="row g-9 mb-8">
                             </div>
                             <!--end::Input group-->
 
@@ -418,7 +412,7 @@
 
                 previousValues[changedField] = currentValue;
 
-                if (areAllFieldsFilled()) {
+                if (form.jenis.value?.length) {
                     generateNomor();
                 } else {
                     form.nomorField.value = '';
@@ -439,7 +433,7 @@
                         // Pastikan `data.last_number` adalah angka terakhir yang digunakan
                         console.log(data);
                         const nextNumber = (data.last_number).toString().padStart(3, '0');
-                        
+
                         // Simpan nomor ke field
                         form.nomorField.value = nextNumber;
                     },
@@ -447,13 +441,6 @@
                         console.error('Error generating nomor:', error);
                     }
                 });
-            }
-
-            function areAllFieldsFilled() {
-                return form.status.value &&
-                    form.asal.selectedIndex !== 0 &&
-                    form.tglSurat.value &&
-                    form.jenis.value; // Pastikan jenis terisi
             }
         });
 

@@ -16,7 +16,7 @@
                 {{ Helper::getDateIndo($v->tgl_surat) }}
             </span>
         </td>
-        
+
         <td>
             <span class="fw-semibold text-nowrap">
                 {{ $v->perihal }}
@@ -24,14 +24,14 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-                {{ $v->jenis == 'nomor_sk' ? 'SK' : 'Surat'  }}
+                {{ $v->jenis == 'nomor_sk' ? 'SK' : 'Surat' }}
             </span>
         </td>
-        <td>
+        {{-- <td>
             <span class="fw-semibold">
                 {{ ucwords($v->status) }}
             </span>
-        </td>
+        </td> --}}
         <td>
             <span class="fw-semibold text-nowrap">
                 @if (is_numeric($v->asal))

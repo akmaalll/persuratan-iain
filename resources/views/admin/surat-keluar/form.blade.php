@@ -52,7 +52,7 @@
                             <div class="row g-9 mb-8">
                                 <div class="col-md-10 fv-row">
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2">Nomor Surat (pilih jenis nomor surat)</label>
+                                        <label class="fs-6 fw-semibold mb-2">Nomor Surat</label>
                                         <input type="text" class="form-control" name="nomor" id="nomor"
                                             value="{{ isset($data->nomor) ? $data->nomor : '' }}" />
                                     </div>
@@ -242,6 +242,18 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
+
+                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
+                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
+
+                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
+                                </div>
+                                <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Aktif</label>
 
                                     <select class="form-select mb-2" data-control="select2" name="retensi"
@@ -253,7 +265,8 @@
                                         <strong>Warning:</strong> Retensi period has expired!
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Inaktif</label>
 
@@ -282,20 +295,6 @@
                                     <div id="retensi_warning" style="display: none; color: red;" class="mt-2">
                                         <strong>Warning:</strong> Retensi period has expired!
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
-
-                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
-                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
-                                </div>
-                                <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
-
-                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
                                 </div>
                             </div>
                             <div class="row g-9 mb-8">
@@ -385,7 +384,7 @@
                         }
                     },
                     error: function(xhr) {
-                        toastr.error('Terjadi kesalahan. Silakan coba lagi.' . xhr);
+                        toastr.error('Terjadi kesalahan. Silakan coba lagi.'.xhr);
                     }
                 });
             } else {

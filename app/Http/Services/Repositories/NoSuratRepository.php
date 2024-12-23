@@ -21,7 +21,7 @@ class NoSuratRepository extends BaseRepository implements NoSuratContract
 	public function paginated(array $criteria)
 	{
 		$perPage = $criteria['per_page'] ?? 5;
-		$field = $criteria['sort_field'] ?? 'id';
+		$field = $criteria['sort_field'] ?? 'nomor';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		return $this->model->orderBy($field, $sortOrder)->paginate($perPage);
 	}
@@ -53,17 +53,21 @@ class NoSuratRepository extends BaseRepository implements NoSuratContract
 	public function filter(array $criteria)
 	{
 		$perPage = $criteria['per_page'] ?? 5;
-		$field = $criteria['sort_field'] ?? 'id';
+		$field = $criteria['sort_field'] ?? 'nomor';
 		$sortOrder = $criteria['sort_order'] ?? 'desc';
 		// criteria
 		$tgl_surat = $criteria['search']['tgl_surat'] ?? '';
 		$asal = $criteria['search']['asal'] ?? '';
+		$jenis = $criteria['search']['jenis'] ?? '';
 
 		return $this->model->when($tgl_surat, function ($query) use ($tgl_surat): void {
 			$query->where('tgl_surat', 'like', "%" . $tgl_surat . "%");
 		})
 			->when($asal, function ($query) use ($asal): void {
 				$query->where('asal', 'like', "%" . $asal . "%");
+			})
+			->when($jenis, function ($query) use ($jenis): void {
+				$query->where('jenis', 'like', "%" . $jenis . "%");
 			})
 			->orderBy($field, $sortOrder)
 			->paginate($perPage);
