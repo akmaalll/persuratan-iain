@@ -71,7 +71,7 @@
                                         data-placeholder="Pilih Jenis" name="jenis" id="jenis">
                                         <option value="">Jenis...</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
-                                            value="nomor_surat">Nomor Surat</option>
+                                            value="nomor_surat" selected>Nomor Surat</option>
                                         <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
                                             value="nomor_sk">Nomor SK</option>
                                     </select>
@@ -123,6 +123,7 @@
                                 {{-- </select> --}}
                                 {{-- </div> --}}
                                 <input type="hidden" name="status" value="-" />
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -425,7 +426,8 @@
                 }
 
                 previousValues[changedField] = currentValue;
-                if (areAllFieldsFilled()) {
+
+                if (form.jenis.value?.length) {
                     generateNomor();
                 } else {
                     form.nomorField.value = '';
@@ -454,7 +456,6 @@
                     }
                 });
             }
-
 
         });
 
