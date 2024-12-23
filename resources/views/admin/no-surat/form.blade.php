@@ -64,6 +64,7 @@
                                         @endforeach
                                     </select>
                                 </div> --}}
+                                <input type="hidden" name="kd_klasifikasi_id" value="0">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Jenis</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -103,24 +104,26 @@
 
                             <div class="row g-9 mb-8">
 
-                                <div class="col-md-6 fv-row d-none">
-                                    <label class="required fs-6 fw-semibold mb-2">Status</label>
-                                    <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Status" name="status" id="status">
-                                        <option value="">Status...</option>
-                                        <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }}
-                                            value="rahasia">Rahasia</option>
-                                        <option {{ isset($data->status) && $data->status == 'biasa' ? 'selected' : '' }}
-                                            value="biasa" selected>Biasa</option>
-                                        <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }}
-                                            value="penting">Penting</option>
-                                        <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }}
-                                            value="terbatas">Terbatas</option>
-                                        <option
-                                            {{ isset($data->status) && $data->status == 'sangat terbatas' ? 'selected' : '' }}
-                                            value="sangat terbatas">Sangat Terbatas</option>
-                                    </select>
-                                </div>
+                                {{-- <div class="col-md-6 fv-row"> --}}
+                                {{-- <label class="required fs-6 fw-semibold mb-2">Status</label> --}}
+                                {{-- <select class="form-select" data-control="select2" data-hide-search="false" --}}
+                                {{-- data-placeholder="Pilih Status" name="status" id="status"> --}}
+                                {{-- <option value="">Status...</option> --}}
+                                {{-- <option {{ isset($data->status) && $data->status == 'rahasia' ? 'selected' : '' }} --}}
+                                {{-- value="rahasia">Rahasia</option> --}}
+                                {{-- <option {{ isset($data->status) && $data->status == 'biasa' ? 'selected' : '' }} --}}
+                                {{-- value="biasa">Biasa</option> --}}
+                                {{-- <option {{ isset($data->status) && $data->status == 'penting' ? 'selected' : '' }} --}}
+                                {{-- value="penting">Penting</option> --}}
+                                {{-- <option {{ isset($data->status) && $data->status == 'terbatas' ? 'selected' : '' }} --}}
+                                {{-- value="terbatas">Terbatas</option> --}}
+                                {{-- <option --}}
+                                {{-- {{ isset($data->status) && $data->status == 'sangat terbatas' ? 'selected' : '' }} --}}
+                                {{-- value="sangat terbatas">Sangat Terbatas</option> --}}
+                                {{-- </select> --}}
+                                {{-- </div> --}}
+                                <input type="hidden" name="status" value="-" />
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -140,7 +143,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -161,6 +163,12 @@
                                     </select>
                                 </div>
                             </div>
+
+                            {{-- <div class="row g-9 mb-8"> --}}
+
+                            {{-- </div> --}}
+                            {{-- <div class="row g-9 mb-8"> --}}
+                            {{-- </div> --}}
                             <!--end::Input group-->
 
                             <!--begin::Actions-->
@@ -373,15 +381,14 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const form = {
-                status: document.getElementById('status'),
+                //status: document.getElementById('status'),
                 tglSurat: document.getElementById('tgl_surat'),
                 asal: document.getElementById('asal'),
                 nomorField: document.getElementById('nomor'),
                 jenis: document.getElementById('jenis') // Tambahkan field jenis jika diperlukan
             };
-
             let previousValues = {
-                status: '',
+                //status: '',
                 tglSurat: '',
                 asal: '',
                 jenis: '' // Tambahkan untuk jenis
@@ -396,13 +403,21 @@
                 }
             });
 
-            ['status', 'asal', 'jenis'].forEach(field => {
+            //['status', 'asal', 'jenis'].forEach(field => {
+            ['asal', 'jenis'].forEach(field => {
                 if (form[field]) {
                     $(document.body).on("change", `#${field}`, function() {
                         handleInputChange(field);
                     });
                 }
             });
+
+            function areAllFieldsFilled() {
+                return form.jenis.value.trim() !== ''; 
+                //form.status.value &&
+                //form.asal.selectedIndex !== 0 &&
+                //form.tglSurat.value &&
+            }
 
             function handleInputChange(changedField) {
                 const currentValue = form[changedField].value;
@@ -424,14 +439,13 @@
                     url: '{{ route('no-surat.last-number') }}', // Ganti dengan route sesuai
                     method: 'POST',
                     data: {
-                        status: form.status.value,
-                        asal: form.asal.value,
+                        //status: form.status.value,
+                        //asal: form.asal.value,
                         jenis: form.jenis.value, // Tambahkan jenis dalam permintaan
                         _token: document.querySelector('meta[name="csrf-token"]').content
                     },
                     success: function(data) {
                         // Pastikan `data.last_number` adalah angka terakhir yang digunakan
-                        console.log(data);
                         const nextNumber = (data.last_number).toString().padStart(3, '0');
 
                         // Simpan nomor ke field
@@ -442,7 +456,9 @@
                     }
                 });
             }
+
         });
+
 
 
         // Define form element
@@ -452,20 +468,20 @@
         var validator = FormValidation.formValidation(
             form, {
                 fields: {
-                    'name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Nama is required'
-                            }
-                        }
-                    },
-                    'code': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Kode is required'
-                            }
-                        }
-                    },
+                    // 'name': {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Nama is required'
+                    //         }
+                    //     }
+                    // },
+                    // 'code': {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Kode is required'
+                    //         }
+                    //     }
+                    // },
                 },
 
                 plugins: {

@@ -88,7 +88,7 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		} else if ($type == 'Arsip') {
 			$filter = $this->model;
 		} else {
-			$filter = '';
+			$filter = $this->model;
 		}
 		// Proses filtering
 		$kd_klasifikasi_id = $criteria['search']['kd_klasifikasi_id'] ?? '';
