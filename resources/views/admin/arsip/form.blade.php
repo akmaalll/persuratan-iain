@@ -92,8 +92,8 @@
                                         class="form-control" name="perihal" />
                                 </div>
 
-                                
-                                
+
+
                                 {{-- <div class="col-md-6 fv-row pencipta-lain">
                                     <label class="fs-6 fw-semibold mb-2">Pencipta Lain</label>
                                     <input value="{{ isset($data->pencipta) ? $data->pencipta : '' }}" type="text"
@@ -104,7 +104,7 @@
 
                             <!-- Status dan Asal -->
                             <div class="row g-9 mb-8">
-                                
+
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Pencipta Arsip </label>
                                     <select class="form-select opsiLain" name="pencipta" id="pencipta" data-tags="true"
@@ -564,27 +564,28 @@
 
         function updateRetensi() {
             var tglSurat = document.getElementById('tgl').value;
+            var retensiSelect2 = document.getElementById('retensi2');
+
+            // Initially disable retensi2
+            $(retensiSelect2).prop('disabled', true).select2();
 
             if (tglSurat) {
-                var baseDate = new Date(tglSurat); // Mengambil nilai tgl_surat
+                var baseDate = new Date(tglSurat);
                 var retensiSelect = document.getElementById('retensi');
-                var retensiSelect2 = document.getElementById('retensi2');
-
-                // Ambil nilai yang sudah dipilih dari atribut data-selected
                 var selectedRetensi = retensiSelect.getAttribute('data-selected');
-                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
 
-                // Membersihkan opsi sebelumnya
+                // Destroy existing Select2 instance
+                $(retensiSelect).select2('destroy');
+
                 retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
-                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
 
                 // Menambahkan opsi retensi aktif (1-5 Tahun)
                 for (var i = 1; i <= 5; i++) {
                     var retensiDate = new Date(baseDate);
-                    retensiDate.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+                    retensiDate.setFullYear(baseDate.getFullYear() + i);
 
                     var option = document.createElement("option");
-                    option.value = retensiDate.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option.value = retensiDate.toISOString().split('T')[0];
                     option.text = i + " Tahun (Aktif hingga: " + retensiDate.toLocaleDateString('id-ID') + ")";
                     if (option.value === selectedRetensi) {
                         option.selected = true;
@@ -592,28 +593,71 @@
                     retensiSelect.appendChild(option);
                 }
 
-                // Menambahkan opsi retensi inaktif (2-15 Tahun)
+                // Reinitialize Select2
+                $(retensiSelect).select2();
+
+                // Add event listener for the first retensi dropdown using Select2 event
+                $(retensiSelect).off('select2:select').on('select2:select', function(e) {
+                    if (e.target.value) {
+                        $(retensiSelect2).prop('disabled', false).select2();
+                        updateRetensi2(e.target.value);
+                    } else {
+                        $(retensiSelect2).prop('disabled', true).select2();
+                        retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+                    }
+                });
+
+                // Initial update of retensi2 if retensi1 has a value
+                if (retensiSelect.value) {
+                    $(retensiSelect2).prop('disabled', false).select2();
+                    updateRetensi2(retensiSelect.value);
+                } else {
+                    $(retensiSelect2).prop('disabled', true).select2();
+                    retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+                }
+            }
+        }
+
+        function updateRetensi2(selectedActiveDate) {
+            if (selectedActiveDate) {
+                var baseDate = new Date(selectedActiveDate);
+                var retensiSelect2 = document.getElementById('retensi2');
+                var selectedRetensi2 = retensiSelect2.getAttribute('data-selected');
+
+                // Destroy existing Select2 instance
+                $(retensiSelect2).select2('destroy');
+
+                retensiSelect2.innerHTML = '<option value="">Pilih Retensi...</option>';
+
                 for (var i = 2; i <= 15; i++) {
                     var retensiDate2 = new Date(baseDate);
-                    retensiDate2.setFullYear(baseDate.getFullYear() + i); // Menambahkan tahun ke tgl_surat
+                    retensiDate2.setFullYear(baseDate.getFullYear() + i);
 
                     var option2 = document.createElement("option");
-                    option2.value = retensiDate2.toISOString().split('T')[0]; // Format yyyy-mm-dd
+                    option2.value = retensiDate2.toISOString().split('T')[0];
                     option2.text = i + " Tahun (Inaktif hingga: " + retensiDate2.toLocaleDateString('id-ID') + ")";
                     if (option2.value === selectedRetensi2) {
                         option2.selected = true;
                     }
                     retensiSelect2.appendChild(option2);
                 }
+
+                // Reinitialize Select2
+                $(retensiSelect2).select2();
             }
         }
 
-        document.getElementById('tgl').addEventListener('change', updateRetensi);
-
-        // Memanggil fungsi saat halaman pertama kali dimuat jika tgl sudah ada
-        if (document.getElementById('tgl').value) {
+        // Make sure to call updateRetensi when tgl_surat changes
+        document.getElementById('tgl').addEventListener('change', function() {
             updateRetensi();
-        }
+        });
+
+        // Initial call to set up the initial state
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRetensi();
+        });
+
+        
 
         const retensiCategory = document.getElementById('retensi_category');
         const retensiDuration = document.getElementById('retensi');
