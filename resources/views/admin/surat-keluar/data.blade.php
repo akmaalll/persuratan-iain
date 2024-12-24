@@ -49,7 +49,7 @@
                 {{ Helper::getDateIndo($v->retensi) }}) <br>
                 {{ Helper::getRentangTanggal($v->retensi, $v->retensi2) }} (Inaktif Hingga
                 {{ Helper::getDateIndo($v->retensi2) }}) <br>
-                {{ $v->retensi3 }} (Nasib)<br>
+                {{ ucfirst($v->retensi3) }} (Nasib)<br>
             </span>
         </td>
         <td class="text-nowrap">
