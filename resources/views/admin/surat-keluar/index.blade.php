@@ -619,6 +619,8 @@
                     }
                 }
             });
+            loadpage(5, '');
+
         });
 
         document.getElementById('button_advanced_search').addEventListener('click', function() {

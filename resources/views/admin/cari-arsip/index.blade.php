@@ -644,6 +644,8 @@
                         }
                     }
                 });
+                loadpage(5, '');
+
             });
 
             // more filter
