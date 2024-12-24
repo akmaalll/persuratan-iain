@@ -44,9 +44,10 @@
                                     );
                                 }, 750);
                             },
-                            error: function(data) {
+                            error: function(xhr, status, error) {
                                 submitButton.removeAttribute('data-kt-indicator');
                                 submitButton.disabled = false;
+                                console.error(status, error);
                                 toastr.error("Failed to save data!");
                             }
                         });

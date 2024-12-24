@@ -156,7 +156,7 @@
                                     <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
 
                                     <input type="text" class="form-control" name="nomor_box" placeholder="Nomor Box"
-                                        value="{{ isset($data->nomor_box) ? $data->nomor_box : '' }}" id="nomor_box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="nomor_box"
                                         readonly />
                                 </div>
 
@@ -164,7 +164,7 @@
                                     <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
                                     <input type="text" class="form-control" name="nomor_rak" placeholder="Nomor Rak"
-                                        value="{{ isset($data->nomor_rak) ? $data->nomor_rak : '' }}" id="nomor_rak"
+                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="nomor_rak"
                                         readonly />
                                 </div>
                             </div>
@@ -190,20 +190,15 @@
                                 </div>
 
 
-                            </div>
-
-                            <div class="row g-9 mb-8">
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Permintaan Nomor Surat</label>
-                                    <input type="text" class="form-control" name="permintaan" id="permintaan"
-                                        value="{{ isset($data->permintaan) ? $data->permintaan : '' }}" readonly />
-                                </div>
-										  <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Keterangan</label>
                                     <textarea id="uraian" name="uraian" class="form-control" readonly id="" rows="5">
                                             {{ isset($data->uraian) ? strip_tags($data->uraian) : '' }}
                                         </textarea>
                                 </div>
+                            </div>
+
+                            <div class="row g-9 mb-8">
 
                             </div>
 
@@ -231,7 +226,7 @@
 @endsection
 
 @push('jsScriptForm')
-	<script>
+    <script>
         ClassicEditor
             .create(document.querySelector('#uraian'))
             .then(editor => {
@@ -240,7 +235,5 @@
             .catch(error => {
                 console.error('CKEditor initialization failed:', error);
             });
-
-	</script>
-
+    </script>
 @endpush
