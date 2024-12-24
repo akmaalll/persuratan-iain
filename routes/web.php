@@ -50,6 +50,7 @@ Route::domain('')->group(function (): void {
     Route::group(['prefix' => 'admin',   'middleware' => ['web', 'auth']], function (): void {
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin');
+        Route::get('/pedoman', [DashboardController::class, 'pedoman'])->name('admin.pedoman');
         Route::get('/get-indikator-kinerja/{id}', [DashboardController::class, 'getIndikatorKinerja']);
 
 

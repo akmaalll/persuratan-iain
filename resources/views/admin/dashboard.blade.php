@@ -151,10 +151,57 @@
                                     <!--end::Col-->
                                 </div>
                                 <!--end::Row-->
+                                <div class="row mt-3">
+                                    <div class="col-md-6 mt-3">
+                                        <button id="pedoman" class="btn btn-primary">
+                                            <i class="ki-duotone ki-eye text-white fs-2x">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                            Pedoman Penomoran
+                                        </button>
+
+                                        <button id="hidePedoman" class="btn btn-primary" hidden>
+                                            <i class="ki-duotone ki-eye-slash text-white fs-2x">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                            Pedoman Penomoran
+                                        </button>
+
+                                        <button id="tataNaskah" class="btn btn-primary">
+                                            <i class="ki-duotone ki-eye text-white fs-2x">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                            Tata Naskah
+                                        </button>
+                                        <button id="hideTataNaskah" class="btn btn-primary" hidden>
+                                            <i class="ki-duotone ki-eye-slash text-white fs-2x">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                            Tata Naskah
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="my-5 ">
+                                    <embed id="previewPedoman"
+                                        data-src="{{ asset('uploads/pedoman/PEDOMAN_KLASIFIKASI_ARSIP_DAN_PENOMORAN_NASKAH_DINAS_v5.pdf') }}"
+                                        width="100%" height="800" type="application/pdf">
+                                    <embed id="previewTataNaskah"
+                                        data-src="{{ asset('uploads/pedoman/PEDOMAN_TATA_NASKAH_DINAS.pdf') }}"
+                                        width="100%" height="800" type="application/pdf">
+                                </div>
+
                             </div>
                             <!--end::Stats-->
 
-                          
+
 
                         </div>
                         <!--end::Body-->
@@ -180,7 +227,69 @@
             const showBtnFilter = $('#button_filter')
             const resetFilter = $('.reset-filter')
 
+            // pdf preview
             hideBtnFilter.hide()
+
+            const previewPedoman = $('#previewPedoman');
+            const previewTataNaskah = $('#previewTataNaskah');
+
+            const pedoman = $('#pedoman');
+            const tataNaskah = $('#tataNaskah');
+
+            const hidePedoman = $('#hidePedoman');
+            const hideTataNaskah = $('#hideTataNaskah');
+
+            // Sembunyikan elemen di awal
+            previewPedoman.hide();
+            previewTataNaskah.hide();
+            hidePedoman.hide();
+            hideTataNaskah.hide();
+
+            pedoman.on('click', function(e) {
+                e.preventDefault();
+                if (!previewPedoman.attr('src')) {
+                    previewPedoman.attr('src', previewPedoman.data('src'));
+                }
+                hidePedoman.removeAttr('hidden');
+                hidePedoman.show();
+                previewPedoman.show();
+                tataNaskah.show();
+                hideTataNaskah.hide();
+                previewTataNaskah.hide();
+                pedoman.hide();
+            });
+
+            hidePedoman.on('click', function(e) {
+                e.preventDefault();
+                pedoman.show();
+                hidePedoman.hide();
+                previewPedoman.hide();
+                previewTataNaskah.hide();
+            });
+
+            tataNaskah.on('click', function(e) {
+                e.preventDefault();
+                if (!previewTataNaskah.attr('src')) {
+                    previewTataNaskah.attr('src', previewTataNaskah.data('src'));
+                }
+                hideTataNaskah.removeAttr('hidden');
+                hideTataNaskah.show();
+                previewTataNaskah.show();
+                pedoman.show();
+                hidePedoman.hide();
+                tataNaskah.hide();
+                previewPedoman.hide();
+            });
+
+            hideTataNaskah.on('click', function(e) {
+                e.preventDefault();
+                tataNaskah.show();
+                previewTataNaskah.hide();
+                hideTataNaskah.hide();
+                previewPedoman.hide();
+            });
+
+
 
             showBtnFilter.on('click', function(e) {
                 filterForm.show()

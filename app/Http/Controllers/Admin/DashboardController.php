@@ -64,4 +64,26 @@ class DashboardController extends Controller
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
+
+    public function pedoman()
+    {
+        // try {
+        //     $title = $this->title;
+        //     $data = is_array($request->search) ? $this->repo->filter($request->all()) : $this->repo->all();
+        //     $header = "Kearsipan Persuratan IAIN Parepare";
+
+        //     $pdf = Pdf::loadView('admin.' . $title . '.pdf', compact('header', 'data'));
+        //     $pdf->setPaper('A4', 'landscape');
+        //     $fileName = 'Cetak-Kearsipan-' . date('d-m-Y') . '.pdf';
+        //     $filePath = storage_path("app/public/{$fileName}");
+        //     $pdf->save($filePath);
+        //     return response()->json([
+        //         // 'pdf_url' => asset('uploads/arsip/' . $fileName)
+        //         // 'pdf_url' => $pdf->stream($fileName)
+        //         'pdf_url' => asset("storage/{$fileName}")
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return view('errors.message', ['message' => $e->getMessage()]);
+        // }
+    }
 }
