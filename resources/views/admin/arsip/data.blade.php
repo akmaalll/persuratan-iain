@@ -18,11 +18,12 @@
         </td>
         <td>
             <span class="fw-semibold text-nowrap">
-					@if($v->kd_klasifikasi_id != 0)
-						{{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} - {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
-					@else
-						Tidak ada klasifikasi
-					@endif
+                @if ($v->kd_klasifikasi_id != 0)
+                    {{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} -
+                    {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+                @else
+                    Tidak ada klasifikasi
+                @endif
             </span>
         </td>
         {{-- <td>
@@ -100,14 +101,14 @@
             <span class="fw-semibold text-nowrap">
                 {{ Helper::getRentangTanggal($v->tgl, $v->retensi) }} ( Aktif Hingga
                 {{ Helper::getDateIndo($v->retensi) }} ) <br>
-                {{ Helper::getRentangTanggal($v->tgl, $v->retensi2) }} ( Inaktif Hingga
+                {{ Helper::getRentangTanggal($v->retensi, $v->retensi2) }} ( Inaktif Hingga
                 {{ Helper::getDateIndo($v->retensi2) }} ) <br>
                 {{ $v->retensi3 }} ( Nasib )<br>
             </span>
         </td>
         <td class="text-nowrap">
-            <a href="{{ route('arsip.detail' , $v->id) }}" target="_blank" data-toggle="tooltip" data-id="' . $id . '" title="Detail"
-                class="DetailData me-1">
+            <a href="{{ route('arsip.detail', $v->id) }}" target="_blank" data-toggle="tooltip" data-id="' . $id . '"
+                title="Detail" class="DetailData me-1">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
                     <i class="ki-duotone ki-information fs-2">
                         <span class="path1"></span>

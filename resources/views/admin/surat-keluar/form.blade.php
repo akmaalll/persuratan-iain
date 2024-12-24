@@ -241,18 +241,18 @@
                                             value="terjaga">Terjaga</option>
                                     </select>
                                 </div>
-										  <div class="col-md-6 fv-row">
-												<label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
-												<input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
-													 value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
-										  </div>
-											<div class="col-md-6 fv-row">
-												 <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
+                                    <input type="text" class="form-control" name="no_rak" placeholder="Nomor Rak"
+                                        value="{{ isset($data->no_rak) ? $data->no_rak : '' }}" id="no_rak" />
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">Nomor Box (opsional)</label>
 
-												 <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
-													  value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
-											</div>
+                                    <input type="text" class="form-control" name="no_box" placeholder="Nomor Box"
+                                        value="{{ isset($data->no_box) ? $data->no_box : '' }}" id="no_box" />
+                                </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Nomor Rak (opsional)</label>
 
@@ -295,7 +295,8 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Retensi Nasib</label>
 
-                                    <select class="form-select mb-2" data-control="select2" name="retensi3"> <option value="">Pilih Retensi...</option>
+                                    <select class="form-select mb-2" data-control="select2" name="retensi3">
+                                        <option value="">Pilih Retensi...</option>
                                         <option value="musnah"
                                             {{ isset($data->retensi3) && $data->retensi3 == 'musnah' ? 'selected' : '' }}>
                                             Musnah</option>
@@ -424,7 +425,7 @@
                 var selectedRetensi = retensiSelect.getAttribute('data-selected');
 
                 // Destroy existing Select2 instance
-                $(retensiSelect).select2('destroy');
+                // $(retensiSelect)?.select2('destroy');
 
                 retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
 

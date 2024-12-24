@@ -47,20 +47,20 @@
             <span class="fw-semibold text-nowrap">
                 {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi) }} (Aktif Hingga
                 {{ Helper::getDateIndo($v->retensi) }}) <br>
-                {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi2) }} (Inaktif Hingga
+                {{ Helper::getRentangTanggal($v->retensi, $v->retensi2) }} (Inaktif Hingga
                 {{ Helper::getDateIndo($v->retensi2) }}) <br>
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>
         </td>
-			<td class="text-nowrap">
-				<span class="fw-bold badge badge-{{ $v->status_arsip == 'arsip' ? 'danger' : 'primary' }}">
+        <td class="text-nowrap">
+            <span class="fw-bold badge badge-{{ $v->status_arsip == 'arsip' ? 'danger' : 'primary' }}">
                 @if ($v->status_arsip == 'arsip')
-						 Telah di arsipkan
+                    Telah di arsipkan
                 @else
-						Masih aktif
+                    Masih aktif
                 @endif
-        </span>
-      </td>
+            </span>
+        </td>
         <td>
             <span class="fw-semibold">
                 {{ $v->no_box }}
@@ -92,17 +92,17 @@
             </td>
         @endif
         <td class="text-nowrap">
-			  {{--  @if('2025-12-18' == $v->retensi) --}}
-			@if($v->status_arsip != 'arsip')
-			  @if(date('Y-m-d') == $v->retensi)
-					<a href="{{ route('surat-keluar.arsip', $v->id) }}"  data-toggle="tooltip"
-						  title="Export data ke arsip">
-						  <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
-							 Export ke arsip 
-						  </button>
-					 </a>
-				@endif
-			@endif
+            {{--  @if ('2025-12-18' == $v->retensi) --}}
+            @if ($v->status_arsip != 'arsip')
+                @if (date('Y-m-d') == $v->retensi)
+                    <a href="{{ route('surat-keluar.arsip', $v->id) }}" data-toggle="tooltip"
+                        title="Export data ke arsip">
+                        <button type="button" class="btn btn-bg-secondary btn-active-color-success btn-sm">
+                            Export ke arsip
+                        </button>
+                    </a>
+                @endif
+            @endif
             <a href="{{ route('surat-keluar.detail', $v->id) }}" data-toggle="tooltip" data-id="' . $id . '"
                 title="Detail" class="DetailData">
                 <button type="button" class="btn btn-icon btn-bg-secondary btn-active-color-warning btn-sm">
