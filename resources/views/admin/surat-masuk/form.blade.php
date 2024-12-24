@@ -453,7 +453,7 @@
                 var selectedRetensi = retensiSelect.getAttribute('data-selected');
 
                 // Destroy existing Select2 instance
-                $(retensiSelect).select2('destroy');
+                // $(retensiSelect)?.select2('destroy');
 
                 retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
 

@@ -575,7 +575,7 @@
                 var selectedRetensi = retensiSelect.getAttribute('data-selected');
 
                 // Destroy existing Select2 instance
-                $(retensiSelect).select2('destroy');
+                // $(retensiSelect)?.select2('destroy');
 
                 retensiSelect.innerHTML = '<option value="">Pilih Retensi...</option>';
 
@@ -657,7 +657,7 @@
             updateRetensi();
         });
 
-        
+
 
         const retensiCategory = document.getElementById('retensi_category');
         const retensiDuration = document.getElementById('retensi');
