@@ -48,7 +48,7 @@
             <span class="fw-semibold text-nowrap">
                 {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi) }} (Aktif Hingga
                 {{ Helper::getDateIndo($v->retensi) }}) <br>
-                {{ Helper::getRentangTanggal($v->tgl_surat, $v->retensi2) }} (Inaktif Hingga
+                {{ Helper::getRentangTanggal($v->retensi, $v->retensi2) }} (Inaktif Hingga
                 {{ Helper::getDateIndo($v->retensi2) }}) <br>
                 {{ $v->retensi3 }} (Nasib)<br>
             </span>

@@ -32,7 +32,7 @@ class ArsipExport implements FromCollection, WithHeadings, WithStyles, WithEvent
                 'Retensi' => strip_tags('<span class="fw-semibold text-nowrap">'
                     . Helper::getRentangTanggal($item->tgl, $item->retensi) . ' ( Aktif Hingga '
                     . Helper::getDateIndo($item->retensi) . ' ) <br>'
-                    . Helper::getRentangTanggal($item->tgl, $item->retensi2) . ' ( Inaktif Hingga '
+                    . Helper::getRentangTanggal($item->retensi, $item->retensi2) . ' ( Inaktif Hingga '
                     . Helper::getDateIndo($item->retensi2) . ' ) <br>'
                     . $item->retensi3 . ' ( Nasib )<br>'
                     . '</span>'),
