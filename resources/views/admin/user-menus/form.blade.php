@@ -202,47 +202,54 @@
 
 @push('jsScriptForm')
     <script type="text/javascript">
+        const editUser = () => {
+            $.ajax({
+                url: '{{ url("admin/$title/$id/show") }}',
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    let um = JSON.parse(data.usermenu);
+                    for (var i = 0; i < um.length; i++) {
+                        if (um[i]['read'] === '1') {
+                            $('#read' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#read' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['create'] === '1') {
+                            $('#create' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#create' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['edit'] === '1') {
+                            $('#edit' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#edit' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['delete'] === '1') {
+                            $('#delete' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#delete' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['report'] === '1') {
+                            $('#report' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#report' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                    }
+                    $('#formId').val(data.id);
+                    $('#id_role').val(data.id).trigger('change');
+                    return
+                },
+                error: function() {}
+            });
+        }
+
         $(document).ready(function() {
             var idx = $('#methodId').val();
+
             if (idx == 'edit') {
-                $.ajax({
-                    url: '{{ url("admin/$title/$id/show") }}',
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(data) {
-                        let um = JSON.parse(data.usermenu);
-                        for (var i = 0; i < um.length; i++) {
-                            if (um[i]['read'] === '1') {
-                                $('#read' + um[i]['id_menu']).attr("checked", "checked");
-                            } else {
-                                $('#read' + um[i]['id_menu']).removeAttr("checked", "checked");
-                            }
-                            if (um[i]['create'] === '1') {
-                                $('#create' + um[i]['id_menu']).attr("checked", "checked");
-                            } else {
-                                $('#create' + um[i]['id_menu']).removeAttr("checked", "checked");
-                            }
-                            if (um[i]['edit'] === '1') {
-                                $('#edit' + um[i]['id_menu']).attr("checked", "checked");
-                            } else {
-                                $('#edit' + um[i]['id_menu']).removeAttr("checked", "checked");
-                            }
-                            if (um[i]['delete'] === '1') {
-                                $('#delete' + um[i]['id_menu']).attr("checked", "checked");
-                            } else {
-                                $('#delete' + um[i]['id_menu']).removeAttr("checked", "checked");
-                            }
-                            if (um[i]['report'] === '1') {
-                                $('#report' + um[i]['id_menu']).attr("checked", "checked");
-                            } else {
-                                $('#report' + um[i]['id_menu']).removeAttr("checked", "checked");
-                            }
-                        }
-                        $('#formId').val(data.id);
-                        $('#id_role').val(data.id).trigger('change');
-                    },
-                    error: function() {}
-                });
+                editUser()
+                return
             }
 
         });
@@ -284,6 +291,46 @@
 
         $(form.querySelector('[name="id_role"]')).on('change', function() {
             validator.revalidateField('id_role');
+            var id = this.value
+            var url = '{{ url("admin") }}/' + '{{ $title }}/' +  id + '/show';
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    let um = JSON.parse(data.usermenu);
+                    for (var i = 0; i < um.length; i++) {
+                        if (um[i]['read'] === '1') {
+                            $('#read' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#read' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['create'] === '1') {
+                            $('#create' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#create' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['edit'] === '1') {
+                            $('#edit' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#edit' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['delete'] === '1') {
+                            $('#delete' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#delete' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                        if (um[i]['report'] === '1') {
+                            $('#report' + um[i]['id_menu']).attr("checked", "checked");
+                        } else {
+                            $('#report' + um[i]['id_menu']).removeAttr("checked", "checked");
+                        }
+                    }
+                    $('#formId').val(data.id);
+                    return
+                },
+                error: function() {}
+            });
         });
     </script>
 
