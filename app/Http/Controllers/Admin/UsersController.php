@@ -67,6 +67,7 @@ class UsersController extends Controller
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
