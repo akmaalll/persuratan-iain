@@ -51,7 +51,7 @@ class Helper
             ->where('user_menus.id_role', auth()->user()->id_role)
             ->orderBy('menus.id', 'asc')->get();
 
-        $main_menu = $data->where('parent', '0')->toArray();
+        $main_menu = $data->where('parent', '0')->where('read', '1')->toArray();
         $menu = $data->where('parent', '<>', 0)->where('read', '1')->toArray();
         // $sub_menu = $data->where('parent', '<>', 0)->where('read', '1')->toArray();
         $data = $data->toArray();

@@ -67,7 +67,6 @@ class UsersController extends Controller
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
-            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
@@ -99,8 +98,6 @@ class UsersController extends Controller
         try {
             $req = $request->all();
             $data = $this->repo->find($request->id);
-
-            // dd($req);
             // update profile
             if ($request->hasFile('profile')) {
                 $files = $request->file('profile')->getClientOriginalName();
@@ -108,8 +105,9 @@ class UsersController extends Controller
                 $files_name = $this->uploadFile2($request->file('profile'), $this->files_path, $data->profile);
                 $req['profile'] = $files_name;
             } else {
-                $req['profile'] = $req['profileOld'];
+                $req['profile'] = $req['profileOld'] ?? '';
             }
+
 
             // update password
             if ($req['password'] != null) {

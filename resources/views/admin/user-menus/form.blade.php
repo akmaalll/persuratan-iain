@@ -76,7 +76,7 @@
                                                         <th>Create</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
-                                                        <th>Report</th>
+                                                        {{-- <th>Report</th> --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -143,7 +143,7 @@
                                                                             </label>
                                                                         </div>
                                                                     </td>
-                                                                    <td width="9%">
+                                                                    {{-- <td width="9%">
                                                                         <div class="checkbox"
                                                                             style="margin-bottom: 0px; margin-top: 0px">
                                                                             <label>
@@ -152,7 +152,7 @@
                                                                                     id="report{{ $v2->id }}">
                                                                             </label>
                                                                         </div>
-                                                                    </td>
+                                                                    </td> --}}
                                                                 </tr>
                                                             @endforeach
                                                         @endif
