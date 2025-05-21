@@ -39,7 +39,7 @@ class LogAktivitasController extends Controller
                 "html"       => $view,
             ]);
         } catch (\Exception $e) {
-            return view('errors.message', ['message' => $e->getMessage()]);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 }

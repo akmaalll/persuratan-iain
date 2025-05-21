@@ -46,6 +46,8 @@
                                 value="{{ isset($data->id) ? 'PUT' : 'POST' }}">
                             <input type="hidden" name="id" id="formId" value="{{ $data->id ?? null }}">
                             @csrf
+                            <input type="hidden" class="form-control" placeholder="Profile" name="profileOld"
+                                id="profileOld" value="{{ $data->profile ?? '' }}" />
 
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">

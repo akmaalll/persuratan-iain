@@ -20,7 +20,7 @@
             <span class="fw-semibold text-nowrap">
                 @if ($v->kd_klasifikasi_id != 0)
                     {{ $v->klasifikasi->jenis_klasifikasi->kode . '.' . $v->klasifikasi->nomor }} -
-                    {{ $v->klasifikasi->nama }} {{-- Perihal Surat --}}
+                    {{ $v->klasifikasi->nama ?? '-' }} {{-- Perihal Surat --}}
                 @else
                     Tidak ada klasifikasi
                 @endif

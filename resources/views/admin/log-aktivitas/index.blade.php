@@ -111,9 +111,16 @@
     <!--end::Content-->
 @endsection
 
+@php
+    $routeName = $title . '.data';   
+@endphp
+
 @push('jsScript')
     <script type="text/javascript">
         $(document).ready(function() {
+
+            const fetchData = '{{ $routeName }}'
+            console.log('{{ route($routeName) }}');
             loadpage();
             var $pagination = $('.twbs-pagination');
             var defaultOpts = {
@@ -124,13 +131,13 @@
                 last: '&#8677;',
             };
             $pagination.twbsPagination(defaultOpts);
-
             function loaddata() {
                 $.ajax({
-                    url: '{{ route($title . '.data') }}',
+                    url: '{{ route($routeName) }}',
                     type: "GET",
                     datatype: "json",
                     success: function(data) {
+                        console.log(data);
                         $(".datatables").html(data.html);
                     }
                 });
@@ -138,7 +145,7 @@
 
             function loadpage() {
                 $.ajax({
-                    url: '{{ route($title . '.data') }}',
+                    url: '{{ route($routeName) }}',
                     type: "GET",
                     datatype: "json",
                     success: function(response) {

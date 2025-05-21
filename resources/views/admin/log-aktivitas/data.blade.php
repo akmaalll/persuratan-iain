@@ -12,7 +12,7 @@
             <!--begin::Timeline heading-->
             <div class="overflow-auto pe-3">
                 <!--begin::Title-->
-                <div class="fs-5 fw-semibold mb-2"><strong>{{ $v->user->name }}</strong> {{ $v->desc }}</div>
+                <div class="fs-5 fw-semibold mb-2"><strong>{{ $v->user->name ?? '-' }}</strong> {{ $v->desc }}</div>
                 <!--end::Title-->
                 <!--begin::Description-->
                 <div class="d-flex align-items-center mt-1 fs-6">

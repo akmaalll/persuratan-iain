@@ -63,11 +63,13 @@ class UsersController extends Controller
     {
         try {
             $req = $request->all();
+            // dd($req);
             $req['password'] = Hash::make($req['password']);
+            // dd($req);
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
-            return view('errors.message', ['message' => $e->getMessage()]);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 

@@ -59,6 +59,15 @@
 
                 <!--begin::notifikasi-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
+
+                    <!--begin:Name Login-->
+                    <span class="menu-link me-3">
+                        <span class="menu-title">Hi, {{ Auth::user()->name }}</span>
+                        <span class="menu-arrow d-lg-none"></span>
+                    </span>
+                    <!--end:Name Login-->
+
+
                     <!--begin::notifikasi wrapper-->
                     <a href="#"
                         class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px"
@@ -193,7 +202,7 @@
                     <div class="cursor-pointer symbol symbol-35px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
-                        <img src="{{ asset('uploads/user/'. auth()->user()->profile) }}" class="rounded-3"
+                        <img src="{{ asset('uploads/user/' . auth()->user()->profile) }}" class="rounded-3"
                             alt="user" />
                     </div>
                     <!--begin::User account menu-->
@@ -205,8 +214,7 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo"
-                                        src="{{ asset('uploads/user/'. auth()->user()->profile) }}" />
+                                    <img alt="Logo" src="{{ asset('uploads/user/' . auth()->user()->profile) }}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
@@ -229,8 +237,9 @@
 
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{ route('users.profile', Auth::user()->id) }}" class="menu-link px-5">My
-                                Profile</a>
+                            <a href="{{ route('users.profile', Auth::user()->id) }}" class="menu-link px-5">
+                                My Profile
+                            </a>
                         </div>
                         <!--end::Menu item-->
 
