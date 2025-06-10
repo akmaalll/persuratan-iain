@@ -76,16 +76,16 @@
                                 </div> --}}
 
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Jenis Nomor Surat</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Jenis Surat</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Jenis No Surat" name="jenis_nosurat" id="jenis_nosurat">
-                                        <option value="">Pilih Jenis No Surat...</option>
+                                        data-placeholder="Pilih Jenis Surat" name="jenis_nosurat" id="jenis_nosurat">
+                                        <option value="">Pilih Jenis Surat...</option>
                                         <option
                                             {{ isset($data->jenis_nosurat) && $data->jenis_nosurat == 'nomor_sk' ? 'selected' : '' }}
-                                            value="nomor_sk">Nomor SK</option>
+                                            value="nomor_sk">SK</option>
                                         <option
                                             {{ isset($data->jenis_nosurat) && $data->jenis_nosurat == 'nomor_surat' ? 'selected' : '' }}
-                                            value="nomor_surat">Nomor Surat</option>
+                                            value="nomor_surat">Surat</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
@@ -554,44 +554,84 @@
 
 
 
-        $(document).ready(function() {
-            // Inisialisasi select2
-            $('#tujuan').select2({
-                tags: true, // Memungkinkan input manual
-                placeholder: "Pilih Tujuan..."
-            });
+        // Inisialisasi select2
+        $('#tujuan').select2({
+            tags: true, // Memungkinkan input manual
+            placeholder: "Pilih Tujuan..."
+        });
 
-            const tujuanOption = $('.tujuan-lain');
-            const tujuanForm = $('#tujuanLain');
+        const tujuanOption = $('.tujuan-lain');
+        const tujuanForm = $('#tujuanLain');
+        tujuanOption.hide();
+
+        // jika form edit
+        const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
+            return v.value == tujuanForm.val();
+        });
+
+        if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
+            tujuanOption.show();
+            tujuanForm.val(tujuanForm.val());
+            $('#tujuan').val('20').change();
+        } else {
             tujuanOption.hide();
+        }
 
-            // jika form edit
-            const getValueTujuanOption = $('#tujuan option').filter((i, v) => {
-                return v.value == tujuanForm.val();
-            });
+        $('#tujuan').on('change', function() {
+            let tujuanValue = $(this).val();
 
-            if (getValueTujuanOption.length === 0 && tujuanForm.val() !== '') {
+            if (tujuanValue == '20') {
                 tujuanOption.show();
-                tujuanForm.val(tujuanForm.val());
-                $('#tujuan').val('20').change();
             } else {
                 tujuanOption.hide();
             }
+        });
 
-            $('#tujuan').on('change', function() {
-                let tujuanValue = $(this).val();
+        const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : '' }}";
+        if (editTujuan && editTujuan?.length > 0) {
+            $("#tujuan").val(editTujuan).trigger("change")
+        }
 
-                if (tujuanValue == '20') {
-                    tujuanOption.show();
+        $(document).ready(function() {
+            // Inisialisasi select2
+            $('#asal').select2({
+                tags: true, // Memungkinkan input manual
+                placeholder: "Pilih Asal..."
+            });
+
+            const asalOption = $('.asal-lain');
+            const asalForm = $('#asalLain');
+            asalOption.hide();
+
+            // jika form edit
+            const getValueAsalOption = $('#asal option').filter((i, v) => {
+                return v.value == asalForm.val();
+            });
+
+            if (getValueAsalOption.length === 0 && asalForm.val() !== '') {
+                asalOption.show();
+                asalForm.val(asalForm.val());
+                $('#asal').val('20').change();
+            } else {
+                asalOption.hide();
+            }
+
+            $('#asal').on('change', function() {
+                let asalValue = $(this).val();
+                if (asalValue == '20') {
+                    asalOption.show();
                 } else {
-                    tujuanOption.hide();
+                    asalOption.hide();
                 }
             });
 
-            const editTujuan = "{{ isset($data->tujuan) ? $data->tujuan : '' }}";
-            if (editTujuan && editTujuan?.length > 0) {
-                $("#tujuan").val(editTujuan).trigger("change")
+            const editAsal = "{{ isset($data->asal) ? $data->asal : '' }}";
+            if (editAsal && editAsal?.length > 0) {
+                $("#asal").val(editAsal).trigger("change")
             }
+
+
+
         });
 
 
