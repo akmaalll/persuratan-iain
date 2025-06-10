@@ -65,15 +65,25 @@
                                     </select>
                                 </div> --}}
                                 <input type="hidden" name="kd_klasifikasi_id" value="0">
+
+
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Jenis</label>
+                                    <label class="required fs-6 fw-semibold mb-2">Asal</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih Jenis" name="jenis" id="jenis">
-                                        <option value="">Jenis...</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
-                                            value="nomor_surat" selected>Nomor Surat</option>
-                                        <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
-                                            value="nomor_sk">Nomor SK</option>
+                                        data-placeholder="Pilih atau Ketikkan Asal" name="asal" id="asal">
+                                        <option value="">Pilih Asal...</option>
+                                        @if (isset($data->asal) && !in_array($data->asal, Helper::getData('kd_units')->pluck('id')->toArray()))
+                                            <option value="{{ $data->asal }}" selected>
+                                                {{ $data->asal }}
+                                            </option>
+                                        @endif
+                                        @foreach (Helper::getData('kd_units') as $v)
+                                            <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
+                                                value="{{ $v->id }}" data-nomor="{{ $v->nomor }}"
+                                                data-kode="{{ $v->kode }}">
+                                                {{ $v->nama }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-6 fv-row">
@@ -123,26 +133,19 @@
                                 {{-- </select> --}}
                                 {{-- </div> --}}
                                 <input type="hidden" name="status" value="-" />
-
                                 <div class="col-md-6 fv-row">
-                                    <label class="required fs-6 fw-semibold mb-2">Asal</label>
+                                    <label class="fs-6 fw-semibold mb-2">Jenis</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
-                                        data-placeholder="Pilih atau Ketikkan Asal" name="asal" id="asal">
-                                        <option value="">Pilih Asal...</option>
-                                        @if (isset($data->asal) && !in_array($data->asal, Helper::getData('kd_units')->pluck('id')->toArray()))
-                                            <option value="{{ $data->asal }}" selected>
-                                                {{ $data->asal }}
-                                            </option>
-                                        @endif
-                                        @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->asal) && $data->asal == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}" data-nomor="{{ $v->nomor }}"
-                                                data-kode="{{ $v->kode }}">
-                                                {{ $v->nama }}
-                                            </option>
-                                        @endforeach
+                                        data-placeholder="Pilih Jenis" name="jenis" id="jenis">
+                                        <option value="">Jenis...</option>
+                                        <option
+                                            {{ isset($data->jenis) && $data->jenis == 'nomor_surat' ? 'selected' : '' }}
+                                            value="nomor_surat" selected>Nomor Surat</option>
+                                        <option {{ isset($data->jenis) && $data->jenis == 'nomor_sk' ? 'selected' : '' }}
+                                            value="nomor_sk">Nomor SK</option>
                                     </select>
                                 </div>
+
                                 <div class="col-md-6 fv-row">
                                     <label class="required fs-6 fw-semibold mb-2">Tujuan</label>
                                     <select class="form-select" data-control="select2" data-hide-search="false"
@@ -413,7 +416,7 @@
             });
 
             function areAllFieldsFilled() {
-                return form.jenis.value.trim() !== ''; 
+                return form.jenis.value.trim() !== '';
                 //form.status.value &&
                 //form.asal.selectedIndex !== 0 &&
                 //form.tglSurat.value &&
