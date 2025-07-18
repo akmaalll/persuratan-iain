@@ -14,5 +14,6 @@ interface CariArsipContract
 	public function paginated(array $request);
 	public function paginate($request);
 	public function filter(array $request);
+	public function filterForExport(array $request);
 	public function getFile($request);
 }

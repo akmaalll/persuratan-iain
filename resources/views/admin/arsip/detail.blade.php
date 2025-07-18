@@ -149,7 +149,7 @@
                                 @php
                                     $eks = explode('.', $data->file);
                                 @endphp
-                                @if ($eks[1] == 'pdf')
+                                @if ($eks[1] ?? '' == 'pdf')
                                     <iframe src="{{ url('uploads/arsip/' . $data->file) }}" width="100%" height="400"
                                         title="File preview"></iframe>
                                 @else

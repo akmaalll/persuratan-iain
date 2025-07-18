@@ -95,16 +95,26 @@
 
 
                                 {{-- <div class="col-md-6 fv-row pencipta-lain">
-                                    <label class="fs-6 fw-semibold mb-2">Pencipta Lain</label>
-                                    <input value="{{ isset($data->pencipta) ? $data->pencipta : '' }}" type="text"
+                                    <label class="fs-6 fw-semibold mb-2">Pencipta Lain</label> --}}
+                                    <input value="{{ isset($data->pencipta) ? $data->pencipta : '' }}" type="hidden"
                                     class="form-control" name="penciptaLain" id="penciptaLain"
                                     placeholder="masukkan pencipta lain" />
-                                </div> --}}
+                                    <input value="{{ isset($data->unit_pengolah) ? $data->unit_pengolah : '' }}" type="hidden"
+                                    class="form-control" name="unitLain" id="unitLain"
+                                    placeholder="masukkan pencipta lain" />
+                                    <input value="{{ isset($data->lokal) ? $data->lokal : '' }}" type="hidden"
+                                    class="form-control" name="lokalLain" id="lokalLain"
+                                    placeholder="masukkan pencipta lain" />
+                                    <input value="{{ isset($data->jenis_media) ? $data->jenis_media : '' }}" type="hidden"
+                                    class="form-control" name="mediaLain" id="mediaLain"
+                                    placeholder="masukkan pencipta lain" />
+                                {{-- </div> --}}
                             </div>
 
                             <!-- Status dan Asal -->
                             <div class="row g-9 mb-8">
 
+                                {{-- {{ dd(isset($data->pencipta) && !in_array($data->pencipta, Helper::getData('kd_units')->pluck('id')->toArray())) }} --}}
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-semibold mb-2">Pencipta Arsip </label>
                                     <select class="form-select opsiLain" name="pencipta" id="pencipta" data-tags="true"
@@ -117,8 +127,8 @@
                                             </option>
                                         @endif
                                         @foreach (Helper::getData('kd_units') as $v)
-                                            <option {{ isset($data->id) && $data->pencipta == $v->id ? 'selected' : '' }}
-                                                value="{{ $v->id }}">
+                                            <option value="{{ $v->id }}"
+                                                @if (isset($data->pencipta) && $data->pencipta == $v->id) selected @endif>
                                                 {{ $v->nama }}
                                             </option>
                                         @endforeach
@@ -205,8 +215,8 @@
                                             value="Foto">Foto</option>
                                         <option {{ isset($data->id) && $data->jenis_media == 'Kaset' ? 'selected' : '' }}
                                             value="Kaset">Kaset</option>
-                                        <option {{ isset($data->id) && $data->jenis_media == 'CD' ? 'selected' : '' }}
-                                            value="CD">CD</option>
+                                        <option {{ $data->jenis_media == 'CD' ? 'selected' : '' }} value="CD">CD
+                                        </option>
                                         <option {{ isset($data->id) && $data->jenis_media == 'FD' ? 'selected' : '' }}
                                             value="FD">FD</option>
                                         {{-- <option {{ isset($data->id) && $data->jenis_media == '20' ? 'selected' : '' }}
@@ -403,20 +413,37 @@
             lokalOption.hide();
             mediaOption.hide();
 
-            // jika form edit
-            const getValuePenciptaOption = $('#pencipta option').filter((i, v) => {
-                return v.value == penciptaForm.val();
+            // PENCIPTA - jika form edit
+            const penciptaSelect = $('#pencipta');
+            const penciptaCurrentValue = penciptaForm.val();
+
+            // Cek apakah nilai pencipta ada di option select
+            const getValuePenciptaOption = penciptaSelect.find('option').filter(function() {
+                return $(this).val() == penciptaCurrentValue;
             });
 
-            if (getValuePenciptaOption.length === 0 && penciptaForm.val() !== '') {
+            if (getValuePenciptaOption.length === 0 && penciptaCurrentValue !== '') {
+                // Jika nilai tidak ada di option, tampilkan input manual dan set select ke "Lainnya"
                 penciptaOption.show();
-                penciptaForm.val(penciptaForm.val());
-                $('#pencipta').val('20').change();
-            } else {
+                penciptaSelect.val('20'); // Set ke value "Lainnya"
+
+                // Trigger select2 untuk update tampilan
+                if (penciptaSelect.hasClass('select2-hidden-accessible')) {
+                    penciptaSelect.trigger('change.select2');
+                }
+            } else if (penciptaCurrentValue !== '') {
+                // Jika nilai ada di option, set select ke nilai tersebut
+                penciptaSelect.val(penciptaCurrentValue);
+
+                // Trigger select2 untuk update tampilan
+                if (penciptaSelect.hasClass('select2-hidden-accessible')) {
+                    penciptaSelect.trigger('change.select2');
+                }
+
                 penciptaOption.hide();
             }
 
-            $('#pencipta').on('change', function() {
+            penciptaSelect.on('change', function() {
                 let penciptaValue = $(this).val();
 
                 if (penciptaValue == '20') {
@@ -426,20 +453,32 @@
                 }
             });
 
-            // unit pengolah
-            const getValueUnitOption = $('#unit_pengolah option').filter((i, v) => {
-                return v.value == unitForm.val();
+            // UNIT PENGOLAH - jika form edit
+            const unitSelect = $('#unit_pengolah');
+            const unitCurrentValue = unitForm.val();
+
+            const getValueUnitOption = unitSelect.find('option').filter(function() {
+                return $(this).val() == unitCurrentValue;
             });
 
-            if (getValueUnitOption.length === 0 && unitForm.val() !== '') {
+            if (getValueUnitOption.length === 0 && unitCurrentValue !== '') {
                 unitOption.show();
-                unitForm.val(unitForm.val());
-                $('#unit_pengolah').val('20').change();
-            } else {
+                unitSelect.val('20');
+
+                if (unitSelect.hasClass('select2-hidden-accessible')) {
+                    unitSelect.trigger('change.select2');
+                }
+            } else if (unitCurrentValue !== '') {
+                unitSelect.val(unitCurrentValue);
+
+                if (unitSelect.hasClass('select2-hidden-accessible')) {
+                    unitSelect.trigger('change.select2');
+                }
+
                 unitOption.hide();
             }
 
-            $('#unit_pengolah').on('change', function() {
+            unitSelect.on('change', function() {
                 let unitValue = $(this).val();
 
                 if (unitValue == '20') {
@@ -449,20 +488,32 @@
                 }
             });
 
-            // lokal arsip
-            const getValueLokalOption = $('#lokal option').filter((i, v) => {
-                return v.value == lokalForm.val();
+            // LOKAL ARSIP - jika form edit
+            const lokalSelect = $('#lokal');
+            const lokalCurrentValue = lokalForm.val();
+
+            const getValueLokalOption = lokalSelect.find('option').filter(function() {
+                return $(this).val() == lokalCurrentValue;
             });
 
-            if (getValueLokalOption.length === 0 && lokalForm.val() !== '') {
+            if (getValueLokalOption.length === 0 && lokalCurrentValue !== '') {
                 lokalOption.show();
-                lokalForm.val(lokalForm.val());
-                $('#lokal').val('20').change();
-            } else {
+                lokalSelect.val('20');
+
+                if (lokalSelect.hasClass('select2-hidden-accessible')) {
+                    lokalSelect.trigger('change.select2');
+                }
+            } else if (lokalCurrentValue !== '') {
+                lokalSelect.val(lokalCurrentValue);
+
+                if (lokalSelect.hasClass('select2-hidden-accessible')) {
+                    lokalSelect.trigger('change.select2');
+                }
+
                 lokalOption.hide();
             }
 
-            $('#lokal').on('change', function() {
+            lokalSelect.on('change', function() {
                 let lokalValue = $(this).val();
 
                 if (lokalValue == '20') {
@@ -472,21 +523,32 @@
                 }
             });
 
+            // MEDIA - jika form edit
+            const mediaSelect = $('#jenis_media');
+            const mediaCurrentValue = mediaForm.val();
 
-            // media 
-            const getValueMediaOption = $('#jenis_media option').filter((i, v) => {
-                return v.value == mediaForm.val();
+            const getValueMediaOption = mediaSelect.find('option').filter(function() {
+                return $(this).val() == mediaCurrentValue;
             });
 
-            if (getValueMediaOption.length === 0 && mediaForm.val() !== '') {
+            if (getValueMediaOption.length === 0 && mediaCurrentValue !== '') {
                 mediaOption.show();
-                mediaForm.val(mediaForm.val());
-                $('#jenis_media').val('20').change();
-            } else {
+                mediaSelect.val('20');
+
+                if (mediaSelect.hasClass('select2-hidden-accessible')) {
+                    mediaSelect.trigger('change.select2');
+                }
+            } else if (mediaCurrentValue !== '') {
+                mediaSelect.val(mediaCurrentValue);
+
+                if (mediaSelect.hasClass('select2-hidden-accessible')) {
+                    mediaSelect.trigger('change.select2');
+                }
+
                 mediaOption.hide();
             }
 
-            $('#jenis_media').on('change', function() {
+            mediaSelect.on('change', function() {
                 let mediaValue = $(this).val();
 
                 if (mediaValue == '20') {
@@ -496,7 +558,23 @@
                 }
             });
 
+            // Debugging function - uncomment untuk debugging
+            
+            
+        });
 
+        // Alternative solution jika masih ada masalah dengan select2
+        $(document).ready(function() {
+            // Pastikan select2 sudah terinisialisasi sebelum mengubah value
+            setTimeout(function() {
+                // Re-trigger semua select untuk memastikan nilai terpilih
+                $('#pencipta, #unit_pengolah, #lokal, #jenis_media').each(function() {
+                    const currentValue = $(this).val();
+                    if (currentValue && $(this).hasClass('select2-hidden-accessible')) {
+                        $(this).trigger('change.select2');
+                    }
+                });
+            }, 100);
         });
 
         ClassicEditor

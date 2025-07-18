@@ -232,8 +232,8 @@ class CariArsipController extends Controller
     {
         try {
             $search = $request->has('search') ? json_decode($request->search, true) : null;
-
-            $data = is_array($search) ? $this->repo->filter(['search' => $search]) : $this->repo->all();
+            $data = is_array($search) ? $this->repo->filterForExport(['search' => $search]) : $this->repo->all();
+            // dd($data);
             $header = "Kearsipan Persuratan IAIN Parepare";
             $fileName = 'Export-Kearsipan-' . date('d-m-Y') . '.xlsx';
 

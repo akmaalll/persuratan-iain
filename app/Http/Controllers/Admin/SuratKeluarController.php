@@ -85,8 +85,10 @@ class SuratKeluarController extends Controller
                 $file_name = $this->uploadFile2($request->file('file'), $this->file_path, '');
                 $req['file'] = $file_name;
             }
-
-
+            else {
+                $req['file'] = '-';
+            }
+            $req['uraian'] = $req['uraian'] ?? '-';
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
             return response()->json(['data' => $data, 'success' => true]);
@@ -118,10 +120,10 @@ class SuratKeluarController extends Controller
                 $file_name = $this->uploadFile2($request->file('file'), $this->file_path, $req['file_old']);
                 $req['file'] = $file_name;
             } else {
-                $req['file'] = $req['file_old'];
+                $req['file'] = $req['file_old'] ?? '-';
             }
 
-
+            $req['uraian'] = $req['uraian'] ?? '-';
             $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $id);
             return response()->json(['data' => $data, 'success' => true]);

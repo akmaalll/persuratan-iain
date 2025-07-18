@@ -26,7 +26,7 @@ class SuratMasukController extends Controller
     {
         $this->title = 'surat-masuk';
         $this->repo = $repo;
-		  $this->arsip = $arsip;
+        $this->arsip = $arsip;
     }
 
     public function index()
@@ -77,16 +77,19 @@ class SuratMasukController extends Controller
         try {
             $req = $request->all();
 
-	
+
             if ($request->hasFile('upload_file')) {
                 $image = $request->file('upload_file')->getClientOriginalName();
                 $image_name = pathinfo($image, PATHINFO_FILENAME);
                 $image_name = $this->uploadFile2($request->file('upload_file'), $this->image_path, '');
                 $req['upload_file'] = $image_name;
+            } else {
+                $req['upload_file'] = '-';
             }
+            $req['uraian'] = $req['uraian'] ?? '-';
             $req['created_by'] = Auth::user()->id;
             $data = $this->repo->store($req);
-				return response()->json(['data' => $data, 'success' => true]);
+            return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
             dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
@@ -118,15 +121,16 @@ class SuratMasukController extends Controller
                 $imageName = $this->uploadFile2($image, $this->image_path, $req['upload_file_old']);
                 $req['upload_file'] = $imageName;
             } else {
-                $req['upload_file'] = $req['upload_file_old'];
+                $req['upload_file'] = $req['upload_file_old'] ?? '-';
             }
+            $req['uraian'] = $req['uraian'] ?? '-';
             $req['updated_by'] = Auth::user()->id;
             $data = $this->repo->update($req, $id);
-				//dd($data);
+            //dd($data);
 
             return response()->json(['data' => $data, 'success' => true]);
         } catch (\Exception $e) {
-			  dd($e);
+            dd($e);
             return view('errors.message', ['message' => $e->getMessage()]);
         }
     }
@@ -197,59 +201,57 @@ class SuratMasukController extends Controller
             ], 500);
         }
     }
-	public function storeArsip($id)
-	 {
-	     try {
+    public function storeArsip($id)
+    {
+        try {
             $title = $this->title;
-				$data = $this->repo->find($id);
-				//dd($data);
-				$req = array(
-					'kd_klasifikasi_id'	=> $data->kd_klasifikasi_id ?? '0',
-					'tgl'						=> $data->tgl_surat,
-					'nomor'					=> $data->nomor,
-					'perihal'				=> $data->perihal,
-					'status'					=> $data->status,
-					'pencipta'				=> $data->asal,
-					'unit_pengolah'		=> $data->asal,
-					'tgl_terima'			=> $data->tgl_terima,
-					'tgl_input'				=> $data->tgl_input,
-					'ttd'						=> $data->ttd,
-					'tujuan'					=> $data->tujuan,
-					'kepada'					=> $data->kepada,
-					'jenis'					=> $data->jenis,
-					'retensi'				=> $data->retensi,
-					'retensi2'				=> $data->retensi2,
-					'retensi3'				=> $data->retensi3,
-					'file'					=> $data->upload_file,
-					'uraian'					=> $data->uraian,
-					'created_by'			=> $data->created_by,
-					'jenis_media'			=> '-',
-					'lokal'					=> '-',
-					'ket_keaslian'			=> '-',
-					'jumlah'					=> '0',
-					'no_rak'					=> '-',
-					'no_box'					=> '-',
-				);
+            $data = $this->repo->find($id);
+            //dd($data);
+            $req = array(
+                'kd_klasifikasi_id'    => $data->kd_klasifikasi_id ?? '0',
+                'tgl'                        => $data->tgl_surat,
+                'nomor'                    => $data->nomor,
+                'perihal'                => $data->perihal,
+                'status'                    => $data->status,
+                'pencipta'                => $data->asal,
+                'unit_pengolah'        => $data->asal,
+                'tgl_terima'            => $data->tgl_terima,
+                'tgl_input'                => $data->tgl_input,
+                'ttd'                        => $data->ttd,
+                'tujuan'                    => $data->tujuan,
+                'kepada'                    => $data->kepada,
+                'jenis'                    => $data->jenis,
+                'retensi'                => $data->retensi,
+                'retensi2'                => $data->retensi2,
+                'retensi3'                => $data->retensi3,
+                'file'                    => $data->upload_file,
+                'uraian'                    => $data->uraian,
+                'created_by'            => $data->created_by,
+                'jenis_media'            => '-',
+                'lokal'                    => '-',
+                'ket_keaslian'            => '-',
+                'jumlah'                    => '0',
+                'no_rak'                    => '-',
+                'no_box'                    => '-',
+            );
 
-				//$req['updated_by'] = Auth::user()->id;
+            //$req['updated_by'] = Auth::user()->id;
 
-				if (!File::exists(public_path('uploads/ttd/surat-masuk/'.$data->upload_file))) {
-					return dd('file tidak ada');
-				}
-				$copy = File::copy(public_path('uploads/ttd/surat-masuk/' . $data->upload_file), public_path('uploads/arsip/' . $data->upload_file));
-				try {
-					$update_data = $this->repo->update(['status_arsip' => 'arsip', 'updated_by' => Auth::user()->id], $id);
-					$store = $this->arsip->store($req);
-				}
-				catch(\Exception $e) {
-					dd($e);
-				}
-				//Session::put('status_arsip', true);
-				return redirect()->route('surat-masuk.index', ['status_arsip' => true]);
+            if (!File::exists(public_path('uploads/ttd/surat-masuk/' . $data->upload_file))) {
+                return dd('file tidak ada');
+            }
+            $copy = File::copy(public_path('uploads/ttd/surat-masuk/' . $data->upload_file), public_path('uploads/arsip/' . $data->upload_file));
+            try {
+                $update_data = $this->repo->update(['status_arsip' => 'arsip', 'updated_by' => Auth::user()->id], $id);
+                $store = $this->arsip->store($req);
+            } catch (\Exception $e) {
+                dd($e);
+            }
+            //Session::put('status_arsip', true);
+            return redirect()->route('surat-masuk.index', ['status_arsip' => true]);
         } catch (\Exception $e) {
             return view('errors.message', ['message' => $e->getMessage()]);
         }
-
     }
 
     public function getNoSuratData(Request $request)

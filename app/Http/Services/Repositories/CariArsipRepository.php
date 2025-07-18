@@ -190,9 +190,127 @@ class CariArsipRepository extends BaseRepository implements CariArsipContract
 		// Pengurutan dan paginasi
 		$data = array(
 			'filter' 	=> $filter->orderBy($field, $sortOrder)->paginate($perPage),
+			// 'filter' 	=> $filter->orderBy($field, $sortOrder),
 			'type'		=> $type
 		);
 		return $data;
+	}
+
+	public function filterForExport(array $criteria)
+	{
+		$field = $criteria['sort_field'] ?? 'id';
+		$sortOrder = $criteria['sort_order'] ?? 'desc';
+
+		$type = $criteria['search']['type_surat'] ?? 'Arsip';
+
+		if ($type === 'Surat Masuk') {
+			$filter = $this->suratMasuk;
+		} elseif ($type === 'Surat Keluar') {
+			$filter = $this->suratKeluar;
+		} else if ($type == 'Arsip') {
+			$filter = $this->model;
+		} else {
+			$filter = $this->model;
+		}
+
+		// Proses filtering (sama seperti method filter yang sudah ada)
+		$kd_klasifikasi_id = $criteria['search']['kd_klasifikasi_id'] ?? '';
+		$nomor = $criteria['search']['nomor'] ?? '';
+		$jumlah = $criteria['search']['jumlah'] ?? '';
+		$uraian = $criteria['search']['uraian'] ?? '';
+		$lokal = $criteria['search']['lokal'] ?? '';
+		$pencipta = $criteria['search']['pencipta'] ?? '';
+		$retensi = $criteria['search']['retensi'] ?? '';
+		$retensi2 = $criteria['search']['retensi2'] ?? '';
+		$retensi3 = $criteria['search']['retensi3'] ?? '';
+		$unit_pengolah = $criteria['search']['unit_pengolah'] ?? '';
+		$media = $criteria['search']['media'] ?? '';
+		$tgl = $criteria['search']['tgl'] ?? '';
+		$ket = $criteria['search']['ket'] ?? '';
+		$perihal = $criteria['search']['perihal'] ?? '';
+		$no_rak = $criteria['search']['no_rak'] ?? '';
+		$no_box = $criteria['search']['no_box'] ?? '';
+		$upload = $criteria['search']['upload'] ?? '';
+		$dari_tanggal = $criteria['search']['dari_tanggal'] ?? '';
+		$sampai_tanggal = $criteria['search']['sampai_tanggal'] ?? '';
+
+		// Terapkan filter
+		if (!empty($kd_klasifikasi_id)) {
+			$filter = $filter->where('kd_klasifikasi_id', '=', $kd_klasifikasi_id);
+		}
+
+		if (!empty($ket)) {
+			$filter = $filter->where('ket_keaslian', '=', $ket);
+		}
+
+		if (!empty($nomor)) {
+			$filter = $filter->where('nomor', 'like', "%" . $nomor . "%");
+		}
+
+		if (!empty($uraian)) {
+			$filter = $filter->where('uraian', 'like', "%" . $uraian . "%");
+		}
+
+		if (!empty($lokal)) {
+			$filter = $filter->where('lokal', 'like', '%' . $lokal . '%');
+		}
+
+		if (!empty($pencipta)) {
+			$filter = Schema::hasColumn($filter->getTable(), 'pencipta') ? $filter->where('pencipta', 'like', '%' . $pencipta . '%')
+				: $filter->where('asal', 'like', '%' . $pencipta . '%');
+		}
+
+		if (!empty($retensi)) {
+			$filter = $filter->where('retensi', 'like', '%' . $retensi . '%');
+		}
+
+		if (!empty($retensi2)) {
+			$filter = $filter->where('retensi2', 'like', '%' . $retensi2 . '%');
+		}
+
+		if (!empty($retensi3)) {
+			$filter = $filter->where('retensi3', 'like', '%' . $retensi3 . '%');
+		}
+
+		if (!empty($unit_pengolah)) {
+			$filter = $filter->where('unit_pengolah', 'like', '%' . $unit_pengolah . '%');
+		}
+
+		if (!empty($media)) {
+			$filter = $filter->where('jenis_media', 'like', '%' . $media . '%');
+		}
+
+		if (!empty($tgl)) {
+			$filter = Schema::hasColumn($filter->getTable(), 'tgl') ? $filter->where('tgl', 'like', '%' . $tgl . '%')
+				: $filter->where('tgl_surat', 'like', '%' . $tgl . '%');
+		}
+
+		if (!empty($perihal)) {
+			$filter = $filter->where('perihal', 'like', '%' . $perihal . '%');
+		}
+
+		if (!empty($no_rak)) {
+			$filter = $filter->where('no_rak', 'like', '%' . $no_rak . '%');
+		}
+
+		if (!empty($no_box)) {
+			$filter = $filter->where('no_box', 'like', '%' . $no_box . '%');
+		}
+
+		if (!empty($jumlah)) {
+			$filter = $filter->where('jumlah', 'like', '%' . $jumlah . '%');
+		}
+
+		if (!empty($upload)) {
+			$filter = $filter->where('upload', 'like', '%' . $upload . '%');
+		}
+
+		if (!empty($dari_tanggal) || !empty($sampai_tanggal)) {
+			$filter = $filter->whereBetween('retensi2', [$dari_tanggal, $sampai_tanggal]);
+		}
+
+		// Return semua data tanpa pagination untuk export
+		return $filter->orderBy($field, $sortOrder)->get();
 	}
 
 
